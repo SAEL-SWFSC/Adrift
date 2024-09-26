@@ -33,19 +33,74 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: content/add-content.qmd
-        text: Add content
-      - href: content/customizing.qmd
-        text: Customizing
-      - href: content/rendering.qmd
-        text: Rendering
-      - href: content/rmarkdown.Rmd
-        text: R Markdown files
-      - href: content/code.qmd
-        text: Code in your files
-      - href: content/acknowledgements.qmd
-        text: Acknowledgements
+      - section: "Background"
+        contents:
+        - href: content/background.qmd
+          text: Background
+        - href: content/objectives.qmd
+          text: Objectives
+        - href: content/studyArea.qmd
+          text: Study Area
+        - href: content/driftingRecorders.qmd
+          text: Drifting Recorders
+      - section: "Marine Mammal Detections"
+        contents:
+        - href: content/detections.qmd
+          text: Summary
+        - href: content/sperm.qmd
+          text: Sperm Whales
+        - href: content/beaked.qmd
+          text: Beaked Whales
+        - href: content/dolphins.qmd
+          text: Dolphins
+        - href: content/nbhf.qmd
+          text: NBHF
+        - href: content/blue.qmd
+          text: Blue Whales
+        - href: content/humpback.qmd
+          text: Humpback Whales
+        - href: content/brydesSei.qmd
+          text: Brydes/Sei Whales
+        - href: content/gray.qmd
+          text: Gray Whales
+        - href: content/minke.qmd
+          text: Minke Whales
+      - section: "Soundscape"
+        contents:
+        - href: content/soundscape.qmd
+          text: Soundscape
+        - href: content/shipNoise.qmd
+          text: Ship Noise
+        - href: content/contributorsSS.qmd
+          text: Contributors to Soundscape
+      - href: content/dataSharing.qmd 
+        text: Data Sharing
+      - href: content/outreach.qmd
+        text: Outreach
+      - section: "Summary"
+        contents:
+        - href: content/summary.qmd
+          text: Summary of Results
+        - href: content/recommendations.qmd
+          text: Recommendations
+      # - section: "Appendices"
+      #   contents:
+      #   - href: content/expandedData.qmd #
+      #     text: Expanded Datasets
+      #   - href: content/spermDemographics.qmd
+      #     text: Sperm Whale Demographics
+      #   - href: content/beakedDensity.qmd
+      #     text: Beaked Whale Density Estimation
+      #   - href: content/nbhfClassification.qmd
+      #     text: NBHF Species Classification
+      #   - href: content/finAI.qmd
+      #     text: Fin Whale AI
+      #   - href: content/habitatModels.qmd
+      #     text: Modeling Habitat Use
+      #   - href: content/spatialNoise.qmd
+      #     text: Spatial Variation in Noise
 
+          
 format:
   html:
     theme:

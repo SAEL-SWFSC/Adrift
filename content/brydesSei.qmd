@@ -1,0 +1,11 @@
+---
+title: Brydes, Sei Whales
+---
+
+Methods Detection of calls associated with Bryde’s and sei whales was conducted by our partners at OSA. PAMGuard's (v2.02.09) whistle and moan detector was used to detect calls associated with Bryde's (Be4) and sei whales (frequency modulated downsweep calls identified in Rankin and Barlow (2007)). Potential calls were reviewed by an experienced OSA analyst in PAMGuard's Viewer Mode. Detections were grouped into acoustic events using the Detection Group Localiser module. Acoustic events were then binned into hourly presence for the presence of Bryde's and sei whales. Deployments with excessive self-noise (such as strumming) that consistently impacted our ability to detect Bryde's and sei whales were eliminated from this analysis. Detailed methods are provided in our [GitHub online analysis methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift) and an OSA Report archived on our GitHub repository.
+
+Results There were no confirmed detections of calls associated with Bryde's or sei whales during Adrift, and a single possible sei whale encounter was detected during PASCAL (see spectrogram of possible sei whale in GitHub Repository).
+
+Bryde’s whale distribution is in the tropical and subtropical waters, with occasional northward incursion into the Southern California Bight (Kerosky et al. 2012). The Adrift deployments were north of Point Conception (and the Southern California Bight), and it is not unexpected to fail to detect animals on our recordings. Warming oceans associated with climate change may lead to more consistent detection of these species in the California Current, and these detections may occur in increasingly northern latitudes over time. We recommend that future acoustic studies in the California Current include detection of Bryde’s whales.
+
+Little is known about sei whales in the North Pacific, and to our knowledge there is only one confirmed recording of sei whales in the North Pacific, near Hawaii (Rankin and Barlow 2007). Future research should take advantage of opportunities to understand the vocal repertoire of sei whales in the North Pacific Ocean.
