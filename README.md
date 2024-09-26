@@ -2,7 +2,7 @@
 
 This repository contains data and code for our report: Rankin, et al. (in preparation). Final Report for ADRIFT in the California Current Survey: Passive Acoustic Monitoring in the California Current using Drifting Recorders. Report for BOEM.
 
-### **Link to Online (HTML) report** \[TBD\]
+### **[Link to Online (HTML) report](https://sael-swfsc.github.io/Adrift/)** 
 
 ### **How to Cite** 
 
