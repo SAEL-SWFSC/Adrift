@@ -3,9 +3,9 @@ project:
 
 website: 
   page-navigation: true
-  title: "NOAA quarto simple" 
+  title: "Adrift in the California Current" 
   site-url: "https://nmfs-opensci.github.io/NOAA-quarto-simple" 
-  repo-url: "https://github.com/nmfs-opensci/NOAA-quarto-simple"
+  repo-url: "https://sael-swfsc.github.io/Adrift/"
   repo-actions: [edit, source, issue]
   favicon: images/favicon.ico
   
@@ -15,17 +15,17 @@ website:
   
   sidebar:
     background: "#D9E3E4"
-    logo: "https://raw.githubusercontent.com/nmfs-opensci/assets/main/logo/nmfs-opensci-logo3.png"
+    logo: "https://tethys.pnnl.gov/sites/default/files/styles/captioned_400xauto/public/taxonomy-images/Screenshot%202022-09-13%20150029.jpg?itok=X_okXi_I"
     favicon: images/favicon.ico
     pinned: true
     align: center
     tools: 
       - icon: globe
-        href: https://nmfs-opensci.github.io
-        text: "NMFS Open Science"
+        href: https://sael-swfsc.github.io/Adrift/
+        text: "Adrift Website"
       - icon: github
-        href: https://github.com/nmfs-opensci
-        text: "NMFS OpenSci"
+        href: https://github.com/SAEL-SWFSC/Adrift
+        text: "Adrift Repository"
 
     style: "docked"
     search: true
