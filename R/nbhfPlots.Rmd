@@ -1,0 +1,200 @@
+
+##NBHF Banter Model Figure w/ Confusion Matrix, ProxPlot, HeatMap, VotePlot
+```{r}
+library("easypackages")
+libraries('banter','rfPermute','magick','magrittr','ggplot2','kableExtra','here','PAMpal')
+source('/Users/ASimonis/Documents/GitHub/identidrift/R/make-model.R')
+source('/Users/ASimonis/Documents/GitHub/identidrift/R/make-study.R')
+
+#Summary of BANTER model 
+#Load Banter Model
+bant<-readRDS(here('data','nbhf','bant_VFB_2024May10.rds'))
+#bant<-readRDS('/Volumes/ADRIFT_Analysis/Odontocetes/NBHF/BANTER/bant_VFB_2024May10.rds')
+banter_model_RF <- getBanterModel(bant)
+
+#class priors
+bant_priors <- classPriors(banter_model_RF, NULL)[,1]
+#confusion matrix
+bant_confuseMatrix <- rfPermute::confusionMatrix(banter_model_RF)
+bant_confuseMatrix <- cbind(bant_confuseMatrix, priors = bant_priors)
+
+bant_confuseMatrix <- kable(bant_confuseMatrix, align = "c", digits = c(0,0,0,0,2,2,2))%>%
+  kable_classic()%>%
+  column_spec(5, border_right = TRUE)%>%
+  row_spec(0, bold = TRUE)%>%
+  row_spec(3,hline_after = TRUE)%>%
+  row_spec(4, bold = TRUE)%>%
+  save_kable(here('data','nbhf','bant_confuseMatrix.png'), zoom = 9)
+
+#proximity plot
+png((here('data','nbhf','bant_proximity.png')), width = 20, height = 20, units = 'cm', res = 300)
+bant_proximity <- plotProximity(banter_model_RF, plot = FALSE)
+bant_proximity$g + theme(axis.text = element_text(size = 16),
+                                     axis.title = element_text(size = 16),
+                                     legend.text = element_text(size = 16)
+                                     )
+dev.off()
+
+#heatmap
+png((here('data','nbhf','bant_importance.png')), width = 30, height = 25, units = 'cm', res = 300)
+bant_importance <- plotImportance(banter_model_RF, plot.type="heatmap",n=10, plot = FALSE)
+bant_importance + theme(axis.text = element_text(size = 16),
+                                      axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0),
+                                      legend.text = element_text(size = 16)
+                                      )
+dev.off()
+
+#plot votes
+png((here('data','nbhf','bant_votes.png')), width = 20, height = 20, units = 'cm',  res = 300)
+bant_plotVotes <- plotVotes(banter_model_RF, plot = FALSE)
+bant_plotVotes + theme(axis.text = element_text(size = 16),
+                                     axis.title = element_text(size = 16),
+                                     legend.text = element_text(size = 16)
+                                     )
+dev.off()
+
+confuse <- magick::image_read(here('data','nbhf','bant_confuseMatrix.png')) %>%
+  image_border(color="#ffffff", geometry = "80x208")%>%
+  image_annotate("a) Confusion Matrix", size=120, color = "black")
+vote <- magick::image_read(here('data','nbhf','bant_votes.png'))%>%
+  image_border(color="#ffffff", geometry = "260x125")%>%
+  image_annotate("d) Vote Plot", size=120, color = "black")
+prox <- magick::image_read(here('data','nbhf','bant_proximity.png'))%>%
+  image_border(color="#ffffff", geometry = "260x125")%>%
+  image_annotate("b) Proximity Plot", size=120, color = "black")
+heat <- magick::image_read(here('data','nbhf','bant_importance.png'))%>%
+  image_border(color="#ffffff", geometry = "110x260")%>%
+  image_scale("3300")%>%
+  image_annotate("c) Importance Heat Map", size=120, color = "black")
+  
+bantModel_Figure <-image_append(c(prox, heat, vote))
+bantModel_Figure<- image_append(c(confuse, bantModel_Figure), stack=TRUE)
+image_write(bantModel_Figure, path = here('figs', 'nbhf_bantModel.png'), format ='png')#SR changed name/location
+
+```
+
+## MAPS of NBHF Species Distributions
+```{r}
+library(ragg)
+library(marmap)
+library(lubridate)
+library(ggplot2)
+library(ggnewscale)
+library(viridis)
+
+#Generate maps showing NBHF species distribution
+
+#Load in drifter tracks
+Drifts<-readRDS(here('data','AllDeploymentGPS.rds'))
+#Load in Wind Call Boundary
+WEA<-readRDS(here('data','map','WindCallBoundary.rdata'))
+
+# NBHF_Ore<-filter(NBHF, Site=="ORE")
+# NBHF_Hum<-filter(NBHF, Site=="HUM")
+# NBHF_SF<-filter(NBHF,Site %in% c('PTA','SFB','HMB'))
+# NBHF_MB<-filter(NBHF,Site %in% c('MBY','MOB'))
+
+NBHFspecies<-c('ks','pd','pp')
+#Create color palettes
+blues<-c("royalblue4","royalblue3",
+         "royalblue2","royalblue1")
+greys<-c(grey(0.8),grey(0.93),grey(0.99))
+SpColor<-c('cyan','magenta','yellow')
+
+#Morro Bay
+lon1=-123
+lon2=-120.3
+lat1=34.8
+lat2=36
+#Extract bathymetry data from NOAA (saves local file to speed future performance)
+bat<-getNOAA.bathy(lon1,lon2,lat1,lat2,resolution=1,keep=TRUE)
+
+png(here('figs','Appdx-NBHF_map_MB.png'),width=5,height=5,units="in",res=300)
+plot.bathy(bat,image=TRUE,bpal=list(c(0,max(bat),greys),c(min(bat),0,blues)),land=TRUE,n=0,
+           main='Morro Bay', asp=NA)
+scaleBathy(bat, deg=1, x="bottomleft", inset=5)
+plot(bat, deep=-1000, shallow=-1000, step=0, lwd=0.5, drawlabel=TRUE, add=TRUE)
+plot(WEA$geometry, add=TRUE, border='purple', lwd=1,lty=3)
+points(Drifts$Longitude,Drifts$Latitude,col=grey(0.5),pch=19,cex=.2)
+for(s in 1:length(NBHFspecies)){
+  sub<-filter(NBHF,predicted==NBHFspecies[s])
+  if(nrow(sub)>0){
+points(sub$Longitude, sub$Latitude, col=SpColor[s], pch=19,cex=.7)}}
+legend('bottomright', legend=NBHFspecies, pch=19,cex=.8,pt.cex = 1, col=SpColor, bg="white")
+dev.off()
+
+#San Francisco
+lon1= -124
+lon2= -122.2
+lat1=38.4
+lat2=36.8
+#Extract bathymetry data from NOAA (saves local file to speed future performance)
+bat<-getNOAA.bathy(lon1,lon2,lat1,lat2,resolution=1,keep=TRUE)
+
+png(here('figs','Appdx-NBHF_map_SF.png'),width=5,height=5,units="in",res=300)
+plot.bathy(bat,image=TRUE,bpal=list(c(0,max(bat),greys),c(min(bat),0,blues)),land=TRUE,n=0,
+           main='San Francisco', asp=NA)
+scaleBathy(bat, deg=1, x="bottomleft", inset=5)
+plot(bat, deep=-1000, shallow=-1000, step=0, lwd=0.5, drawlabel=TRUE, add=TRUE)
+plot(WEA$geometry, add=TRUE, border='purple', lwd=1,lty=3)
+points(Drifts$Longitude,Drifts$Latitude,col=grey(0.5),pch=19,cex=.2)
+for(s in 1:length(NBHFspecies)){
+  sub<-filter(NBHF,predicted==NBHFspecies[s])
+  if(nrow(sub)>0){
+points(sub$Longitude, sub$Latitude, col=SpColor[s], pch=19,cex=.7)}}
+legend('bottomright', legend=NBHFspecies, pch=19,cex=.8,pt.cex = 1, col=SpColor, bg="white")
+dev.off()
+
+#Humboldt
+lon1=-126
+lon2=-123.5
+lat1=42.2
+lat2=40
+#Extract bathymetry data from NOAA (saves local file to speed future performance)
+bat<-getNOAA.bathy(lon1,lon2,lat1,lat2,resolution=1,keep=TRUE)
+
+png(here('figs','Appdx-NBHF_map_Hum.png'),width=5,height=5,units="in",res=300)
+plot.bathy(bat,image=TRUE,bpal=list(c(0,max(bat),greys),c(min(bat),0,blues)),land=TRUE,n=0,
+           main='Humboldt', asp=NA)
+scaleBathy(bat, deg=1, x="bottomleft", inset=5)
+plot(bat, deep=-1000, shallow=-1000, step=0, lwd=0.5, drawlabel=TRUE, add=TRUE)
+plot(WEA$geometry, add=TRUE, border='purple', lwd=1,lty=3)
+points(Drifts$Longitude,Drifts$Latitude,col=grey(0.5),pch=19,cex=.2)
+for(s in 1:length(NBHFspecies)){
+  sub<-filter(NBHF,predicted==NBHFspecies[s])
+  if(nrow(sub)>0){
+points(sub$Longitude, sub$Latitude, col=SpColor[s], pch=19,cex=.7)}}
+legend('bottomright', legend=NBHFspecies, pch=19,cex=.8,pt.cex = 1, col=SpColor, bg="white")
+dev.off()
+
+#Oregon
+lon1= -126
+lon2= -123
+lat1=46
+lat2=42.5
+#Extract bathymetry data from NOAA (saves local file to speed future performance)
+bat<-getNOAA.bathy(lon1,lon2,lat1,lat2,resolution=1,keep=TRUE)
+
+png(here('figs','Appdx-NBHF_map_ORE.png'),width=5,height=5,units="in",res=300)
+plot.bathy(bat,image=TRUE,bpal=list(c(0,max(bat),greys),c(min(bat),0,blues)),land=TRUE,n=0,
+           main='Oregon', asp=NA)
+scaleBathy(bat, deg=1, x="bottomleft", inset=5)
+plot(bat, deep=-1000, shallow=-1000, step=0, lwd=0.5, drawlabel=TRUE, add=TRUE)
+plot(WEA$geometry, add=TRUE, border='purple', lwd=1,lty=3)
+points(Drifts$Longitude,Drifts$Latitude,col=grey(0.5),pch=19,cex=.2)
+for(s in 1:length(NBHFspecies)){
+  sub<-filter(NBHF,predicted==NBHFspecies[s])
+  if(nrow(sub)>0){
+points(sub$Longitude, sub$Latitude, col=SpColor[s], pch=19,cex=.7)}}
+legend('bottomright', legend=NBHFspecies, pch=19,cex=.8,pt.cex = 1, col=SpColor, bg="white")
+dev.off()
+
+
+MB <- magick::image_read(here('figs','Appdx-NBHF_map_MB.png')) 
+SF<- magick::image_read(here('figs','Appdx-NBHF_map_SF.png'))
+HUM <- magick::image_read(here('figs','Appdx-NBHF_map_HUM.png'))
+ORE <- magick::image_read(here('figs','Appdx-NBHF_map_ORE.png'))
+  
+NBHF_Map <-image_append(c(ORE,HUM,SF,MB), stack=TRUE)
+image_write(NBHF_Map, path = here('figs', 'Appdx-NBHF_map.png'), format ='png')#SR changed name/location
+```

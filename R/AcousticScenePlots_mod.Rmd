@@ -1,0 +1,580 @@
+##Acoustic Scene Plots, Modified to Reduce BlankTime
+
+```{r, prep, include=FALSE}
+library(here)
+source(here('R/_commonR.R'))
+source(here('R/reportPlotFunctions.R'))
+
+#From reportPlots.rmd
+effortBase <- readRDS(here('data/AllDrifts_BaseEffort.rds'))
+badPascal <- c('PASCAL_014')
+effortBase <- effortBase[!effortBase$DriftName %in% badPascal, ]
+effortHourly <- effortToBins(effortBase, bin='hour')
+effortHourly_adrift <- filter(effortHourly, grepl('ADRIFT', DriftName))
+effortHourly_cces <- filter(effortHourly, grepl('CCES', DriftName))
+effortHourly_pascal <- filter(effortHourly, grepl('PASCAL', DriftName))
+effortHourly_pc <- bind_rows(effortHourly_cces, effortHourly_pascal)
+gps <- readRDS(here('data/AllDeploymentGPS.rds'))
+plotPercentile <- FALSE
+srHeight <- 12
+srWidth <- 14
+hpHeight <- 8
+hpWidth <- 10
+
+```
+
+## Acoustic Scene Prep
+
+```{r}
+allDetections <- read.csv(here('data/AllDetections_wGPS.csv'), stringsAsFactors = FALSE)
+allDetections$UTC <- as.POSIXct(allDetections$UTC, format='%Y-%m-%d %H:%M:%S', tz='UTC')
+
+sort(unique(allDetections$species))
+
+detRename <- tribble(
+    ~old, ~new,
+    'Anthro', 'ship',
+    'Mn', 'humpback',
+    'Bp', 'fin',
+    'Bm', 'blue',
+    'B. borealis', 'sei',
+    'Lo', 'dolphin',
+    'Gg', 'dolphin',
+    'UO', 'dolphin',
+    'Ba', 'minke',
+    'Pm', 'sperm',
+    'BB', 'beaked whale',
+    'BW', 'beaked whale',
+    'BW43', 'beaked whale',
+    'ZC', 'beaked whale',
+    'MS', 'beaked whale',
+    'MC', 'beaked whale',
+    'BWC', 'beaked whale',
+    'Er', 'gray'
+)
+for(i in 1:nrow(detRename)) {
+    allDetections$species[allDetections$species == detRename$old[i]] <- detRename$new[i]
+}
+table(allDetections$species)
+
+freqMap <- tribble(
+    ~type, ~freqMin, ~freqMax,
+    'beaked whale', 25e3, 60e3,
+    'blue', 15, 25,
+    'dolphin', 5e3, 25e3,
+    'fin', 20, 50,
+    'gray', 100, 2e3,
+    'humpback', 50, 2e3,
+    'minke', 1e3, 2e3,
+    'NBHF', 80e3, 120e3,
+    'sei', 50, 500,
+    'ship', 100, 1e3,
+    'sperm', 1e3, 20e3,
+)
+freqMap <- arrange(freqMap, desc(freqMax))
+allDetections$species <- factor(allDetections$species, levels=freqMap$type)
+allDetections <- allDetections %>% 
+    left_join(effortBase[c('DriftName', 'DeploymentSite')], by='DriftName') %>% 
+    mutate(region = markRegion(DeploymentSite))
+allDetections$season <- markSeason(allDetections$UTC)
+# attempting better color blind palette
+cbColors <- c('#000000', '#E69F00', '#56B4E9', '#009E73', '#F0E442', 
+              '#0072B2', '#D55E00', '#CC79A7', '#45c929', '#9e3e04', '#5b33e5'
+)
+# freqMap$color <- scales::hue_pal()(nrow(freqMap))
+freqMap$color <- cbColors
+alpha <- 0.7
+freqMin <- 10
+bin <- '1hour'
+
+allDets_adrift <- filter(allDetections, grepl('ADRIFT', DriftName))
+```
+
+## OREGON- Acoustic Scene
+```{r, AScene_Oregon}
+#Need:
+#--> Month on X Axis
+#--> Remove Legends?
+#--> Remove some white-space
+
+OregonTest <-plotAcousticScene(
+    filter(allDets_adrift, region == "Oregon"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='Oregon Acoustic Scene')
+OregonTest
+
+#Upwelling (March - June)
+datebreaks<-c(
+              as.POSIXct("2023-03-22",tz='UTC'),
+              as.POSIXct("2023-04-13",tz='UTC'),              
+              as.POSIXct("2023-04-17",tz='UTC'),
+              as.POSIXct("2023-04-26",tz='UTC'),
+              as.POSIXct("2023-04-30",tz='UTC'),
+              as.POSIXct("2023-05-17",tz='UTC')
+              )
+AScene_ORE_UP<- plotModAcousticScene(
+  filter(allDets_adrift, region == "Oregon" & season == "Upwelling"), datebreaks,
+  typeCol='species',freqMap=freqMap
+)
+AScene_ORE_UP
+ggsave(AScene_ORE_UP, filename=here('figs//acoustic_scenes/Adrift_Oregon_Upwell.png'),
+       width=hpWidth, height=hpHeight)
+
+#Post-Upwelling (July - November)
+datebreaks<-c(
+              as.POSIXct("2023-07-22",tz='UTC'),
+              as.POSIXct("2023-08-04",tz='UTC')             
+              )
+AScene_ORE_PUP<- plotModAcousticScene(
+  filter(allDets_adrift, region == "Oregon" & season == "Post-Upwelling"), datebreaks,
+  typeCol='species',freqMap=freqMap
+)
+AScene_ORE_PUP
+ggsave(AScene_ORE_PUP, filename=here('figs/acoustic_scenes/Adrift_Oregon_PostUpwell.png'),
+       width=hpWidth, height=hpHeight)
+
+#Cut Winter (no Data)
+#Winter (December - February)
+# datebreaks<-c(
+#   as.POSIXct("2023-12-31",tz='UTC'),
+#   as.POSIXct("2023-01-01",tz='UTC')
+#   )
+# AScene_ORE_WNT<- plotModAcousticScene(
+#   filter(allDets_adrift, region == "Oregon" & season == "Post-Upwelling"), datebreaks,
+#   typeCol='species',freqMap=freqMap
+# )
+# AScene_ORE_WNT
+# ggsave(AScene_ORE_WNT, filename=here('figs//acoustic_scenes/Adrift_Oregon_Winter.png'),
+#        width=hpWidth, height=hpHeight)
+
+#Oregon Acoustic Scene- All Seasons
+OrUp <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Oregon_Upwell.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  # image_border(color="#ffffff", geometry = "260x125")%>%
+  image_annotate("Upwelling", size=120, color = "black")
+OrPup <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Oregon_PostUpwell.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+    # image_border(color="#ffffff", geometry = "260x125")%>%
+  image_annotate("Post-Upwelling", size=120, color = "black")
+# OrWnt <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Oregon_Winter.png'))%>%
+#     image_border(color="#ffffff", geometry = "0x125")%>%
+#     # image_border(color="#ffffff", geometry = "260x125")%>%
+#   image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(OrUp, OrPup))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_Oregon_Seasons.png"))
+
+```
+
+
+## HUMBOLDT- Acoustic Scene
+```{r, AScene_Humboldt}
+#Need:
+#--> Consistent X Axis
+#--> 2022 Winter- label 1st chunk = January, 2nd Chunk = December[COMPLETE]
+#--> Consistent Upwelling, Post-Upwelling, Winter labels on Top
+
+
+#2021
+Hum21_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2021 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Hum21_Up, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Upwell21.png'),
+       width=hpWidth, height=hpHeight)
+Hum21_Pup <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2021 & season == "Post-Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin)%>% #Removed title='Post-Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Hum21_Pup, filename=here('figs/acoustic_scenes/Adrift_Humboldt_PostUpwell21.png'),
+       width=hpWidth, height=hpHeight)
+#This includes January 2022
+Hum21_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year (UTC) == 2022 & month(UTC)== 01 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin)%>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+## ORIGINAL (does not include January 2022)
+# Hum21_Wnt <- plotAcousticScene(
+#     filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2021 & season == "Winter"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Winter')%>% 
+    # PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Hum21_Wnt, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Winter21.png'),
+       width=hpWidth, height=hpHeight)
+
+#2021 FinalFigure
+HumUp_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Upwell21.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("2021", size=120, color = "black")
+HumPup_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_PostUpwell21.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Post-Upwelling", size=120, color = "black")
+HumWnt_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Winter21.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(HumPup_21, HumWnt_21))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_Humboldt21_Seasons.png"))
+
+#2022
+Hum22_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2022 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin)%>% #Removed title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Hum22_Up, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Upwell22.png'),
+       width=hpWidth, height=hpHeight)
+# Hum22_Pup <- plotAcousticScene(
+#     filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2022 & season == "Post-Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Post-Upwelling') #Too much blank space
+
+#Hum22_Pup Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2022-8-02",tz='UTC'),
+              as.POSIXct("2022-09-13",tz='UTC'),
+              as.POSIXct("2022-09-16",tz='UTC'),
+              as.POSIXct("2022-11-15",tz='UTC')
+              )
+Hum22_Pup<- plotModAcousticScene(
+  filter(allDets_adrift, region == "Humboldt" & season == "Post-Upwelling" & year(UTC) == "2022"),   datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Hum22_Pup, filename=here('figs/acoustic_scenes/Adrift_Humboldt_PostUpwell22.png'),
+       width=hpWidth, height=hpHeight)
+#End HumPup_22 Alternative
+
+# Hum22_Wnt <- plotAcousticScene(
+#     filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2022 & season == "Winter"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Winter')#Too much blank space
+
+#HumWnt_22 Alternative to reduce blank space
+#No longer need datebreaks as I moved January detections to Winter 2021
+# datebreaks<-c(
+#               as.POSIXct("2022-01-24",tz='UTC'),
+#               as.POSIXct("2022-12-10",tz='UTC')
+#               )#Note, first chunk in Jan 2022, 2nd in Dec 2022
+
+
+Hum22_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year (UTC) == 2022 & month(UTC)== 12 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin)%>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+#ORIGINAL (Includes January 2022)
+# Hum22_Wnt<- plotModAcousticScene(
+#   filter(allDets_adrift, region == "Humboldt" & season == "Winter" & year(UTC) == "2022"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Hum22_Wnt, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Winter22.png'),
+       width=hpWidth, height=hpHeight)
+
+#2022 FinalFigure
+HumUp_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Upwell22.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+HumPup_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_PostUpwell22.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+HumWnt_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Winter22.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Winter", size=100, color = "black")
+test <- image_append(c(HumUp_22, HumPup_22, HumWnt_22))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_Humboldt22_Seasons.png"))
+
+
+
+#2023
+# Hum23_Up <- plotAcousticScene(
+#     filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2023 & season == "Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Upwelling')#Too much blank space
+
+#Hum23_Up Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2023-03-20",tz='UTC'),
+              as.POSIXct("2023-05-05",tz='UTC')
+              )
+Hum23_Up<- plotModAcousticScene(
+  filter(allDets_adrift, region == "Humboldt" & season == "Upwelling" & year(UTC) == "2023"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Hum23_Up, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Upwell23.png'),
+       width=hpWidth, height=hpHeight)
+
+# Hum23_Pup <- plotAcousticScene(
+#     filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2023 & season == "Post-Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Post-Upwelling')#Too much blank space
+
+#Hum23_Pup Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2023-08-29",tz='UTC'),
+              as.POSIXct("2023-10-04",tz='UTC')
+              )
+Hum23_Pup<- plotModAcousticScene(
+  filter(allDets_adrift, region == "Humboldt" & season == "Post-Upwelling" & year(UTC) == "2023"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Hum23_Pup, filename=here('figs/acoustic_scenes/Adrift_Humboldt_PostUpwell23.png'),
+       width=hpWidth, height=hpHeight)
+Hum23_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "Humboldt" & year(UTC) == 2023 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin)%>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Hum23_Wnt, filename=here('figs/acoustic_scenes/Adrift_Humboldt_Winter23.png'),
+       width=hpWidth, height=hpHeight)
+
+#Humboldt 2023 Acoustic Scene- All Seasons
+HumUp_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Upwell23.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+HumPup_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_PostUpwell23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+HumWnt_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt_Winter23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(HumUp_23, HumPup_23))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_Humboldt23_Seasons.png"))
+
+
+#Humboldt All Seasons, All Years
+Hum21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt21_Seasons.png'))
+Hum22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt22_Seasons.png'))
+Hum23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_Humboldt23_Seasons.png'))
+draft <- image_append(c(Hum21, Hum22, Hum23), stack = TRUE)
+image_write(draft, path= here('figs', 'acoustic_scenes', "Adrift_Humboldt_SeasonYears.png"))
+
+```
+
+
+## SF - Acoustic Scene
+```{r, AScene_SF}
+#Need:
+#--> Consistent X Axis
+#--> 2022 Winter- label 1st chunk = January, 2nd Chunk = December
+#--> Consistent Upwelling, Post-Upwelling, Winter labels on Top
+
+#2021
+SF21_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2021 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')#No Deployments here
+ggsave(SF21_Up, filename=here('figs/acoustic_scenes/Adrift_SF_Upwell21.png'),
+       width=hpWidth, height=hpHeight)
+SF21_Pup <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2021 & season == "Post-Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Post-Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF21_Pup, filename=here('figs/acoustic_scenes/Adrift_SF_PostUpwell21.png'),
+       width=hpWidth, height=hpHeight)
+SF21_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2021 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF21_Wnt, filename=here('figs/acoustic_scenes/Adrift_SF_Winter21.png'),
+       width=hpWidth, height=hpHeight)
+
+#2021 FinalFigure
+SFUp_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Upwell21.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+SFPup_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_PostUpwell21.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+# SFWnt_21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Winter21.png'))%>%
+#     image_border(color="#ffffff", geometry = "0x125")
+#   # image_annotate("Winter", size=100, color = "black")
+test <- image_append(c(SFUp_21, SFPup_21))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_SF21_Seasons.png"))
+
+#2022
+SF22_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2022 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF22_Up, filename=here('figs/acoustic_scenes/Adrift_SF_Upwell22.png'),
+       width=hpWidth, height=hpHeight)
+# SF22_Pup <- plotAcousticScene(
+#     filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2022 & season == "Post-Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Post-Upwelling') #Too much blank space
+
+#SF22_Pup Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2022-8-01",tz='UTC'),
+              as.POSIXct("2022-09-26",tz='UTC')
+              )
+SF22_Pup<- plotModAcousticScene(
+  filter(allDets_adrift, region == "SanFrancisco" & season == "Post-Upwelling" & year(UTC) == "2022"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(SF22_Pup, filename=here('figs/acoustic_scenes/Adrift_SF_PostUpwell22.png'),
+       width=hpWidth, height=hpHeight)
+#End SFPup_22 Alternative
+
+SF22_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2022 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF22_Wnt, filename=here('figs/acoustic_scenes/Adrift_SF_Winter22.png'),
+       width=hpWidth, height=hpHeight)
+
+#2022 FinalFigure
+SFUp_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Upwell22.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+SFPup_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_PostUpwell22.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+# SFWnt_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Winter22.png'))%>%
+#     image_border(color="#ffffff", geometry = "0x125")
+#   # image_annotate("Winter", size=100, color = "black")
+test <- image_append(c(SFUp_22, SFPup_22))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_SF22_Seasons.png"))
+
+
+
+#2023
+SF23_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2023 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF23_Up, filename=here('figs/acoustic_scenes/Adrift_SF_Upwell23.png'),
+       width=hpWidth, height=hpHeight)
+
+SF23_Pup <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2023 & season == "Post-Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Post-Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')#Too much blank space
+ggsave(SF23_Pup, filename=here('figs/acoustic_scenes/Adrift_SF_PostUpwell23.png'),
+       width=hpWidth, height=hpHeight)
+
+SF23_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "SanFrancisco" & year(UTC) == 2023 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Removed title='Winter'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(SF23_Wnt, filename=here('figs/acoustic_scenes/Adrift_SF_Winter23.png'),
+       width=hpWidth, height=hpHeight)
+
+#San Francisco 2023 Acoustic Scene- All Seasons
+SFUp_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Upwell23.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+SFPup_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_PostUpwell23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+SFWnt_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF_Winter23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(SFUp_23, SFPup_23))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_SF23_Seasons.png"))
+
+
+#San Francisco All Seasons, All Years
+SF21 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF21_Seasons.png'))
+SF22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF22_Seasons.png'))
+SF23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_SF23_Seasons.png'))
+draft <- image_append(c(SF21, SF22, SF23), stack = TRUE)
+image_write(draft, path= here('figs', 'acoustic_scenes', "Adrift_SF_SeasonYears.png"))
+
+```
+
+## MorroBay- Acoustic Scene
+```{r, AScene_MorroBay}
+#Need:
+#--> Consistent X Axis
+#--> 2022 Winter- label 1st chunk = January, 2nd Chunk = December
+#--> Consistent Upwelling, Post-Upwelling, Winter labels on Top
+
+#2021- No Data Collection in Morro Bay
+
+
+#2022
+# Mb22_Up <- plotAcousticScene(
+#     filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2022 & season == "Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Upwelling')#Too much blank space
+
+#Mb22_Up Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2022-5-06",tz='UTC'),
+              as.POSIXct("2022-06-20",tz='UTC')
+              )
+Mb22_Up<- plotModAcousticScene(
+  filter(allDets_adrift, region == "MorroBay" & season == "Upwelling" & year(UTC) == "2022"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Mb22_Up, filename=here('figs/acoustic_scenes/Adrift_MorroBay_Upwell22.png'),
+       width=hpWidth, height=hpHeight)
+Mb22_Pup <- plotAcousticScene(
+    filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2022 & season == "Post-Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='Post-Upwelling') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')#No Data
+ggsave(Mb22_Pup, filename=here('figs/acoustic_scenes/Adrift_MorroBay_PostUpwell22.png'),
+       width=hpWidth, height=hpHeight)
+
+Mb22_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2022 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='Winter') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')#No Data
+ggsave(Mb22_Wnt, filename=here('figs/acoustic_scenes/Adrift_MorroBay_Winter22.png'),
+       width=hpWidth, height=hpHeight)
+
+#2022 FinalFigure
+MbUp_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_Upwell22.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+MbPup_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_PostUpwell22.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Post-Upwelling", size=120, color = "black")
+MbWnt_22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_Winter22.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(MbUp_22, MbPup_22, MbWnt_22))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_MorroBay22_Seasons.png"))
+#Below is final figure
+image_write(MbUp_22, path = here('figs', 'acoustic_scenes', "Adrift_MorroBay22_Seasons.png"))
+
+
+#2023
+Mb23_Up <- plotAcousticScene(
+    filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2023 & season == "Upwelling"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin) %>% #Remove title='Upwelling'
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+ggsave(Mb23_Up, filename=here('figs/acoustic_scenes/Adrift_MorroBay_Upwell23.png'),
+       width=hpWidth, height=hpHeight)
+
+# Mb23_Pup <- plotAcousticScene(
+#     filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2023 & season == "Post-Upwelling"),
+#     freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+#     title='Post-Upwelling')#Too much blank space
+
+#Mb23_Pup Alternative to reduce blank space
+datebreaks<-c(
+              as.POSIXct("2023-07-18",tz='UTC'),
+              as.POSIXct("2023-11-04",tz='UTC')
+              )
+Mb23_Pup<- plotModAcousticScene(
+  filter(allDets_adrift, region == "MorroBay" & season == "Post-Upwelling" & year(UTC) == "2023"), datebreaks, typeCol='species',freqMap=freqMap)
+ggsave(Mb23_Pup, filename=here('figs/acoustic_scenes/Adrift_MorroBay_PostUpwell23.png'),
+       width=hpWidth, height=hpHeight)
+Mb23_Wnt <- plotAcousticScene(
+    filter(allDets_adrift, region == "MorroBay" & year(UTC) == 2023 & season == "Winter"),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='Winter') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')#No Data
+ggsave(Mb23_Wnt, filename=here('figs/acoustic_scenes/Adrift_MorroBay_Winter23.png'),
+       width=hpWidth, height=hpHeight)
+
+#MorroBay 2023 Acoustic Scene- All Seasons
+MbUp_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_Upwell23.png'))%>%
+  image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Upwelling", size=100, color = "black")
+MbPup_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_PostUpwell23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")%>%
+  image_annotate("Post-Upwelling", size=100, color = "black")
+MbWnt_23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay_Winter23.png'))%>%
+    image_border(color="#ffffff", geometry = "0x125")
+  # image_annotate("Winter", size=120, color = "black")
+test <- image_append(c(MbUp_23, MbPup_23))
+image_write(test, path = here('figs', 'acoustic_scenes', "Adrift_MorroBay23_Seasons.png"))
+
+
+#MorroBay All Seasons, All Years
+Mb22 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay22_Seasons.png'))
+Mb23 <- magick::image_read(here('figs/acoustic_scenes', 'Adrift_MorroBay23_Seasons.png'))
+draft <- image_append(c(Mb22, Mb23), stack = TRUE)
+image_write(draft, path= here('figs', 'acoustic_scenes', "Adrift_MorroBay_SeasonYears.png"))
+
+
+```
+

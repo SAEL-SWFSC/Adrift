@@ -1,0 +1,866 @@
+---
+title: "Report Data Prep"
+author: "Taiki Sakai"
+date: "2024-01-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+source(here('R/reportPlotFunctions.R'))
+effortBase <- readRDS(here('data/AllDrifts_BaseEffort.rds'))
+```
+
+## Intro
+
+This document outlines any complicated data prep steps used to create `.rds` files that are loaded with `reportPlots.rmd`.
+
+If anything needs to be re-run because more raw data has been added, you should only need to change the prefix for the server folder, mine was 'X:/', yours may be different. Also *DO NOT* run everything, it will take forever. You should only need to run the first code chunk above this, and then the specific section that needs to be updated. Then commit the new data piece that gets written to the `data` folder.
+
+## Effort
+
+Base effort is just start/end times for each deployment + site
+
+```{r}
+#Only run on Taiki's system to update AllDrifts_BaseEffort.rds
+effortBase <- getDepDetails('C:/Users/taiki.sakai/Documents/R_Projects/DriftWatch/SPOTGPS_Logger.sqlite3')
+effortBase <- rename(effortBase, 'start'='DataStart', 'end'='DataEnd')
+effortBase <- effortBase[c('start', 'end', 'DriftName', 'DeploymentSite')]
+hasNa <- is.na(effortBase$start) | is.na(effortBase$end)
+effortBase <- effortBase[!hasNa, ]
+effortBase <- filter(effortBase, grepl('ADRIFT|CCES|PASCAL', DriftName))
+saveRDS(effortBase, file=here('data/AllDrifts_BaseEffort.rds'))
+```
+
+## Bm triton logs
+
+```{r}
+# bmLog_pascal <- here('data/Bm/All_PASCAL_2016_Blue_Whale_Logs.xlsx')
+bmLog_pascal <- 'Z:/ANALYSIS/PASCAL_2016/Blue Whales/TRITON_LOGS/All_PASCAL_2016_Blue_Whale_Logs.xlsx'
+# bmLog_cces <- here('data/Bm/All_CCES_2018_Blue_Whale_Logs.xlsx')
+bmLog_cces <- 'Z:/ANALYSIS/CCES_2018/Blue_Whales/TRITON_LOGS/All_CCES_2018_Blue_Whale_Logs.xlsx'
+# bmLog_adrift <- here('data/Bm/All_ADRIFT_Blue_Whale_Logs.xlsx')
+bmLog_adrift <- 'Z:/ANALYSIS/ADRIFT/Blue Whales/TRITON_LOGS/All_ADRIFT_Blue_Whale_Logs.xlsx'
+
+bmData_pascal <- loadDetectionData(bmLog_pascal, source='bm', driftName = 'PASCAL')
+bmData_cces <- loadDetectionData(bmLog_cces, source='bm', driftName = 'CCES')
+bmData_adrift <- loadDetectionData(bmLog_adrift, source='bm', driftName = 'ADRIFT')
+
+#Correct call types
+bmCallRename <- data.frame(old = c('A NE Pacific', 'B NE Pacific'),
+                           new = c('A', 'B'))
+for (i in 1:nrow(bmData_pascal)) {
+  bmData_pascal$call[bmData_pascal$call == bmCallRename$old[i]] <- bmCallRename$new[i]
+}
+for (i in 1:nrow(bmData_cces)) {
+  bmData_cces$call[bmData_cces$call == bmCallRename$old[i]] <- bmCallRename$new[i]
+}
+for (i in 1:nrow(bmData_adrift)) {
+  bmData_adrift$call[bmData_adrift$call == bmCallRename$old[i]] <- bmCallRename$new[i]
+}
+
+#Save data files
+saveRDS(bmData_pascal, file=here('data/Bm/PASCAL_bmData.rds'))
+saveRDS(bmData_cces, file=here('data/Bm/CCES_bmData.rds'))
+saveRDS(bmData_adrift, file=here('data/Bm/ADRIFT_bmData.rds'))
+```
+
+## PSD Plot Data
+
+Data for the overall PSD plots are quite large, even when using just third octave level measures. Here we'll load and format the median TOL levels for each project (ADRIFT, CCES, PASCAL) from the server.
+
+### PSD Plot - ADRIFT
+
+April 16, 2024: Soundscape metrics are complete for PASCAL, CCES, and ADRIFT.
+
+Per Anne, noise logs for PASCAL/CCES are complete, ADRIFT is not.
+
+Soundscape metrics for PASCAL are incomplete.
+
+```{r}
+tolDir <- 'Z:/ANALYSIS/ADRIFT/Soundscape/metrics/'
+tolFiles <- list.files(tolDir, recursive=TRUE, full.names=TRUE, pattern='TOL_2min')
+
+adriftTol <- bind_rows(lapply(tolFiles, function(x) {
+    data <- checkSoundscapeInput(x)
+    driftName <- basename(dirname(x))
+    if(grepl('pst', driftName)) {
+        # data$UTC <- data$UTC + 7  * 3600
+        data$UTC <- force_tz(data$UTC, tzone='America/Los_Angeles')
+        data$UTC <- with_tz(data$UTC, tzone='UTC')
+        driftName <- gsub('_pst', '', driftName)
+    }
+    data$DriftName <- driftName
+    data
+}))
+# saveRDS(adriftTol, here('data/PSD/ADRIFT_TOL_raw.rds'))
+# adriftTol <- readRDS(here('data/PSD/ADRIFT_TOL_raw.rds'))
+# Mark noise logged sections as NA, then add "onEffort" and "DeploymentSite" cols
+adriftNoise <- loadNoiseLog(here('data/PSD/ADRIFTNoiseLogs.xlsx'), project='ADRIFT')
+adriftTol <- adriftTol %>% 
+    markNA(na=adriftNoise, by='DriftName') %>% 
+    markEffort(effort=effortBase, by='DriftName', mark=TRUE) %>% 
+    left_join(effortBase[c('DriftName', 'DeploymentSite')], by='DriftName')
+saveRDS(adriftTol, here('data/PSD/ADRIFT_TOL_final.rds'))  
+```
+
+### PSD Plot - CCES
+
+April 16, 2024: Ch 2 on Drifts 20 & 22 do not need to be included, and the code reflects this
+
+It appears CCES_004 and CCES_017 are marked as having effort but do not have soundscape metrics. Were these excluded because they are SM3M? YES.
+
+Also Drifts 20 & 22 have a second channel calculated, not sure if these need to be included.
+
+```{r}
+tolDir <- 'X:/ANALYSIS/CCES_2018/DASBR/SOUNDSCAPE/METRICS/'
+tolFiles <- list.files(tolDir, recursive=TRUE, full.names=TRUE, pattern='TOL_2min')
+tolFiles <- tolFiles[!grepl('_CH2_', tolFiles)]
+
+ccesTol <- bind_rows(lapply(tolFiles, function(x) {
+    data <- checkSoundscapeInput(x)
+    driftNumber <- gsub('Drift_([0-9]{1,2})_.*', '\\1', basename(dirname(x)))
+    driftName <- paste0('CCES_', formatNumber(as.numeric(driftNumber)))
+    # driftName <- gsub('_48kHz', '', basename(dirname(x)))
+    if(grepl('pst', driftName)) {
+        # data$UTC <- data$UTC + 7  * 3600
+        data$UTC <- force_tz(data$UTC, tzone='America/Los_Angeles')
+        data$UTC <- with_tz(data$UTC, tzone='UTC')
+        driftName <- gsub('_pst', '', driftName)
+    }
+    data$DriftName <- driftName
+    data
+}))
+# saveRDS(ccesTol, here('data/PSD/CCES_TOL_raw.rds'))
+ccesTol <- readRDS(here('data/PSD/CCES_TOL_raw.rds'))
+# Mark noise logged sections as NA, then add "onEffort" and "DeploymentSite" cols
+ccesNoise <- loadNoiseLog(here('data/PSD/CCESNoiseLogs.xlsx'), project='CCES')
+ccesTol <- ccesTol %>% 
+    markNA(na=ccesNoise, by='DriftName') %>% 
+    markEffort(effort=effortBase, by='DriftName', mark=TRUE) %>% 
+    left_join(effortBase[c('DriftName', 'DeploymentSite')], by='DriftName')
+saveRDS(ccesTol, here('data/PSD/CCES_TOL_final.rds'))
+```
+
+### PSD Plot - PASCAL
+
+April 16, 2024: PASCAL metrics are complete. Re: Anne's message PASCAL soundscape metrics are not yet complete. Re-run when complete, also mayn PASCAL drifts currently have no DataStart/End so do not have approved effort.
+
+```{r}
+tolDir <- 'X:/ANALYSIS/PASCAL_2016/Soundscape/metrics/'
+tolFiles <- list.files(tolDir, recursive=TRUE, full.names=TRUE, pattern='TOL_2min')
+
+pascalTol <- bind_rows(lapply(tolFiles, function(x) {
+    data <- checkSoundscapeInput(x)
+    driftName <- basename(dirname(x))
+    if(grepl('pst', driftName)) {
+        # data$UTC <- data$UTC + 7  * 3600
+        data$UTC <- force_tz(data$UTC, tzone='America/Los_Angeles')
+        data$UTC <- with_tz(data$UTC, tzone='UTC')
+        driftName <- gsub('_pst', '', driftName)
+    }
+    data$DriftName <- driftName
+    data
+}))
+saveRDS(pascalTol, here('data/PSD/PASCAL_TOL_raw.rds'))
+pascalTol <- readRDS(here('data/PSD/PASCAL_TOL_raw.rds'))
+# Mark noise logged sections as NA, then add "onEffort" and "DeploymentSite" cols
+pascalNoise <- loadNoiseLog(here('data/PSD/PascalNoiseLogs.xlsx'), project='PASCAL')
+pascalTol <- pascalTol %>% 
+    markNA(na=pascalNoise, by='DriftName') %>% 
+    markEffort(effort=effortBase, by='DriftName', mark=TRUE) %>% 
+    left_join(effortBase[c('DriftName', 'DeploymentSite')], by='DriftName')
+saveRDS(pascalTol, here('data/PSD/PASCAL_TOL_final.rds'))
+```
+
+## Ship / Pm Logs
+
+Ships are logged in both Pm logs and ship logs. This ship folder has one CCES drift for some reason.
+
+```{r}
+pmDir <- 'Z:/ANALYSIS/ADRIFT/Sperm whales/Logs/'
+pmFiles <- list.files(pmDir, full.names=TRUE, pattern='xlsx?')
+shipDir <- 'Z:/ANALYSIS/ADRIFT/Soundscape/Ship Detections/logs'
+shipFiles <- list.files(shipDir, full.names=TRUE, pattern='xlsx?')
+shipData <- loadTritonLog(shipFiles)
+pmData <- loadTritonLog(pmFiles)
+```
+
+April 16, 2024:
+
+Incomplete ship logs for CCES and PASCAL (not a priority). Will complete if time allows, but may not be included in final report.
+
+CCES ship logs saved on the don Z:\\ANALYSIS\\CCES_2018\\Soundscapes\\Ship Detections
+
+Taiki's previous comment: Currently (1/30) only one CCES log, so separate by project and save ship logs separately.
+
+```{r}
+shipAll <- bind_rows(pmData, shipData) %>% 
+    filter(grepl('Ship', call))
+shipAdrift <- filter(shipAll, grepl('ADRIFT', DriftName))
+saveRDS(shipAdrift, file=here('data/ship/ADRIFT_shipLogs.rds'))
+```
+
+```{r}
+pmAll <- bind_rows(pmData, shipData) %>% 
+    filter(species == 'Pm')
+pmAdrift <- filter(pmAll, grepl('ADRIFT', DriftName))
+saveRDS(pmAdrift, file=here('data/Pm/ADRIFT_pmLogs.rds'))
+maskAll <- bind_rows(pmData, shipData) %>% 
+    filter(call == 'Masking')
+saveRDS(maskAll, file=here('data/Pm/PmMasking.rds'))
+```
+
+## NBHF
+
+April 16, 2024: NBHF events might be labeled by species using Jackson's banter model (nearly finalized). Will revisit during week of April 22
+
+```{r}
+nbhfDir_adrift <- 'Z:/ANALYSIS/ADRIFT/NBHF/MTC events/Databases/'
+nbhfFiles_adrift <- list.files(nbhfDir_adrift, pattern='sqlite3$', full.names=TRUE)
+nbhfData_adrift <- bind_rows(lapply(nbhfFiles_adrift, function(x) {
+    cat(basename(x))
+    result <- getPgEvent(x)
+    result$DriftName <- gsub('(^ADRIFT_[0-9]{1,3}).*$', '\\1', basename(x))
+    result
+}))
+table(nbhfData_adrift$DriftName, nbhfData_adrift$species)
+saveRDS(filter(nbhfData_adrift, species == 'NBHF'),
+        file=here('data/nbhf/ADRIFT_nbhfData.rds'))
+```
+
+```{r}
+#nbhfDir_cces <- here('data/bw/dbs/ccesnbhf') # Directory no longer exists on ADRIFT Report repo
+nbhfDir_cces <- 'Z:\\ANALYSIS\\CCES_2018\\NBHF\\Final Databases'
+nbhfFiles_cces <- list.files(nbhfDir_cces, full.names=TRUE)
+nbhfData_cces <- bind_rows(lapply(nbhfFiles_cces, function(x) {
+    data <- getPgEvent(x)
+    driftName <- gsub('.*Drift-([0-9]{1,2}).*', '\\1', basename(x))
+    driftName <- paste0('CCES_', paste0(rep('0', 3-nchar(driftName)),collapse=''), driftName)
+    if(driftName == 'CCES_015') {
+        driftName <- 'CCES_014'
+    }
+    data$DriftName <- driftName
+    data
+}))
+table(nbhfData_cces$DriftName, nbhfData_cces$species)
+saveRDS(nbhfData_cces, file=here('data/nbhf/CCES_nbhfData.rds'))
+```
+
+```{r}
+#nbhfDir_pascal <- here('data/bw/dbs/pasnbhf') # Directory no longer exists on ADRIFT Report repo
+nbhfDir_pascal <- 'Z:\\ANALYSIS\\PASCAL_2016\\NBHF\\Final DB'
+nbhfFiles_pascal <- list.files(nbhfDir_pascal, full.names=TRUE)
+nbhfData_pascal <- bind_rows(lapply(nbhfFiles_pascal, function(x) {
+    data <- getPgEvent(x)
+    driftName <- gsub('.*Station-([0-9]{1,2}).*', '\\1', basename(x))
+    driftName <- paste0('PASCAL_', paste0(rep('0', 3-nchar(driftName)),collapse=''), driftName)
+    data$DriftName <- driftName
+    data
+}))
+table(nbhfData_pascal$DriftName, nbhfData_pascal$species)
+saveRDS(filter(nbhfData_pascal, species == 'NBHF'),
+        file=here('data/nbhf/PASCAL_nbhfData.rds'))
+```
+
+## Minke Spectrogram Annotations
+
+Data from Kourtney are marked out as spectrogram annotations in the databases. Per Kourtney no minkes were in ADRIFT, only CCES/PASCAL.
+
+Only calls labelled "B" (boing) or "CB" (cutoff boing) should be considered.
+
+CCES004 has one boing with note "uncertain", KB confirmed this is a boing
+
+```{r}
+minkeDir_cces <- 'Z:/ANALYSIS/CCES_2018/Minke_Whales/DATABASE'
+minkeFiles_cces <- list.files(minkeDir_cces, pattern='sqlite3$', full.names=TRUE)
+minkeData_cces <- bind_rows(lapply(minkeFiles_cces, function(x) {
+    driftName <- gsub('CCES2018_([0-9]{3})_.*', 'CCES_\\1', basename(x))
+    result <- loadSpecAnno(x)
+    if(is.null(result)) {
+        return(NULL)
+    }
+    result$DriftName <- driftName
+    result$species <- 'Ba'
+    result <- filter(result, call %in% c('B', 'CB'))
+    result
+}))
+
+# Rename all call to Boing
+minkeData_cces$call <- 'Boing'
+
+saveRDS(minkeData_cces, here('data/minke/CCES_minkeData.rds'))
+```
+
+```{r}
+minkeDir_pascal <- 'Z:/ANALYSIS/PASCAL_2016/Minke_Whales/DATABASE'
+minkeFiles_pascal <- list.files(minkeDir_pascal, pattern='sqlite', full.names=TRUE)
+minkeData_pascal <- bind_rows(lapply(minkeFiles_pascal, function(x) {
+    driftName <- gsub('PASCAL_([0-9]{3})_.*', 'PASCAL_\\1', basename(x))
+    result <- loadSpecAnno(x)
+    if(is.null(result)) {
+        return(NULL)
+    }
+    result$DriftName <- driftName
+    result$species <- 'Ba'
+    result <- filter(result, call %in% c('B', 'CB'))
+    result
+}))
+
+# Rename all call to Boing
+minkeData_pascal$call <- 'Boing'
+
+saveRDS(minkeData_pascal, here('data/minke/PASCAL_minkeData.rds'))
+```
+
+## Fin Liz Data
+
+Notes: Marked out in DGL WMD marked Fin 40Hz pulse is tricky - doesn't detect well, sometimes like 50% of available calls
+
+These should be used for sure for Fin 40Hz (clarifying labeling here), Sei whale (B borealis), and Brydes (B brydei)
+
+All other species will be removed as these are considered adhoc detections (incuding blue, humpback, minke, possible detections, and unknown sounds) \### ADRIFT
+
+```{r}
+finLizDir_adrift <- 'Z:/ANALYSIS/ADRIFT/Fin_Whales/Lizs_Analysis/Databases'
+finLizFiles_adrift <- list.files(finLizDir_adrift, pattern='sqlite3$', full.names=TRUE)
+finLizData_adrift <- bind_rows(lapply(finLizFiles_adrift, function(x) {
+    cat(basename(x))
+    result <- getPgEvent(x, label='Species_ID', extraCols = c('Sound_type', 'Comments'))
+    driftName <- gsub('^(ADRIFT_[0-9]{1,3})_.*', '\\1', basename(x))
+    result$DriftName <- driftName
+    # result$db <- basename(x)
+    result
+}))
+
+# Remove unwanted data
+dropSpecies <- c('Mn','Pos B. bore','Pos Bb','Pos Bm','Pos Fish','Pos Mn','Pos whale','UNK Sound')
+finLizData_adrift <- filter(finLizData_adrift, !species %in% dropSpecies)
+
+# Rename sei whale downsweep calls to SWDS
+for (i in 1:nrow(finLizData_adrift)) {
+  if (finLizData_adrift$species[i] == 'B. borealis') {
+    finLizData_adrift$call[i] <- 'SWDS'
+  }
+}
+
+# Clean blue detections
+for (i in 1:nrow(finLizData_adrift)) {
+  if (finLizData_adrift$species[i] == 'Bm') {
+    if (finLizData_adrift$call[i] == 'DS') {
+      finLizData_adrift$call[i] <- 'BWDS'
+    }
+    if (finLizData_adrift$call[i] == 'Tonal only') {
+      finLizData_adrift$call[i] <- 'BWTonal'
+    }
+    if (finLizData_adrift$call[i] == 'Varied') {
+      finLizData_adrift$call[i] <- 'BWMixed'
+    }
+  }
+}
+
+# Renaming Bp Pulses to 20Hz and Bp 40 Hz to 40Hz
+for (i in 1:nrow(finLizData_adrift)) { 
+  if (finLizData_adrift$species[i] == "Bp") {
+    if (finLizData_adrift$call[i] == "Pulses") {
+      finLizData_adrift$call[i] <- "20Hz"
+    }
+    else {
+      finLizData_adrift$call[i] <- "40Hz"
+    }
+  }
+}
+
+# Renaming Bp 40-50 Hz Pulses to 40Hz and Bp  40-50 Hz 40 Hz to 40Hz
+for (i in 1:nrow(finLizData_adrift)) { 
+  if (finLizData_adrift$species[i] == "Bp 40-50 Hz") {
+    finLizData_adrift$call[i] <- "40Hz"
+  }
+}
+
+# Rename Species
+finRename <- data.frame(old = c('Bp 40-50 Hz'),
+                           new = c('Bp'))
+for (i in 1:nrow(finLizData_adrift)) {
+  finLizData_adrift$species[finLizData_adrift$species == finRename$old[i]] <- finRename$new[i]
+}
+
+#Saving blue detections in separate rds to the don. These will not be included in report
+blueLizData_adrift <- subset(finLizData_adrift, species == 'Bm')
+saveRDS(blueLizData_adrift, file='Z:\\ANALYSIS\\ADRIFT\\Blue Whales\\ADRIFT_Blue_lizData.rds')
+
+finLizData_adrift <- subset(finLizData_adrift, species != 'Bm')
+saveRDS(finLizData_adrift, file=here('data/fin/ADRIFT_FinSei_lizData.rds'))
+```
+
+### CCES
+
+```{r}
+finLizDir_cces <- 'Z:/ANALYSIS/CCES_2018/Fin_Whales/Lizs_Analysis/Databases'
+finLizFiles_cces <- list.files(finLizDir_cces, pattern='sqlite3$', full.names=TRUE)
+finLizData_cces <- bind_rows(lapply(finLizFiles_cces, function(x) {
+    result <- getPgEvent(x, label='Species_ID', extraCols = c('Sound_type','Comments'))
+    driftName <- gsub('^(CCES_[0-9]{1,3})_.*', '\\1', basename(x))
+    result$DriftName <- driftName
+    # result$db <- basename(x)
+    result
+}))
+
+# Remove unwanted data
+dropSpecies <- c('Ba','Pos whale','UNK Sound','UNK whale')
+finLizData_cces <- filter(finLizData_cces, !species %in% dropSpecies)
+
+# Clean blue detections
+for (i in 1:nrow(finLizData_cces)) {
+  if (finLizData_cces$species[i] == 'Bm') {
+    if (finLizData_cces$call[i] == 'DS') {
+      finLizData_cces$call[i] <- 'BWDS'
+    }
+  }
+}
+
+# Rename call type
+finCallRename <- data.frame(old = c('Pulses'),
+                           new = c('20Hz'))
+for (i in 1:nrow(finLizData_cces)) {
+  finLizData_cces$call[finLizData_cces$call == finCallRename$old[i]] <- finCallRename$new[i]
+}
+
+#Saving blue detections in separate rds. These will not be included in report
+blueLizData_cces <- subset(finLizData_cces, species == 'Bm')
+saveRDS(blueLizData_cces, 'Z:\\ANALYSIS\\CCES_2018\\Blue Whales\\CCES_Blue_lizData.rds')
+
+finLizData_cces <- subset(finLizData_cces, species != 'Bm')
+saveRDS(finLizData_cces, file=here('data/fin/CCES_FinSei_lizData.rds'))
+```
+
+### PASCAL
+
+```{r}
+finLizDir_pascal <- 'Z:/ANALYSIS/PASCAL_2016/Fin_Whales/Lizs_Analysis/Databases'
+finLizFiles_pascal <- list.files(finLizDir_pascal, pattern='sqlite3$', full.names=TRUE)
+finLizData_pascal <- bind_rows(lapply(finLizFiles_pascal, function(x) {
+    result <- getPgEvent(x, label='Species_ID', extraCols = c('Sound_type','Comments'))
+    driftName <- gsub('^(PASCAL_[0-9]{1,3})_.*', '\\1', basename(x))
+    result$DriftName <- driftName
+    # result$db <- basename(x)
+    result
+}))
+
+# Remove unwanted data
+dropSpecies <- c('UNK whale')
+finLizData_pascal <- filter(finLizData_pascal, !species %in% dropSpecies)
+
+# Rename sei whale downsweep calls to SWDS
+for (i in 1:nrow(finLizData_pascal)) {
+  if (finLizData_pascal$species[i] == 'B. borealis') {
+    finLizData_pascal$call[i] <- 'SWDS'
+  }
+}
+
+# Clean blue detections
+for (i in 1:nrow(finLizData_pascal)) {
+  if (finLizData_pascal$species[i] == 'Bm') {
+    if (finLizData_pascal$call[i] == 'DS') {
+      finLizData_pascal$call[i] <- 'BWDS'
+    }
+  }
+}
+
+# Renaming Bp Pulses to 20Hz and Bp 40-50 Hz to 40Hz
+for (i in 1:nrow(finLizData_pascal)) { 
+  if (finLizData_pascal$call[i] == "Pulses") {
+    if (finLizData_pascal$species[i] == "Bp") {
+      finLizData_pascal$call[i] <- "20Hz"
+    }
+    else {
+      finLizData_pascal$call[i] <- "40Hz"
+    }
+  }
+}
+
+# Rename Species
+finRename <- data.frame(old = c('Bp 40-50 Hz'),
+                           new = c('Bp'))
+for (i in 1:nrow(finLizData_pascal)) {
+  finLizData_pascal$species[finLizData_pascal$species == finRename$old[i]] <- finRename$new[i]
+}
+
+#Saving blue detections in separate rds. These will not be included in report
+blueLizData_pascal <- subset(finLizData_pascal, species == 'Bm')
+saveRDS(blueLizData_pascal, 'Z:\\ANALYSIS\\PASCAL_2016\\Blue Whales\\PASCAL_Blue_lizData.rds')
+
+finLizData_pascal <- subset(finLizData_pascal, species != 'Bm')
+saveRDS(finLizData_pascal, file=here('data/fin/PASCAL_FinSei_lizData.rds'))
+```
+
+## Fin RF Logs
+
+Manual review logs given to Cory.
+
+```{r}
+#finDir_adrift <- here('data/fin/Reviewed') # Directory no longer exists on ADRIFT Report repo
+finDir_adrift <- 'Z:\\ANALYSIS\\ADRIFT\\Fin_Whales\\Corys_Analysis\\RANDOM_FOREST\\REVIEW_PRODUCTS\\ALL_REVIEWED_CSVS'
+finFiles_adrift <- list.files(finDir_adrift, full.names=TRUE, pattern='csv$')
+finData_adrift <- bind_rows(lapply(finFiles_adrift, function(x) {
+    data <- read.csv(x, stringsAsFactors = FALSE)
+    data <- rename(data, 'DriftName' = 'drift',
+                   'UTC' = 'hour')
+    data <- filter(data, reviewStatus != 'Dropped')
+    data$manualReview <- tolower(data$manualReview)
+    data$manualReview[data$reviewStatus == 'Accepted'] <- 'fin'
+    notReviewed <- data$reviewStatus == 'Review' & !(data$manualReview %in% c('fin', 'notfin'))
+    if(any(notReviewed)) {
+        warning('File ', basename(x), ' has review label issues in event(s) ID: ', 
+                paste0(data$id[notReviewed], collapse=', '))
+    }
+    data <- filter(data, manualReview == 'fin')
+    if(nrow(data) == 0) {
+        return(NULL)
+    }
+    data$species <- 'fin'
+    data$call <- '20Hz'
+    data$UTC <- parse_date_time(data$UTC, orders='%m/%d/%Y %H:%M', tz='UTC', truncated=2)
+    data[c('UTC', 'species', 'call', 'DriftName')]
+}))
+
+# Rename species
+finData_adrift$species <- 'Bp'
+
+saveRDS(finData_adrift, here('data/fin/ADRIFT_finData.rds'))
+```
+
+## Fin Triton Logs
+
+PASCAL/CCES are like this from Cory
+
+```{r}
+finDir_pascal <- 'Z:/ANALYSIS/PASCAL_2016/Fin_Whales/Corys_Analysis/TRITON_LOGS'
+finFiles_pascal <- list.files(finDir_pascal, full.names=TRUE, pattern='xls')
+finFiles_pascal <- finFiles_pascal[!grepl('All_PASCAL', finFiles_pascal)]
+finData_pascal <- bind_rows(lapply(finFiles_pascal, function(x) {
+    data <- loadDetectionData(x, source='triton', sheet='Detections')
+    data
+}))
+
+saveRDS(finData_pascal, file=here('data/fin/PASCAL_finData.rds'))
+```
+
+```{r}
+finDir_cces <- 'Z:/ANALYSIS/CCES_2018/Fin_Whales/Corys_Analysis/TRITON_LOGS'
+finFiles_cces <- list.files(finDir_cces, full.names=TRUE, pattern='xls')
+finFiles_cces <- finFiles_cces[!grepl('All_CCES', finFiles_cces)]
+finData_cces <- bind_rows(lapply(finFiles_cces, function(x) {
+    data <- loadDetectionData(x, source='triton', sheet='Detections')
+    data
+}))
+
+saveRDS(finData_cces, file=here('data/fin/CCES_finData.rds'))
+```
+
+## Dolphin Logs
+
+April 20, 2024:
+
+-ADRIFT, CCES & PASCAL dolphin logs are complete.
+
+-Consider plotting separate species (Gg/Lo/UD) instead of single 'delphinid' group
+
+[Taiki's previous comments]{.underline}
+
+Per Anne - CCES/ADRIFT are pretty much done, but not double checked for errors. PASCAL still in progress. Unsure of what species codes to use / separate, need to clarify with team.
+
+Has "Interesting Detection" and "Some sort of delphinid" species
+
+Per Anne - Yes - only use detections from the "Detections" tab. We will want to include clicks from species "Gg" and "Lo" (including call types "clicks","clicks/A","clicks/B"), and whistles from UO (including "Whistles", "Whistles/\>10kHz", "Whistles/\<10kHz", "Whistles/\<5kHz")
+
+```{r}
+dolDir_adrift <- 'Z:/ANALYSIS/ADRIFT/Dolphins/Logs'
+dolFiles_adrift <- list.files(dolDir_adrift, pattern='[Dd]olphin.*xls', full.names=TRUE)
+dolLogs_adrift <- bind_rows(lapply(dolFiles_adrift, function(x) {
+    data <- loadDetectionData(x, source='triton', sheet='Detections')
+    data
+}))
+
+# Standardize call naming schema
+ODCallRename <- data.frame(old = c('clicks', 'clicks/A', 'clicks/B', 'whistles', 'whistle'),
+                           new = c('Clicks', 'Clicks/A', 'Clicks/B', 'Whistles', 'Whistles'))
+for (i in 1:nrow(dolLogs_adrift)) {
+  dolLogs_adrift$call[dolLogs_adrift$call == ODCallRename$old[i]] <- ODCallRename$new[i]
+}
+
+saveRDS(dolLogs_adrift, file=here('data/dolphin/ADRIFT_dolphinData.rds'))
+```
+
+CCES drifts do not have end times bc these are duty cycled, so marked as presence only within 2 minute bins
+
+```{r}
+dolDir_cces <- 'Z:/ANALYSIS/CCES_2018/Dolphins_SpermWhale/Logs'
+dolFiles_cces <- list.files(dolDir_cces, pattern='[Dd]olphin.*xls', full.names=TRUE)
+dolLogs_cces <- bind_rows(lapply(dolFiles_cces, function(x) {
+    data <- loadDetectionData(x, source='triton', sheet='Detections')
+    data
+}))
+saveRDS(dolLogs_cces, file=here('data/dolphin/CCES_dolphinData.rds'))
+```
+
+PASCAL dolphin logs are not finished as of 2/7. Has one "Anthro" species
+
+```{r}
+dolDir_pascal <- 'Z:/ANALYSIS/PASCAL_2016/Dolphins and sperm whales/Logs'
+dolFiles_pascal <- list.files(dolDir_pascal, pattern='[Dd]olphin.*xls', full.names=TRUE)
+dolLogs_pascal <- loadDetectionData(dolFiles_pascal, source='triton', sheet='Detections')
+dropSpecies <- 'Anthro'
+dolLogs_pascal <- filter(dolLogs_pascal, !species %in% dropSpecies)
+
+ODCallRename <- data.frame(old = c('Whistle'), new = c('Whistles'))
+for (i in 1:nrow(dolLogs_pascal)) {
+  dolLogs_pascal$call[dolLogs_pascal$call == ODCallRename$old[i]] <- ODCallRename$new[i]
+}
+
+saveRDS(dolLogs_pascal, file=here('data/dolphin/PASCAL_dolphinData.rds'))
+```
+
+## Humpback Raven tables (+Grays)
+
+Raven selection tables from KP, use BeginTime(s) from first file in drift to get actual detection time.+
+
+Includes gray whale detections
+
+```{r}
+hmpDir <- 'Z:/ANALYSIS/ADRIFT/Humpback and Gray Whales/RavenSelectionTables'
+hmpFiles <- list.files(hmpDir, pattern='[0-9]\\.txt', full.names=TRUE)
+# ccesStarts <- getDriftStart('Z:/RECORDINGS/DRIFTERS/CCES_2018/RAW')
+# adriftStarts <- getDriftStart('Z:/RECORDINGS/DRIFTERS/ADRIFT/RAW')
+# pascalStarts <- getDriftStart('Z:/RECORDINGS/DRIFTERS/PASCAL_2016/RAW')
+# allStarts <- c(ccesStarts, adriftStarts, pascalStarts)
+# saveRDS(allStarts, file=here('data/driftStarts.rds'))
+allStarts <- readRDS(here('data/driftStarts.rds'))
+hmpData <- bind_rows(lapply(hmpFiles, function(x) {
+    cat(basename(x))
+    DriftName <- gsub('\\.txt', '', basename(x))
+    data <- loadRavenTable(x)
+    if(is.null(data) || nrow(data) == 0) {
+        return(NULL)
+    }
+    data$DriftName <- DriftName
+    if(DriftName %in% names(allStarts)) {
+        # data$BeginUTC <- data$BeginTimes + allStarts[[DriftName]]
+        data$UTC <- data$BeginTimes + allStarts[[DriftName]]
+        data$end <- data$EndTimes + allStarts[[DriftName]]
+    }
+    data[c('UTC', 'species', 'call', 'end', 'DriftName')]
+}))
+saveRDS(hmpData, file=here('data/humpback/humpbackDataRaw.rds'))
+```
+
+Need to clean up species names
+
+```{r}
+hmpData <- readRDS(here('data/humpback/humpbackDataRaw.rds'))
+table(hmpData$species)
+hmpData$species <- tolower(hmpData$species)
+table(hmpData$species)
+isHump <- c('hmp', 'hmpsco', 'hmpsic', 'hmpsng', 'hmpsnp', 'hmpsoc', 'hump')
+isGray <- c('gray')
+hmpData$original <- hmpData$species
+hmpData$species <- 'other'
+hmpData$species[hmpData$original %in% isHump] <- 'Mn'
+hmpData$species[hmpData$original %in% isGray] <- 'Er'
+table(hmpData$species, hmpData$original)
+hmpData$call <- 'regular'
+isSoc <- c('hmpsco', 'hmpsic', 'hmpsoc')
+hmpData$call[hmpData$original %in% isSoc] <- 'Social'
+isSong <- c('hmpsng', 'hmpsnp')
+hmpData$call[hmpData$original %in% isSong] <- 'Song'
+table(hmpData$call, hmpData$species)
+hmpData$original <- NULL
+
+# Rename 'regular' calls to be unidentified
+hmpCallRename <- data.frame(old = c('regular'),
+                           new = c('unidentified'))
+for (i in 1:nrow(hmpData)) {
+  hmpData$call[hmpData$call == hmpCallRename$old[i]] <- hmpCallRename$new[i]
+}
+
+# Remove 'other' data
+hmpData <- hmpData[!grepl('other', hmpData$species), ]
+
+saveRDS(hmpData, file=here('data/humpback/humpbackDataFinal.rds'))
+```
+
+## Beaked Whale PG Databases
+
+April 16, 2024: ADRIFT Beaked whales are complete. No logs available for ADRIFT 44, 64, 68 due to failed Ch 1. There were many drifts with no beaked whale detections; those databases will have zero events.
+
+```{r}
+bwDir1_adrift <- 'Z:/ANALYSIS/ADRIFT/Beaked whales/Manual events'
+bwFiles1_adrift <- list.files(bwDir1_adrift, pattern='sqlite3$', full.names=TRUE)
+bwData1_adrift <- bind_rows(lapply(bwFiles1_adrift, function(x) {
+    cat(basename(x))
+    data <- getPgEvent(x)
+    data$DriftName <- gsub('^(ADRIFT_[0-9]{3}).*', '\\1', basename(x))
+    data
+}))
+table(bwData1_adrift$species)
+bwDir2_adrift <- 'Z:/ANALYSIS/ADRIFT/Beaked whales/MTC events'
+bwFiles2_adrift <- list.files(bwDir2_adrift, pattern='Copy.*sqlite3$', full.names=TRUE)
+bwData2_adrift <- vector('list', length=length(bwFiles2_adrift))
+for(i in seq_along(bwData2_adrift)) {
+    cat(basename(bwFiles2_adrift[i]))
+    data <- getPgEvent(bwFiles2_adrift[i])
+    data$DriftName <- gsub('^(ADRIFT_[0-9]{3}).*', '\\1', basename(bwFiles2_adrift[i]))
+    bwData2_adrift[[i]] <- data
+}
+bwData2_adrift <- bind_rows(bwData2_adrift)
+# bwData2_adrift <- bind_rows(lapply(bwFiles2_adrift, function(x) {
+#   cat(basename(x))
+#   data <- getPgEvent(x)
+#   data$DriftName <- gsub('^(ADRIFT_[0-9]{3}).*', '\\1', basename(x))
+#   data
+# }))
+bwData2_adrift$species[bwData2_adrift$species %in% c('BW39V', 'BW37V')] <- 'MC'
+bwData1_adrift$species[bwData1_adrift$species %in% c('BW39V', 'BW37V')] <- 'MC'
+
+table(bwData2_adrift$species)
+bwData_adrift <- bind_rows(bwData1_adrift, bwData2_adrift)
+saveRDS(bwData_adrift, here('data/bw/bwDataRaw_adrift.rds'))
+saveRDS(filter(bwData_adrift, 
+               species %in% c('BB', 'BW37V', 'BW43', 'MS', 'Pm', 'ZC', 'MC', 'BW')),
+        file=here('data/bw/bwData_adrift.rds'))
+```
+
+PASCAL and CCES are older manual PG DBs for this and NBHF Uh..PASCAL 26-29 and 27-30 are one DB, but we have effort for 27, 29, and 30 separately. No 26.
+
+```{r}
+#bwDir_cces <- here('data/bw/dbs/ccesbw') # Directory no longer exists on ADRIFT Report repo
+bwDir_cces <- 'Z:\\ANALYSIS\\CCES_2018\\Beaked whales\\Final databases'
+bwFiles_cces <- list.files(bwDir_cces, full.names=TRUE)
+bwData_cces <- bind_rows(lapply(bwFiles_cces, function(x) {
+    data <- getPgEvent(x)
+    driftName <- gsub('.*Drift-([0-9]{1,2}).*', '\\1', basename(x))
+    driftName <- paste0('CCES_', paste0(rep('0', 3-nchar(driftName)),collapse=''), driftName)
+    if(driftName == 'CCES_015') {
+        driftName <- 'CCES_014'
+    }
+    data$DriftName <- driftName
+    data
+}))
+table(bwData_cces$DriftName, bwData_cces$species)
+saveRDS(bwData_cces, file=here('data/bw/bwDataRaw_cces.rds'))
+bwData_cces$species[bwData_cces$species %in% c('BW39V', 'BW37V')] <- 'MC'
+saveRDS(filter(bwData_cces, 
+               species %in% c('BB', 'BW43', 'MS', 'PM', 'ZC', 'MC', 'BW', 'BWC')),
+        file=here('data/bw/bwData_cces.rds'))
+
+bwData_cces<-readRDS(here('data/bw/bwData_cces.rds'))
+for(i in 1:nrow(bwData_cces)) {
+  if(bwData_cces$species[i] == 'PM') {
+    bwData_cces$species[i] <- 'Pm'
+  }
+}
+saveRDS(bwData_cces, file=here('data/bw/bwData_cces.rds'))
+```
+
+```{r}
+pascalRename <- data.frame(old = c('BW34-50', 'BW46', 'BW50-75', '?BW', 'Zc', 'Pm', 'SW', '?Pm', 'Oo'),
+                           new = c('BW37V', 'MS', 'MS', 'BWunid', 'ZC', 'Pm', 'Pm', '?Pm', 'OO'))
+#bwDir_pascal <- here('data/bw/dbs/pasbw') # Directory no longer exists on ADRIFT Report repo
+bwDir_pascal <- 'Z:\\ANALYSIS\\PASCAL_2016\\Beaked whales\\DB'
+bwFiles_pascal <- list.files(bwDir_pascal, full.names=TRUE)
+bwData_pascal <- bind_rows(lapply(bwFiles_pascal, function(x) {
+    data <- getPgEvent(x)
+    driftName <- gsub('Station-([0-9]{1,2}).*', '\\1', basename(x))
+    driftName <- paste0('PASCAL_', paste0(rep('0', 3-nchar(driftName)),collapse=''), driftName)
+    data$DriftName <- driftName
+    data
+}))
+for(i in 1:nrow(pascalRename)) {
+    bwData_pascal$species[bwData_pascal$species == pascalRename$old[i]] <- pascalRename$new[i]
+}
+table(bwData_pascal$DriftName, bwData_pascal$species)
+saveRDS(bwData_pascal, file=here('data/bw/bwDataRaw_pascal.rds'))
+bwData_pascal$species[bwData_pascal$species %in% c('BW37V', 'BW39V')] <- 'MC'
+bwData_pascal$species[bwData_pascal$species %in% c('BW26-47', 'BW38', 'BWunid')] <- 'BW'
+saveRDS(filter(bwData_pascal, 
+               species %in% c('ZC', 'BB', 'BW37V', 'BW43', 'MS', 'MC', 'BW')),
+        file=here('data/bw/bwData_pascal.rds'))
+```
+
+## PASCAL Pm Dbs
+
+Okay apparently sometimes the BW dbs have PM and sometimes they don't bc PASCAL is the best
+
+```{r}
+pmDir_pascal <- 'X:/1650_PASCAL_2016/Data/DASBR_Pamguard_Post_Processing/Database/Jennifer'
+pmFiles_pascal <- list.files(pmDir_pascal, full.names=TRUE)
+pmData_pascal <- bind_rows(lapply(pmFiles_pascal, function(x) {
+    cat(basename(x))
+    data <- getPgEvent(x)
+    driftName <- gsub('Station-([0-9]{1,2}).*', '\\1', basename(x))
+    driftName <- paste0('PASCAL_', paste0(rep('0', 3-nchar(driftName)),collapse=''), driftName)
+    data$DriftName <- driftName
+    data
+}))
+table(pmData_pascal$DriftName, pmData_pascal$species)
+pmRename <- data.frame(old=c('PmDP'), new=c('Pm'))
+for(i in 1:nrow(pmRename)) {
+    pmData_pascal$species[pmData_pascal$species == pmRename$old[i]] <- pmRename$new[i]
+}
+table(pmData_pascal$species)
+saveRDS(filter(pmData_pascal, species == 'Pm'), file=here('data/Pm/PASCAL_pmData.rds'))
+saveRDS(pmData_pascal, file=here('data/Pm/PASCAL_pmDataRaw.rds'))
+```
+
+## Combine All Dets for Acoustic Scene
+
+Create a single CSV data prodcut combining all detection data from our various .rds sources we've created above.
+
+```{r}
+dataFiles <- list.files(here('data'), pattern='([Ll]ogs|[Dd]ata).*\\.rds$', recursive=TRUE, full.names=TRUE)
+dataFiles <- dataFiles[!grepl('[Rr]aw', dataFiles)]
+# dataFiles
+allDetections <- bind_rows(lapply(dataFiles, function(x) {
+    data <- readRDS(x)
+    data$file <- basename(x)
+    data
+}))
+allDetections$Sound_type <- NULL
+allDetections$Comments <- NULL
+allDetections$Note <- NULL
+allDetections$file <- NULL
+# remove possible and non-detections
+allDetections <- allDetections[!grepl('\\?', allDetections$species), ]
+allDetections <- allDetections[!grepl('Pos', allDetections$species), ]
+allDetections <- allDetections[!grepl('UNK', allDetections$species), ]
+allDetections <- allDetections[!grepl('other', allDetections$species), ]
+allDetections <- allDetections[!grepl('unid', allDetections$species), ]
+# this is labeling from CCES
+allDetections <- allDetections[!grepl('SHIP', allDetections$species), ]
+allDetections$DriftName <- gsub(' - Copy.sqlite3', '', allDetections$DriftName)
+
+# table(allDetections$species, allDetections$file)
+table(allDetections$species)
+table(allDetections$call)
+
+gps<-readRDS(here('data','AllDeploymentGPS.rds'))
+allDetections <- bind_rows(lapply(split(allDetections,allDetections$DriftName), function(x) {
+    thisGps <- filter(gps, DriftName == x$DriftName[1])
+    x <- PAMpal::addGps(x, thisGps, thresh=Inf)
+    x
+}))
+write.csv(allDetections, file=here('data/AllDetections_wGPS.csv'), row.names=FALSE)
+```
+
+###Additional cleaning Summarize data hourly
+
+```{r}
+allDetectionsHourly <- read.csv(here('data/AllDetections_wGPS.csv'))
+
+allDetectionsHourly$UTC<- as.POSIXct(allDetectionsHourly$UTC, format = "%Y-%m-%d %H:%M:%S", tz = 'UTC')
+
+allDetectionsHourly$UTC <- lubridate::floor_date(allDetectionsHourly$UTC, unit='1hour')
+allDetectionsHourly <- distinct(allDetectionsHourly[c('UTC', 'species', 'call', 'DriftName')])
+write.csv(allDetectionsHourly, file = here('data/AllDetectionsHourly.csv'), row.names=FALSE)
+```

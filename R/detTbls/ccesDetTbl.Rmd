@@ -1,0 +1,551 @@
+There are a number of problems with this table that need to be fixed before I can consider it
+1) Eliminate 'Upwelling' Season
+2) Some of the regions are NA
+3) Some inconsistencies across the two datasets (mismatch of results)
+4) sum or results across row do not add up
+5) get rid of the Species = NA
+
+#Prep
+```{r, Prep, include=FALSE}
+#Load packages and background data/functions
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/reportPlotFunctions.r"))
+source(here::here("R/Adrift_SummarizeHourlyProb.R"))
+```
+
+#Load Data
+```{r, Load Data, include=FALSE}
+blue_cces <- readRDS(here("data", "Bm", "bmHourly_cces.rds"))
+blue_cces$season <- markSeason(blue_cces$UTC)
+blue_cces$region <- map_chr(blue_cces$Latitude, find_region)
+blue_cces<- blue_cces[,c(7, 11, 12)]
+
+beaked_cces <- readRDS(here("data", "bw", "bwHourly_cces.rds"))
+beaked_cces$season <- markSeason(beaked_cces$UTC)
+beaked_cces$region <- map_chr(beaked_cces$Latitude, find_region)
+beaked_cces<- beaked_cces[,c(7, 11, 12)]
+
+dolphin_cces <- readRDS(here("data", "dolphin", "dolphinHourly_cces.rds"))
+dolphin_cces$season <- markSeason(dolphin_cces$UTC)
+dolphin_cces$region <- map_chr(dolphin_cces$Latitude, find_region)
+dolphin_cces<- dolphin_cces[,c(7, 11, 12)]
+
+fin_cces <- readRDS(here("data", "fin", "finHourly_cces.rds")) 
+fin_cces$season <- markSeason(fin_cces$UTC)
+fin_cces$region <- map_chr(fin_cces$Latitude, find_region)
+fin_cces<- fin_cces[,c(7, 11, 12)]
+
+minke_cces <- readRDS(here("data", "minke", "minkeHourly_cces.rds"))
+minke_cces$season <- markSeason(minke_cces$UTC)
+minke_cces$region <- map_chr(minke_cces$Latitude, find_region)
+minke_cces<- minke_cces[,c(7, 11, 12)]
+
+nbhf_cces <- readRDS(here("data", "nbhf", "nbhfHourly_cces.rds"))
+nbhf_cces$season <- markSeason(nbhf_cces$UTC)
+nbhf_cces$region <- map_chr(nbhf_cces$Latitude, find_region)
+nbhf_cces<- nbhf_cces[,c(7, 11, 12)]
+
+humpback_cces <- readRDS(here("data", "humpback", "humpbackHourly_cces.rds"))
+humpback_cces$season <- markSeason(humpback_cces$UTC)
+humpback_cces$region <- map_chr(humpback_cces$Latitude, find_region)
+humpback_cces<- humpback_cces[,c(7, 11, 12)]
+
+pm_cces <- readRDS(here("data", "Pm", "pmHourly_cces.rds"))
+pm_cces$season <- markSeason(pm_cces$UTC)
+pm_cces$region <- map_chr(pm_cces$Latitude, find_region)
+pm_cces<- pm_cces[,c(7, 11, 12)]
+
+sei_cces <- readRDS(here("data", "sei", "seiHourly_cces.rds"))
+sei_cces$season <- markSeason(sei_cces$UTC)
+sei_cces$region <- map_chr(sei_cces$Latitude, find_region)
+sei_cces<- sei_cces[,c(7, 11, 12)]
+
+gray_cces <- readRDS(here("data", "gray", "grayHourly_cces.rds"))
+gray_cces$season <- markSeason(gray_cces$UTC)
+gray_cces$region <- map_chr(gray_cces$Latitude, find_region)
+gray_cces<- gray_cces[,c(7, 11, 12)]
+
+bryde_cces <- readRDS(here("data", "bryde", "brydeHourly_cces.rds"))
+bryde_cces$season <- markSeason(bryde_cces$UTC)
+bryde_cces$region <- map_chr(bryde_cces$Latitude, find_region)
+bryde_cces<- bryde_cces[,c(7, 11, 12)]
+
+```
+
+#Summary Table
+```{r, Summary Daily Prob, include=FALSE}
+#Create & deconstruct individual tables
+
+#blue
+blueBinTbl <- 
+    tbl_strata(
+    data = blue_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+blueBinTbl
+
+#Deconstruct blueBinTbl to dataframe (blueDet_df)
+init <- as.data.frame(blueBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+blueBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(blueBin_df) <- c("Species", "Region", "Season", "Summ")
+blueBin_df$Summ[blueBin_df$Summ == "0 (0%)"] <- NA
+
+#beaked
+beakedBinTbl <- 
+    tbl_strata(
+    data = beaked_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+beakedBinTbl
+
+#Deconstruct beakedBinTbl to dataframe (beakedDet_df)
+init <- as.data.frame(beakedBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+beakedBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(beakedBin_df) <- c("Species", "Region", "Season", "Summ")
+beakedBin_df$Summ[blueBin_df$Summ == "0 (0%)"] <- NA
+
+#dolphin
+dolphinBinTbl <- 
+    tbl_strata(
+    data = dolphin_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+dolphinBinTbl
+
+#Deconstruct dolphinBinTbl to dataframe (dolphinDet_df)
+init <- as.data.frame(dolphinBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+dolphinBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(dolphinBin_df) <- c("Species", "Region", "Season", "Summ")
+dolphinBin_df$Summ[dolphinBin_df$Summ == "0 (0%)"] <- NA
+
+#fin
+finBinTbl <- 
+    tbl_strata(
+    data = fin_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+finBinTbl
+
+#Deconstruct finBinTbl to dataframe (finDet_df)
+init <- as.data.frame(finBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+finBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(finBin_df) <- c("Species", "Region", "Season", "Summ")
+finBin_df$Summ[finBin_df$Summ == "0 (0%)"] <- NA
+
+#minke
+minkeBinTbl <- 
+    tbl_strata(
+    data = minke_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+minkeBinTbl
+
+#Deconstruct minkeBinTbl to dataframe (minkeDet_df)
+init <- as.data.frame(minkeBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+minkeBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(minkeBin_df) <- c("Species", "Region", "Season", "Summ")
+minkeBin_df$Summ[minkeBin_df$Summ == "0 (0%)"] <- NA
+
+#nbhf
+nbhfBinTbl <- 
+    tbl_strata(
+    data = nbhf_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+nbhfBinTbl
+
+#Deconstruct nbhfBinTbl to dataframe (nbhfDet_df)
+init <- as.data.frame(nbhfBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+nbhfBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(nbhfBin_df) <- c("Species", "Region", "Season", "Summ")
+nbhfBin_df$Summ[nbhfBin_df$Summ == "0 (0%)"] <- NA
+
+#humpback
+humpbackBinTbl <- 
+    tbl_strata(
+    data = humpback_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+humpbackBinTbl
+
+#Deconstruct humpbackBinTbl to dataframe (humpbackDet_df)
+init <- as.data.frame(humpbackBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+humpbackBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(humpbackBin_df) <- c("Species", "Region", "Season", "Summ")
+humpbackBin_df$Summ[humpbackBin_df$Summ == "0 (0%)"] <- NA
+
+#pm
+pmBinTbl <- 
+    tbl_strata(
+    data = pm_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+pmBinTbl
+
+#Deconstruct pmBinTbl to dataframe (pmDet_df)
+init <- as.data.frame(pmBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+pmBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(pmBin_df) <- c("Species", "Region", "Season", "Summ")
+pmBin_df$Summ[pmBin_df$Summ == "0 (0%)"] <- NA
+
+#sei
+seiBinTbl <- 
+    tbl_strata(
+    data = sei_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+seiBinTbl
+
+#Deconstruct seiBinTbl to dataframe (seiDet_df)
+init <- as.data.frame(seiBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+seiBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(seiBin_df) <- c("Species", "Region", "Season", "Summ")
+seiBin_df$Summ[seiBin_df$Summ == "0 (0%)"] <- NA
+
+#gray
+grayBinTbl <- 
+    tbl_strata(
+    data = gray_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+grayBinTbl
+
+#Deconstruct grayBinTbl to dataframe (grayDet_df)
+init <- as.data.frame(grayBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+grayBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(grayBin_df) <- c("Species", "Region", "Season", "Summ")
+grayBin_df$Summ[grayBin_df$Summ == "0 (0%)"] <- NA
+
+#bryde
+brydeBinTbl <- 
+    tbl_strata(
+    data = bryde_cces,
+    strata = species,
+    \(df_subset) {
+      tbl_cross(
+        data = df_subset,
+        row = region,
+        col = season,
+        percent = "row",
+        missing = "no"
+      ) %>% 
+        remove_row_type(type = "header") %>% 
+        modify_header(all_stat_cols() ~ "**{level}**")
+    },
+    .combine_with = "tbl_stack"
+  )
+brydeBinTbl
+
+#Deconstruct brydeBinTbl to dataframe (brydeDet_df)
+init <- as.data.frame(brydeBinTbl$'table_body')[,c(1, 7:11)]
+colnames(init) <- c("Species", "Region",  "Upwelling", "Post-Upwelling", "Winter", "Overall")
+init <- init[(!init$Region %in% "Total"),]
+brydeBin_df <-  pivot_longer(init, cols= c( "Upwelling", "Post-Upwelling", "Winter"))[,c(1,2,4,5)]
+colnames(brydeBin_df) <- c("Species", "Region", "Season", "Summ")
+brydeBin_df$Summ[brydeBin_df$Summ == "0 (0%)"] <- NA
+
+```
+
+
+#Hourly Prob Table
+
+```{r, DailyProb_df, include=FALSE}
+#Prep Daily Probability dataset (blueDailyProb_df)
+#blue
+bmHourly_cces <- readRDS(here("data", "Bm", "bmHourly_cces.rds"))
+blueHrProb_df<-DailyProb(Species='Bm',BinnedData=bmHourly_cces)
+
+colnames(blueHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+blueHrProb_df$HourlyProb[blueHrProb_df$HourlyProb == "0 (0)"] <- NA
+# blueHrProb_df$Species <- factor(blueHrProb_df$Species, levels = c("Bm", "None"))
+# blueHrProb_df$Species<- (as.character(blueHrProb_df$Species))
+# blueHrProb_df <- blueHrProb_df %>%
+#   arrange(Species)
+
+#beaked
+bwHourly_cces <- readRDS(here("data", "bw", "bwHourly_cces.rds"))
+beakedHrProb_df<-DailyProb(Species='bw',BinnedData=bwHourly_cces)
+
+colnames(beakedHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+beakedHrProb_df$HourlyProb[beakedHrProb_df$HourlyProb == "0 (0)"] <- NA
+# beakedHrProb_df$Species <- factor(beakedHrProb_df$Species, levels = c("bw", "None"))
+# beakedHrProb_df$Species<- (as.character(beakedHrProb_df$Species))
+# beakedHrProb_df <- beakedHrProb_df %>%
+#   arrange(Species)
+
+#dolphin
+dolphinHourly_cces <- readRDS(here("data", "dolphin", "dolphinHourly_cces.rds"))
+dolphinHrProb_df<-DailyProb(Species='dolphin',BinnedData=dolphinHourly_cces)
+
+colnames(dolphinHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+dolphinHrProb_df$HourlyProb[dolphinHrProb_df$HourlyProb == "0 (0)"] <- NA
+# dolphinHrProb_df$Species <- factor(dolphinHrProb_df$Species, levels = c("dolphin", "None"))
+# dolphinHrProb_df$Species<- (as.character(dolphinHrProb_df$Species))
+# dolphinHrProb_df <- dolphinHrProb_df %>%
+#   arrange(Species)
+
+#fin
+finHourly_cces <- readRDS(here("data", "fin", "finHourly_cces.rds"))
+finHrProb_df<-DailyProb(Species='Bp',BinnedData=finHourly_cces)
+
+colnames(finHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+finHrProb_df$HourlyProb[finHrProb_df$HourlyProb == "0 (0)"] <- NA
+# finHrProb_df$Species <- factor(finHrProb_df$Species, levels = c("Bp", "None"))
+# finHrProb_df$Species<- (as.character(finHrProb_df$Species))
+# finHrProb_df <- finHrProb_df %>%
+#   arrange(Species)
+
+#minke
+minkeHourly_cces <- readRDS(here("data", "minke", "minkeHourly_cces.rds"))
+minkeHrProb_df<-DailyProb(Species='Ba',BinnedData=minkeHourly_cces)
+
+colnames(minkeHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+minkeHrProb_df$HourlyProb[minkeHrProb_df$HourlyProb == "0 (0)"] <- NA
+# minkeHrProb_df$Species <- factor(minkeHrProb_df$Species, levels = c("Ba", "None"))
+# minkeHrProb_df$Species<- (as.character(minkeHrProb_df$Species))
+# minkeHrProb_df <- minkeHrProb_df %>%
+#   arrange(Species)
+
+#nbhf
+nbhfHourly_cces <- readRDS(here("data", "nbhf", "nbhfHourly_cces.rds"))
+nbhfHrProb_df<-DailyProb(Species='NBHF',BinnedData=nbhfHourly_cces)
+
+colnames(nbhfHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+nbhfHrProb_df$HourlyProb[nbhfHrProb_df$HourlyProb == "0 (0)"] <- NA
+# nbhfHrProb_df$Species <- factor(nbhfHrProb_df$Species, levels = c("NBHF", "None"))
+# nbhfHrProb_df$Species<- (as.character(nbhfHrProb_df$Species))
+# nbhfHrProb_df <- nbhfHrProb_df %>%
+#   arrange(Species)
+
+#humpback
+humpbackHourly_cces <- readRDS(here("data", "humpback", "humpbackHourly_cces.rds"))
+humpbackHrProb_df<-DailyProb(Species='Mn',BinnedData=humpbackHourly_cces)
+
+colnames(humpbackHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+humpbackHrProb_df$HourlyProb[humpbackHrProb_df$HourlyProb == "0 (0)"] <- NA
+# humpbackHrProb_df$Species <- factor(humpbackHrProb_df$Species, levels = c("Mn", "None"))
+# humpbackHrProb_df$Species<- (as.character(humpbackHrProb_df$Species))
+# humpbackHrProb_df <- humpbackHrProb_df %>%
+#   arrange(Species)
+
+#pm
+pmHourly_cces <- readRDS(here("data", "Pm", "pmHourly_cces.rds"))
+pmHrProb_df<-DailyProb(Species='Pm',BinnedData=pmHourly_cces)
+
+colnames(pmHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+pmHrProb_df$HourlyProb[pmHrProb_df$HourlyProb == "0 (0)"] <- NA
+# pmHrProb_df$Species <- factor(pmHrProb_df$Species, levels = c("Pm", "None"))
+# pmHrProb_df$Species<- (as.character(pmHrProb_df$Species))
+# pmHrProb_df <- pmHrProb_df %>%
+#   arrange(Species)
+
+#sei
+seiHourly_cces <- readRDS(here("data", "sei", "seiHourly_cces.rds"))
+seiHrProb_df<-DailyProb(Species='Bb',BinnedData=seiHourly_cces)
+
+colnames(seiHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+seiHrProb_df$HourlyProb[seiHrProb_df$HourlyProb == "0 (0)"] <- NA
+# seiHrProb_df$Species <- factor(seiHrProb_df$Species, levels = c("Er", "None"))
+# seiHrProb_df$Species<- (as.character(seiHrProb_df$Species))
+# seiHrProb_df <- seiHrProb_df %>%
+#   arrange(Species)
+
+#gray
+grayHourly_cces <- readRDS(here("data", "gray", "grayHourly_cces.rds"))
+grayHrProb_df<-DailyProb(Species='Er',BinnedData=grayHourly_cces)
+
+colnames(grayHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+grayHrProb_df$HourlyProb[grayHrProb_df$HourlyProb == "0 (0)"] <- NA
+# grayHrProb_df$Species <- factor(grayHrProb_df$Species, levels = c("Er", "None"))
+# grayHrProb_df$Species<- (as.character(grayHrProb_df$Species))
+# grayHrProb_df <- grayHrProb_df %>%
+#   arrange(Species)
+
+#bryde
+brydeHourly_cces <- readRDS(here("data", "bryde", "brydeHourly_cces.rds"))
+brydeHrProb_df<-DailyProb(Species='Be',BinnedData=brydeHourly_cces)
+
+colnames(brydeHrProb_df) <- c("Region", "Season", "HourlyProb", "Species")
+brydeHrProb_df$HourlyProb[brydeHrProb_df$HourlyProb == "0 (0)"] <- NA
+# brydeHrProb_df$Species <- factor(brydeHrProb_df$Species, levels = c("Be", "None"))
+# brydeHrProb_df$Species<- (as.character(brydeHrProb_df$Species))
+# brydeHrProb_df <- brydeHrProb_df %>%
+#   arrange(Species)
+
+
+```
+
+
+#Final Table
+
+```{r, ccesTbl}
+#Merge dataframes
+ccesDetProb_df <- bind_rows(blueBin_df, beakedBin_df, dolphinBin_df, finBin_df, minkeBin_df, nbhfBin_df, humpbackBin_df, pmBin_df, seiBin_df, grayBin_df, brydeBin_df)
+
+# ccesDetProb_df <-ccesDetProb_df %>% filter(!Season == "Upwelling")
+
+
+ccesHrProb_df <- bind_rows(blueHrProb_df, beakedHrProb_df, dolphinHrProb_df, finHrProb_df, minkeHrProb_df, nbhfHrProb_df, humpbackHrProb_df, pmHrProb_df, seiHrProb_df, grayHrProb_df, brydeHrProb_df)
+
+#Merge dataframes
+cces_df <- merge(ccesHrProb_df, ccesDetProb_df, all = TRUE)
+
+
+#Create formatted bwTbl
+ccesTbl <- cces_df %>%
+  pivot_wider(names_from = "Season", values_from = c("Summ", "HourlyProb"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay", "S California", "Baja California Norte")))%>%
+  arrange(Region)%>%
+  gt(
+  groupname_col = "Species",
+  rowname_col = "Region",
+  )%>%
+  DetTableTheme()
+ccesTbl
+
+gt::gtsave(ccesTbl, file=file.path(here("figs", "detTbls", "cces_Table.png")), expand = c(10, 20, 10, 0))
+#Note: Modify expand values to give white space (top, right, bottom, and left)
+#see https://www.rdocumentation.org/packages/webshot/versions/0.5.2/topics/webshot
+```

@@ -1,0 +1,34 @@
+---
+title: Test
+format: 
+  pdf: 
+    fig-pos: "H"
+---
+## Test 
+Test
+Test @tbl-finTbl
+
+\begingroup
+\setlength{\LTleft}{0pt minus 500pt}
+\setlength{\LTright}{0pt minus 500pt}
+\fontsize{12pt}{20pt}\selectfont
+\addtolength{\tabcolsep}{-3pt}
+
+```{r, include=FALSE}
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+```
+\begin{table}
+\caption[Precision, recall, and F-Score for fin whale models]{\label{tab:tbl-finAITbl} Precision ('Precise'), recall, and F-Score for Tiny Yolo (TY), CSP-DarkNet-53 (CSP), and ResNet-50 models ran on test Adrift drifting recorder data.}
+
+```{r, finAITbl, include=TRUE}
+fin <- read_csv(here("data/Appx_finAI_results.csv"))
+finAI_Tbl <- fin %>%
+  gt()%>%
+  cols_width(everything() ~px(70))%>%
+  tableTheme()
+finAI_Tbl
+```
+\end{table}
+\endgroup

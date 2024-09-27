@@ -1,0 +1,76 @@
+```{r, prep, include=FALSE}
+library(densityClust)
+library(purrr)
+library(stringr)
+library(tibble)
+library(rfPermute)
+library(tidyr)
+library(lubridate)
+library(banter)
+```
+
+
+```{r, ApplyBantModel, include=FALSE}
+#Apply BANTER model to label ADRIFT NBHF events
+
+# ADRIFT_NBHF<-readRDS('/Volumes/ADRIFT_Analysis/Odontocetes/NBHF/Labeled Events/AcousticStudy_NBHF_ADRIFT_wGPS_wICI.rds')
+ADRIFT_NBHF<-readRDS(here('data','nbhf', 'AcousticStudy_NBHF_ADRIFT_wGPS_wICI.rds'))
+
+#Export to Banter and leave out false positives
+NBHFdf<-export_banter(ADRIFT_NBHF,dropSpecies = 'FP')
+
+#Assign new click detectors (hirange >125 kHz & lorange < 125 kHz)
+NBHFdf<-split_calls(NBHFdf)##Error here, could not find function 'split_calls'. Please source function!
+NBHFpredict<-predict(bant,NBHFdf) ##Error: object 'bant' not found
+
+##Add site & season to dataframe
+effort<-readRDS(here('data','AllDrifts_baseEffort.rds'))
+effort<-effort %>%
+  select(DeploymentSite,DriftName)%>%
+  rename(Site=DeploymentSite)
+
+NBHFpredictdf<-NBHFpredict$predict.df %>%
+  mutate(DriftName = substr(event.id,1,10))
+
+NBHFpredictdf<-merge(NBHFpredictdf,effort,by='DriftName')
+
+#Match event id
+EventGPS<-getClickData(ADRIFT_NBHF) %>%
+  group_by(eventId)%>%
+  reframe(Latitude=median(Latitude),
+          Longitude=median(Longitude),
+          UTC=max(UTC)) %>%
+  rename(event.id=eventId)
+
+  #Dataframe with GPS points
+ NBHF<-left_join(NBHFpredictdf,EventGPS,by='event.id') 
+ 
+ NBHFSummary<-NBHF %>%
+  mutate(Site = case_when(
+  Site %in% c('HUM') ~ 'Humboldt',
+    Site %in% c('HMB','SF','SFB') ~ 'San Francisco',
+   Site %in% c('MBY','MOB') ~ 'Morro Bay',
+    Site %in% c('ORE')~ 'Oregon')) %>%
+    mutate(Month=month(UTC)) %>% 
+    mutate(Season = factor(case_when(
+    Month %in% c(3,4,5,6) ~ 'Upwelling',
+    Month %in% c(7,8,9,10,11) ~'Post-Upwelling',
+    Month %in% c(12,1,2) ~'Winter'),levels=c('Upwelling','Post-Upwelling','Winter'))) %>%
+   rename(Species='predicted')%>%
+   group_by(Species,Season) %>%
+   summarise(Oregon=length(which(Site=='Oregon')),
+             Humboldt=length(which(Site=='Humboldt')),
+             SF=length(which(Site=='San Francisco')),
+             MB=length(which(Site=='Morro Bay')),
+             Total=n()) 
+ 
+ NBHFSummary$Species<-recode(NBHFSummary$Species,ks='K spp.',pd='Pd',pp='Pp')
+ ```
+ 
+ ```{r, nbhfPredictSummary}
+ 
+ gt(NBHFSummary,rowname_col = "Season",row_group_as_column = TRUE,
+    auto_align = FALSE)
+ 
+  #ggplot(NBHFSummary,aes(predicted))+geom_bar(stat='count')+facet_grid(Site~Season)
+```
