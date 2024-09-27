@@ -1,0 +1,92 @@
+
+```{r, include=FALSE}
+#Load packages and background data/functions
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/deployDetails.r"))
+```
+
+
+```{r, include=FALSE}
+    #Prepare data
+    survey <- "ADRIFT" #Choose "ADRIFT" or "CCES" or "PASCAL"
+
+    #Load Data and prep Data
+    deployDetails_all <- read.csv(here ("output", "deployDetails.csv"))
+
+    deployDetails_all$DutyCycle <- if_else(deployDetails_all$RecordingDuration_m != "Continuous",  paste(deployDetails_all$RecordingDuration_m, "min per", deployDetails_all$RecordingInterval_m), "Continuous")
+
+    goodCol <- c("Drift_ID", "Site",  "Status",  "Deployment_Date", "Deployment_Latitude", "Deployment_Longitude",   "Recovery_Date", "Recovery_Latitude", "Recovery_Longitude",  "Recorder", "Recorder", "SampleRate_kHz",  "DutyCycle",  "Deployment_Depth_m.", "Data_Start", "Data_End" )
+
+    deployDetails <- deployDetails_all%>%
+      filter(Project == survey) %>%
+      rename(Recorder = Type, Drift_ID = Data_ID) %>%
+      arrange("Deployment_Date")%>%
+      dplyr::select(all_of(goodCol)) 
+    
+deployDetails$Deployment_Date <- substr(deployDetails$Deployment_Date, 1, 10)
+deployDetails$Recovery_Date <- substr(deployDetails$Recovery_Date, 1, 10)
+deployDetails$Data_Start <- substr(deployDetails$Data_Start, 1, 10)
+deployDetails$Data_End<- substr(deployDetails$Data_End, 1, 10)
+
+```
+
+
+
+```{r, 2_Deployment Table ADRIFT}
+# Make Expanded Table for Appendix
+deployDetails2 <- deployDetails[23:60,]
+DeployTable_Adrift2 <- deployDetails2 %>% 
+  gt()%>%
+  # tab_header('ADRIFT Survey') %>%
+  sub_missing(missing_text = "--")%>%
+  tab_spanner(
+    label = "Deployment",
+    columns = c(Deployment_Date, Deployment_Latitude, Deployment_Longitude)
+  ) %>%
+  tab_spanner(
+    label = "Retrieval",
+    columns = c(Recovery_Date, Recovery_Latitude, Recovery_Longitude)
+  )%>%
+    tab_spanner(
+    label = "Recording Specifications",
+    columns = c(Recorder, SampleRate_kHz, DutyCycle, Deployment_Depth_m.)
+  )%>%
+    fmt_number(
+    columns = c("Deployment_Latitude", "Deployment_Longitude", "Recovery_Latitude",
+    "Recovery_Longitude"),
+    decimals = 2
+  ) %>%
+    tableTheme()%>%
+  cols_label(
+      Drift_ID = "Drift ID",
+      Deployment_Date = "Date",
+      Deployment_Latitude = "Latitude",
+      Deployment_Longitude = "Longitude",
+      Recovery_Date = "Date",
+      Recovery_Latitude = "Latitude",
+      Recovery_Longitude = "Longitude",
+      SampleRate_kHz = "SR (kHz)",
+      DutyCycle = "Duty Cycle",
+      Deployment_Depth_m. = "HP Depth (m)",
+      Data_Start = "Data Start Date",
+      Data_End = "Data End Date"
+    )%>%
+  cols_align(
+    align = "center"
+  ) %>%
+  sub_values(
+    columns = "Status",
+    values = c("Lost", "Sunk"),
+    replacement = "Failed"
+  )
+  # tab_header("Summary of Adrift Deployments, con't.")%>%
+  # opt_align_table_header(align = "center") 
+
+
+DeployTable_Adrift2
+
+```
+
+

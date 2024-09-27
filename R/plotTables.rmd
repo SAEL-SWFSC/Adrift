@@ -1,0 +1,64 @@
+
+#Load packages and background data/functions
+```{r}
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/deployDetails.r"))
+source(here::here("R/reportPlotFunctions.R"))
+```
+
+#Prepare data and make table for Adrift Plots
+```{r}
+survey <- "ADRIFT" #Choose "ADRIFT" or "CCES" or "PASCAL"
+
+deployDetails_all <- read.csv(here ("output", "deployDetails.csv"))
+
+deployDetails_all$DutyCycle <- if_else(deployDetails_all$RecordingDuration_m != "Continuous",  paste(deployDetails_all$RecordingDuration_m, "min per", deployDetails_all$RecordingInterval_m), "Continuous")
+
+goodCol <- c("Drift_ID", "Site",  "Deployment_Date")
+
+AdriftPlotTable <- deployDetails_all%>%
+  filter(Status == "Complete")%>%
+  filter(Project == survey) %>%
+  rename(Recorder = Type, Drift_ID = Data_ID) %>%
+  arrange("Deployment_Date")%>%
+  dplyr::select(all_of(goodCol)) 
+
+plotname <- paste(AdriftPlotTable$Drift_ID, "AcousticScene.png", sep = "_")
+AdriftPlotTable$AcousticScene <- paste(plotname, "[<https://github.com/shannonrankin/ADRIFT_Report/tree/main/figs/acoustic_scenes/", plotname,  ">]", sep = "")
+AdriftPlotTable$DriftPlot <- paste(AdriftPlotTable$Drift_ID, "DriftPlot.png", sep = "_")
+AdriftPlotTable$Deployment_Date <- substr(AdriftPlotTable$Deployment_Date, 1, 10)
+
+write.csv(AdriftPlotTable, file = here::here("output/AdriftPlotTable.csv"))
+```
+#To Do:
+# Fix Acoustic Scene so that the link works in the final table output (test table is scratch.qmd)
+# Make it so the code does not show up in the final rendered document
+#Still need to create the individual drift plots and save to a folder in R
+#Learn more by reading R/driftDetectionPlots.rmd
+
+#Once Adrift is finished, then go on to do the same for CCES and PASCAl
+
+
+#create all driftPlots
+```{r}
+
+testPlot <- plotTrackDetections(allDetections, gps=gps, plotSpecies = 'blue', drift='ADRIFT_001')
+
+
+spp <- c('ship', 'humpback', 'fin', 'blue', 'sei', 'dolphin', 'minke', 'sperm', 'beaked whale', 'gray')
+drifts <- AdriftPlotTable$Drift_ID
+plotName <- paste(drifts, spp, sep = "-")
+
+#NotWorking, asked Taiki for help 
+plotList <- mget(plotTrackDetections(allDetections, gps=gps, plotSpecies = spp, drift=drifts))
+invisible(mapply(ggsave, file=paste0(plotName(plotList), "-plot", ".png"), plot=plotList))
+  
+```
+  
+
+
+
+
+  

@@ -1,0 +1,104 @@
+---
+title: "driftDetectionPlots.rmd"
+author: "Taiki Sakai"
+date: "2024-05-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Plot detections on drift tracks
+
+First load the detection data. Feel free to change the renaming done in `detRename` below,
+this is just a starting point from the species codes.
+
+```{r cars}
+# this is some common variables and data used for the rest
+library(here)
+source(here('R/reportPlotFunctions.R'))
+gps <- readRDS(here('data/AllDeploymentGPS.rds'))
+allDetections <- read.csv(here('data/AllDetections_wGPS.csv'), stringsAsFactors = FALSE)
+allDetections$UTC <- as.POSIXct(allDetections$UTC, format='%Y-%m-%d %H:%M:%S', tz='UTC')
+allDetections$end <- as.POSIXct(allDetections$end, format='%Y-%m-%d %H:%M:%S', tz='UTC')
+
+detRename <- tribble(
+    ~old, ~new,
+    'Anthro', 'ship',
+    'Mn', 'humpback',
+    'Bp', 'fin',
+    'Bm', 'blue',
+    'B. borealis', 'sei',
+    'Lo', 'dolphin',
+    'Gg', 'dolphin',
+    'UO', 'dolphin',
+    'Ba', 'minke',
+    'Pm', 'sperm',
+    'BB', 'beaked whale',
+    'BW', 'beaked whale',
+    'BW43', 'beaked whale',
+    'ZC', 'beaked whale',
+    'MS', 'beaked whale',
+    'MC', 'beaked whale',
+    'BWC', 'beaked whale',
+    'Er', 'gray'
+)
+for(i in 1:nrow(detRename)) {
+    allDetections$species[allDetections$species == detRename$old[i]] <- detRename$new[i]
+}
+```
+
+### Basic functionality
+
+Tell it what species and drift you want
+
+```{r}
+plotTrackDetections(allDetections, gps=gps, plotSpecies = 'humpback', drift='ADRIFT_001')
+```
+
+### More than one drift or more than one species (or both!)
+
+plotSpecies and drift can both accept vectors of any number of names
+
+```{r}
+plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift='ADRIFT_001')
+plotTrackDetections(allDetections, gps=gps, plotSpecies = 'humpback', drift=c('ADRIFT_001', 'ADRIFT_002'))
+plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift=c('ADRIFT_001', 'ADRIFT_002'))
+```
+
+## Adding titles and changing species legend label
+
+Titles can be added with the title argument, the legend name of the species
+can be set with `labs(color=...)`
+
+```{r}
+plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift='ADRIFT_001', 
+                    title='ADRIFT_001 Whales')
+plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift='ADRIFT_001') +
+    labs(color='SPECIES')
+```
+
+### Changing species colors and/or labels
+
+If plotting multiple species, make sure the order of values/labels matches
+the order of breaks, and the names in breaks must match the actual labels in the
+data. If only one species you don't need to specify breaks.
+
+```{r}
+plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift='ADRIFT_001') +
+    scale_color_manual(values=c('red', 'blue'), labels=c('Hump', 'Blue'), breaks=c('humpback', 'blue'))
+```
+
+### Saving a PNG
+
+`plotTrackDetections` creates a `ggplot` object, so can be saved to file using `ggsave`, you will
+probably need to fiddle with the height/width a bit to get things looking nice. Since it is a map,
+the x/y scaling proportion is fixed so the image will not fill the entire space, instead you'll have
+extra white area to preserve the map proportions.
+
+```{r}
+testPlot <- plotTrackDetections(allDetections, gps=gps, plotSpecies = c('blue', 'humpback'), drift='ADRIFT_001')
+ggsave(testPlot, filename=here('figs/sampleTrackDetections.png'), width=6, height=10)
+```
+

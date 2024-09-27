@@ -1,0 +1,17 @@
+```{r, include=FALSE}
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+```
+
+```{r, include=TRUE}
+fin <- read_csv(here("data/Appx_finAI_results.csv"))
+finAI_Tbl <- fin %>%
+  gt()%>%
+  tab_style(
+    style = cell_text(size=px(12))
+  )
+  cols_width(everything() ~px(60))%>%
+  tableTheme()
+finAI_Tbl
+```

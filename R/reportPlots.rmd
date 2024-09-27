@@ -1,0 +1,1980 @@
+---
+title: "Report Plots"
+author: "Taiki Sakai"
+date: "2024-01-28"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+This document contains code used to create most of the plots in the
+ADRIFT report document.
+
+### NOTES FOR WHAT IS HERE AND RERUNNING
+
+Currently as of 7pm on April 1st, `devtools::install_github` does not
+seem to be working, and unfortunately some of the plots require updates
+to my packages that are only available on GitHub (you'll see they are at
+the top of the list with a version requirement in the
+`reportPlotFunctions.R` file). Until this works, the only work around
+will be to clone those repositories and build the R packages, this will
+install the needed versions.
+
+Hopefully everything in this document will run with data that has
+already been pushed and stored in the `data` folder on this repository,
+so once you have the right packages installed everything *should* just
+run from here. Ive tried to make it somewhat obvious what things you
+might need to chagne below, but the general workflow here is:
+
+1.  Read detection data (formatted to columns `UTC`, `species`, `call`
+    (this is NA a lot of the time), and `DriftName`.
+2.  Use `formatBinnedPresence` to both bin these detections to hours,
+    and pair them with the amount of effort at that time
+3.  Use `plotYearlyPresence` to plot
+
+Since we've been back and forth a bit on the style of the hourly
+presence plots, heres a breakdown of what's currently here. For ADRIFT,
+all plots are broken down by region, and all years are combined within
+each region. For PASCAL and CCES, only the drifts that were near our
+ADRIFT locations are shown, and so these are shown by the same regions.
+Since this is a much smaller amount of data, PASCAL and CCES are
+combined into the same plot, and there is no visual difference to which
+data came from where. Originally PASCAL and CCES were separate, and all
+data were plotted. Those original versions are still here since I didn't
+see a need to remove them. These plots are prefixed with `PASCAL_`, or
+`CCES_`, the newer combined plots are prefixed with `PC_`.
+
+If you want to change some of these settings, here are the optiosn you
+would change in the `plotYearlyPresence` calls.:
+
+-   `by` - if this is `'region'`, remove or set to `NULL` to not split
+    apart by region
+-   `combineYears` - set to `FALSE` to no longer combine different years
+    into one color, this will result in different colors for different
+    years.
+-   `barPosition` - not currently used, but if `combineYears` is `TRUE`,
+    you may want to change this. You can set it to `'dodge'` to have the
+    different color bars sit side-by-side instead of being on different
+    rows.
+-   `plotEffort` - set to `TRUE` to show effort subplot
+-   `percent` - set this to `TRUE` to show the detections as a percent
+    of available hours instead of the current setting. This can be
+    easily changed for all plots by changing the `plotPercentile`
+    variable to `TRUE` in the first code chunk below.
+
+### OVERALL TODO NOTES
+
+Currently counting fractional hours of effort, so it may appear that
+some sites have slightly more detection hours than effort. This Was
+originally implemented for Pm masking counting (otherwise I think a lot
+of these don't really get removed from effort bc not full hours), but
+may need to round up on plots to avoid confusion.s
+
+Issue with GPS NA due to time difference - ADRIFT_001 appears to have
+Drift Start & Data Start time errors - actual deployment time according
+to what the GPS looks like is between 2021-08-22 17:23 and 17:53, not
+00:00:00 or 12:00:00.
+
+ADRIFT_002 start time according to GPS plot is between 2021-06-09 17:41
+and 18:07, not 00:00:00 or 11:30
+
+ADRIFT_048 has warnings, but seems like we just lost GPS signal in the
+middle so that's fine enough.
+
+Check CCES/PASCAL warnings to make sure ok from GPS - I'm pretty sure
+these are fine.
+
+**Specific directions for compiling the updated versions of Taiki's code
+locally**
+
+1)  Clone the relevant repositories to your local github folder
+
+<https://github.com/TaikiSan21/PAMscapes>
+
+<https://github.com/TaikiSan21/PAMpal>
+
+2)  Set your working directory to the cloned repository (you will have
+    to do this twice, once for PAMScapes ones for PAMpal)
+
+3)  Use the devtools build command to create a .*tar file of the
+    compiled library **devtools::build()***
+
+4)  Install the the compiled library using the following code
+
+*install.packages("\~/GitHub/PAMpal_1.0.6.tar.gz", repos = NULL, type =
+"source")*
+
+Alternatively you can use the Packages tab, Install, and change the
+'Install From' dropdown menue from 'Cran' to 'Package Archive File' and
+navigate to the .tar file you just created.
+
+```{r, message=FALSE}
+# this is some common variables and data used for the rest
+library(here)
+library(tidyverse)
+library(conflicted)
+#pak::pkg_install('TaikiSan21/PAMscapes')
+source(here('R/reportPlotFunctions.R'))
+effortBase <- readRDS(here('data/AllDrifts_BaseEffort.rds'))
+badPascal <- c('PASCAL_014')
+effortBase <- effortBase[!effortBase$DriftName %in% badPascal, ]
+effortHourly <- effortToBins(effortBase, bin='hour')
+effortHourly_adrift <- dplyr::filter(effortHourly, grepl('ADRIFT', DriftName))
+effortHourly_cces <- dplyr::filter(effortHourly, grepl('CCES', DriftName))
+effortHourly_pascal <- dplyr::filter(effortHourly, grepl('PASCAL', DriftName))
+effortHourly_pc <- bind_rows(effortHourly_cces, effortHourly_pascal)
+gps <- readRDS(here('data/AllDeploymentGPS.rds'))
+plotPercentile <- FALSE
+srHeight <- 12
+srWidth <- 14
+hpHeight <- 8
+hpWidth <- 10
+conflicts_prefer(
+  dplyr::filter,
+  dplyr::select,)
+```
+
+## Blue Whales
+
+Combined, A, B, D separate plots all created. Added Liz's detections,
+plots should be basically final.
+
+```{r, cache=TRUE}
+# Bm Plots
+bmData_pascal <- readRDS(here('data/Bm/PASCAL_bmData.rds'))
+bmData_cces <- readRDS(here('data/Bm/CCES_bmData.rds'))
+bmData_adrift <- readRDS(here('data/Bm/ADRIFT_bmData.rds'))
+
+# Not including Liz's blue whale data
+# bmLiz_pascal <- readRDS(here('data/fin/PASCAL_lizData.rds')) %>% 
+#   filter(species == 'Bm') %>% 
+#   lizBmLabeler()
+# bmData_pascal <- bind_rows(bmData_pascal, bmLiz_pascal)
+# bmLiz_cces <- readRDS(here('data/fin/CCES_lizData.rds')) %>% 
+#   filter(species == 'Bm') %>% 
+#   lizBmLabeler()
+# bmData_cces <- bind_rows(bmData_cces, bmLiz_cces)
+# bmLiz_adrift <- readRDS(here('data/fin/ADRIFT_lizData.rds')) %>% 
+#   filter(species == 'Bm') %>% 
+#   lizBmLabeler()
+# bmData_adrift <- bind_rows(bmData_adrift, bmLiz_adrift)
+
+bmData_pc <- bind_rows(bmData_cces, bmData_pascal)
+
+```
+
+```{r, cache=TRUE, warning=FALSE}
+# pascal
+bmHourly_pascal <- formatBinnedPresence(mutate(bmData_pascal, call = NA),
+                                        effort=effortHourly_pascal,
+                                        bin='hour',
+                                        gps=gps)
+bmAHourly_pascal <- formatBinnedPresence(filter(bmData_pascal, grepl('^A', call)),
+                                         effort=effortHourly_pascal,
+                                         bin='hour',
+                                         gps=gps)
+bmBHourly_pascal <- formatBinnedPresence(filter(bmData_pascal, grepl('^B', call)),
+                                         effort=effortHourly_pascal,
+                                         bin='hour',
+                                         gps=gps)
+bmDHourly_pascal <- formatBinnedPresence(filter(bmData_pascal, grepl('^D', call)),
+                                         effort=effortHourly_pascal,
+                                         bin='hour',
+                                         gps=gps)
+# cces
+bmHourly_cces <- formatBinnedPresence(mutate(bmData_cces, call = NA),
+                                      effort=effortHourly_cces,
+                                      bin='hour',
+                                      gps=gps)
+bmAHourly_cces <- formatBinnedPresence(filter(bmData_cces, grepl('^A', call)),
+                                       effort=effortHourly_cces,
+                                       bin='hour',
+                                       gps=gps)
+bmBHourly_cces <- formatBinnedPresence(filter(bmData_cces, grepl('^B', call)),
+                                       effort=effortHourly_cces,
+                                       bin='hour',
+                                       gps=gps)
+bmDHourly_cces <- formatBinnedPresence(filter(bmData_cces, grepl('^D', call)),
+                                       effort=effortHourly_cces,
+                                       bin='hour',
+                                       gps=gps)
+# cces/pascal combined
+bmHourly_pc <- formatBinnedPresence(mutate(bmData_pc, call = NA),
+                                      effort=effortHourly_pc,
+                                      bin='hour',
+                                      gps=gps)
+bmAHourly_pc <- formatBinnedPresence(filter(bmData_pc, grepl('^A', call)),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bmBHourly_pc <- formatBinnedPresence(filter(bmData_pc, grepl('^B', call)),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bmDHourly_pc <- formatBinnedPresence(filter(bmData_pc, grepl('^D', call)),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+# adrift
+bmHourly_adrift <- formatBinnedPresence(mutate(bmData_adrift, call = NA),
+                                        effort=effortHourly_adrift,
+                                        bin='hour',
+                                        gps=gps)
+bmAHourly_adrift <- formatBinnedPresence(filter(bmData_adrift, grepl('^A', call)), 
+                                         effort=effortHourly_adrift,
+                                         bin='hour',
+                                         gps=gps)
+bmBHourly_adrift <- formatBinnedPresence(filter(bmData_adrift, grepl('^B', call)), 
+                                         effort=effortHourly_adrift,
+                                         bin='hour',
+                                         gps=gps)
+bmDHourly_adrift <- formatBinnedPresence(filter(bmData_adrift, grepl('^D', call)), 
+                                         effort=effortHourly_adrift,
+                                         bin='hour',
+                                         gps=gps)
+
+save(bmHourly_adrift, bmAHourly_adrift, bmBHourly_adrift, bmDHourly_adrift, file = here("data/bm", "blueBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+write_rds(bmHourly_cces, path = here("data/Bm", "bmHourly_cces.rds"))
+write_rds(bmHourly_pascal, path = here("data/Bm", "bmHourly_pascal.rds"))
+```
+
+```{r}
+bmPlot_pascal <- plotYearlyPresence(bmHourly_pascal, title='PASCAL - Bm Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmAPlot_pascal <- plotYearlyPresence(bmAHourly_pascal, title='PASCAL - Bm A Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmBPlot_pascal <- plotYearlyPresence(bmBHourly_pascal, title='PASCAL - Bm B Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmDPlot_pascal <- plotYearlyPresence(bmDHourly_pascal, title='PASCAL - Bm D Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmPlot_pascal
+bmAPlot_pascal
+bmBPlot_pascal
+bmDPlot_pascal
+ggsave(bmPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs/PASCAL_Bm_HourlyPresence.png'))
+ggsave(bmAPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs/PASCAL_BmA_HourlyPresence.png'))
+ggsave(bmBPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs/PASCAL_BmB_HourlyPresence.png'))
+ggsave(bmDPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs/PASCAL_BmD_HourlyPresence.png'))
+
+```
+
+```{r}
+bmPlot_pc <- plotYearlyPresence(bmHourly_pc, title='PASCAL/CCES - Bm Hourly Presence', percent=plotPercentile,
+                                by='region', plotEffort = FALSE, combineYears=TRUE)
+bmAPlot_pc <- plotYearlyPresence(bmAHourly_pc, 
+                                 title='PASCAL/CCES - Bm A Hourly Presence', percent=plotPercentile,
+                                 by='region', plotEffort = FALSE, combineYears=TRUE)
+bmBPlot_pc <- plotYearlyPresence(bmBHourly_pc, 
+                                     title='PASCAL/CCES - Bm B Hourly Presence', percent=plotPercentile,
+                                 by='region', plotEffort = FALSE, combineYears=TRUE)
+bmDPlot_pc <- plotYearlyPresence(bmDHourly_pc, 
+                                     title='PASCAL/CCES - Bm D Hourly Presence', percent=plotPercentile,
+                                 by='region', plotEffort = FALSE, combineYears=TRUE)
+bmPlot_pc
+bmAPlot_pc
+bmBPlot_pc
+bmDPlot_pc
+ggsave(bmPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs/PC_Bm_HourlyPresence.png'))
+ggsave(bmAPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs/PC_BmA_HourlyPresence.png'))
+ggsave(bmBPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs/PC_BmB_HourlyPresence.png'))
+ggsave(bmDPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs/PC_BmD_HourlyPresence.png'))
+```
+
+```{r}
+bmPlot_cces <- plotYearlyPresence(bmHourly_cces, title='CCES - Bm Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmAPlot_cces <- plotYearlyPresence(bmAHourly_cces, title='CCES - Bm A Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmBPlot_cces <- plotYearlyPresence(bmBHourly_cces, title='CCES - Bm B Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmDPlot_cces <- plotYearlyPresence(bmDHourly_cces, title='CCES - Bm D Hourly Presence', plotEffort = FALSE, legend='remove', percent=plotPercentile)
+bmPlot_cces
+bmAPlot_cces
+bmBPlot_cces
+bmDPlot_cces
+ggsave(bmPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_Bm_HourlyPresence.png'))
+ggsave(bmAPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_BmA_HourlyPresence.png'))
+ggsave(bmBPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_BmB_HourlyPresence.png'))
+ggsave(bmDPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_BmD_HourlyPresence.png'))
+```
+
+```{r}
+bmPlot_adrift <- plotYearlyPresence(bmHourly_adrift, title='ADRIFT - Hourly Bm Presence', percent=plotPercentile, 
+                                    by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bmAPlot_adrift <- plotYearlyPresence(bmAHourly_adrift, title='ADRIFT - Hourly Bm A Presence', 
+                                     percent=plotPercentile, by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bmBPlot_adrift <- plotYearlyPresence(bmBHourly_adrift, title='ADRIFT - Hourly Bm B Presence', 
+                                     percent=plotPercentile, by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bmDPlot_adrift <- plotYearlyPresence(bmDHourly_adrift, title='ADRIFT - Hourly Bm D Presence', 
+                                     percent=plotPercentile, by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bmPlot_adrift
+bmAPlot_adrift
+bmBPlot_adrift
+bmDPlot_adrift
+ggsave(bmPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_Bm_HourlyPresence.png'))
+ggsave(bmAPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_BmA_HourlyPresence.png'))
+ggsave(bmBPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_BmB_HourlyPresence.png'))
+ggsave(bmDPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_BmD_HourlyPresence.png'))
+
+
+
+```
+
+```{r, warning=FALSE}
+bmHourly_all <- formatBinnedPresence(bind_rows(list(bmData_adrift, bmData_cces, bmData_pascal)),
+                                     effort=filter(effortHourly, !grepl('OPPS_', DriftName)),
+                                     bin='hour',
+                                     gps=gps)
+bmPlot_all <- plotYearlyPresence(bmHourly_all, title='All Deployments - Blue Whale Presence', percent=plotPercentile)
+# ggsave('All_Bm_Hours.png', allPlot, width=16, height=18)
+bmPlot_all
+```
+
+## PSD Plots
+
+```{r}
+psdData_adrift <- readRDS(here('data/PSD/ADRIFT_TOL_final.rds'))
+psdData_cces <- readRDS(here('data/PSD/CCES_TOL_final.rds'))
+psdData_pascal <- readRDS(here('data/PSD/PASCAL_TOL_final.rds'))
+```
+
+```{r, warning=FALSE}
+
+psdPlotRS <- function(x, season, region) {
+  plotPSD(x, style='density', dbRange = c(0, 300), title=paste0(region, '_', season),
+          q=.05, units='dB re: 1uPa') + 
+    coord_cartesian(ylim=c(45, 145), xlim=c(100, 20e3))+
+        scale_fill_gradientn(colors=scales::viridis_pal()(25),
+                         limits=c(0, .26), #Change this scale according to limits of data; will normalize
+                         oob=scales::squish)
+}
+
+psdSR_adrift <- plotRegionSeason(filter(psdData_adrift, onEffort), PLOTFUN=psdPlotRS, title='Adrift TOL Summary')
+#Note, CCES/PASCAL, below, cover large regions, so these plots might not be appropriate, not recommended
+psdSR_cces <- plotRegionSeason(filter(psdData_cces, onEffort), PLOTFUN=psdPlotRS, title='CCES TOL Summary')
+psdSR_pascal <- plotRegionSeason(filter(psdData_pascal, onEffort), PLOTFUN=psdPlotRS, title='PASCAL TOL Summary')
+```
+
+```{r, fig.width=16, fig.height=16}
+psdSR_adrift
+psdSR_cces#Do not recommend, combined across distant recorders
+psdSR_pascal #Do not recommend, combined across distant recorders
+ggsave(plot=psdSR_adrift,
+       width=srWidth, height=srHeight, filename=here('figs', 'ADRIFT_PSD_SeasonRegion.png'))
+ggsave(plot=psdSR_cces,
+       width=srWidth, height=srHeight, filename=here('figs', 'CCES_PSD_SeasonRegion.png'))
+ggsave(plot=psdSR_pascal,
+       width=srWidth, height=srHeight, filename=here('figs', 'PASCAL_PSD_SeasonRegion.png'))
+```
+
+## Ship
+
+Ship logs only complete for ADRIFT
+
+```{r}
+shipData_adrift <- readRDS(here('data/ship/ADRIFT_shipLogs.rds'))
+shipHourly_adrift <- formatBinnedPresence(shipData_adrift,
+                                          effort=effortHourly_adrift,
+                                          bin='hour',
+                                          gps=gps)
+```
+
+```{r, fig.width=16, fig.height=16}
+shipPlotRS <- function(x, season, region) {
+  plotRadialPresence(x, title=paste0(region, '_', season), bin='hour') +
+    scale_fill_viridis_c(limits=c(0, 0.5)) +
+    scale_y_continuous(limits=c(-.1, 0.5)) # 0 normal, -.1 donut, remove for diffscale
+}
+shipPlot_adrift <- plotRegionSeason(shipHourly_adrift, PLOTFUN=shipPlotRS, title='ADRIFT Ship Hourly Presence')
+shipPlot_adrift
+ggsave(shipPlot_adrift, width=srWidth, height=srHeight, filename = here('figs', 'ADRIFT_ShipPresence_SeasonRegion.png'))
+```
+
+## Sperm Whales
+
+```{r}
+pmMasking <- readRDS(here('data/Pm/PmMasking.rds'))
+maskedEffort <- effortToBins(effortBase, bin='hour', off=pmMasking) 
+pmData_adrift <- readRDS(here('data/Pm/ADRIFT_pmLogs.rds'))
+pmHourly_adrift <- formatBinnedPresence(pmData_adrift,
+                                        effort=filter(maskedEffort, grepl('ADRIFT', DriftName)),
+                                        gps=gps,
+                                        bin='hour')
+#Start Shannon's Modification
+pmBinClick_adrift <- formatBinnedPresence(filter(pmData_adrift, call == 'Clicks'),
+                                       effort=filter(maskedEffort, grepl('ADRIFT', DriftName)),
+                                       bin='hour',
+                                       gps=gps)
+pmBinSlow_adrift <- formatBinnedPresence(filter(pmData_adrift, call == 'Slow Clicks'),
+                                       effort=filter(maskedEffort, grepl('ADRIFT', DriftName)),
+                                       bin='hour',
+                                       gps=gps)
+pmBin_adrift <- formatBinnedPresence(pmData_adrift, 
+                                       effort=filter(maskedEffort, grepl('ADRIFT', DriftName)),
+                                       bin='hour',
+                                       gps=gps)
+save(pmBin_adrift, pmBinClick_adrift, pmBinSlow_adrift, file = here("data/Pm", "pmBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+
+##End Shannon's Modification
+```
+
+```{r}
+pmPlot_adrift <- plotYearlyPresence(pmHourly_adrift, percent=plotPercentile,
+                                    title='ADRIFT - Pm Hourly Presence',
+                                    by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+ggsave(plot=pmPlot_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs/ADRIFT_Pm_HourlyPresence.png'))
+pmPlot_adrift
+```
+
+```{r}
+pmData_cces <- readRDS(here('data/bw/bwData_cces.rds')) %>% 
+  filter(species == 'Pm')
+pmData_pascal <- readRDS(here('data/Pm/PASCAL_pmData.rds')) %>% 
+  filter(species %in% c('Pm'))
+pmData_pc <- bind_rows(pmData_pascal, pmData_cces)
+
+pmBin_cces <- formatBinnedPresence(pmData_cces,
+                                   effort=effortHourly_cces,
+                                   bin='hour',
+                                   gps=gps)
+pmBin_pascal <- formatBinnedPresence(pmData_pascal,
+                                     effort=effortHourly_pascal,
+                                     bin='hour',
+                                     gps=gps)
+pmBin_pc <- formatBinnedPresence(pmData_pc,
+                                     effort=effortHourly_pc,
+                                     bin='hour',
+                                     gps=gps)
+
+pmPlot_cces <- plotYearlyPresence(pmBin_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove', title='CCES - Pm Hourly Presence')
+pmPlot_pascal <- plotYearlyPresence(pmBin_pascal, percent=plotPercentile,plotEffort = FALSE, legend='remove', title='PASCAL - Pm Hourly Presence')
+pmPlot_pc <- plotYearlyPresence(pmBin_pc, percent=plotPercentile, title='PASCAL/CCES - Pm Hourly Presence',
+                                by='region', plotEffort=FALSE, combineYears=TRUE)
+pmPlot_cces
+pmPlot_pascal
+pmPlot_pc
+ggsave(pmPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Pm_HourlyPresence.png'))
+ggsave(pmPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Pm_HourlyPresence.png'))
+ggsave(pmPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Pm_HourlyPresence.png'))
+
+write_rds(pmBin_cces, path = here("data/Pm", "pmHourly_cces.rds"))
+write_rds(pmBin_pascal, path = here("data/Pm", "pmHourly_pascal.rds"))
+```
+
+## Minke
+
+No Minkes in ADRIFT, only some in PASCAL/CCES
+
+```{r}
+minkeData_cces <- readRDS(here('data/minke/CCES_minkeData.rds'))
+minkeData_pascal <- readRDS(here('data/minke/PASCAL_minkeData.rds'))
+minkeData_pc <- bind_rows(minkeData_cces, minkeData_pascal)
+
+minkeHourly_cces <- formatBinnedPresence(minkeData_cces,
+                                         effort=effortHourly_cces,
+                                         gps=gps,
+                                         bin='hour')
+minkeHourly_pascal <- formatBinnedPresence(minkeData_pascal,
+                                           effort=effortHourly_pascal,
+                                           gps=gps,
+                                           bin='hour')
+minkeHourly_pc <- formatBinnedPresence(minkeData_pc,
+                                       effort=effortHourly_pc,
+                                       gps=gps,
+                                       bin='hour')
+write_rds(minkeHourly_cces, path = here("data/minke", "minkeHourly_cces.rds"))
+write_rds(minkeHourly_pascal, path = here("data/minke", "minkeHourly_pascal.rds"))
+
+```
+
+```{r}
+minkePlot_cces <- plotYearlyPresence(minkeHourly_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove', 
+                                     title='CCES -Minke Hourly Presence')
+minkePlot_pascal <- plotYearlyPresence(minkeHourly_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove', 
+                                       title='PASCAL - Minke Hourly Presence')
+minkePlot_pc <- plotYearlyPresence(minkeHourly_pc, percent=plotPercentile, plotEffort = FALSE, legend='remove', 
+                                       title='PASCAL/CCES - Minke Hourly Presence',
+                                   by='region', combineYears = TRUE)
+
+minkePlot_cces
+minkePlot_pascal
+minkePlot_pc
+
+ggsave(minkePlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_Minke_HourlyPresence.png'))
+ggsave(minkePlot_pascal, width=hpWidth, height = hpHeight,
+       filename=here('figs/PASCAL_Minke_HourlyPresence.png'))
+ggsave(minkePlot_pc, width=hpWidth, height = hpHeight,
+       filename=here('figs/PC_Minke_HourlyPresence.png'))
+```
+
+## NBHF
+
+```{r}
+nbhfData_adrift <- readRDS(here('data/nbhf/ADRIFT_nbhfData.rds')) %>% 
+  filter(species == 'NBHF')
+nbhfBin_adrift <- formatBinnedPresence(nbhfData_adrift,
+                                       bin='hour',
+                                       effort=effortHourly_adrift,
+                                       gps=gps)
+nbhfPlot_adrift <- plotYearlyPresence(nbhfBin_adrift,
+                                      percent=plotPercentile,
+                                      title='ADRIFT - NBHF Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+nbhfPlot_adrift
+ggsave(nbhfPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_NBHF_HourlyPresence.png'))
+
+save(nbhfBin_adrift, file = here("data/nbhf", "nbhfBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+```
+
+```{r}
+nbhfData_cces <- readRDS(here('data/nbhf/CCES_nbhfData.rds')) %>% 
+  filter(species == 'NBHF')
+nbhfBin_cces <- formatBinnedPresence(nbhfData_cces,
+                                     bin='hour',
+                                     effort=effortHourly_cces,
+                                     gps=gps)
+nbhfPlot_cces <- plotYearlyPresence(nbhfBin_cces, plotEffort = FALSE, legend='remove', 
+                                    percent=plotPercentile,
+                                    title='CCES - NBHF Hourly Presence')
+nbhfPlot_cces
+ggsave(nbhfPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs/CCES_NBHF_HourlyPresence.png'))
+
+write_rds(nbhfBin_cces, path = here("data/nbhf", "nbhfHourly_cces.rds"))
+```
+
+```{r}
+nbhfData_pascal <- readRDS(here('data/nbhf/PASCAL_nbhfData.rds')) %>% 
+  filter(species == 'NBHF')
+nbhfBin_pascal <- formatBinnedPresence(nbhfData_pascal,
+                                       bin='hour',
+                                       effort=effortHourly_pascal,
+                                       gps=gps)
+nbhfPlot_pascal <- plotYearlyPresence(nbhfBin_pascal, plotEffort = FALSE, legend='remove', 
+                                      percent=plotPercentile,
+                                      title='PASCAL - NBHF Hourly Presence')
+nbhfPlot_pascal
+ggsave(nbhfPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs/PASCAL_NBHF_HourlyPresence.png'))
+
+write_rds(nbhfBin_pascal, path = here("data/nbhf", "nbhfHourly_pascal.rds"))
+```
+
+```{r}
+nbhfData_pc <- bind_rows(nbhfData_pascal, nbhfData_cces)
+nbhfBin_pc <- formatBinnedPresence(nbhfData_pc,
+                                       bin='hour',
+                                       effort=effortHourly_pc,
+                                       gps=gps)
+nbhfPlot_pc <- plotYearlyPresence(nbhfBin_pc,
+                                      percent=plotPercentile,
+                                      title='PASCAL/CCES- NBHF Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+nbhfPlot_pc
+ggsave(nbhfPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs/PC_NBHF_HourlyPresence.png'))
+```
+
+## Fin
+
+```{r}
+finData_adrift <- readRDS(here('data/fin/ADRIFT_finData.rds')) %>% 
+  mutate(call='20')
+finLiz_adrift <- readRDS(here('data/fin/ADRIFT_finsei_lizData.rds')) %>% 
+  filter(grepl('Bp', species))
+table(finLiz_adrift$call)
+finLiz_adrift$call[finLiz_adrift$call == '20Hz'] <- '20'
+finLiz_adrift$call[finLiz_adrift$call == '40Hz'] <- '40'
+#finLiz_adrift$species <- 'Bp'
+
+finData_adrift <- bind_rows(finData_adrift, finLiz_adrift)
+# Taiki's code, previously not working because it was adding too many fin hourly bins
+finBin_adrift <- formatBinnedPresence(mutate(finData_adrift, call=NA),
+                                      bin='hour',
+                                      effort=effortHourly_adrift,
+                                      gps=gps)
+
+finBin20_adrift <- formatBinnedPresence(filter(finData_adrift, call=='20'),
+                                        bin='hour',
+                                        effort=effortHourly_adrift,
+                                        gps=gps)
+finBin40_adrift <- formatBinnedPresence(filter(finData_adrift, call=='40'),
+                                        bin='hour',
+                                        effort=effortHourly_adrift,
+                                        gps=gps)
+save(finBin_adrift, finBin20_adrift, finBin40_adrift, file = here("data/fin", "finBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+
+# #Kourtney's code - temporarily correcting issue above
+# finData_adrift$UTC <- lubridate::floor_date(finData_adrift$UTC, unit='1hour')
+# finData_adrift <- distinct(finData_adrift[c('UTC', 'species', 'DriftName')])
+# 
+# finBin_adrift <- formatBinnedPresence(finData_adrift,
+#                                       bin='hour',
+#                                       effort=effortHourly_adrift,
+#                                       gps=gps)
+
+finPlot_adrift <- plotYearlyPresence(finBin_adrift, 
+                                     percent = plotPercentile,
+                                     title='ADRIFT - Fin Hourly Presence',
+                                     by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+finPlot20_adrift <- plotYearlyPresence(finBin20_adrift, 
+                                       percent = plotPercentile,
+                                       title='ADRIFT - Fin 20Hz Hourly Presence',
+                                       by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+finPlot40_adrift <- plotYearlyPresence(finBin40_adrift, 
+                                       percent = plotPercentile,
+                                       title='ADRIFT - Fin 40Hz Hourly Presence',
+                                       by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+finPlot_adrift
+finPlot20_adrift
+finPlot40_adrift
+ggsave(finPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_Fin_HourlyPresence.png'))
+ggsave(finPlot20_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_Fin20_HourlyPresence.png'))
+ggsave(finPlot40_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs/ADRIFT_Fin40_HourlyPresence.png'))
+```
+
+```{r}
+finData_cces <- readRDS(here('data/fin/CCES_finData.rds')) %>% 
+  mutate(call='20')
+finLiz_cces <- readRDS(here('data/fin/CCES_finsei_lizData.rds')) %>% 
+  filter(grepl('Bp', species))
+finLiz_cces$call[finLiz_cces$call == '20Hz'] <- '20'
+finLiz_cces$call[finLiz_cces$call == '40Hz'] <- '40'
+#finLiz_cces$species <- 'fin'
+
+finData_cces <- bind_rows(finData_cces, finLiz_cces)
+finBin_cces <- formatBinnedPresence(mutate(finData_cces, call=NA),
+                                      bin='hour',
+                                      effort=effortHourly_cces,
+                                      gps=gps)
+finBin20_cces <- formatBinnedPresence(filter(finData_cces, call=='20'),
+                                        bin='hour',
+                                        effort=effortHourly_cces,
+                                        gps=gps)
+finBin40_cces <- formatBinnedPresence(filter(finData_cces, call=='40'),
+                                        bin='hour',
+                                        effort=effortHourly_cces,
+                                        gps=gps)
+finPlot_cces <- plotYearlyPresence(finBin_cces, plotEffort = FALSE, legend='remove', 
+                                     percent = plotPercentile,
+                                     title='CCES - Fin Hourly Presence')
+finPlot20_cces <- plotYearlyPresence(finBin20_cces, plotEffort = FALSE, legend='remove', 
+                                       percent = plotPercentile,
+                                       title='CCES - Fin 20Hz Hourly Presence')
+finPlot40_cces <- plotYearlyPresence(finBin40_cces, plotEffort = FALSE, legend='remove', 
+                                       percent = plotPercentile,
+                                       title='CCES - Fin 40Hz Hourly Presence')
+finPlot_cces
+finPlot20_cces
+finPlot40_cces # No 40hz calls in Liz's data
+ggsave(finPlot_cces, width=hpWidth, height=hpHeight, 
+       filename=here('figs/CCES_Fin_HourlyPresence.png'))
+ggsave(finPlot20_cces, width=hpWidth, height=hpHeight, 
+       filename=here('figs/CCES_Fin20_HourlyPresence.png'))
+ggsave(finPlot40_cces, width=hpWidth, height=hpHeight, 
+       filename=here('figs/CCES_Fin40_HourlyPresence.png'))
+
+write_rds(finBin_cces, path = here("data/fin", "finHourly_cces.rds"))
+
+```
+
+```{r}
+finData_pascal <- readRDS(here('data/fin/PASCAL_finData.rds')) %>% 
+  mutate(call='20')
+finLiz_pascal <- readRDS(here('data/fin/PASCAL_finsei_lizData.rds')) %>% 
+  filter(grepl('Bp', species))
+finLiz_pascal$call[finLiz_pascal$call == '20Hz'] <- '20'
+finLiz_pascal$call[finLiz_pascal$call == '40Hz'] <- '40'
+#finLiz_pascal$species <- 'fin'
+
+finData_pascal <- bind_rows(finData_pascal, finLiz_pascal)
+# Taiki's code, previously not working because it was adding too many fin hourly bins
+finBin_pascal <- formatBinnedPresence(mutate(finData_pascal, call=NA),
+                                      bin='hour',
+                                      effort=effortHourly_pascal,
+                                      gps=gps)
+finBin20_pascal <- formatBinnedPresence(filter(finData_pascal, call=='20'),
+                                        bin='hour',
+                                        effort=effortHourly_pascal,
+                                        gps=gps)
+finBin40_pascal <- formatBinnedPresence(filter(finData_pascal, call=='40'),
+                                        bin='hour',
+                                        effort=effortHourly_pascal,
+                                        gps=gps)
+
+# #Kourtney's code - temporarily correcting issue above
+# finData_pascal$UTC <- lubridate::floor_date(finData_pascal$UTC, unit='1hour')
+# finData_pascal <- distinct(finData_pascal[c('UTC', 'species', 'DriftName')])
+# 
+# finBin_pascal <- formatBinnedPresence(finData_pascal,
+#                                       bin='hour',
+#                                       effort=effortHourly_pascal,
+#                                       gps=gps)
+
+
+finPlot_pascal <- plotYearlyPresence(finBin_pascal, plotEffort = FALSE, legend='remove', 
+                                     percent = plotPercentile,
+                                     title='PASCAL - Fin Hourly Presence')
+finPlot20_pascal <- plotYearlyPresence(finBin20_pascal, plotEffort = FALSE, legend='remove', 
+                                       percent = plotPercentile,
+                                       title='PASCAL - Fin 20Hz Hourly Presence')
+finPlot40_pascal <- plotYearlyPresence(finBin40_pascal, plotEffort = FALSE, legend='remove', 
+                                       percent = plotPercentile,
+                                       title='PASCAL - Fin 40Hz Hourly Presence')
+finPlot_pascal
+finPlot20_pascal
+finPlot40_pascal
+ggsave(finPlot_pascal, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PASCAL_Fin_HourlyPresence.png'))
+ggsave(finPlot20_pascal, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PASCAL_Fin20_HourlyPresence.png'))
+ggsave(finPlot40_pascal, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PASCAL_Fin40_HourlyPresence.png'))
+
+write_rds(finBin_pascal, path = here("data/fin", "finHourly_pascal.rds"))
+```
+
+```{r}
+#Kourtney's code - need to resave cces and pascal fin data because call type got dropped above
+finData_cces <- readRDS(here('data/fin/CCES_finData.rds')) %>% 
+  mutate(call='20')
+finLiz_cces <- readRDS(here('data/fin/CCES_finsei_lizData.rds')) %>% 
+  filter(grepl('Bp', species))
+finLiz_cces$call[finLiz_cces$call == '20Hz'] <- '20'
+finLiz_cces$call[finLiz_cces$call == '40Hz'] <- '40'
+#finLiz_cces$species <- 'fin'
+finData_cces <- bind_rows(finData_cces, finLiz_cces)
+
+finData_pascal <- readRDS(here('data/fin/PASCAL_finData.rds')) %>% 
+  mutate(call='20')
+finLiz_pascal <- readRDS(here('data/fin/PASCAL_finsei_lizData.rds')) %>% 
+  filter(grepl('Bp', species))
+finLiz_pascal$call[finLiz_pascal$call == '20Hz'] <- '20'
+finLiz_pascal$call[finLiz_pascal$call == '40Hz'] <- '40'
+#finLiz_pascal$species <- 'fin'
+finData_pascal <- bind_rows(finData_pascal, finLiz_pascal)
+
+
+finData_pc <- bind_rows(finData_pascal, finData_cces)
+finBin_pc <- formatBinnedPresence(mutate(finData_pc, call=NA),
+                                      bin='hour',
+                                      effort=effortHourly_pc,
+                                      gps=gps)
+finBin20_pc <- formatBinnedPresence(filter(finData_pc, call=='20'),
+                                        bin='hour',
+                                        effort=effortHourly_pc,
+                                        gps=gps)
+finBin40_pc <- formatBinnedPresence(filter(finData_pc, call=='40'),
+                                        bin='hour',
+                                        effort=effortHourly_pc,
+                                        gps=gps)
+
+finPlot_pc <- plotYearlyPresence(finBin_pc,
+                                     percent = plotPercentile,
+                                     title='PASCAL/CCES - Fin Hourly Presence',
+                                 by='region', plotEffort=FALSE, combineYears=TRUE)
+finPlot20_pc <- plotYearlyPresence(finBin20_pc, 
+                                       percent = plotPercentile,
+                                       title='PASCAL/CCES - Fin 20Hz Hourly Presence',
+                                   by='region', plotEffort=FALSE, combineYears=TRUE)
+finPlot40_pc <- plotYearlyPresence(finBin40_pc, 
+                                       percent = plotPercentile,
+                                       title='PASCAL/CCES - Fin 40Hz Hourly Presence',
+                                   by='region', plotEffort=FALSE, combineYears=TRUE)
+finPlot_pc
+finPlot20_pc
+finPlot40_pc
+ggsave(finPlot_pc, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PC_Fin_HourlyPresence.png'))
+ggsave(finPlot20_pc, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PC_Fin20_HourlyPresence.png'))
+ggsave(finPlot40_pc, width=hpWidth, height=hpHeight, 
+       filename=here('figs/PC_Fin40_HourlyPresence.png'))
+```
+
+## Dolphin
+
+Plots combine Gg/Lo/UO Clicks/Clicks/Whistles into single "dolphin" plot
+
+```{r}
+dolData_adrift <- readRDS(here('data/dolphin/ADRIFT_dolphinData.rds')) %>% 
+  mutate(call=NA, species='dolphin')
+dolData_cces <- readRDS(here('data/dolphin/CCES_dolphinData.rds')) %>% 
+  mutate(call=NA, species='dolphin')
+dolData_pascal <- readRDS(here('data/dolphin/PASCAL_dolphinData.rds')) %>% 
+  mutate(call=NA, species='dolphin')
+dolData_pc <- bind_rows(dolData_pascal, dolData_cces)
+
+### Start Shannon's Modification
+#Shannon Add on 20 May to include Gg, Lo, UO for dolphins
+dolData_adrift <- readRDS(here('data/dolphin/ADRIFT_dolphinData.rds'))
+dolSpecies <- c("Gg", "Lo", "UO")
+
+dolphinBinAll_adrift <- formatBinnedPresence(
+  filter(dolData_adrift, species %in% dolSpecies) %>% 
+    mutate(call=species,
+           species='dolphin'),
+  effort=effortHourly_adrift,
+  bin='hour',
+  gps=gps)
+
+dolphinBinGg_adrift <- formatBinnedPresence(filter(dolData_adrift, species == 'Gg'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+dolphinBinLo_adrift <- formatBinnedPresence(filter(dolData_adrift, species == 'Lo'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+dolphinBinUO_adrift <- formatBinnedPresence(filter(dolData_adrift, species == 'UO'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+save(dolphinBinGg_adrift, dolphinBinLo_adrift, dolphinBinUO_adrift, file = here("data/dolphin", "dolphinBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+
+
+### End Shannon's Modification
+
+
+dolBin_adrift <- formatBinnedPresence(dolData_adrift, 
+                                      bin='hour', 
+                                      effort=effortHourly_adrift,
+                                      gps=gps)
+dolBin_cces <- formatBinnedPresence(dolData_cces,
+                                    bin='hour',
+                                    effort=effortHourly_cces,
+                                    gps=gps)
+dolBin_pascal <- formatBinnedPresence(dolData_pascal,
+                                      bin='hour',
+                                      effort=effortHourly_pascal,
+                                      gps=gps)
+dolBin_pc <- formatBinnedPresence(dolData_pc,
+                                      bin='hour',
+                                      effort=effortHourly_pc,
+                                      gps=gps)
+
+dolPlot_adrift <- plotYearlyPresence(dolBin_adrift, percent=plotPercentile, 
+                                     title='ADRIFT - Dolphin Hourly Presence',
+                                     by='region', plotEffort = FALSE, combineYears = TRUE)
+
+dolPlot_cces <- plotYearlyPresence(dolBin_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                   title='CCES - Dolphin Hourly Presence')
+dolPlot_pascal <- plotYearlyPresence(dolBin_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title='PASCAL - Dolphin Hourly Presence')
+dolPlot_pc <- plotYearlyPresence(dolBin_pc, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title='PASCAL/CCES - Dolphin Hourly Presence',
+                                 by='region', combineYears=TRUE)
+dolPlot_adrift
+dolPlot_cces
+dolPlot_pascal
+dolPlot_pc
+
+ggsave(dolPlot_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_Dolphin_HourlyPresence.png'))
+ggsave(dolPlot_cces, width=hpWidth, height=hpHeight,
+       filename = here('figs', 'CCES_Dolphin_HourlyPresence.png'))
+ggsave(dolPlot_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_Dolphin_HourlyPresence.png'))
+ggsave(dolPlot_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_Dolphin_HourlyPresence.png'))
+
+write_rds(dolBin_cces, path = here("data/dolphin", "dolphinHourly_cces.rds"))
+write_rds(dolBin_pascal, path = here("data/dolphin", "dolphinHourly_pascal.rds"))
+```
+
+## Beaked Whales
+
+```{r, warning=FALSE}
+bwData_adrift <- readRDS(here('data/bw/bwData_adrift.rds'))
+bwData_cces <- readRDS(here('data/bw/bwData_cces.rds'))
+bwData_pascal <- readRDS(here('data/bw/bwData_pascal.rds'))
+bwData_pc <- bind_rows(bwData_cces, bwData_pascal)
+bwSpecies <- c('ZC', 'BB', 'BW39V', 'MS', 'BW43', 'BW37V', 'MC', 'BW', 'BWC')
+bwBinAll_adrift <- formatBinnedPresence(
+  filter(bwData_adrift, species %in% bwSpecies) %>% 
+    mutate(call=species,
+           species='bw'),
+  effort=effortHourly_adrift,
+  bin='hour',
+  gps=gps)
+bwBinAll_cces <- formatBinnedPresence(
+  filter(bwData_cces, species %in% bwSpecies) %>% 
+    mutate(call=species,
+           species='bw'),
+  effort=effortHourly_cces,
+  bin='hour',
+  gps=gps)
+bwBinAll_pascal <- formatBinnedPresence(
+  filter(bwData_pascal, species %in% bwSpecies) %>% 
+    mutate(call=species,
+           species='bw'),
+  effort=effortHourly_pascal,
+  bin='hour', 
+  gps=gps)
+bwBinAll_pc <- formatBinnedPresence(
+  filter(bwData_pc, species %in% bwSpecies) %>% 
+    mutate(call=species,
+           species='bw'),
+  effort=effortHourly_pc,
+  bin='hour', 
+  gps=gps)
+#adrift
+bwBinZc_adrift <- formatBinnedPresence(filter(bwData_adrift, species == 'ZC'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+bwBinBb_adrift <- formatBinnedPresence(filter(bwData_adrift, species == 'BB'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+bwBinMs_adrift <- formatBinnedPresence(filter(bwData_adrift, species == 'MS'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+bwBin43_adrift <- formatBinnedPresence(filter(bwData_adrift, species == 'BW43'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+bwBin39_adrift <- formatBinnedPresence(filter(bwData_adrift, species == 'MC'),
+                                       effort=effortHourly_adrift,
+                                       bin='hour',
+                                       gps=gps)
+save(bwBinZc_adrift, bwBinBb_adrift, bwBinMs_adrift, bwBin43_adrift, bwBin39_adrift, file = here("data/bw", "bwBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+
+# cces
+bwBinZc_cces <- formatBinnedPresence(filter(bwData_cces, species == 'ZC'),
+                                     effort=effortHourly_cces,
+                                     bin='hour',
+                                     gps=gps)
+bwBinBb_cces <- formatBinnedPresence(filter(bwData_cces, species == 'BB'),
+                                     effort=effortHourly_cces,
+                                     bin='hour',
+                                     gps=gps)
+bwBinMs_cces <- formatBinnedPresence(filter(bwData_cces, species == 'MS'),
+                                     effort=effortHourly_cces,
+                                     bin='hour',
+                                     gps=gps)
+bwBin43_cces <- formatBinnedPresence(filter(bwData_cces, species == 'BW43'),
+                                     effort=effortHourly_cces,
+                                     bin='hour',
+                                     gps=gps)
+bwBin39_cces <- formatBinnedPresence(filter(bwData_cces, species == 'MC'),
+                                     effort=effortHourly_cces,
+                                     bin='hour',
+                                     gps=gps)
+# pascal
+bwBinZc_pascal <- formatBinnedPresence(filter(bwData_pascal, species == 'ZC'),
+                                       effort=effortHourly_pascal,
+                                       bin='hour',
+                                       gps=gps)
+bwBinBb_pascal <- formatBinnedPresence(filter(bwData_pascal, species == 'BB'),
+                                       effort=effortHourly_pascal,
+                                       bin='hour',
+                                       gps=gps)
+bwBinMs_pascal <- formatBinnedPresence(filter(bwData_pascal, species == 'MS'),
+                                       effort=effortHourly_pascal,
+                                       bin='hour',
+                                       gps=gps)
+bwBin43_pascal <- formatBinnedPresence(filter(bwData_pascal, species == 'BW43'),
+                                       effort=effortHourly_pascal,
+                                       bin='hour',
+                                       gps=gps)
+bwBin39_pascal <- formatBinnedPresence(filter(bwData_pascal, species == 'MC'),
+                                       effort=effortHourly_pascal,
+                                       bin='hour',
+                                       gps=gps)
+# pascal/cces combined
+bwBinZc_pc <- formatBinnedPresence(filter(bwData_pc, species == 'ZC'),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bwBinBb_pc <- formatBinnedPresence(filter(bwData_pc, species == 'BB'),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bwBinMs_pc <- formatBinnedPresence(filter(bwData_pc, species == 'MS'),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bwBin43_pc <- formatBinnedPresence(filter(bwData_pc, species == 'BW43'),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+bwBin39_pc <- formatBinnedPresence(filter(bwData_pc, species == 'MC'),
+                                       effort=effortHourly_pc,
+                                       bin='hour',
+                                       gps=gps)
+
+write_rds(bwBinAll_cces, path = here("data/bw", "bwHourly_cces.rds"))
+write_rds(bwBinAll_pascal, path = here("data/bw", "bwHourly_pascal.rds"))
+
+```
+
+```{r}
+bwPlotAll_adrift <- plotYearlyPresence(bwBinAll_adrift, percent=plotPercentile,
+                                       title='ADRIFT - Beaked Whale Hourly Presence',
+                                       by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlotZc_adrift <- plotYearlyPresence(bwBinZc_adrift, percent=plotPercentile, 
+                                      title='ADRIFT - Zc Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlotMs_adrift <- plotYearlyPresence(bwBinMs_adrift, percent=plotPercentile, 
+                                      title='ADRIFT - Ms Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlotBb_adrift <- plotYearlyPresence(bwBinBb_adrift, percent=plotPercentile, 
+                                      title='ADRIFT - Bb Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlot43_adrift <- plotYearlyPresence(bwBin43_adrift, percent=plotPercentile, 
+                                      title='ADRIFT - BW43 Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlot39_adrift <- plotYearlyPresence(bwBin39_adrift, percent=plotPercentile, 
+                                      title='ADRIFT - Mc Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+bwPlotAll_adrift
+bwPlotZc_adrift
+bwPlotMs_adrift
+bwPlotBb_adrift
+bwPlot43_adrift
+bwPlot39_adrift
+
+ggsave(bwPlotAll_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_BW_HourlyPresence.png'))
+ggsave(bwPlotZc_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Zc_HourlyPresence.png'))
+ggsave(bwPlotMs_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Ms_HourlyPresence.png'))
+ggsave(bwPlotBb_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Bb_HourlyPresence.png'))
+ggsave(bwPlot43_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_BW43_HourlyPresence.png'))
+ggsave(bwPlot39_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Mc_HourlyPresence.png'))
+```
+
+```{r}
+bwPlotAll_cces <- plotYearlyPresence(bwBinAll_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title='CCES - Beaked Whale Hourly Presence')
+bwPlotZc_cces <- plotYearlyPresence(bwBinZc_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - Zc Hourly Presence')
+bwPlotMs_cces <- plotYearlyPresence(bwBinMs_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - Ms Hourly Presence')
+bwPlotBb_cces <- plotYearlyPresence(bwBinBb_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - Bb Hourly Presence')
+bwPlot43_cces <- plotYearlyPresence(bwBin43_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - BW43 Hourly Presence')
+bwPlot39_cces <- plotYearlyPresence(bwBin39_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - Mc Hourly Presence')
+bwPlotAll_cces
+bwPlotZc_cces
+bwPlotMs_cces
+bwPlotBb_cces
+bwPlot43_cces
+bwPlot39_cces
+
+ggsave(bwPlotAll_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_BW_HourlyPresence.png'))
+ggsave(bwPlotZc_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Zc_HourlyPresence.png'))
+ggsave(bwPlotMs_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Ms_HourlyPresence.png'))
+ggsave(bwPlotBb_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Bb_HourlyPresence.png'))
+ggsave(bwPlot43_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_BW43_HourlyPresence.png'))
+ggsave(bwPlot39_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Mc_HourlyPresence.png'))
+```
+
+```{r}
+bwPlotAll_pascal <- plotYearlyPresence(bwBinAll_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                       title='PASCAL - Beaked Whale Hourly Presence')
+bwPlotZc_pascal <- plotYearlyPresence(bwBinZc_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - Zc Hourly Presence')
+bwPlotMs_pascal <- plotYearlyPresence(bwBinMs_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - Ms Hourly Presence')
+bwPlotBb_pascal <- plotYearlyPresence(bwBinBb_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - Bb Hourly Presence')
+bwPlot43_pascal <- plotYearlyPresence(bwBin43_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - BW43 Hourly Presence')
+bwPlot39_pascal <- plotYearlyPresence(bwBin39_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - Mc Hourly Presence')
+bwPlotAll_pascal
+bwPlotZc_pascal
+bwPlotMs_pascal
+bwPlotBb_pascal
+bwPlot43_pascal
+bwPlot39_pascal
+
+ggsave(bwPlotAll_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_BW_HourlyPresence.png'))
+ggsave(bwPlotZc_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Zc_HourlyPresence.png'))
+ggsave(bwPlotMs_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Ms_HourlyPresence.png'))
+ggsave(bwPlotBb_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Bb_HourlyPresence.png'))
+ggsave(bwPlot43_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_BW43_HourlyPresence.png'))
+ggsave(bwPlot39_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Mc_HourlyPresence.png'))
+```
+
+```{r}
+bwPlotAll_pc <- plotYearlyPresence(bwBinAll_pc, percent=plotPercentile,
+                                       title='PASCAL/CCES - Beaked Whale Hourly Presence',
+                                   by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlotZc_pc <- plotYearlyPresence(bwBinZc_pc, percent=plotPercentile, 
+                                      title='PASCAL/CCES - Zc Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlotMs_pc <- plotYearlyPresence(bwBinMs_pc, percent=plotPercentile, 
+                                      title='PASCAL/CCES - Ms Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlotBb_pc <- plotYearlyPresence(bwBinBb_pc, percent=plotPercentile, 
+                                      title='PASCAL/CCES - Bb Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlot43_pc <- plotYearlyPresence(bwBin43_pc, percent=plotPercentile, 
+                                      title='PASCAL/CCES - BW43 Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlot39_pc <- plotYearlyPresence(bwBin39_pc, percent=plotPercentile, 
+                                      title='PASCAL/CCES - Mc Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+bwPlotAll_pc
+bwPlotZc_pc
+bwPlotMs_pc
+bwPlotBb_pc
+bwPlot43_pc
+bwPlot39_pc
+
+ggsave(bwPlotAll_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_BW_HourlyPresence.png'))
+ggsave(bwPlotZc_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Zc_HourlyPresence.png'))
+ggsave(bwPlotMs_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Ms_HourlyPresence.png'))
+ggsave(bwPlotBb_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Bb_HourlyPresence.png'))
+ggsave(bwPlot43_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_BW43_HourlyPresence.png'))
+ggsave(bwPlot39_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Mc_HourlyPresence.png'))
+```
+
+## Humpback
+
+```{r}
+hmpData_all <- readRDS(here('data/humpback/humpbackDataFinal.rds'))
+hmpData_adrift <- filter(hmpData_all, grepl('ADRIFT', DriftName), species == 'Mn')
+hmpData_cces <- filter(hmpData_all, grepl('CCES', DriftName), species == 'Mn')
+hmpData_pascal <- filter(hmpData_all, grepl('PASCAL', DriftName), species == 'Mn')
+hmpData_pc <- bind_rows(hmpData_cces, hmpData_pascal)
+#adrift
+hmpBin_adrift <- formatBinnedPresence(mutate(hmpData_adrift, call=NA),
+                                      effort=effortHourly_adrift, 
+                                      bin='hour', 
+                                      gps=gps)
+hmpBinReg_adrift <- formatBinnedPresence(filter(hmpData_adrift, call=='unidentified'),
+                                         effort=effortHourly_adrift,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSoc_adrift <- formatBinnedPresence(filter(hmpData_adrift, call=='Social'),
+                                         effort=effortHourly_adrift,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSong_adrift <- formatBinnedPresence(filter(hmpData_adrift, call=='Song'),
+                                          effort=effortHourly_adrift,
+                                          bin='hour',
+                                          gps=gps)
+
+save(hmpBin_adrift, hmpBinReg_adrift, hmpBinSoc_adrift, hmpBinSong_adrift, file = here("data/humpback", "humpBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+#cces
+hmpBin_cces <- formatBinnedPresence(mutate(hmpData_cces, call=NA),
+                                    effort=effortHourly_cces, 
+                                    bin='hour', 
+                                    gps=gps)
+hmpBinReg_cces <- formatBinnedPresence(filter(hmpData_cces, call=='unidentified'),
+                                       effort=effortHourly_cces,
+                                       bin='hour',
+                                       gps=gps)
+hmpBinSoc_cces <- formatBinnedPresence(filter(hmpData_cces, call=='Social'),
+                                       effort=effortHourly_cces,
+                                       bin='hour',
+                                       gps=gps)
+hmpBinSong_cces <- formatBinnedPresence(filter(hmpData_cces, call=='Song'),
+                                        effort=effortHourly_cces,
+                                        bin='hour',
+                                        gps=gps)
+#pascal
+hmpBin_pascal <- formatBinnedPresence(mutate(hmpData_pascal, call=NA),
+                                      effort=effortHourly_pascal, 
+                                      bin='hour', 
+                                      gps=gps)
+hmpBinReg_pascal <- formatBinnedPresence(filter(hmpData_pascal, call=='unidentified'),
+                                         effort=effortHourly_pascal,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSoc_pascal <- formatBinnedPresence(filter(hmpData_pascal, call=='Social'),
+                                         effort=effortHourly_pascal,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSong_pascal <- formatBinnedPresence(filter(hmpData_pascal, call=='Song'),
+                                          effort=effortHourly_pascal,
+                                          bin='hour',
+                                          gps=gps)
+
+write_rds(hmpBin_cces, path = here("data/humpback", "humpbackHourly_cces.rds"))
+write_rds(hmpBin_pascal, path = here("data/humpback", "humpbackHourly_pascal.rds"))
+
+
+#pascal/cces combined
+hmpBin_pc <- formatBinnedPresence(mutate(hmpData_pc, call=NA),
+                                      effort=effortHourly_pc, 
+                                      bin='hour', 
+                                      gps=gps)
+hmpBinReg_pc <- formatBinnedPresence(filter(hmpData_pc, call=='unidentified'),
+                                         effort=effortHourly_pc,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSoc_pc <- formatBinnedPresence(filter(hmpData_pc, call=='Social'),
+                                         effort=effortHourly_pc,
+                                         bin='hour',
+                                         gps=gps)
+hmpBinSong_pc <- formatBinnedPresence(filter(hmpData_pc, call=='Song'),
+                                          effort=effortHourly_pc,
+                                          bin='hour',
+                                          gps=gps)
+
+hmpPlot_adrift <- plotYearlyPresence(hmpBin_adrift, percent = plotPercentile,
+                                     title='ADRIFT - Humpback Hourly Presence',
+                                     by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+hmpPlotReg_adrift <- plotYearlyPresence(hmpBinReg_adrift, percent = plotPercentile,
+                                        title='ADRIFT - Humpback Unidentified Hourly Presence',
+                                        by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+hmpPlotSoc_adrift <- plotYearlyPresence(hmpBinSoc_adrift, percent = plotPercentile,
+                                        title='ADRIFT - Humpback Social Hourly Presence',
+                                        by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+hmpPlotSong_adrift <- plotYearlyPresence(hmpBinSong_adrift, percent = plotPercentile,
+                                         title='ADRIFT - Humpback Song Hourly Presence',
+                                         by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+
+hmpPlot_cces <- plotYearlyPresence(hmpBin_cces, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                   title='CCES - Humpback Hourly Presence')
+hmpPlotReg_cces <- plotYearlyPresence(hmpBinReg_cces, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='CCES - Humpback Unidentified Hourly Presence')
+hmpPlotSong_cces <- plotYearlyPresence(hmpBinSong_cces, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                       title='CCES - Humpback Song Hourly Presence')
+hmpPlotSoc_cces <- plotYearlyPresence(hmpBinSoc_cces, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='CCES - Humpback Social Hourly Presence')
+
+hmpPlot_pascal <- plotYearlyPresence(hmpBin_pascal, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title='PASCAL - Humpback Hourly Presence')
+hmpPlotReg_pascal <- plotYearlyPresence(hmpBinReg_pascal, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                        title='PASCAL - Humpback Unidentified Hourly Presence')
+hmpPlotSong_pascal <- plotYearlyPresence(hmpBinSong_pascal, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                         title='PASCAL - Humpback Song Hourly Presence')
+hmpPlotSoc_pascal <- plotYearlyPresence(hmpBinSoc_pascal, percent = plotPercentile, plotEffort = FALSE, legend='remove',
+                                        title='PASCAL - Humpback Social Hourly Presence')
+
+hmpPlot_pc <- plotYearlyPresence(hmpBin_pc, percent = plotPercentile,
+                                     title='PASCAL/CCES - Humpback Hourly Presence',
+                                 by='region', plotEffort=FALSE, combineYears=TRUE)
+hmpPlotReg_pc<- plotYearlyPresence(hmpBinReg_pc, percent = plotPercentile,
+                                        title='PASCAL/CCES - Humpback Unidentified Hourly Presence',
+                                   by='region', plotEffort=FALSE, combineYears=TRUE)
+hmpPlotSong_pc <- plotYearlyPresence(hmpBinSong_pc, percent = plotPercentile,
+                                         title='PASCAL/CCES - Humpback Song Hourly Presence',
+                                     by='region', plotEffort=FALSE, combineYears=TRUE)
+hmpPlotSoc_pc <- plotYearlyPresence(hmpBinSoc_pc, percent = plotPercentile,
+                                        title='PASCAL/CCES - Humpback Social Hourly Presence',
+                                    by='region', plotEffort=FALSE, combineYears=TRUE)
+
+hmpPlot_adrift
+hmpPlotReg_adrift
+hmpPlotSong_adrift
+hmpPlotSoc_adrift
+hmpPlot_cces
+hmpPlotReg_cces
+hmpPlotSong_cces
+hmpPlotSoc_cces
+hmpPlot_pascal
+hmpPlotReg_pascal
+hmpPlotSong_pascal
+hmpPlotSoc_pascal
+hmpPlot_pc
+hmpPlotReg_pc
+hmpPlotSong_pc
+hmpPlotSoc_pc
+
+ggsave(hmpPlot_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_Humpback_HourlyPresence.png'))
+ggsave(hmpPlotReg_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_HumpbackUnidentified_HourlyPresence.png'))
+ggsave(hmpPlotSong_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_HumpbackSong_HourlyPresence.png'))
+ggsave(hmpPlotSoc_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_HumpbackSocial_HourlyPresence.png'))
+
+ggsave(hmpPlot_cces, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'CCES_Humpback_HourlyPresence.png'))
+ggsave(hmpPlotReg_cces, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'CCES_HumpbackUnidentified_HourlyPresence.png'))
+ggsave(hmpPlotSong_cces, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'CCES_HumpbackSong_HourlyPresence.png'))
+ggsave(hmpPlotSoc_cces, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'CCES_HumpbackSocial_HourlyPresence.png'))
+
+ggsave(hmpPlot_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_Humpback_HourlyPresence.png'))
+ggsave(hmpPlotReg_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_HumpbackUnidentified_HourlyPresence.png'))
+ggsave(hmpPlotSong_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_HumpbackSong_HourlyPresence.png'))
+ggsave(hmpPlotSoc_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_HumpbackSocial_HourlyPresence.png'))
+
+ggsave(hmpPlot_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_Humpback_HourlyPresence.png'))
+ggsave(hmpPlotReg_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_HumpbackUnidentified_HourlyPresence.png'))
+ggsave(hmpPlotSong_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_HumpbackSong_HourlyPresence.png'))
+ggsave(hmpPlotSoc_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_HumpbackSocial_HourlyPresence.png'))
+
+
+```
+
+## Gray
+
+From KP logs
+
+```{r}
+grayData <- readRDS(here('data/humpback/humpbackDataFinal.rds')) %>% 
+  filter(species == 'Er') %>% 
+  mutate(call=NA)
+grayData_adrift <- filter(grayData, grepl('ADRIFT', DriftName))
+grayData_cces <- filter(grayData, grepl('CCES', DriftName))
+grayData_pascal <- filter(grayData, grepl('PASCAL', DriftName))
+grayData_pc <- bind_rows(grayData_pascal, grayData_cces)
+
+grayBin_adrift <- formatBinnedPresence(grayData_adrift, 
+                                       bin='hour', 
+                                       effort=effortHourly_adrift,
+                                       gps=gps)
+
+save(grayBin_adrift, file = here("data/gray", "grayBin_adrift.rdata")) #Save for later use in Detection Summary Tables
+
+grayBin_cces <- formatBinnedPresence(grayData_cces,
+                                     bin='hour',
+                                     effort=effortHourly_cces,
+                                     gps=gps)
+grayBin_pascal <- formatBinnedPresence(grayData_pascal,
+                                       bin='hour',
+                                       effort=effortHourly_pascal,
+                                       gps=gps)
+grayBin_pc <- formatBinnedPresence(grayData_pc,
+                                       bin='hour',
+                                       effort=effortHourly_pc,
+                                       gps=gps)
+
+write_rds(grayBin_cces, path = here("data/gray", "grayHourly_cces.rds"))
+write_rds(grayBin_pascal, path = here("data/gray", "grayHourly_pascal.rds"))
+
+grayPlot_adrift <- plotYearlyPresence(grayBin_adrift, percent=plotPercentile,
+                                      title='ADRIFT - Gray Hourly Presence',
+                                      by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+grayPlot_cces <- plotYearlyPresence(grayBin_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                    title='CCES - Gray Hourly Presence')
+grayPlot_pascal <- plotYearlyPresence(grayBin_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                      title='PASCAL - Gray Hourly Presence')
+grayPlot_pc <- plotYearlyPresence(grayBin_pc, percent=plotPercentile,
+                                      title='PASCAL/CCES - Gray Hourly Presence',
+                                  by='region', plotEffort=FALSE, combineYears=TRUE)
+
+grayPlot_adrift
+grayPlot_cces
+grayPlot_pascal
+grayPlot_pc
+ggsave(grayPlot_adrift, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'ADRIFT_Gray_HourlyPresence.png'))
+ggsave(grayPlot_cces, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'CCES_Gray_HourlyPresence.png'))
+ggsave(grayPlot_pascal, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PASCAL_Gray_HourlyPresence.png'))
+ggsave(grayPlot_pc, width=hpWidth, height=hpHeight, 
+       filename = here('figs', 'PC_Gray_HourlyPresence.png'))
+```
+
+## Brydes
+
+Making blank plots bc no detections
+
+
+```{r}
+brydeData_adrift <- readRDS(here('data/fin/ADRIFT_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. brydei') %>% 
+  mutate(call=NA)
+brydeData_pascal <- readRDS(here('data/fin/PASCAL_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. brydei') %>% 
+  mutate(call=NA)
+brydeData_cces <- readRDS(here('data/fin/CCES_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. brydei') %>% 
+  mutate(call=NA)
+brydeData_pc <- bind_rows(brydeData_cces, brydeData_pascal)
+
+brydeBin_adrift <- formatBinnedPresence(brydeData_adrift,
+                                      effort=effortHourly_adrift, 
+                                      bin='hour',
+                                      gps=gps)
+brydeBin_pascal <- formatBinnedPresence(brydeData_pascal,
+                                      effort=effortHourly_pascal,
+                                      bin='hour',
+                                      gps=gps)
+brydeBin_pc <- formatBinnedPresence(brydeData_pc,
+                                      effort=effortHourly_pc,
+                                      bin='hour',
+                                      gps=gps)
+brydeBin_cces <- formatBinnedPresence(brydeData_cces,
+                                    effort=effortHourly_cces,
+                                    bin='hour',
+                                    gps=gps)
+
+write_rds(brydeBin_cces, path = here("data/bryde", "brydeHourly_cces.rds"))
+write_rds(brydeBin_pascal, path = here("data/bryde", "brydeHourly_pascal.rds"))
+
+brydePlot_adrift <- plotYearlyPresence(brydeBin_adrift, percent=plotPercentile,
+                                     title='ADRIFT - Bryde Hourly Presence',
+                                     by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+brydePlot_pascal <- plotYearlyPresence(brydeBin_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title = 'PASCAL - Bryde Hourly Presence')
+brydePlot_pc <- plotYearlyPresence(brydeBin_pc, percent=plotPercentile, 
+                                     title = 'PASCAL/CCES - Bryde Hourly Presence',
+                                   by='region', plotEffort=FALSE, combineYears=TRUE)
+brydePlot_cces <- plotYearlyPresence(brydeBin_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                   title='CCES - Bryde Hourly Presence')
+
+brydePlot_adrift
+brydePlot_pascal
+brydePlot_cces
+brydePlot_pc
+
+ggsave(brydePlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Bryde_HourlyPresence.png'))
+ggsave(brydePlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Bryde_HourlyPresence.png'))
+ggsave(brydePlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Bryde_HourlyPresence.png'))
+ggsave(brydePlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Bryde_HourlyPresence.png'))
+```
+
+## Sei
+
+Sei B. borealis in liz data, basically nothing
+
+```{r}
+seiData_adrift <- readRDS(here('data/fin/ADRIFT_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. borealis') %>% 
+  mutate(call=NA)
+seiData_pascal <- readRDS(here('data/fin/PASCAL_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. borealis') %>% 
+  mutate(call=NA)
+seiData_cces <- readRDS(here('data/fin/CCES_FinSei_lizData.rds')) %>% 
+  filter(species == 'B. borealis') %>% 
+  mutate(call=NA)
+seiData_pc <- bind_rows(seiData_cces, seiData_pascal)
+
+seiBin_adrift <- formatBinnedPresence(seiData_adrift,
+                                      effort=effortHourly_adrift, 
+                                      bin='hour',
+                                      gps=gps)
+seiBin_pascal <- formatBinnedPresence(seiData_pascal,
+                                      effort=effortHourly_pascal,
+                                      bin='hour',
+                                      gps=gps)
+seiBin_pc <- formatBinnedPresence(seiData_pc,
+                                      effort=effortHourly_pc,
+                                      bin='hour',
+                                      gps=gps)
+seiBin_cces <- formatBinnedPresence(seiData_cces,
+                                    effort=effortHourly_cces,
+                                    bin='hour',
+                                    gps=gps)
+
+write_rds(seiBin_cces, path = here("data/sei", "seiHourly_cces.rds"))
+write_rds(seiBin_pascal, path = here("data/sei", "seiHourly_pascal.rds"))
+
+seiPlot_adrift <- plotYearlyPresence(seiBin_adrift, percent=plotPercentile,
+                                     title='ADRIFT - Sei Hourly Presence',
+                                     by='region', plotEffort = FALSE, legend='remove', combineYears = TRUE)
+seiPlot_pascal <- plotYearlyPresence(seiBin_pascal, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                     title = 'PASCAL - Sei Hourly Presence')
+seiPlot_pc <- plotYearlyPresence(seiBin_pc, percent=plotPercentile,
+                                     title = 'PASCAL/CCES - Sei Hourly Presence',
+                                 by='region', plotEffort=FALSE, combineYears=TRUE)
+seiPlot_cces <- plotYearlyPresence(seiBin_cces, percent=plotPercentile, plotEffort = FALSE, legend='remove',
+                                   title='CCES - Sei Hourly Presence')
+
+seiPlot_adrift
+seiPlot_pascal
+seiPlot_cces
+seiPlot_pc
+
+ggsave(seiPlot_adrift, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'ADRIFT_Sei_HourlyPresence.png'))
+ggsave(seiPlot_pascal, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PASCAL_Sei_HourlyPresence.png'))
+ggsave(seiPlot_pc, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'PC_Sei_HourlyPresence.png'))
+ggsave(seiPlot_cces, width=hpWidth, height=hpHeight,
+       filename=here('figs', 'CCES_Sei_HourlyPresence.png'))
+```
+
+## Deployment Map
+
+Only fixed images plus separated by region. See Issue for deets
+
+Images will not show in this document because base plotting functions
+are used for this instead of `ggplot`, so plot objects cannot be saved
+in the same way.
+
+```{r}
+useBathy <- TRUE
+plotGps <- filter(gps, recordingEffort)
+plotGps$season <- markSeason(plotGps$UTC)
+plotGps$region <- markRegion(plotGps$DeploymentSite)
+plotGps_adrift <- filter(plotGps, grepl('ADRIFT', DriftName))
+plotGps_cces <- filter(plotGps, grepl('CCES', DriftName))
+plotGps_pascal <- filter(plotGps, grepl('PASCAL', DriftName))
+plotDriftTracks(plotGps_adrift,
+                dataPath = here('data/map'), 
+                filename = here('figs', 'ADRIFT_DriftTracks_All.png'),
+                title = 'ADRIFT - All Drift Tracks',
+                bathy = useBathy)
+plotDriftTracks(plotGps_cces,
+                dataPath = here('data/map'), 
+                filename = here('figs', 'CCES_DriftTracks_All.png'),
+                title = 'CCES - All Drift Tracks',
+                bathy = useBathy)
+plotDriftTracks(plotGps_pascal,
+                dataPath = here('data/map'), 
+                filename = here('figs', 'PASCAL_DriftTracks_All.png'),
+                title = 'PASCAL - All Drift Tracks',
+                bathy = useBathy)
+## by region - SR removed legend for regional figures (need to remove winter in some)
+lapply(split(plotGps_adrift, plotGps_adrift$region), function(x) {
+  if(is.null(x) || nrow(x) == 0) return(NULL)
+  region <- x$region[1]
+  plotDriftTracks(x,
+                dataPath = here('data/map'), 
+                filename = here('figs', paste0('ADRIFT_DriftTracks_', region,'.png')),
+                title = paste0('ADRIFT - ', region, ' Drift Tracks'),
+                bathy = FALSE,
+                season= TRUE)
+})
+# No region plots for CCES/PASCAL
+# ## by region
+# lapply(split(plotGps_cces, plotGps_cces$region), function(x) {
+#   if(is.null(x) || nrow(x) == 0) return(NULL)
+#   region <- x$region[1]
+#   plotDriftTracks(x,
+#                 dataPath = here('data/map'), 
+#                 filename = here('figs', paste0('CCES_DriftTracks_', region, '.png')),
+#                 title = paste0('CCES - ', region, ' Drift Tracks'),
+#                 bathy = useBathy)
+# })
+# ## by region
+# lapply(split(plotGps_pascal, plotGps_pascal$region), function(x) {
+#   if(is.null(x) || nrow(x) == 0) return(NULL)
+#   region <- x$region[1]
+#   plotDriftTracks(x,
+#                 dataPath = here('data/map'), 
+#                 filename = here('figs', paste0('PASCAL_DriftTracks_', region, '.png')),
+#                 title = paste0('PASCAL - ', region, ' Drift Tracks'),
+#                 bathy = useBathy)
+# })
+```
+
+## Acoustic Scene
+
+Season/Region try first, by project
+
+Ask group about frequency ranges
+
+```{r}
+allDetections <- read.csv(here('data/AllDetections_wGPS.csv'), stringsAsFactors = FALSE)
+allDetections$UTC <- as.POSIXct(allDetections$UTC, format='%Y-%m-%d %H:%M:%S', tz='UTC')
+
+sort(unique(allDetections$species))
+
+detRename <- tribble(
+    ~old, ~new,
+    'Anthro', 'ship',
+    'Mn', 'humpback',
+    'Bp', 'fin',
+    'Bm', 'blue',
+    'B. borealis', 'sei',
+    'Lo', 'dolphin',
+    'Gg', 'dolphin',
+    'UO', 'dolphin',
+    'Ba', 'minke',
+    'Pm', 'sperm',
+    'BB', 'beaked whale',
+    'BW', 'beaked whale',
+    'BW43', 'beaked whale',
+    'ZC', 'beaked whale',
+    'MS', 'beaked whale',
+    'MC', 'beaked whale',
+    'BWC', 'beaked whale',
+    'Er', 'gray'
+)
+for(i in 1:nrow(detRename)) {
+    allDetections$species[allDetections$species == detRename$old[i]] <- detRename$new[i]
+}
+table(allDetections$species)
+
+freqMap <- tribble(
+    ~type, ~freqMin, ~freqMax,
+    'beaked whale', 25e3, 60e3,
+    'blue', 15, 25,
+    'dolphin', 10e3, 25e3,
+    'fin', 20, 50,
+    'gray', 100, 2e3,
+    'humpback', 50, 2e3,
+    'minke', 1e3, 2e3,
+    'NBHF', 80e3, 120e3,
+    'sei', 50, 500,
+    'ship', 100, 1e3,
+    'sperm', 1e3, 20e3,
+)
+freqMap <- arrange(freqMap, desc(freqMax))
+allDetections$species <- factor(allDetections$species, levels=freqMap$type)
+allDetections <- allDetections %>% 
+    left_join(effortBase[c('DriftName', 'DeploymentSite')], by='DriftName') %>% 
+    mutate(region = markRegion(DeploymentSite))
+allDetections$season <- markSeason(allDetections$UTC)
+# freqMap$color <- scales::hue_pal()(nrow(freqMap))
+cbColors <- c('#000000', '#E69F00', '#56B4E9', '#009E73', '#F0E442', 
+              '#0072B2', '#D55E00', '#CC79A7', '#45c929', '#9e3e04', '#5b33e5'
+)
+freqMap$color <- cbColors
+alpha <- 0.7
+freqMin <- 10
+bin <- '1hour'
+
+acScene_cces <- plotAcousticScene(
+    filter(allDetections, grepl('CCES', DriftName)),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='CCES Acoustic Scene') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+acScene_pascal <- plotAcousticScene(
+    filter(allDetections, grepl('PASCAL', DriftName)),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='PASCAL Acoustic Scene') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+
+acScene_cces
+acScene_pascal
+allDets_adrift <- filter(allDetections, grepl('ADRIFT', DriftName))
+datebreaks<-c(as.POSIXct("2022-01-22",tz='UTC'),
+              as.POSIXct("2022-04-22",tz='UTC'),
+              as.POSIXct("2022-05-05",tz='UTC'),
+                 as.POSIXct("2022-06-18",tz='UTC'),
+              as.POSIXct("2022-06-26",tz='UTC'),
+                 as.POSIXct("2022-07-25",tz='UTC'),
+               as.POSIXct("2022-08-02",tz='UTC'),
+               as.POSIXct("2022-09-12",tz='UTC'),
+              as.POSIXct("2022-09-16",tz='UTC'),
+              as.POSIXct("2022-09-26",tz='UTC'),
+              as.POSIXct("2022-10-02",tz='UTC'),
+               as.POSIXct("2022-11-15",tz='UTC'),
+              as.POSIXct("2022-11-22",tz='UTC'),
+               as.POSIXct("2022-12-12",tz='UTC')
+              )
+
+plotModAcousticScene(filter(allDets_adrift, year(UTC) == 2022),
+                     datebreaks,typeCol='species',freqMap=freqMap)
+
+acScene_adrift21 <- plotAcousticScene(
+    filter(allDets_adrift, year(UTC) == 2021),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='ADRIFT 2021 Acoustic Scene') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+acScene_adrift22 <- plotAcousticScene(
+    filter(allDets_adrift, year(UTC) == 2022),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='ADRIFT 2022 Acoustic Scene') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+acScene_adrift23 <- plotAcousticScene(
+    filter(allDets_adrift, year(UTC) == 2023),
+    freqMap=freqMap, bin=bin, alpha=alpha, freqMin=freqMin,
+    title='ADRIFT 2023 Acoustic Scene') %>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+acScene_adrift21
+acScene_adrift22
+acScene_adrift23
+
+ggsave(acScene_cces, filename=here('figs/CCES_AcousticScene.png'),
+       width=hpWidth, height=hpHeight)
+ggsave(acScene_pascal, filename=here('figs/PASCAL_AcousticScene.png'),
+       width=hpWidth, height=hpHeight)
+ggsave(acScene_adrift21, filename=here('figs/ADRIFT2021_AcousticScene.png'),
+       width=hpWidth, height=hpHeight)
+ggsave(acScene_adrift22, filename=here('figs/ADRIFT2022_AcousticScene.png'),
+       width=hpWidth, height=hpHeight)
+ggsave(acScene_adrift23, filename=here('figs/ADRIFT2023_AcousticScene.png'),
+       width=hpWidth, height=hpHeight)
+```
+
+```{r}
+acSceneRS <- function(x, season, region) {
+  plotAcousticScene(x, freqMap=freqMap, title=paste0(region, '_', season), bin=bin, freqMin=freqMin, alpha=alpha)%>% 
+    PAMscapes:::myLog10Scale(c(min(freqMap$freqMin), max(freqMap$freqMax)), dim='y')
+}
+ad21srplot <- plotRegionSeason(filter(allDets_adrift, year(UTC) == 2021), PLOTFUN=acSceneRS, title='ADRIFT 2021 Acoustic Scene')
+ad22srplot <- plotRegionSeason(filter(allDets_adrift, year(UTC) == 2022), PLOTFUN=acSceneRS, title='ADRIFT 2022 Acoustic Scene')
+ad23srplot <- plotRegionSeason(filter(allDets_adrift, year(UTC) == 2023), PLOTFUN=acSceneRS, title='ADRIFT 2023 Acoustic Scene')
+ad21srplot
+ad22srplot
+ad23srplot
+# ggsave(ad22srplot, width=srWidth, height=srHeight, filename=here('figs/ad22srplot.png'))
+ggsave(ad21srplot, width=srWidth, height=srHeight, 
+       filename=here('figs/ADRIFT2021_AcousticScene_SeasonRegion.png'))
+ggsave(ad22srplot, width=srWidth, height=srHeight, 
+       filename=here('figs/ADRIFT2022_AcousticScene_SeasonRegion.png'))
+ggsave(ad23srplot, width=srWidth, height=srHeight, 
+       filename=here('figs/ADRIFT2023_AcousticScene_SeasonRegion.png'))
+```
+
+## Per Drift Acoustic Scene
+
+```{r}
+# byDrift <- split(allDetections, allDetections$DriftName)
+redo <- TRUE
+asWidth <- 12
+asHeight <- 8
+# if these should be different than the ones above then change here
+# alpha <- 0.7
+# freqMin <- 10
+# bin <- '1hour'
+for(drift in unique(allDetections$DriftName)) {
+    saveFile <- here('figs/acoustic_scenes', paste0(drift, '_AcousticScene.png'))
+    if(isFALSE(redo) && file.exists(saveFile)) {
+        next
+    }
+    thisDet <- filter(allDetections, DriftName == drift)
+    thisGps <- filter(gps, DriftName == drift)
+    scene <- plotPairedScene(data=thisDet, gps=thisGps, drift=drift,
+                             freqMap = freqMap, freqMin=freqMin, bin=bin, alpha=alpha,
+                             title=paste0(drift, ' - Acoustic Scene'),
+                             bathyFile = here('data/map/etopo180.nc'))
+    ggsave(scene, filename=saveFile, height=asHeight, width=asWidth)
+}
+```
+
+## Modify Sperm whale appendix figures 2, 3, 4
+
+```{r, SpermWhale Appedix Figs}
+
+library(magick)
+library(here)
+here()
+ici_length <- magick::image_read('../figs/ADRIFT_Appendix_Pm-Figure2_ICI_vs_Length.png')
+length_ts_gscatter <- magick::image_read('../figs/ADRIFT_Appendix_Pm-Figure3_Pm_length_TS_gscatter.png')
+length_hist <- magick::image_read('../figs/ADRIFT_Appendix_Pm-Figure4_Pm_length_hist.png')
+
+ADRIFT_Appendix_Pm_Combo <- image_append(c(ici_length, length_ts_gscatter, length_hist))
+print(ADRIFT_Appendix_Pm_Combo, info= FALSE)
+image_write(ADRIFT_Appendix_Pm_Combo, path = "../figs/ADRIFT_Appendix_Pm_Combo.png", format = "png")
+  
+
+```
+
+## Modify HabitatUse appendix figures 3
+
+```{r, SpermWhale Appedix Figs}
+
+library(magick)
+library(here)
+here()
+areahist <- magick::image_read('../figs/ADRIFT_Appendix_HabitaMod_AreaHist.png')
+spatialRes <- magick::image_read('../figs/ADRIFT_Appendix_HabitaMod_SpatialRes.png')
+
+
+ADRIFT_Appendix_Habitat_Combo <- image_append(c(areahist, spatialRes))
+print(ADRIFT_Appendix_Habitat_Combo, info= FALSE)
+image_write(ADRIFT_Appendix_Habitat_Combo, path = "../figs/Adrift_Appendix_HabitatMod_HistSpatialRes.png", format = "png")
+```
+  
+
+
+## Combined Hrly Plots
+
+```{r}
+library(magick)
+library(here)
+
+#Blue All
+Ad <- magick::image_read('../figs/ADRIFT_Bm_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Bm_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_blue_HourlyPresence.png", format= "png")
+
+#Fin All
+Ad <- magick::image_read('../figs/ADRIFT_Fin_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Fin_HourlyPresence.png')
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_fin_HourlyPresence.png", format= "png")
+
+#Humpback All
+Ad <- magick::image_read('../figs/ADRIFT_Humpback_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Humpback_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_humpback_HourlyPresence.png", format= "png")
+
+#Gray All
+Ad <- magick::image_read('../figs/ADRIFT_Gray_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Gray_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_gray_HourlyPresence.png", format= "png")
+
+#Sperm All
+Ad <- magick::image_read('../figs/ADRIFT_Pm_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Pm_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_sperm_HourlyPresence.png", format= "png")
+
+#Beaked All
+Ad <- magick::image_read('../figs/ADRIFT_BW_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_BW_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_beaked_HourlyPresence.png", format= "png")
+
+#NBHF All
+Ad <- magick::image_read('../figs/ADRIFT_NBHF_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_NBHF_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_nbhf_HourlyPresence.png", format= "png")
+
+#Dolphins All
+Ad <- magick::image_read('../figs/ADRIFT_Dolphin_HourlyPresence.png')
+PC <- magick::image_read('../figs/PC_Dolphin_HourlyPresence.png')
+
+AdPC <- image_append(c(Ad, PC))
+image_write(AdPC, path = "../figs/AdPC_dolphin_HourlyPresence.png", format= "png")
+
+#ZcBb_HourlyPresence
+Zc <- magick::image_read('../figs/ADRIFT_Zc_HourlyPresence.png')
+Bb <- magick::image_read('../figs/ADRIFT_Bb_HourlyPresence.png')
+
+ZcBb <- image_append(c(Zc, Bb))
+image_write(ZcBb, path = "../figs/ADRIFT_ZcBb_HourlyPresence.png", format= "png")
+
+#fin2040_HourlyPresence
+fin20 <- magick::image_read('../figs/ADRIFT_Fin20_HourlyPresence.png')
+fin40 <- magick::image_read('../figs/ADRIFT_Fin40_HourlyPresence.png')
+
+fin2040 <- image_append(c(fin20, fin40))
+image_write(fin2040, path = "../figs/ADRIFT_fin2040_HourlyPresence.png", format= "png")
+
+#humpback_songSocial_HourlyPresence
+song <- magick::image_read('../figs/ADRIFT_HumpbackSong_HourlyPresence.png')
+social <- magick::image_read('../figs/ADRIFT_HumpbackSocial_HourlyPresence.png')
+
+humpback_songSocial <- image_append(c(song, social))
+image_write(humpback_songSocial, path = "../figs/ADRIFT_humpback_songSocial_HourlyPresence.png", format= "png")
+
+#CCES_PmBwUdNbhf
+Pm <- magick::image_read('../figs/CCES_Pm_HourlyPresence.png')
+Bw <- magick::image_read('../figs/CCES_BW_HourlyPresence.png')
+Ud <- magick::image_read('../figs/CCES_Dolphin_HourlyPresence.png')
+nbhf <- magick::image_read('../figs/CCES_NBHF_HourlyPresence.png')
+
+CCES_PmBwUdNbhf <- image_montage(c(Pm, Bw, Ud, nbhf), tile = '2', geometry = "500 x 500")
+CCES_PmBwUdNbhf
+image_write(CCES_PmBwUdNbhf, path = "../figs/CCES_PmBwUdNbhf_HourlyPresence.png", format= "png")
+
+#CCES_BlueAllBlueDFin20minke
+Bm <- magick::image_read('../figs/CCES_Bm_HourlyPresence.png')
+BmD <- magick::image_read('../figs/CCES_BmD_HourlyPresence.png')
+Fin20 <- magick::image_read('../figs/CCES_Fin20_HourlyPresence.png')
+minke <- magick::image_read('../figs/CCES_Minke_HourlyPresence.png')
+
+CCES_BlueAllBlueDFin20minke <- image_montage(c(Bm, BmD, Fin20, minke), tile = '2', geometry = "500 x 500")
+CCES_BlueAllBlueDFin20minke
+image_write(CCES_BlueAllBlueDFin20minke, path = "../figs/CCES_BlueAllBlueDFin20minke_HourlyPresence.png", format= "png")
+
+#CCES_humpbackSongSocial
+song <- magick::image_read('../figs/CCES_HumpbackSong_HourlyPresence.png')
+social <- magick::image_read('../figs/CCES_HumpbackSocial_HourlyPresence.png')
+
+CCES_humpbackSongSocial <- image_append(c(song, social))
+CCES_humpbackSongSocial
+image_write(CCES_humpbackSongSocial, path = "../figs/CCES_humpbackSongSocial_HourlyPresence.png", format= "png")
+
+#PASCAL_PmBwUdNbhf
+Pm <- magick::image_read('../figs/PASCAL_Pm_HourlyPresence.png')
+Bw <- magick::image_read('../figs/PASCAL_BW_HourlyPresence.png')
+Ud <- magick::image_read('../figs/PASCAL_Dolphin_HourlyPresence.png')
+nbhf <- magick::image_read('../figs/PASCAL_NBHF_HourlyPresence.png')
+
+PASCAL_PmBwUdNbhf <- image_montage(c(Pm, Bw, Ud, nbhf), tile = '2', geometry = "500 x 500")
+PASCAL_PmBwUdNbhf
+image_write(PASCAL_PmBwUdNbhf, path = "../figs/PASCAL_PmBwUdNbhf_HourlyPresence.png", format= "png")
+
+#PASCAL_BlueAllBlueDFin20Fin40
+Bm <- magick::image_read('../figs/PASCAL_Bm_HourlyPresence.png')
+BmD <- magick::image_read('../figs/PASCAL_BmD_HourlyPresence.png')
+Fin20 <- magick::image_read('../figs/PASCAL_Fin20_HourlyPresence.png')
+Fin40 <- magick::image_read('../figs/PASCAL_Fin40_HourlyPresence.png')
+
+PASCAL_BlueAllBlueDFin20Fin40 <- image_montage(c(Bm, BmD, Fin20, Fin40), tile = '2', geometry = "500 x 500")
+PASCAL_BlueAllBlueDFin20Fin40
+image_write(PASCAL_BlueAllBlueDFin20Fin40, path = "../figs/PASCAL_BlueAllBlueDFin20Fin40_HourlyPresence.png", format= "png")
+
+#PASCAL_SeiMinke
+sei <- magick::image_read('../figs/PASCAL_Sei_HourlyPresence.png')
+minke <- magick::image_read('../figs/PASCAL_Minke_HourlyPresence.png')
+
+PASCAL_SeiMinke <- image_append(c(sei, minke))
+PASCAL_SeiMinke
+image_write(PASCAL_SeiMinke, path = "../figs/PASCAL_SeiMinke_HourlyPresence.png", format= "png")
+
+#PASCAL_humpbackSongSocial
+song <- magick::image_read('../figs/PASCAL_HumpbackSong_HourlyPresence.png')
+social <- magick::image_read('../figs/PASCAL_HumpbackSocial_HourlyPresence.png')
+
+PASCAL_humpbackSongSocial <- image_append(c(song, social))
+PASCAL_humpbackSongSocial
+image_write(PASCAL_humpbackSongSocial, path = "../figs/PASCAL_humpbackSongSocial_HourlyPresence.png", format= "png")
+
+```

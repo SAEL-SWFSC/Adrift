@@ -1,0 +1,92 @@
+```{r, prep, include=FALSE}
+# library(sjPlot)
+library(here)
+library(PAMpal)
+library(PAMmisc)
+# library(PAMBinaries)
+library(dplyr)
+library(gt)
+library(tidyverse)
+library(stringr)
+source(here("R", "_commonR.R"))
+
+```
+
+```{r, Data4Table, include=FALSE}
+#Create table summarizing training dataset
+#Load Training Dataset from Jackson's "identidrift package'
+#https://github.com/jackvfb/identidrift
+load(here('data','nbhf','train.rda'))
+
+#Create summary table of training data
+#Columns: Species, Number of Events, Median clicks per event (IQR)
+ClicksKs<-getClickData(train$ks)
+ClicksPd<-getClickData(train$pd)
+ClicksPp<-getClickData(train$pp)
+
+#Assign 'Survey' category 
+ClicksKs$Survey<-'CCES-drifter'
+
+ClicksPd$Survey<-NA
+Bangarang<-which(!is.na(str_match(ClicksPd$eventId,'Bangarang')))
+CalCURSeasPd<-which(!is.na(str_match(ClicksPd$eventId,'CalCURSeas')))
+PASCAL<-which(!is.na(str_match(ClicksPd$eventId,'PASCAL')))
+ClicksPd$Survey[Bangarang]<-'BC-array'
+ClicksPd$Survey[CalCURSeasPd]<-'CalCURSeas-array'
+ClicksPd$Survey[PASCAL]<-'PASCAL-array'
+
+CalCURSeasPp<-which(!is.na(str_match(ClicksPp$eventId,'CalCURSeas')))
+ClicksPp$Survey<-'ADRIFT-drifter'
+ClicksPp$Survey[CalCURSeasPp]<-'CalCURSeas-array'
+
+SumKs<-ClicksKs %>%
+  group_by(Survey,eventId) %>%
+  reframe(NClicks = length(peak)) %>%
+   group_by(Survey) %>% 
+  reframe(NEvents=length(unique(eventId)),
+          MedClicks = paste0(round(median(NClicks)),' (',round(quantile(NClicks,c(.25))),'-',round(quantile(NClicks,c(.75))),')'),
+          TotClicks=sum(NClicks)) %>%
+  mutate(Species='Kspp.')
+
+SumPd<-ClicksPd %>%
+  group_by(Survey,eventId) %>%
+  reframe(NClicks = length(peak)) %>%
+  group_by(Survey) %>% 
+  reframe(NEvents=length(unique(eventId)),
+          MedClicks = paste0(round(median(NClicks)),' (',round(quantile(NClicks,c(.25))),'-',round(quantile(NClicks,c(.75))),')'),
+          TotClicks=sum(NClicks)) %>%
+  mutate(Species='Pd')
+
+SumPp<-ClicksPp %>%
+  group_by(Survey,eventId) %>%
+  reframe(NClicks = length(peak)) %>%
+   group_by(Survey) %>% 
+  reframe(NEvents=length(unique(eventId)),
+          MedClicks = paste0(round(median(NClicks)),' (',round(quantile(NClicks,c(.25))),'-',round(quantile(NClicks,c(.75))),')'),
+          TotClicks=sum(NClicks)) %>%
+  mutate(Species='Pp')
+
+
+TrainTable<-rbind(SumKs,SumPd,SumPp)
+TrainTable <- TrainTable[, c("Species","Survey", "NEvents", "MedClicks","TotClicks")]
+
+
+#ColHeaders <-c('Species','Survey','N Events','Event Clicks','Total Clicks')
+
+# tab_df(TrainTable,alternate.rows=T,
+# title="Table 1. Summary of NBHF training dataset, including acoustic events with visually-verified species identification for Kogia (Kspp), Dall's porpoise (Pd), and harbor porpoise (Pp)). The acoustic data was collected from various surveys (Survey), including towed array data from the Bangarang (BC-array), CalCURSeas (CalCUReas-array), (PASCAL-array), and drifter data from CCES (CCES-drifters), and ADRIFT (ADRIFT-drifters). Reported values include the total number of acoustic events (N Events), median number of clicks per event, with the inter-quartile range in parenthesis, and the total number of clicks (Total Clicks) for each species.",col.header = ColHeaders, file = here('data','nbhf',paste0("NBHF_Model_Training_Summary.html")))
+       
+# webshot(here('data','nbhf',paste0("NBHF_Model_Training_Summary.html")), 
+#         here('data','nbhf',paste0("NBHF_Model_Training_Summary.png")),
+#         vwidth=400,vheight=300)
+
+```
+
+```{r, nbhfClassTbl}
+gt<-gt(head(TrainTable)) %>%
+  cols_label(Species='Species', Survey='Survey', NEvents='N Events', MedClicks='Event Clicks', TotClicks='Total Clicks')%>%
+  tableTheme()
+
+gt
+
+```

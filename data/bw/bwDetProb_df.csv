@@ -1,0 +1,56 @@
+"","Region","Season","Species","HourlyProb","Summ"
+"1","Humboldt","Upwelling","ZC",NA,NA
+"2","Humboldt","Upwelling","BB",NA,NA
+"3","Humboldt","Upwelling","MC",NA,NA
+"4","Humboldt","Upwelling","MS",NA,NA
+"5","Humboldt","Upwelling","None",NA,"1,956 (27%)"
+"6","Humboldt","Post-Upwelling","ZC",NA,NA
+"7","Humboldt","Post-Upwelling","BB","0.01 (0.1)","5 (83%)"
+"8","Humboldt","Post-Upwelling","MC","0 (0.01)","1 (100%)"
+"9","Humboldt","Post-Upwelling","MS","0 (0.04)","1 (100%)"
+"10","Humboldt","Post-Upwelling","None",NA,"4,185 (57%)"
+"11","Humboldt","Winter","ZC",NA,NA
+"12","Humboldt","Winter","BB","0 (0.02)","1 (17%)"
+"13","Humboldt","Winter","MC",NA,NA
+"14","Humboldt","Winter","MS",NA,NA
+"15","Humboldt","Winter","None",NA,"1,231 (17%)"
+"16","Morro Bay","Upwelling","ZC","0.1 (0.33)","191 (69%)"
+"17","Morro Bay","Upwelling","BB","0 (0.06)","14 (88%)"
+"18","Morro Bay","Upwelling","MC","0 (0.04)","2 (100%)"
+"19","Morro Bay","Upwelling","MS","0 (0.08)","3 (100%)"
+"20","Morro Bay","Upwelling","None",NA,"7,926 (60%)"
+"21","Morro Bay","Post-Upwelling","ZC","0.06 (0.12)","86 (31%)"
+"22","Morro Bay","Post-Upwelling","BB","0 (0.02)","2 (13%)"
+"23","Morro Bay","Post-Upwelling","MC",NA,NA
+"24","Morro Bay","Post-Upwelling","MS",NA,NA
+"25","Morro Bay","Post-Upwelling","None",NA,"5,324 (40%)"
+"26","Morro Bay","Winter","ZC",NA,NA
+"27","Morro Bay","Winter","BB",NA,NA
+"28","Morro Bay","Winter","MC",NA,NA
+"29","Morro Bay","Winter","MS",NA,NA
+"30","Morro Bay","Winter","None",NA,NA
+"31","Oregon","Upwelling","ZC",NA,NA
+"32","Oregon","Upwelling","BB","0 (0.01)","1 (100%)"
+"33","Oregon","Upwelling","MC",NA,NA
+"34","Oregon","Upwelling","MS",NA,NA
+"35","Oregon","Upwelling","None",NA,"5,719 (74%)"
+"36","Oregon","Post-Upwelling","ZC",NA,NA
+"37","Oregon","Post-Upwelling","BB",NA,NA
+"38","Oregon","Post-Upwelling","MC",NA,NA
+"39","Oregon","Post-Upwelling","MS",NA,NA
+"40","Oregon","Post-Upwelling","None",NA,"1,972 (26%)"
+"41","Oregon","Winter","BB",NA,NA
+"42","Oregon","Winter","None",NA,NA
+"43","San Francisco","Upwelling","ZC","0.01 (0.06)","14 (45%)"
+"44","San Francisco","Upwelling","BB","0 (0.04)","3 (20%)"
+"45","San Francisco","Upwelling","MC",NA,NA
+"46","San Francisco","Upwelling","MS",NA,NA
+"47","San Francisco","Upwelling","None",NA,"3,823 (58%)"
+"48","San Francisco","Post-Upwelling","ZC","0.01 (0.15)","17 (55%)"
+"49","San Francisco","Post-Upwelling","BB","0.01 (0.19)","12 (80%)"
+"50","San Francisco","Post-Upwelling","MC",NA,NA
+"51","San Francisco","Post-Upwelling","MS",NA,NA
+"52","San Francisco","Post-Upwelling","None",NA,"2,723 (42%)"
+"53","San Francisco","Winter","ZC",NA,NA
+"54","San Francisco","Winter","BB",NA,NA
+"55","San Francisco","Winter","None",NA,NA
