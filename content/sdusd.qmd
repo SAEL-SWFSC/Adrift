@@ -1,0 +1,15 @@
+---
+title: K-12 Phenomena Curriculum
+---
+
+In 2020 we collaborated with San Diego Unified School District (SDUSD) to host a teachers' workshop to develop a series of phenomena-based instructional curricula. Lessons aligned with Next Generation Science Standards and included instructional units for:
+
+Kindergarden ["Dolphins Have Needs"](https://drive.google.com/file/d/1VE2-jXCJet4iO_4bWywwW0dPtOK1BcLA/view?usp=sharing)
+
+Middle School ["You can recognize different species by the sounds they make"](https://drive.google.com/file/d/1MsorXXkcHk8YNyHgldJ_-ApASLcEkoJy/view?usp=sharing)
+
+High School ["Ocean noise impacts marine mammals"](https://drive.google.com/file/d/17qMPka0tTKjmF8jlAQD24QiWRzs3E9P4/view?usp=sharing)
+
+Lessons plans are publicly available on the [Project Phenomena Database website](https://www.sdcoe.net/ngss/phenomena-and-the-ngss).
+
+![Screenshot of the San Diego Unified School District Kindergarden Project Phenomena "Dolphins Have Needs".](/figs/sdusd_KinderScreenshot.JPG){#fig-sdusd_KinderScreenshot}

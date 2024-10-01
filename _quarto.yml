@@ -76,6 +76,18 @@ website:
           text: Ship Noise
         - href: content/contributorsSS.qmd
           text: Contributors to Soundscape
+      - section: content/dataSharing.qmd
+        contents:
+        - href: content/detections.qmd
+          text:
+      - section: content/outreach.qmd
+        text: Outreach
+        contents:
+        - content/sdusd.qmd
+        - content/dataNuggets.qmd
+        - content/zooniverse.qmd
+        - content/soundBytes.qmd
+        - content/soundCloud.qmd
       - href: content/dataSharing.qmd 
         text: Data Sharing
       - href: content/outreach.qmd
@@ -112,6 +124,7 @@ format:
     code-copy: true
     code-overflow: wrap
     toc: true
+    code-fold: true
 
 
 filters:
