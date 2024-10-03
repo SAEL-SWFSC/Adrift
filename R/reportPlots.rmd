@@ -1978,3 +1978,141 @@ PASCAL_humpbackSongSocial
 image_write(PASCAL_humpbackSongSocial, path = "../figs/PASCAL_humpbackSongSocial_HourlyPresence.png", format= "png")
 
 ```
+## ACCESS Plots
+```{r}
+
+#Sperm Whales
+plotFile <- pmBinSlow_adrift
+title <- "ADRIFT-ACCESS: Sperm Whale 'Slow' Click Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_PmSlow_HourlyPresence.png'))
+
+# Beaked
+plotFile <- bwBinAll_adrift
+title <- "ADRIFT-ACCESS: Beaked Whale Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_bw_HourlyPresence.png'))
+#Beaked, Combined ZcBb
+Zc <- magick::image_read('../figs/ACCESS/ADRIFT_Zc_HourlyPresence.png')
+Bb <- magick::image_read('../figs/ACCESS/ADRIFT_Bb_HourlyPresence.png')
+
+ZcBb <- image_append(c(Zc, Bb))
+image_write(ZcBb, path = "../figs/ACCESS/Adrift_ZcBb_HourlyPresence.png", format= "png")
+
+#Dolphins
+plotFile <- dolphinBinAll_adrift
+title <- "ADRIFT-ACCESS: Dolphin Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_dolphin_HourlyPresence.png'))
+#Dolphins, combined
+Gg <- magick::image_read('../figs/ACCESS/ADRIFT_Gg_HourlyPresence.png')
+Lo <- magick::image_read('../figs/ACCESS/ADRIFT_Lo_HourlyPresence.png')
+
+GgLo <- image_append(c(Gg, Lo))
+image_write(GgLo, path = "../figs/ACCESS/Adrift_GgLo_HourlyPresence.png", format= "png")
+
+
+#NBHF
+plotFile <- nbhfBin_adrift
+title <- "ADRIFT-ACCESS: NBHF Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_NBHF_HourlyPresence.png'))
+
+#Blue whales
+plotFile <- bmHourly_adrift
+title <- "ADRIFT-ACCESS: Blue Whale Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_Bm_HourlyPresence.png'))
+
+#Fin
+plotFile <- finBin_adrift
+title <- "ADRIFT-ACCESS: Fin Whale Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_fin_HourlyPresence.png'))
+
+#Humpback
+plotFile <- hmpBin_adrift
+title <- "ADRIFT-ACCESS: Humpback Whale Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_humpback_HourlyPresence.png'))
+
+#Gray
+plotFile <- grayBin_adrift
+title <- "ADRIFT-ACCESS: Gray Whale Hourly Presence"
+
+plot <- plotFile %>% 
+  mutate(call=NA) %>% 
+  markPCRegion() %>% 
+  filter(region == 'SanFrancisco') %>% 
+  plotYearlyPresence(percent= plotPercentile, combineYears = TRUE, plotEffort = FALSE, 
+                     title = title, legend = 'remove')
+
+plot
+ggsave(plot, width=hpWidth, height=hpHeight,
+       filename=here('figs/ACCESS/ADRIFT_gray_HourlyPresence.png'))
+
+
+```
