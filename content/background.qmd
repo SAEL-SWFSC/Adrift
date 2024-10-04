@@ -1,8 +1,42 @@
 ---
 title: Introduction to Adrift in the California Current
+editor: 
+  markdown: 
+    wrap: sentence
 ---
-Cetacean distribution and abundance data are traditionally collected by large vessels and aircraft conducting surveys in offshore areas. These surveys provide important data, but due to the expense and difficulty in collecting data during bad weather or during times of low visibility, these surveys are generally conducted intermittently during the summer and fall seasons. As such, these data suffer from spatial and temporal gaps, especially for cryptic species. Since sound is the primary sensory modality of marine mammals, passive acoustic monitoring (PAM) is an efficient approach to monitoring marine mammals as well as simultaneous characterization of the overall soundscape.
 
-There are a variety of PAM platforms that vary in strengths and limitations: towing hydrophones behind a ship provides good geographic resolution, while seafloor hydrophones allow for good temporal resolution. Passive acoustic drifting recorders can record for weeks or months (depending on recording characteristics and local currents) and their low cost allows for deployment of multiple instruments, which increases spatial coverage and provides a model for intermediate geographic and temporal resolution. Furthermore, the hydrophones for drifting recorders can be positioned near animals in the water column (and away from surface noise), which allows them to collect high-quality data without affecting animal behavior. Drifting recorders have been increasingly deployed during large scale shipboard surveys to augment visual line-transect surveys for cryptic and deep-diving species (Keating et al. 2018; Simonis 2020), and methods have been developed to estimate density and abundance of goose-beaked whales (Ziphius cavirostris) (Barlow et al. 2021). As drifting recorders are not tethered to the seafloor or to a ship, they have shown potential as an alternative PAM platform for the wind energy areas identified in the deep waters offshore the U.S. West Coast.
+The goal of the Adrift in the California Current Project ('Adrift') was to use passive acoustic drifting recorders deployed offshore the U.S.
+West Coast to assess the distribution of marine mammals and to characterize the marine soundscape.
+This three-year study was initiated in the Northern California region in 2020, was extended to Central California in 2021, and an additional pilot study off Oregon was initiated in 2022.
+A concerted effort was made to develop a streamlined open-source workflow for passive acoustic analysis that would promote reproducible research, with all methods, data, and metadata being publicly accessible.
+This report outlines methods, results, and recommendations for future research.
 
-The goal of the Adrift in the California Current Project ('Adrift') was to use passive acoustic drifting recorders deployed offshore the U.S. West Coast to assess the distribution of marine mammals and to characterize the marine soundscape. This three-year study was initiated in the Northern California region in 2020, was extended to Central California in 2021, and an additional pilot study off Oregon was initiated in 2022. A concerted effort was made to develop a streamlined open-source workflow for passive acoustic analysis that would promote reproducible research, with all methods, data, and metadata being publicly accessible. This report outlines methods, results, and recommendations for future research.
+**Why PAM?**
+
+-   *Traditional shipboard surveys to assess marine mammal populations are expensive generally conducted intermittently (every 5 years) during summer and fall seasons*
+
+-   *Traditional shipboard visual observation methods are difficult during poor weather conditions and during times of low visibility (including night)*
+
+-   *These data suffer from spatial and temporal gaps, especially for cryptic species.*
+
+-   *Sound is the primary sensory modality of marine mammals and passive acoustic monitoring (PAM) allows for monitoring marine mammals and characterization of the overall soundscape.*
+
+**Why Drifting Recorders?**
+
+-   Traditional PAM platforms vary in strengths and limitations:
+
+    -   *Towing hydrophones behind a ship provides good geographic resolution, but poor temporal resolution; recordings at surface near ship noise & far from deep diving species*
+
+    -   *Seafloor hydrophones allow for good temporal resolution, but poor geographic resolution. Seafloor hydrophones are limited in depth of deployment, and recorders are far from near-surface species.*
+
+-   Drifting recorders:
+
+    -   *Can record for weeks or months (depending on recording characteristics and local currents),*
+
+    -   *Low cost allows for deployment of multiple instruments, which increases spatial coverage and provides a model for intermediate geographic and temporal resolution.*
+
+    -   *Hydrophones positioned near animals in the water column (neither at surface nor seafloor)*
+
+Drifting recorders have been increasingly deployed during large scale shipboard surveys to augment visual line-transect surveys for cryptic and deep-diving species (Keating et al. 2018; Simonis 2020), and methods have been developed to estimate density and abundance of goose-beaked whales (Ziphius cavirostris) (Barlow et al. 2021).
+As drifting recorders are not tethered to the seafloor or to a ship, they have shown potential as an alternative PAM platform for the wind energy areas identified in the deep waters offshore the U.S.
+West Coast.

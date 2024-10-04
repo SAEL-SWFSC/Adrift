@@ -32,20 +32,16 @@ website:
 
     style: "docked"
     search: true
-    collapse-level: 1
+    collapse-level: 2
     contents:
       - href: index.qmd
         text: Home
-      - section: "Background"
+      - section: content/background.qmd
+        text: Background
         contents:
-        - href: content/background.qmd
-          text: Background
-        - href: content/objectives.qmd
-          text: Objectives
-        - href: content/studyArea.qmd
-          text: Study Area
-        - href: content/driftingRecorders.qmd
-          text: Drifting Recorders
+        - content/objectives.qmd
+        - content/studyArea.qmd
+        - content/driftingRecorders.qmd
       - section: "Marine Mammal Detections"
         contents:
         - href: content/detections.qmd
