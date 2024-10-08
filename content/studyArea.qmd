@@ -20,13 +20,29 @@ Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. 
 
 The cumulative impacts of the pandemic and poor environmental conditions ultimately required us to shift our survey approach and abandon our efforts to coordinate data collection using vessels of opportunity. Instead, we focused on directed deployment of drifting recorders in collaboration with regional partners. Our partners in Humboldt (Cal Poly Humboldt) and Oregon (Oregon State University) were able to use a combination of opportunistic and dedicated vessel time for data collection. We partnered with the NOAA Sanctuary Applied California Current Ecosystem Studies (ACCESS) Surveys to collect data offshore San Francisco up to three times per year, and developed a collaborative partnership for fieldwork in Morro Bay.
 
-\[Insert Summary Table\]
+
+\begingroup
+\setlength{\LTleft}{0pt minus 500pt}
+\setlength{\LTright}{0pt minus 500pt}
+\fontsize{12pt}{20pt}\selectfont
+\addtolength{\tabcolsep}{-3pt}
+
+\caption[Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys]{\label{tab:#tbl-summaryTable} Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys. Unsuccessful buoys are reported for Adrift.}
+
+```{r, Summary Table,  child=here::here("R", "summaryTable.RMD")}
+# | label: tbl-summaryTable
+# | tbl-cap: Summary of Deployments for Adrift, PASCAL and CCES surveys.
+sumTabl
+
+```
+
+\endgroup
 
 
 
 ::: columns
 ::: {.column width="35%"}
-A total of 90 drifting recorders were successfully deployed during the Adrift survey, for a total of 493 deployment days which resulted in a total of 8,736 hours of recordings (**Error! Reference source not found.**, Figure 3.2). Analysis included additional recordings from the 2016 PASCAL Survey (29 successful drifting recorders for a total of 421 deployment days and 9,451 hours of recordings) and the 2018 CCES Survey (15 successful drifting recorders for a total of 529 deployment days and 11,022 hours of recordings). Expanded deployment details are provided in Appendix A, Appendix B, Appendix C.
+A total of 90 drifting recorders were successfully deployed during the Adrift survey, for a total of 493 deployment days which resulted in a total of 8,736 hours of recordings (@tbl-summaryTable, @fig-ADRIFT_DriftTracks_All). Analysis included additional recordings from the 2016 PASCAL Survey (29 successful drifting recorders for a total of 421 deployment days and 9,451 hours of recordings) and the 2018 CCES Survey (15 successful drifting recorders for a total of 529 deployment days and 11,022 hours of recordings). Expanded deployment details are provided in Appendix A, Appendix B, Appendix C.
 
 The primary focal regions included areas of importance to the initial phases of offshore renewable wind energy development, including two locations in Oregon (Coos Bay to the North, and Brookings to the South), Humboldt, and Morro Bay, with sampling of San Francisco as opportunity allowed (Figure 3.2). The 100 m and 200 m isobaths are shown on the maps to identify the shelf break and potential for increased biological activity associated with upwelling (Figure 3.2 and regional maps). Regional description of partners and data collection efforts will be presented from the northern region (Oregon) to the southern region (Morro Bay).
 :::
@@ -40,7 +56,7 @@ The primary focal regions included areas of importance to the initial phases of 
 
 ::: columns
 ::: {.column width="35%"}
-We collaborated with Oregon State University to conduct a pilot study offshore Oregon in order to understand if data collection using drifting recorders could be conducted in this study area (Figure 3.3). Our partners were able to deploy a cluster of 4 drifting recorders at least monthly between March and August 2023 (21 total deployments), using both opportunistic and dedicated surveys. More information is provided in the Adrift GitHub Repository Supplement folder.
+We collaborated with Oregon State University to conduct a pilot study offshore Oregon in order to understand if data collection using drifting recorders could be conducted in this study area (@fig-ADRIFT_DriftTracks_Oregon). Our partners were able to deploy a cluster of 4 drifting recorders at least monthly between March and August 2023 (21 total deployments), using both opportunistic and dedicated surveys. More information is provided in the Adrift GitHub Repository Supplement folder.
 :::
 
 ::: {.column width="65%"}
@@ -52,7 +68,7 @@ We collaborated with Oregon State University to conduct a pilot study offshore O
 ::: columns
 ::: {.column width="35%"}
 
-Adrift data collection in the Humboldt region was coordinated with our partners at Cal Poly Humboldt (Figure 3.4). The first drifting recorder was deployed in fall 2021, with more frequent deployment of clusters of 2-4 buoys starting in spring 2022 (28 total deployments).
+Adrift data collection in the Humboldt region was coordinated with our partners at Cal Poly Humboldt (@fig-ADRIFT_DriftTracks_Humboldt). The first drifting recorder was deployed in fall 2021, with more frequent deployment of clusters of 2-4 buoys starting in spring 2022 (28 total deployments).
 
 Drifting recorders had previously been deployed in the Humboldt region during the 2018 CCES survey (Appendix C) and the 2019 Express Pilot Survey. Both previous drifts were entrained in the recirculating current offshore Humboldt (Largier et al. 1993) that allowed for repeated sampling during each deployment. Unfortunately, during the Adrift survey these drifting recorders encountered strong southward currents that prevented the repeated sampling provided during previous surveys. The extreme weather conditions, variable currents, and proximity to Cape Mendocino (and lack of ports south of this point) created a high-risk scenario. After the loss of 3 drifting recorders in the first survey year, we reduced deployments to open weather windows to ensure opportunity for retrieval.
 
@@ -75,7 +91,7 @@ The monthly Trinidad Head Line survey provides year-round ship observations of o
 
 ::: {.column width="35%"}
 
-We partnered with the Greater Farallones and the Cordell Bank National Marine Sanctuaries and Point Blue to participate in their tri-annual ACCESS surveys. These surveys provided an opportunity to deploy and retrieve 1-2 drifting recorders in the area offshore San Francisco Bay, providing data to inform the Sanctuaries and to provide an additional dataset between the Morro Bay and Humboldt WEAs (total 11 deployments, Figure 3.5). This partnership was mutually beneficial; however, these surveys are only conducted in late spring through late summer. Deployments in the post-upwelling season extended further south than deployments in the upwelling season (Figure 3.5); these geographic differences may contribute to seasonal differences in marine mammal detections.
+We partnered with the Greater Farallones and the Cordell Bank National Marine Sanctuaries and Point Blue to participate in their tri-annual ACCESS surveys. These surveys provided an opportunity to deploy and retrieve 1-2 drifting recorders in the area offshore San Francisco Bay, providing data to inform the Sanctuaries and to provide an additional dataset between the Morro Bay and Humboldt WEAs (total 11 deployments, Figure 3.5). This partnership was mutually beneficial; however, these surveys are only conducted in late spring through late summer. Deployments in the post-upwelling season extended further south than deployments in the upwelling season (@fig-ADRIFT_DriftTracks_SanFrancisco); these geographic differences may contribute to seasonal differences in marine mammal detections.
 
 ::: 
 
@@ -93,7 +109,7 @@ We partnered with the Greater Farallones and the Cordell Bank National Marine Sa
 
 ::: {.column width="35%"}
 
-The Morro Bay WEA is located offshore the remote coastal region of Big Sur, south of Monterey Bay and north of the small harbor at Morro Bay. We had difficulty identifying suitable partners for this remote study area and the high cost of vessel charters in the Morro Bay region led us to seek what resulted in a highly successful collaboration with regional scientific partners. After a successful pilot study in June 2022, we initiated the seasonal Central Coast Collaborative passive acoustic monitoring survey (CCC). These highly successful surveys brought together scientists, educators, tribal representatives, and regional community members to collect data, form collaborations, and strengthen bonds across communities to better serve our combined priorities. These surveys allowed us to collect data from clusters of eight drifting recorders during each survey, providing improved geographic coverage during these seasonal surveys. We conducted a total of four CCC surveys with a total of 30 Adrift deployments (Figure 3.6).
+The Morro Bay WEA is located offshore the remote coastal region of Big Sur, south of Monterey Bay and north of the small harbor at Morro Bay. We had difficulty identifying suitable partners for this remote study area and the high cost of vessel charters in the Morro Bay region led us to seek what resulted in a highly successful collaboration with regional scientific partners. After a successful pilot study in June 2022, we initiated the seasonal Central Coast Collaborative passive acoustic monitoring survey (CCC). These highly successful surveys brought together scientists, educators, tribal representatives, and regional community members to collect data, form collaborations, and strengthen bonds across communities to better serve our combined priorities. These surveys allowed us to collect data from clusters of eight drifting recorders during each survey, providing improved geographic coverage during these seasonal surveys. We conducted a total of four CCC surveys with a total of 30 Adrift deployments (@fig-ADRIFT_DriftTracks_MorroBay).
 
 ::: 
 
