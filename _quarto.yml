@@ -7,8 +7,8 @@ project:
 website: 
   page-navigation: true
   title: "Adrift in the California Current" 
-  # site-url: "https://sael-swfsc.github.io/Adrift/" 
-  # repo-url: "https://github.com/SAEL-SWFSC/Adrift"
+  site-url: "https://sael-swfsc.github.io/Adrift/"
+  repo-url: "https://github.com/SAEL-SWFSC/Adrift"
   repo-actions: [edit, source, issue]
   favicon: images/favicon.ico
   
@@ -32,7 +32,7 @@ website:
 
     style: "docked"
     search: true
-    collapse-level: 2
+    collapse-level: 1
     contents:
       - href: index.qmd
         text: Home
@@ -76,22 +76,22 @@ website:
         contents:
         - content/summaryResults.qmd
         - content/recommendations.qmd
-      # - section: "Appendices"
-      #   contents:
-      #   - href: content/expandedData.qmd #
-      #     text: Expanded Datasets
-      #   - href: content/spermDemographics.qmd
-      #     text: Sperm Whale Demographics
-      #   - href: content/beakedDensity.qmd
-      #     text: Beaked Whale Density Estimation
-      #   - href: content/nbhfClassification.qmd
-      #     text: NBHF Species Classification
-      #   - href: content/finAI.qmd
-      #     text: Fin Whale AI
-      #   - href: content/habitatModels.qmd
-      #     text: Modeling Habitat Use
-      #   - href: content/spatialNoise.qmd
-      #     text: Spatial Variation in Noise
+      - section: content/expandedData.qmd
+        text: Expanded Datasets
+        contents:
+        - content/adriftData.qmd
+        - content/pascalData.qmd
+        - content/ccesData.qmd
+      - section: content/ancillary.qmd
+          text: Ancillary Projects
+        contents:
+        - content/spermDemographics.qmd
+        - content/beakedDensity.qmd
+        - content/nbhfClassification.qmd
+        - content/finAI.qmd
+        - content/habitatModels.qmd
+        - content/spatialNoise.qmd
+
 
           
 format:
