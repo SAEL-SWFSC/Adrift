@@ -21,64 +21,6 @@ Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. 
 The cumulative impacts of the pandemic and poor environmental conditions ultimately required us to shift our survey approach and abandon our efforts to coordinate data collection using vessels of opportunity. Instead, we focused on directed deployment of drifting recorders in collaboration with regional partners. Our partners in Humboldt (Cal Poly Humboldt) and Oregon (Oregon State University) were able to use a combination of opportunistic and dedicated vessel time for data collection. We partnered with the NOAA Sanctuary Applied California Current Ecosystem Studies (ACCESS) Surveys to collect data offshore San Francisco up to three times per year, and developed a collaborative partnership for fieldwork in Morro Bay.
 
 
-
-```{r, Summary Table}
-# | label: tbl-summaryTable
-# | tbl-cap: Summary of Deployments for Adrift, PASCAL and CCES surveys.
-library(here)
-# knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-source(here::here("R/_commonR.r"))
-source(here::here("R/deployDetails.r"))
-
-deployDetails_all <- read.csv(here ("output", "deployDetails.csv"))
-
-goodCol <- c("Project", "Status", "DeployDuration_days", "RecordDuration_hrs") #When I have the Deployment Duration & Recording Duration, will want to add to summary
-#Remove OPPs & single channel recordings from ST300 (they were additional recorders on existing array)
-deployDetails_all <- deployDetails_all %>%
-  filter(Project != "OPPS" & Type != "ST300")
-  
-
-sumTabl <- deployDetails_all %>%
-  select(c(goodCol))%>%
-  arrange("Deployment_Date")%>%  
-  # deployDetails_all$Project[,c("PASCAL", "CCES", "OPPS", "ADRIFT")] %>%
-  tbl_summary(
-    by = Project, 
-    missing = "no",
-    type=all_continuous() ~ "continuous2",
-    statistic = list(all_continuous2() ~ c("{sum}", "{median} ({min} - {max})")),
-    digits = all_categorical() ~ list(cards::alias_as_fmt_fn("xx"), cards::alias_as_fmt_fn("xx.x%")),
-    label = list(
-      DeployDuration_days ~ "Deployment Duration (days)",
-      RecordDuration_hrs ~ "Recording Duration (hours)"
-    )
-  ) %>%
-  modify_column_alignment(all_stat_cols(), "right")%>%
-  modify_table_body(
-    ~.x%>%
-      mutate(
-        across(all_stat_cols(),~gsub("^0.*", "-", .))
-      )
-
-  )%>%
-  bold_labels() %>%
-  bold_levels() %>%
-  modify_footnote(everything() ~ NA)%>%
-  italicize_levels() %>%
-  as_gt() %>% 
-  tab_style(
-    style = list(cell_fill(color = "#DBE5F1")),
-    locations = cells_column_labels()
-)
-
-sumTabl
-
-```
-
-
-
-
-
 ::: columns
 ::: {.column width="35%"}
 A total of 90 drifting recorders were successfully deployed during the Adrift survey, for a total of 493 deployment days which resulted in a total of 8,736 hours of recordings (@tbl-summaryTable, @fig-ADRIFT_DriftTracks_All). Analysis included additional recordings from the 2016 PASCAL Survey (29 successful drifting recorders for a total of 421 deployment days and 9,451 hours of recordings) and the 2018 CCES Survey (15 successful drifting recorders for a total of 529 deployment days and 11,022 hours of recordings). Expanded deployment details are provided in Appendix A, Appendix B, Appendix C.
