@@ -1,9 +1,16 @@
 ---
 title: Minke Whales
 ---
+::: columns
 
-Methods Minke whale ‘boing’ calls were detected using PAMGuard’s Generalized Power Law (GPL) detector on 10 kHz decimated data (Butterworth low pass filter at 5 kHz). GPL settings were modified from a template tuned to fit our data (Helble, pers. comm). The GPL detector returned a low number of detections, and all detections were manually validated using the PAMGuard spectrogram annotation tool. A stratified sub-sampling method was then used to randomly sample 20% of all data void of detections to verify the GPL was not missing boings. Detailed methods are provided in our GitHub online analysis methods.
+::: {.column width="40%"}
+There were no detections of minke whale boings during the Adrift study, and only a few minke whale detections in the CCES and PASCAL datasets (Figure 5.13). Minke whale boing calls are considered 'song' and typically detected during the winter and early spring months where our study has limited effort (Rankin and Barlow 2005). In November 2023 there was a minke whale sighting near Morro Bay; however, there were no boings detected from our offshore drifts. The lack of detections could be due to low population densities or that minkes use coastal waters. Research is needed to improve our knowledge of the minke whale vocal repertoire.
+:::
 
-Results There were no detections of minke whale boings during the Adrift study, and only a few minke whale detections in the CCES and PASCAL datasets (Figure 5.13). Minke whale boing calls are considered 'song' and typically detected during the winter and early spring months where our study has limited effort (Rankin and Barlow 2005). In November 2023 there was a minke whale sighting near Morro Bay; however, there were no boings detected from our offshore drifts. The lack of detections could be due to low population densities or that minkes use coastal waters. Research is needed to improve our knowledge of the minke whale vocal repertoire.
+::: {.column width="60%"}
 
 ![Hourly minke whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence for minke whale boing calls (y axis) for different months for combined PASCAL 2016 and CCES 2018 survey (x axis) for each region (Oregon, Humboldt, San Francisco, and Morro Bay). There were no detections of minke whale boings during the Adrift study. Buoys were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort), and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/PC_Minke_HourlyPresence.png){#fig-PC_Minke_HourlyPresence.png fig-alt="Hourly presence of minke whales detected during the combined PASCAL and CCES surveys. Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red.  There were very few detections of minkes in the San Francisco and Morro Bay regions. There were no minke whales detected during Adrift."}
+:::
+:::
+
+Detailed methods are provided in our GitHub online analysis methods.

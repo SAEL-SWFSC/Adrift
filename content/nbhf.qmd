@@ -2,12 +2,63 @@
 title: NBHF species
 ---
 
-Methods A NBHF click detector was run on full bandwidth data using PAMGuard (v2.02.09). The matched template classifier module evaluated the similarity of each detection to templates from known click types, including Harbor porpoise, Dall's porpoise, and Kogia spp. Potential NBHF acoustic events are automatically defined based on the presence of 3 or more clicks that exceed matched-template thresholds that occur within a 2-minute period. All NBHF events are confirmed by an analyst by reviewing detection and event features in the Click Display window of PAMGuard Viewer. Detailed methods are provided in our GitHub online analysis methods.
+::: columns
+::: {.column width="40%"}
 
-Results Calls associated with NBHF species (porpoise and Kogia spp.) were detected in all regions in all seasons (Figure 5.5), and the hourly probability of detection was higher for the post-upwelling season than for the upwelling season in all regions (Table 5.4). Detections were made during most drifts; however, there were no NBHF detected during the April deployments in any region (there was no effort in San Francisco during this month, Figure 5.5). During the PASCAL and CCES Surveys, most NBHF detections were in the Humboldt region (Figure 5.5).
+Calls associated with NBHF species (porpoise and Kogia spp.) were detected in all regions in all seasons (@fig-AdPC_nbhf_HourlyPresence), and the hourly probability of detection was higher for the post-upwelling season than for the upwelling season in all regions (see table, right). Detections were made during most drifts; however, there were no NBHF detected during the April deployments in any region (there was no effort in San Francisco during this month, @fig-AdPC_nbhf_HourlyPresence). During the PASCAL and CCES Surveys, most NBHF detections were in the Humboldt region (@fig-AdPC_nbhf_HourlyPresence).
+:::
+
+::: {.column width="60%"}
+
+```{r nbhfTbl, echo=FALSE, warning=FALSE, message=FALSE}
+library(here)
+source(here::here("R/_commonR.r"))
+source(here::here("R/reportPlotFunctions.r"))
+
+load(here("data", "nbhf", "nbhfBin_adrift.rdata"))
+Species <- "NBHF"
+binData <- nbhfBin_adrift
+Bin<-binData%>%
+  mutate(Region = case_when(
+      DeploymentSite %in% c('Crescent City','HUM') ~ 'Humboldt',
+      DeploymentSite %in% c('HMB','SF','SFB') ~ 'San Francisco',
+      DeploymentSite %in% c('MBY','MOB') ~ 'Morro Bay',
+      DeploymentSite %in% c('ORE')~ 'Oregon'))
+  
+Bin$season <- markSeason(binData$UTC)
+Bin<- Bin[,c(4, 7, 11, 12)]
+
+
+dfSummary <- Bin%>%
+  group_by(season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(species == Species)),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+
+dfSummary<- dfSummary[,c(1, 2, 5, 6)]
+
+detTbl <- dfSummary %>%
+  pivot_wider(names_from = "season", values_from = c("HourlyProb", "n"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay")))%>%
+  arrange(Region)%>%
+  gt(
+  groupname_col = "Species",
+  rowname_col = "Region",
+  )%>%
+  DetTableTheme508()
+detTbl
+```
+:::
+:::
+
 
 ![Hourly NBHF events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of NBHF events (y axis) for different months for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_nbhf_HourlyPresence.png){#fig-AdPC_nbhf_HourlyPresence fig-alt="Hourly presence of narrow band high frequency (NBHF) species detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the x-axis, and the date on the y-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of NBHF varied by drift for Adrift surveys, and detections during PASCAL/CCES were greater in Humboldt and San Francisco."}
 
 The California Current is home to 4 different species that produce NBHF echolocation clicks: harbor porpoise, Dall’s porpoise, pygmy sperm whales, and dwarf sperm whales. Despite the similarities in their echolocation clicks, these species inhabit different habitats and have different behaviors and life histories. Harbor porpoise inhabit the nearshore waters north of Point Conception, and are very sensitive to noise and other anthropogenic impacts. Dall’s porpoise are fast moving and are often found in mixed species aggregations with dolphins. Both the pygmy and dwarf sperm whales are cryptic deep diving species. Lumping these very different species into one ‘acoustic’ group is problematic, and acoustic classification to species (or at least genus) is needed.
 
 Preliminary efforts at developing a genus-level species classifier for NBHF species in the California Current have shown positive results, and future research will further develop this classifier (see Appendix F). With some improvement, this classifier can be applied towards existing archived data to improve our understanding of the distribution of these species in the greater California Current.
+
+Detailed methods are provided in our GitHub online analysis methods.

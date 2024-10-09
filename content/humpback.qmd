@@ -1,17 +1,101 @@
 ---
 title: Humpback Whales
 ---
+::: columns
+::: {.column width="40%"}
 
-Methods An experienced analyst manually scanned spectrograms of 12 kHz decimated data using [Raven Pro](https://store.birds.cornell.edu/collections/raven-sound-software) v. 1.6.4 (4096pt FFT length, Hann window, 90% overlap resulting in a resolution of 341 ms and 4.21 Hz) to detect the presence of humpback whale calls. Humpback whale calls were categorized as song, social, or undetermined calls. Cross validation of a portion of calls was completed with Dr. Alison Stimpert to ensure consistency with expert annotations. Detailed methods are provided in our [GitHub online analysis methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack).
+Humpback whales were detected during most deployments (@fig-AdPC_humpback_HourlyPresence), with higher probability of detection in the post-upwelling season in Humboldt and San Francisco (see table, right). Hourly detection rates of humpback whales were lower for the combined PASCAL and CCES surveys than the Adrift study (@fig-AdPC_humpback_HourlyPresence). Most PASCAL and CCES deployments were further offshore (west) of the Adrift study areas (see drift maps in Appendix B, Appendix C). Historical sighting data shows decreased distribution of humpback whales in these offshore waters (see [OBIS Seamap](https://seamap.env.duke.edu/species/180530)). Humpback whales were not detected in Oregon during the PASCAL and CCES Surveys (@fig-AdPC_humpback_HourlyPresence).
 
-Results Humpback whales were detected during most deployments (Figure 5.10), with higher probability of detection in the post-upwelling season in Humboldt and San Francisco (Table 5.7). Hourly detection rates of humpback whales were lower for the combined PASCAL and CCES surveys than the Adrift study (Table 5.7). Most PASCAL and CCES deployments were further offshore (west) of the Adrift study areas (see drift maps in Appendix B, Appendix C). Historical sighting data shows decreased distribution of humpback whales in these offshore waters (see [Ocean Biodiversity Information System Seamap](https://seamap.env.duke.edu/species/180530)). Humpback whales were not detected in Oregon during the PASCAL and CCES Surveys (Figure 5.10).
+There were few acoustic detections of humpback whales during the late June/early July surveys off Morro Bay (@fig-AdPC_humpback_HourlyPresence). Multiple humpback whales were visually sighted during the June 2022 and July 2023 CCC surveys in Morro Bay; however, the bulk of the visual survey effort (and sightings) were south of the area acoustically surveyed. The disconnect between the visual sightings and acoustic detections could be due to local differences in the sampling areas or that the animals were not particularly vocal during this sampling period.
 
-There were few acoustic detections of humpback whales during the late June/early July surveys off Morro Bay (Figure 5.10). Multiple humpback whales were visually sighted during the June 2022 and July 2023 CCC surveys in Morro Bay; however, the bulk of the visual survey effort (and sightings) were south of the area acoustically surveyed. The disconnect between the visual sightings and acoustic detections could be due to local differences in the sampling areas or that the animals were not particularly vocal during this sampling period.
+:::
 
-Hourly probability of detecting song was higher in the post-upwelling than the upwelling season for Humboldt and San Francisco, but the opposite was true for Morro Bay (Table 5.7). Deployments were limited in winter, but high probability of detecting humpback song aligns with the production of song during the southern winter migration (Clapham and Mattila 1990). There were several drifts in which humpback song dominated the recordings (Figure 5.11). The acoustic features of humpback whale song, including high source level and series of calls produced over long time spans, naturally lead to high detection rates (Au et al. 2006). While recordings dominated by song may be attributed to one or a few animals, social sounds may be attributed to larger numbers of animals (Ryan et al. 2019). There were few detections of humpback song in Oregon.
+::: {.column width="60%"}
 
-![Hourly humpback whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of combined humpback whales call types (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_humpback_HourlyPresence.png){#fig-AdPC_humpback_HourlyPresence.png fig-alt="Hourly presence of humpback whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of humpbacks varied by drift, with fewer detections off Oregon for all surveys. Humpback whale detections were strong off Humboldt for most drifts during Adrift, but there were few humpback detections in Humboldt (and Oregon) for the PASCAL/CCES surveys."}
+```{r humpTbl, echo=FALSE, warning=FALSE, message=FALSE}
+library(here)
+source(here::here("R/_commonR.r"))
+source(here::here("R/reportPlotFunctions.r"))
+
+load(here("data", "humpback", "humpBin_adrift.rdata"))
+binSong<-hmpBinSong_adrift %>%
+  mutate (Season = markSeason(hmpBinSong_adrift$UTC),
+          Region = map_chr(hmpBinSong_adrift$Latitude, find_region)
+          )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(call == "Song")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binSong<- binSong[,c(1, 2, 5, 6)]
+binSong$CallType <- "Song"
+binSong <- binSong[!is.na(binSong$Region),]
+
+binSocial<-hmpBinSoc_adrift%>%
+  mutate (Season = markSeason(hmpBinSoc_adrift$UTC),
+          Region = map_chr(hmpBinSoc_adrift$Latitude, find_region),
+          CallType = "B"
+          )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(call == "Social")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binSocial<- binSocial[,c(1, 2, 5, 6)]
+binSocial$CallType <- "Social"
+binSocial <- binSocial[!is.na(binSocial$Region),]
+
+
+binUnid <- hmpBinReg_adrift%>%
+  mutate (Season = markSeason(hmpBinReg_adrift$UTC),
+          Region = map_chr(hmpBinReg_adrift$Latitude, find_region),
+          CallType = "Unidentified"
+          )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(call == "unidentified")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binUnid<- binUnid[,c(1, 2, 5, 6)]
+binUnid$CallType <- "Unidentified"
+binUnid <- binUnid[!is.na(binUnid$Region),]
+
+dfSummary <- rbind(binSong, binSocial, binUnid)
+
+detTbl <- dfSummary %>%
+  pivot_wider(names_from = "Season", values_from = c("HourlyProb", "n"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay")))%>%
+  arrange(Region)%>%
+  gt(
+  groupname_col = "CallType",
+  rowname_col = "Region"
+  )%>%
+  DetTableTheme508()
+detTbl
+```
+:::
+:::
+
+
+
+
+
+![Hourly humpback whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of combined humpback whales call types (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_humpback_HourlyPresence.png){#fig-AdPC_humpback_HourlyPresence fig-alt="Hourly presence of humpback whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of humpbacks varied by drift, with fewer detections off Oregon for all surveys. Humpback whale detections were strong off Humboldt for most drifts during Adrift, but there were few humpback detections in Humboldt (and Oregon) for the PASCAL/CCES surveys."}
+
+Hourly probability of detecting song was higher in the post-upwelling than the upwelling season for Humboldt and San Francisco, but the opposite was true for Morro Bay (see table, above). Deployments were limited in winter, but high probability of detecting humpback song aligns with the production of song during the southern winter migration (Clapham and Mattila 1990). There were several drifts in which humpback song dominated the recordings (@fig-ADRIFT_humpback_songSocial_HourlyPresence). The acoustic features of humpback whale song, including high source level and series of calls produced over long time spans, naturally lead to high detection rates (Au et al. 2006). While recordings dominated by song may be attributed to one or a few animals, social sounds may be attributed to larger numbers of animals (Ryan et al. 2019). There were few detections of humpback song in Oregon.
+
+
+
+![Hourly presence of humpback song, social calls by month, region for Adrift. Hourly presence of humpback song (left) and humpback social calls (right)(y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay). Adrifts 001-012 were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data (6 min of 12 min). Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/ADRIFT_humpback_songSocial_HourlyPresence.png){#fig-ADRIFT_humpback_songSocial_HourlyPresence fig-alt="Hourly presence of humpback whale song detected during the Adrift study (left graph) and social calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Humpback song and social calls were stronger during the post-upwelling drifts deployed off Humboldt and San Francisco. Detection of humpback social calls mirrored detection of song in all regions except Morro Bay, where there were few detections of humpback social calls."}
 
 Humpback whales produce many non-song (social) calls that may be associated with feeding or social behaviors.  Humpback whale social sounds most frequently detected in these analyses included the grunts, 'wops' and 'thwops' (Dunlop et al. 2008). We were unable to dedicate the time required to differentiate these sounds during this study. Highly annotated datasets exist, and we recommend development of machine learning models to classify humpback non-song, which may allow for an improved understanding of spatial and temporal variation in habitat use in the California Current, allowing us to identify potential critical habitat. 
 
-![Hourly presence of humpback song, social calls by month, region for Adrift. Hourly presence of humpback song (left) and humpback social calls (right)(y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay). Adrifts 001-012 were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data (6 min of 12 min). Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/ADRIFT_humpback_songSocial_HourlyPresence.png){#fig-ADRIFT_humpback_songSocial_HourlyPresence fig-alt="Hourly presence of humpback whale song detected during the Adrift study (left graph) and social calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Humpback song and social calls were stronger during the post-upwelling drifts deployed off Humboldt and San Francisco. Detection of humpback social calls mirrored detection of song in all regions except Morro Bay, where there were few detections of humpback social calls."}
+
+Detailed methods are provided in our [GitHub online analysis methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack).
+
