@@ -29,7 +29,7 @@ The cumulative impacts of the pandemic and poor environmental conditions ultimat
 
 \caption[Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys]{\label{tab:#tbl-summaryTable} Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys. Unsuccessful buoys are reported for Adrift.}
 
-```{r, Summary Table,  child=here::here("R", "summaryTable.RMD")}
+```{r, Summary Table,  here("R", "summaryTable.RMD")}
 # | label: tbl-summaryTable
 # | tbl-cap: Summary of Deployments for Adrift, PASCAL and CCES surveys.
 sumTabl
