@@ -83,7 +83,7 @@ website:
         - content/pascalData.qmd
         - content/ccesData.qmd
       - section: content/ancillary.qmd
-          text: Ancillary Projects
+        text: Ancillary Projects
         contents:
         - content/spermDemographics.qmd
         - content/beakedDensity.qmd
