@@ -103,6 +103,9 @@ format:
     code-overflow: wrap
     toc: true
     code-fold: true
+    include-in-header: 
+      text: |
+        \usepackage[here]
 
 
 filters:
