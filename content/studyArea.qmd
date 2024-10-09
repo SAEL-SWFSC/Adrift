@@ -32,6 +32,7 @@ The cumulative impacts of the pandemic and poor environmental conditions ultimat
 ```{r, Summary Table,  child=here::here("R", "summaryTable.RMD")}
 # | label: tbl-summaryTable
 # | tbl-cap: Summary of Deployments for Adrift, PASCAL and CCES surveys.
+library(here)
 sumTabl
 
 ```

@@ -2,6 +2,7 @@
 title: "Adrift in the California Current"
 subtitle: "Passive Acoustic Monitoring in the California Current using Drifting Recorders"
 page-layout: full
+
 ---
 
 ::: columns
