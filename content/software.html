@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Recommendations – Adrift in the California Current</title>
+<title>Software – Adrift in the California Current</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/summaryResults.html" rel="prev">
+<link href="../content/outreach.html" rel="next">
+<link href="../content/dataSharing.html" rel="prev">
 <link href="../images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -83,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/summary.html">Summary</a></li><li class="breadcrumb-item"><a href="../content/recommendations.html">Recommendations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/dataSharing.html">Data Sharing</a></li><li class="breadcrumb-item"><a href="../content/software.html">Software</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -247,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/software.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/software.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Software</span></a>
   </div>
 </li>
@@ -311,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/recommendations.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/recommendations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Recommendations</span></a>
   </div>
 </li>
@@ -327,17 +328,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-collection-recommendations" id="toc-data-collection-recommendations" class="nav-link active" data-scroll-target="#data-collection-recommendations">Data Collection Recommendations</a></li>
-  <li><a href="#data-analysis-and-archive-recommendations" id="toc-data-analysis-and-archive-recommendations" class="nav-link" data-scroll-target="#data-analysis-and-archive-recommendations">Data Analysis and Archive Recommendations</a></li>
+  <li><a href="#pampal" id="toc-pampal" class="nav-link active" data-scroll-target="#pampal">PAMpal</a></li>
+  <li><a href="#pamscapes" id="toc-pamscapes" class="nav-link" data-scroll-target="#pamscapes">PAMscapes</a></li>
+  <li><a href="#roboj" id="toc-roboj" class="nav-link" data-scroll-target="#roboj">RoboJ</a></li>
+  <li><a href="#beaked-whale-event-detector" id="toc-beaked-whale-event-detector" class="nav-link" data-scroll-target="#beaked-whale-event-detector">Beaked Whale Event Detector</a></li>
+  <li><a href="#fin-model" id="toc-fin-model" class="nav-link" data-scroll-target="#fin-model">Fin Model</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/summary.html">Summary</a></li><li class="breadcrumb-item"><a href="../content/recommendations.html">Recommendations</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/dataSharing.html">Data Sharing</a></li><li class="breadcrumb-item"><a href="../content/software.html">Software</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Recommendations</h1>
+<h1 class="title">Software</h1>
 </div>
 
 
@@ -354,35 +358,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We believe that drifting recorders provide high quality data to address certain research questions, and that they complement additional PAM studies using traditional methods. Here we provide a list of recommendations that may serve to guide future research efforts.</p>
-<section id="data-collection-recommendations" class="level2">
-<h2 class="anchored" data-anchor-id="data-collection-recommendations">Data Collection Recommendations</h2>
+<p>The Southwest Acoustic Ecology Lab firmly believes that analysis methods should be publicly accessible. We dedicated time to develop a streamlined approach to data analysis, data visualization, and archival processes to create a reproducible product. These include developing methods in open-source software and publishing analytical methods as R packages, available on CRAN (Comprehensive R Archive Network). Open-source software developed as a part of this project include:</p>
+<section id="pampal" class="level2">
+<h2 class="anchored" data-anchor-id="pampal">PAMpal</h2>
+<p>PAMpal is an R package for processing passive acoustic data collected using <a href="PAMGuard.org">PAMGuard</a> software. PAMpal was initially funded by NOAA’s Advanced Sampling Technology Working Group; additional functionality to support the Adrift project was made to PAMpal to allow others to benefit from these developments. PAMpal is increasingly being adopted by scientists using mobile platforms.</p>
 <ul>
-<li><p>Clustered deployments provide improved spatial and temporal data to understand variability in contributors to the soundscape and should be considered for surveys.</p></li>
-<li><p>Conduct regional pilot studies to determine region-specific environmental conditions and to identify local partners prior to initiating full scale surveys, as drifting recorders are not appropriate for all geographic regions.</p></li>
-<li><p>Collaborative field surveys should be considered in all regions (including Humboldt) to share vessel resources, improve scientific collaborations, and provide opportunities for scientists to share and learn from other community members.</p></li>
-<li><p>Alternative buoy designs to reduce strumming should be considered; design developed by Pacific Islands Fisheries Science Center may reduce strumming and associated self-noise. New sub-surface drifting recorders (in development and testing) may be an alternative approach that reduces risk of ship strike or data loss due to self-noise.</p></li>
-<li><p>Seafloor recorders are the preferred platform for depths &lt; 300 m. depth. Drifting recorders are suitable for monitoring offshore, deep water habitats.</p></li>
+<li><p><a href="https://cran.r-project.org/package=PAMpal">PAMpal on CRAN</a></p></li>
+<li><p><a href="https://taikisan21.github.io/PAMpal">PAMpal User Guide</a></p></li>
+<li><p><a href="https://github.com/TaikiSan21/PAMpal">PAMpal GitHub</a></p></li>
 </ul>
 </section>
-<section id="data-analysis-and-archive-recommendations" class="level2">
-<h2 class="anchored" data-anchor-id="data-analysis-and-archive-recommendations">Data Analysis and Archive Recommendations</h2>
+<section id="pamscapes" class="level2">
+<h2 class="anchored" data-anchor-id="pamscapes">PAMscapes</h2>
+<p>The NOAA-funded “Biotic, Abiotic, and Anthropogenic Contributors to the Soundscapes: Development of an Open -Source Method for Data Integration &amp; Visualization” developed the PAMscapes R package, including several of the visualizations used in this report. This effort also allows for integration of Automatic Identification System ship tracks and weather data with acoustic detections from PAMpal.</p>
 <ul>
-<li><p>Expand beaked whale density estimation methods to include: (1) further development of an automated approach to acoustic event delineation to improve standardization of methods and reduce manual workload, and (2) expansion of this analysis to species beyond goose-beaked whales.</p></li>
-<li><p>Expand analytical methods to localize sound sources from clustered recorders based on pilot study (Appendix H) to apply these data to population assessment, if future work with clustered buoys will be adopted.</p></li>
-<li><p>Expand methods to assess the spatial and temporal variability in soundscape from clustered recorders based on preliminary methods outlined in (Appendix I) if future work with clustered buoys will be adopted.</p></li>
-<li><p>Develop a comprehensive machine learning acoustic classifier for dolphins in California Current using existing archived datasets, including these data.</p></li>
-<li><p>Develop an open-source platform to share bioacoustics annotations to make annotations of publicly available datasets available for developing deep learning classifiers.</p></li>
-<li><p>Encourage Open Science methods, including the development of analytical methods using open-source software, open sharing of data and metadata in accessible environments, and public sharing of research methods to accommodate reproduction of methods.</p></li>
-<li><p>Develop machine learning methods for humpback whale calls, including differentiation of specific social sounds and song. Detection of humpback whales was dominated by humpback whale song; however, detection of specific social calls may be more appropriate for identifying larger aggregations of humpback whales.</p></li>
-<li><p>Exclude gray whale analysis from offshore data collection efforts if these efforts are outside their primary migration routes.</p></li>
-<li><p>Assess demographic composition of sperm whales in California Current from new and archived datasets by applying methods outlined in (Appendix D).</p></li>
-<li><p>Estimate beaked whale density for the Adrift dataset; data were prepared but we were unable to complete this analysis due to delays caused by the COVID-19 pandemic.</p></li>
-<li><p>Encourage research on sei whale vocal repertoire in the Pacific Ocean to allow for PAM description of this little-known species.</p></li>
-<li><p>Examine the co-occurrence of beaked whales with echolocating dolphins and how this may impact studies based on single sensors.</p></li>
-<li><p>Examine geographic variation in acoustic characteristics of Pacific white-sided and Risso’s dolphins to better understand the geographic variation in these two species and potential underlying environmental variables.</p></li>
-<li><p>Reanalyze Adrift sound levels in hybrid millidecade bands to conform to recently developed standards.</p></li>
-<li><p>Develop vessel noise detectors that provide standardized output for different platforms for a systematic approach to quantifying the contribution of ship noise to the soundscape.</p></li>
+<li><p><a href="https://github.com/shannonrankin/fossa_soundscape/files/13231870/Rankin.etal_FOSSA.Soundscape.Report_OAP2023.pdf">Final report</a></p></li>
+<li><p><a href="https://cran.r-project.org/package=PAMscapes">PAMscapes on CRAN</a></p></li>
+<li><p><a href="https://github.com/TaikiSan21/PAMscapes">PAMscapes GitHub</a></p></li>
+</ul>
+</section>
+<section id="roboj" class="level2">
+<h2 class="anchored" data-anchor-id="roboj">RoboJ</h2>
+<p>RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders. The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods. Development is still ongoing, but near-final code for this project is available on <a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub</a>.</p>
+</section>
+<section id="beaked-whale-event-detector" class="level2">
+<h2 class="anchored" data-anchor-id="beaked-whale-event-detector">Beaked Whale Event Detector</h2>
+<p>Anne Simonis and Taiki Sakai developed a preliminary automated workflow for identifying and classifying beaked whale events. The initial approach used a Match Template Classifier (MTC) to identify candidate beaked whale clicks and group these into events. Initial attempts to use the MTC-defined events to train a BANTER model were not successful enough to deploy the model on new Adrift study data, so an attempt was made to incorporate a computer vision-based model to add additional information for the BANTER model. This combined outputs from a computer vision model that was trained on other beaked whale data with the original MTC data. Preliminary results suggest there is a need for further development of the initial MTC detection step. The combined models results were promising but required improved training data.</p>
+<ul>
+<li><p>Detailed project status report can be found on <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/Simonis.Sakai_BeakerMTC_May2024.pdf">GitHub</a>.</p></li>
+<li><p>Detailed summary of the original computer-vision model can be found on <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/TSakai_beakerVisionModel_May2024.pdf">GitHub</a>.</p></li>
+</ul>
+</section>
+<section id="fin-model" class="level2">
+<h2 class="anchored" data-anchor-id="fin-model">Fin Model</h2>
+<p>Cory Hom-Weaver and Taiki Sakai developed a random forest model for classifying fin whale 20 Hz calls. This method uses PAMGuard’s click detector and PAMpal to process click data and create a model training dataset. The model was trained on a subset of manually annotated Adrift study data, and results were validated on a subset of data. The validation set was used to identify criteria for manually reviewing the predictions, and then the model was used to predict on the remainder of Adrift study data. A set of functions to create review products for each predicted drift allowed the analyst to quickly scan data to verify fin whale presence.</p>
+<ul>
+<li>Code for creating review products and model training is available on <a href="https://github.com/TaikiSan21/Fin_RF">GitHub</a>.</li>
 </ul>
 
 
@@ -955,11 +966,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/summaryResults.html" class="pagination-link" aria-label="Highlighted Results">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Highlighted Results</span>
+      <a href="../content/dataSharing.html" class="pagination-link" aria-label="Data Sharing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Sharing</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../content/outreach.html" class="pagination-link" aria-label="Outreach">
+        <span class="nav-page-text">Outreach</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
