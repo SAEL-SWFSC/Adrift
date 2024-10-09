@@ -1,31 +1,57 @@
 ---
 title: Recommendations
+editor: 
+  markdown: 
+    wrap: sentence
 ---
-We believe that drifting recorders provide high quality data to address certain research questions, and that they complement additional PAM studies using traditional methods. Here we provide a list of recommendations that may serve to guide future research efforts.
+
+We believe that drifting recorders provide high quality data to address certain research questions, and that they complement additional PAM studies using traditional methods.
+Here we provide a list of recommendations that may serve to guide future research efforts.
 
 ## Data Collection Recommendations
-•	Clustered deployments provide improved spatial and temporal data to understand variability in contributors to the soundscape and should be considered for surveys.
-•	Conduct regional pilot studies to determine region-specific environmental conditions and to identify local partners prior to initiating full scale surveys, as drifting recorders are not appropriate for all geographic regions. 
-•	Collaborative field surveys should be considered in all regions (including Humboldt) to share vessel resources, improve scientific collaborations, and provide opportunities for scientists to share and learn from other community members.
-•	Alternative buoy designs to reduce strumming should be considered; design developed by Pacific Islands Fisheries Science Center may reduce strumming and associated self-noise. New sub-surface drifting recorders (in development and testing) may be an alternative approach that reduces risk of ship strike or data loss due to self-noise. 
-•	Seafloor recorders are the preferred platform for depths < 300 m. depth. Drifting recorders are suitable for monitoring offshore, deep water habitats. 
 
+-   Clustered deployments provide improved spatial and temporal data to understand variability in contributors to the soundscape and should be considered for surveys.
+
+-   Conduct regional pilot studies to determine region-specific environmental conditions and to identify local partners prior to initiating full scale surveys, as drifting recorders are not appropriate for all geographic regions.
+
+-   Collaborative field surveys should be considered in all regions (including Humboldt) to share vessel resources, improve scientific collaborations, and provide opportunities for scientists to share and learn from other community members.
+
+-   Alternative buoy designs to reduce strumming should be considered; design developed by Pacific Islands Fisheries Science Center may reduce strumming and associated self-noise.
+    New sub-surface drifting recorders (in development and testing) may be an alternative approach that reduces risk of ship strike or data loss due to self-noise.
+
+-   Seafloor recorders are the preferred platform for depths \< 300 m.
+    depth.
+    Drifting recorders are suitable for monitoring offshore, deep water habitats.
 
 ## Data Analysis and Archive Recommendations
-•	Expand beaked whale density estimation methods to include (1) further development of an automated approach to acoustic event delineation to improve standardization of methods and reduce manual workload, and (2) expansion of this analysis to species beyond goose-beaked whales.
-•	Expand analytical methods to localize sound sources from clustered recorders based on pilot study (Appendix H) to apply these data to population assessment, if future work with clustered buoys will be adopted.
-•	Expand methods to assess the spatial and temporal variability in soundscape from clustered recorders based on preliminary methods outlined in (Appendix I) if future work with clustered buoys will be adopted.
-•	Develop a comprehensive machine learning acoustic classifier for dolphins in California Current using existing archived datasets, including these data.
-•	Develop an open-source platform to share bioacoustics annotations to make annotations of publicly available datasets available for developing deep learning classifiers. 
-•	Encourage Open Science methods, including the development of analytical methods using open-source software, open sharing of data and metadata in accessible environments, and public sharing of research methods to accommodate reproduction of methods.
-•	Develop machine learning methods for humpback whale calls, including differentiation of specific social sounds and song. Detection of humpback whales was dominated by humpback whale song; however, detection of specific social calls may be more appropriate for identifying larger aggregations of humpback whales. 
-•	Exclude gray whale analysis from offshore data collection efforts if these efforts are outside their primary migration routes.  
-•	Assess demographic composition of sperm whales in California Current from new and archived datasets by applying methods outlined in (Appendix D).
-•	Estimate beaked whale density for the Adrift dataset; data were prepared but we were unable to complete this analysis due to delays caused by the COVID-19 pandemic.
-•	Encourage research on sei whale vocal repertoire in the Pacific Ocean to allow for PAM description of this little-known species.
-•	Examine the co-occurrence of beaked whales with echolocating dolphins and how this may impact studies based on single sensors. 
-•	Examine geographic variation in acoustic characteristics of Pacific white-sided and Risso's dolphins to better understand the geographic variation in these two species and potential underlying environmental variables.
-•	Reanalyze Adrift sound levels in hybrid millidecade bands to conform to recently developed standards.
-•	Develop vessel noise detectors that provide standardized output for different platforms for a systematic approach to quantifying the contribution of ship noise to the soundscape.
 
+-   Expand beaked whale density estimation methods to include: (1) further development of an automated approach to acoustic event delineation to improve standardization of methods and reduce manual workload, and (2) expansion of this analysis to species beyond goose-beaked whales.
 
+-   Expand analytical methods to localize sound sources from clustered recorders based on pilot study (Appendix H) to apply these data to population assessment, if future work with clustered buoys will be adopted.
+
+-   Expand methods to assess the spatial and temporal variability in soundscape from clustered recorders based on preliminary methods outlined in (Appendix I) if future work with clustered buoys will be adopted.
+
+-   Develop a comprehensive machine learning acoustic classifier for dolphins in California Current using existing archived datasets, including these data.
+
+-   Develop an open-source platform to share bioacoustics annotations to make annotations of publicly available datasets available for developing deep learning classifiers.
+
+-   Encourage Open Science methods, including the development of analytical methods using open-source software, open sharing of data and metadata in accessible environments, and public sharing of research methods to accommodate reproduction of methods.
+
+-   Develop machine learning methods for humpback whale calls, including differentiation of specific social sounds and song.
+    Detection of humpback whales was dominated by humpback whale song; however, detection of specific social calls may be more appropriate for identifying larger aggregations of humpback whales.
+
+-   Exclude gray whale analysis from offshore data collection efforts if these efforts are outside their primary migration routes.
+
+-   Assess demographic composition of sperm whales in California Current from new and archived datasets by applying methods outlined in (Appendix D).
+
+-   Estimate beaked whale density for the Adrift dataset; data were prepared but we were unable to complete this analysis due to delays caused by the COVID-19 pandemic.
+
+-   Encourage research on sei whale vocal repertoire in the Pacific Ocean to allow for PAM description of this little-known species.
+
+-   Examine the co-occurrence of beaked whales with echolocating dolphins and how this may impact studies based on single sensors.
+
+-   Examine geographic variation in acoustic characteristics of Pacific white-sided and Risso's dolphins to better understand the geographic variation in these two species and potential underlying environmental variables.
+
+-   Reanalyze Adrift sound levels in hybrid millidecade bands to conform to recently developed standards.
+
+-   Develop vessel noise detectors that provide standardized output for different platforms for a systematic approach to quantifying the contribution of ship noise to the soundscape.

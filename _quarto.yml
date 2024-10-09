@@ -7,8 +7,8 @@ project:
 website: 
   page-navigation: true
   title: "Adrift in the California Current" 
-  site-url: "https://nmfs-opensci.github.io/NOAA-quarto-simple" 
-  repo-url: "https://sael-swfsc.github.io/Adrift/"
+  # site-url: "https://sael-swfsc.github.io/Adrift/" 
+  # repo-url: "https://github.com/SAEL-SWFSC/Adrift"
   repo-actions: [edit, source, issue]
   favicon: images/favicon.ico
   
@@ -54,18 +54,15 @@ website:
         - content/brydesSei.qmd
         - content/gray.qmd
         - content/minke.qmd
-      - section: "Soundscape"
+      - section: content/soundscape.qmd
+        text: Soundscape
         contents:
-        - href: content/soundscape.qmd
-          text: Soundscape
-        - href: content/shipNoise.qmd
-          text: Ship Noise
-        - href: content/contributorsSS.qmd
-          text: Contributors to Soundscape
+        - content/shipNoise.qmd
+        - content/contributorsSS.qmd
       - section: content/dataSharing.qmd
+        text: Data Sharing
         contents:
-        - href: content/detections.qmd
-          text:
+        - content/software.qmd
       - section: content/outreach.qmd
         text: Outreach
         contents:
@@ -74,16 +71,11 @@ website:
         - content/zooniverse.qmd
         - content/soundBytes.qmd
         - content/soundCloud.qmd
-      - href: content/dataSharing.qmd 
-        text: Data Sharing
-      - href: content/outreach.qmd
-        text: Outreach
-      - section: "Summary"
+      - section: content/summary.qmd
+        text: Summary
         contents:
-        - href: content/summary.qmd
-          text: Summary of Results
-        - href: content/recommendations.qmd
-          text: Recommendations
+        - content/summaryResults.qmd
+        - content/recommendations.qmd
       # - section: "Appendices"
       #   contents:
       #   - href: content/expandedData.qmd #
