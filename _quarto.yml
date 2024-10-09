@@ -50,6 +50,7 @@ website:
         - content/dolphins.qmd
         - content/nbhf.qmd
         - content/blue.qmd
+        - content/fin.qmd
         - content/humpback.qmd
         - content/brydesSei.qmd
         - content/gray.qmd
@@ -103,9 +104,7 @@ format:
     code-overflow: wrap
     toc: true
     code-fold: true
-    include-in-header: 
-      text: |
-        \usepackage[here]
+
 
 
 filters:

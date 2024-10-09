@@ -11,10 +11,13 @@ page-layout: full
 The ADRIFT in the California Current Project ('Adrift') used drifting acoustic recorders deployed offshore the U.S. West Coast, combined with more complete analysis of archived data from previous drifting acoustic recorder surveys, to assess the distribution of marine mammals and to characterize the marine soundscape.
 
 This site serves as a landing page for the Adrift project, and the Adrift Research Compendium can be found on our [Adrift Github Repository](https://github.com/SAEL-SWFSC/Adrift). This research compendium includes detection and soundscape data, code, high resolution figures, supplemental files, and the final reports.
+
 :::
 
 ::: {.column width="60%"}
+
 ![A drifting acoustic recorder floats offshore San Francisco. Photo Credit Shannon Rankin, Southwest Fisheries Science Center, NOAA Fisheries.](figs/drifterShip_Rankin_SWFSC_ACCESS_2021_MULTI-2019-005.JPG){fig-alt="A drifting acoustic recorder floats offshore San Francisco with a large container ship in the background. Photo Credit Shannon Rankin, Southwest Fisheries Science Center, NOAA Fisheries." width="526" fig-align="center"}
+
 :::
 :::
 

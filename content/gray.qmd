@@ -1,11 +1,66 @@
 ---
 title: Gray Whales
 ---
+::: columns
+::: {.column width="40%"}
 
-Methods An experienced analyst manually scanned spectrograms of 12 kHz decimated data using Raven Pro v. 1.6.4 (4096pt FFT length, Hann window with 90% overlap resulting in a resolution of 341 ms and 4.21 Hz) to detect calls associated with gray whales. Presence of gray whales were indicated, but call classes were not specified. Cross validation of a portion of calls was verified by Dr. Alison Stimpert to ensure consistency with expert annotations. Detailed methods are provided in our [GitHub online analysis methods.](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack)
+Sounds associated with gray whales were only detected on a few recordings in the upwelling and post-upwelling seasons in Oregon and San Francisco regions (Table 5.8), and only during a few hours on the combined PASCAL and CCES surveys (Figure 5.12). There is a significant overlap in spectral content for humpback and gray whale calls and most drifts were outside primary gray whale migration routes; care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.
 
-Results Sounds associated with gray whales were only detected on a few recordings in the upwelling and post-upwelling seasons in Oregon and San Francisco regions (Table 5.8), and only during a few hours on the combined PASCAL and CCES surveys (Figure 5.12). There is a significant overlap in spectral content for humpback and gray whale calls and most drifts were outside primary gray whale migration routes; care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.
+:::
+
+::: {.column width="60%"}
+
+```{r grayTbl, echo=FALSE, warning=FALSE, message=FALSE}
+library(here)
+source(here::here("R/_commonR.r"))
+source(here::here("R/reportPlotFunctions.r"))
+
+load(here("data", "gray", "grayBin_adrift.rdata"))
+Species <- "Er"
+binData <- grayBin_adrift
+Bin<-binData%>%
+  mutate(Region = case_when(
+      DeploymentSite %in% c('Crescent City','HUM') ~ 'Humboldt',
+      DeploymentSite %in% c('HMB','SF','SFB') ~ 'San Francisco',
+      DeploymentSite %in% c('MBY','MOB') ~ 'Morro Bay',
+      DeploymentSite %in% c('ORE')~ 'Oregon'))
+  
+Bin$season <- markSeason(binData$UTC)
+Bin<- Bin[,c(4, 7, 11, 12)]
+
+
+dfSummary <- Bin%>%
+  group_by(season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(species == Species)),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+
+dfSummary<- dfSummary[,c(1, 2, 5, 6)]
+
+detTbl <- dfSummary %>%
+  pivot_wider(names_from = "season", values_from = c("HourlyProb", "n"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay")))%>%
+  arrange(Region)%>%
+  gt(
+  groupname_col = "Species",
+  rowname_col = "Region",
+  )%>%
+  DetTableTheme508()
+detTbl
+
+```
+
+:::
+:::
+
+Most Eastern North Pacific gray whales use the California Current to migrate between their feeding grounds in the north and their winter breeding grounds in Baja California. A subpopulation of these whales known as the ‘Pacific Coast Feeding Group’ feed in the California Current off Northern California, Oregon, and Washington during the upwelling and post-upwelling seasons (Barlow et al. 2024). Gray whales are typically found in the nearshore waters, but do occur in offshore waters (see [OBIS Seamap](https://seamap.env.duke.edu/dataset/861)).
+
 
 ![Hourly gray whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of gray whale calls (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_gray_HourlyPresence.png){#fig-AdPC_gray_HourlyPresence.png fig-alt="Hourly presence of gray whales detected during the Adrift study (left graph) and social calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red.  There were few detections of gray whales during these offshore deployments, but some gray whales were detected during one drift off Oregon during the upwelling season, and one drift off San Francisco during the post-upwelling season. There were almost no gray whale detections during the combined PASCAL/CCES surveys."}
 
-Most Eastern North Pacific gray whales use the California Current to migrate between their feeding grounds in the north and their winter breeding grounds in Baja California. A subpopulation of these whales known as the ‘Pacific Coast Feeding Group’ feed in the California Current off Northern California, Oregon, and Washington during the upwelling and post-upwelling seasons (Barlow et al. 2024). Gray whales are typically found in the nearshore waters, but do occur in offshore waters (see [OBIS Seamap](https://seamap.env.duke.edu/dataset/861)).
+
+
+Detailed methods are provided in our [GitHub online analysis methods.](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack)
