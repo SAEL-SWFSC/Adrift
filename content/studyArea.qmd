@@ -21,13 +21,6 @@ Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. 
 The cumulative impacts of the pandemic and poor environmental conditions ultimately required us to shift our survey approach and abandon our efforts to coordinate data collection using vessels of opportunity. Instead, we focused on directed deployment of drifting recorders in collaboration with regional partners. Our partners in Humboldt (Cal Poly Humboldt) and Oregon (Oregon State University) were able to use a combination of opportunistic and dedicated vessel time for data collection. We partnered with the NOAA Sanctuary Applied California Current Ecosystem Studies (ACCESS) Surveys to collect data offshore San Francisco up to three times per year, and developed a collaborative partnership for fieldwork in Morro Bay.
 
 
-\begingroup
-\setlength{\LTleft}{0pt minus 500pt}
-\setlength{\LTright}{0pt minus 500pt}
-\fontsize{12pt}{20pt}\selectfont
-\addtolength{\tabcolsep}{-3pt}
-
-\caption[Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys]{\label{tab:#tbl-summaryTable} Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys. Unsuccessful buoys are reported for Adrift.}
 
 ```{r, Summary Table}
 # | label: tbl-summaryTable
@@ -82,7 +75,7 @@ sumTabl
 
 ```
 
-\endgroup
+
 
 
 
