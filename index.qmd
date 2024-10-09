@@ -6,6 +6,7 @@ page-layout: full
 ---
 
 ::: columns
+
 ::: {.column width="40%"}
 The ADRIFT in the California Current Project ('Adrift') used drifting acoustic recorders deployed offshore the U.S. West Coast, combined with more complete analysis of archived data from previous drifting acoustic recorder surveys, to assess the distribution of marine mammals and to characterize the marine soundscape.
 

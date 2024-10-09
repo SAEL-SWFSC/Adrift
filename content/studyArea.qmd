@@ -29,9 +29,55 @@ The cumulative impacts of the pandemic and poor environmental conditions ultimat
 
 \caption[Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys]{\label{tab:#tbl-summaryTable} Summary of drifting recorder deployments for Adrift, PASCAL and CCES surveys. Unsuccessful buoys are reported for Adrift.}
 
-```{r, Summary Table,  here("R", "summaryTable.RMD")}
+```{r, Summary Table}
 # | label: tbl-summaryTable
 # | tbl-cap: Summary of Deployments for Adrift, PASCAL and CCES surveys.
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/deployDetails.r"))
+
+deployDetails_all <- read.csv(here ("output", "deployDetails.csv"))
+
+goodCol <- c("Project", "Status", "DeployDuration_days", "RecordDuration_hrs") #When I have the Deployment Duration & Recording Duration, will want to add to summary
+#Remove OPPs & single channel recordings from ST300 (they were additional recorders on existing array)
+deployDetails_all <- deployDetails_all %>%
+  filter(Project != "OPPS" & Type != "ST300")
+  
+
+sumTabl <- deployDetails_all %>%
+  select(c(goodCol))%>%
+  arrange("Deployment_Date")%>%  
+  # deployDetails_all$Project[,c("PASCAL", "CCES", "OPPS", "ADRIFT")] %>%
+  tbl_summary(
+    by = Project, 
+    missing = "no",
+    type=all_continuous() ~ "continuous2",
+    statistic = list(all_continuous2() ~ c("{sum}", "{median} ({min} - {max})")),
+    digits = all_categorical() ~ list(cards::alias_as_fmt_fn("xx"), cards::alias_as_fmt_fn("xx.x%")),
+    label = list(
+      DeployDuration_days ~ "Deployment Duration (days)",
+      RecordDuration_hrs ~ "Recording Duration (hours)"
+    )
+  ) %>%
+  modify_column_alignment(all_stat_cols(), "right")%>%
+  modify_table_body(
+    ~.x%>%
+      mutate(
+        across(all_stat_cols(),~gsub("^0.*", "-", .))
+      )
+
+  )%>%
+  bold_labels() %>%
+  bold_levels() %>%
+  modify_footnote(everything() ~ NA)%>%
+  italicize_levels() %>%
+  as_gt() %>% 
+  tab_style(
+    style = list(cell_fill(color = "#DBE5F1")),
+    locations = cells_column_labels()
+)
+
 sumTabl
 
 ```
