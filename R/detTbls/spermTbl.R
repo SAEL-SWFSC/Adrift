@@ -1,9 +1,9 @@
 
 # #Load packages and background data/functions
-# library(here)
-# knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-# source(here::here("R/_commonR.r"))
-# source(here::here("R/reportPlotFunctions.r"))
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/reportPlotFunctions.r"))
 
 load(here("data", "Pm", "pmBin_adrift.rdata"))
 binClick<-pmBinClick_adrift %>%

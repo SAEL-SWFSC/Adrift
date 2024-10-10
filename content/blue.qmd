@@ -1,13 +1,7 @@
 ---
 title: Blue Whales
 ---
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-library(here)
-source(here::here("R", "_commonR.r"))
-source(here::here("R", "reportPlotFunctions.r"))
-source(here::here("R", "detTbls", "blueTbl.r"))
-```
+
 
 ::: columns
 ::: {.column width="40%"}
@@ -22,11 +16,7 @@ Blue whale ‘song’ consists of both A and B calls, which can occur individual
 
 ::: {.column width="60%"}
 
-```{r blueTbl, echo=FALSE, warning=FALSE, message=FALSE}
-
-detTbl
-
-```
+Put Table HEre 
 :::
 
 :::
