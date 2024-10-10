@@ -36,62 +36,62 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - section: content/background.qmd
-        text: Background
+      # - section: content/background.qmd
+      #   text: Background
+      #   contents:
+      #   - content/objectives.qmd
+      #   - content/studyArea.qmd
+      #   - content/driftingRecorders.qmd
+      # - section: content/detections.qmd
+      #   text: Marine Mammal Detections
         contents:
-        - content/objectives.qmd
-        - content/studyArea.qmd
-        - content/driftingRecorders.qmd
-      - section: content/detections.qmd
-        text: Marine Mammal Detections
-        contents:
-        - content/sperm.qmd
+        # - content/sperm.qmd
         - content/beaked.qmd
-        - content/dolphins.qmd
-        - content/nbhf.qmd
-        - content/blue.qmd
-        - content/fin.qmd
-        - content/humpback.qmd
+      #   - content/dolphins.qmd
+      #   - content/nbhf.qmd
+      #   - content/blue.qmd
+      #   - content/fin.qmd
+      #   - content/humpback.qmd
         - content/brydesSei.qmd
-        - content/gray.qmd
-        - content/minke.qmd
-      - section: content/soundscape.qmd
-        text: Soundscape
-        contents:
-        - content/shipNoise.qmd
-        - content/contributorsSS.qmd
-      - section: content/dataSharing.qmd
-        text: Data Sharing
-        contents:
-        - content/software.qmd
-      - section: content/outreach.qmd
-        text: Outreach
-        contents:
-        - content/sdusd.qmd
-        - content/dataNuggets.qmd
-        - content/zooniverse.qmd
-        - content/soundBytes.qmd
-        - content/soundCloud.qmd
-      - section: content/summary.qmd
-        text: Summary
-        contents:
-        - content/summaryResults.qmd
-        - content/recommendations.qmd
-      - section: content/expandedData.qmd
-        text: Expanded Datasets
-        contents:
-        - content/adriftData.qmd
-        - content/pascalData.qmd
-        - content/ccesData.qmd
-      - section: content/ancillary.qmd
-        text: Ancillary Projects
-        contents:
-        - content/spermDemographics.qmd
-        - content/beakedDensity.qmd
-        - content/nbhfClassification.qmd
-        - content/finAI.qmd
-        - content/habitatModels.qmd
-        - content/spatialNoise.qmd
+      #   - content/gray.qmd
+      #   - content/minke.qmd
+      # - section: content/soundscape.qmd
+      #   text: Soundscape
+      #   contents:
+      #   - content/shipNoise.qmd
+      #   - content/contributorsSS.qmd
+      # - section: content/dataSharing.qmd
+      #   text: Data Sharing
+      #   contents:
+      #   - content/software.qmd
+      # - section: content/outreach.qmd
+      #   text: Outreach
+      #   contents:
+      #   - content/sdusd.qmd
+      #   - content/dataNuggets.qmd
+      #   - content/zooniverse.qmd
+      #   - content/soundBytes.qmd
+      #   - content/soundCloud.qmd
+      # - section: content/summary.qmd
+      #   text: Summary
+      #   contents:
+      #   - content/summaryResults.qmd
+      #   - content/recommendations.qmd
+      # - section: content/expandedData.qmd
+      #   text: Expanded Datasets
+      #   contents:
+      #   - content/adriftData.qmd
+      #   - content/pascalData.qmd
+      #   - content/ccesData.qmd
+      # - section: content/ancillary.qmd
+      #   text: Ancillary Projects
+      #   contents:
+      #   - content/spermDemographics.qmd
+      #   - content/beakedDensity.qmd
+      #   - content/nbhfClassification.qmd
+      #   - content/finAI.qmd
+      #   - content/habitatModels.qmd
+      #   - content/spatialNoise.qmd
 
 
           
