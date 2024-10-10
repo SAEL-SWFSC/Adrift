@@ -86,6 +86,6 @@ detTbl <- dfSummary %>%
   )%>%
   bwDetTableTheme508()
 detTbl
-gtsave(detTbl, filename = here("output", "bw_detTbl.html"))
+# gtsave(detTbl, filename = here("output", "bw_detTbl.html"))
 ```
 
