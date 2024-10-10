@@ -15,7 +15,7 @@ All beaked whale species were detected in Morro Bay, with relatively high probab
 
 ::: {.column width="60%"}
 
-```{r bwTbl, child=here("R/detTbls", "bwTbl.Rmd")}
+```{r bwTbl, child= "../R/detTbls/bwTbl.Rmd"}
 
 
 ```
