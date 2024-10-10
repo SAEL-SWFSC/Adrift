@@ -1,0 +1,54 @@
+
+# #Load packages and background data/functions
+# library(here)
+# knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+# source(here::here("R/_commonR.r"))
+# source(here::here("R/reportPlotFunctions.r"))
+
+load(here("data", "fin", "finBin_adrift.rdata"))
+bin20<-finBin20_adrift %>%
+  mutate (Season = markSeason(finBin20_adrift$UTC),
+          Region = map_chr(finBin20_adrift$Latitude, find_region)
+  )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(call == "20")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+bin20<- bin20[,c(1, 2, 5, 6)]
+bin20$CallType <- "20 Hz"
+bin20 <- bin20[!is.na(bin20$Region),]
+
+
+bin40<-finBin40_adrift%>%
+  mutate (Season = markSeason(finBin40_adrift$UTC),
+          Region = map_chr(finBin40_adrift$Latitude, find_region),
+          CallType = "40"
+  )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(call == "40")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+bin40<- bin40[,c(1, 2, 5, 6)]
+bin40$CallType <- "40 Hz"
+bin40 <- bin40[!is.na(bin40$Region),]
+
+dfSummary <- rbind(bin20, bin40)
+
+detTbl <- dfSummary %>%
+  pivot_wider(names_from = "Season", values_from = c("HourlyProb", "n"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay")))%>%
+  arrange(Region)%>%
+  gt(
+    groupname_col = "CallType",
+    rowname_col = "Region"
+  )%>%
+  DetTableTheme508()
+detTbl
+# gtsave(detTbl, filename = here("output", "fin_detTbl.html"))
+
