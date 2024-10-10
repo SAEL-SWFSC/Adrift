@@ -1,35 +1,26 @@
 ---
 title: Beaked Whales
+always_allow_html: true
 ---
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(here)
-source(here::here("R", "_commonR.r"))
-source(here::here("R", "reportPlotFunctions.r"))
-source(here::here("R", "detTbls", "bwTbl.r"))
-
 ```
 ::: columns
 ::: {.column width="40%"}
-
 Detection of beaked whale species included: goose-beaked whales (Zc), Baird's beaked whales (Bb, Berardius bairdii), Blainville's beaked whales (Md, Mesoplodon densirostris), Stejneger's beaked whales (Ms, M. stejnegeri), Hubb's beaked whales (Mc, M. carlhubbsi, formerly BW37V), Cross Seamount Beaked Whale (BWC), and unidentified beaked whale BW43 (BW43, recently identified as M. ginkgodens, Mc, (Henderson et al., in prep.)). Beaked whales were detected in all regions (@fig-AdPC_beaked_HourlyPresence), and species detected in Adrift data included Baird's beaked whales (Bb), Hubb's beaked whales (Mc), Stejneger's beaked whales (Ms), and goose-beaked whales (Zc) (see table, right). Detection of beaked whales was higher in low latitude regions than in higher latitudes for the combined CCES and PASCAL surveys (@fig-AdPC_beaked_HourlyPresence2).
 
 All beaked whale species were detected in Morro Bay, with relatively high probability of detection for goose-beaked whales (Figure 5.3, Table 5.2). While goose-beaked whales were the most common species detected overall, there were no detections of this species in either Humboldt or Oregon study areas.
-
 :::
 
 ::: {.column width="60%"}
 
-```{r bwTbl, echo=FALSE, warning=FALSE, message=FALSE}
+```{r bwTbl, child=here("R/detTbls", "bwTbl.Rmd")}
 
-detTbl
 
 ```
 :::
 :::
-
-
-
 
 ![Hourly beaked whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of beaked whales (combined species) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_beaked_HourlyPresence.png){#fig-AdPC_beaked_HourlyPresence fig-alt="Hourly presence of beaked whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the x-axis, and the date on the y-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Beaked whale detections varied by region, with very low detections in Humboldt, and high hourly detections in San Francisco and Morro Bay."}
 

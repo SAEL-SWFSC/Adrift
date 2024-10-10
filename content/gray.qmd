@@ -1,14 +1,7 @@
 ---
 title: Gray Whales
 ---
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-library(here)
-source(here::here("R", "_commonR.r"))
-source(here::here("R", "reportPlotFunctions.r"))
-source(here::here("R", "detTbls", "grayTbl.r"))
 
-```
 ::: columns
 ::: {.column width="40%"}
 
@@ -18,11 +11,7 @@ Sounds associated with gray whales were only detected on a few recordings in the
 
 ::: {.column width="60%"}
 
-```{r grayTbl, echo=FALSE, warning=FALSE, message=FALSE}
-
-detTbl
-
-```
+PUT TABLE HERE
 
 :::
 :::

@@ -1,14 +1,7 @@
 ---
 title: Humpback Whales
 ---
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-library(here)
-source(here::here("R", "_commonR.r"))
-source(here::here("R", "reportPlotFunctions.r"))
-source(here::here("R", "detTbls", "humpTbl.r"))
 
-```
 ::: columns
 ::: {.column width="40%"}
 
@@ -20,10 +13,8 @@ There were few acoustic detections of humpback whales during the late June/early
 
 ::: {.column width="60%"}
 
-```{r humpTbl, echo=FALSE, warning=FALSE, message=FALSE}
+PUT TABLE HERE
 
-detTbl
-```
 :::
 :::
 
