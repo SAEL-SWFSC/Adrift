@@ -1,9 +1,35 @@
 Type: project
-Title: NOAA-tech-memo
-Description: NOAA tech memo template. Add the packages used.
+Title: Adrift
+Description: Adrift. Add the packages used.
 Depends:
     here,
     ggplot2,
     rmarkdown,
     knitr,
+    tidyverse,
+    readr,
+    dplyr,
+    magrittr,
+    gtExtras,
+    webshot2,
+    gtsummary,
+    stringr,
+    zoo,
+    magick,
+    tinytex,
+    PAMmisc,
+    PAMscapes,
+    lubridate,
+    Rcpp,
+    raster,
+    readxl,
+    RSQLite,
+    patchwork,
+    purrr,
+    marmap,
+    sf,
+    RColorBrewer,
+    ggbreak
     gt
+    
+    
