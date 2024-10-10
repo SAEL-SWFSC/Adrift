@@ -1,0 +1,77 @@
+
+#Load packages and background data/functions
+# library(here)
+# knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+# source(here::here("R/_commonR.r"))
+# source(here::here("R/reportPlotFunctions.r"))
+
+load(here("data", "dolphin", "dolphinBin_adrift.rdata"))
+binGg<-dolphinBinGg_adrift
+binLo<-dolphinBinLo_adrift
+binUO<-dolphinBinUO_adrift
+
+binGg<-dolphinBinGg_adrift %>%
+  mutate (Season = markSeason(dolphinBinGg_adrift$UTC),
+          Region = map_chr(dolphinBinGg_adrift$Latitude, find_region),
+          Species =  "Gg"
+  )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(species == "Gg")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binGg<- binGg[,c(1, 2, 5, 6)]
+binGg$CallType <- "Risso's dolphins"
+binGg <- binGg[!is.na(binGg$Region),]
+
+
+binLo<-dolphinBinLo_adrift%>%
+  mutate (Season = markSeason(dolphinBinLo_adrift$UTC),
+          Region = map_chr(dolphinBinLo_adrift$Latitude, find_region),
+          Species = "BB"
+  )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(species == "Lo")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binLo<- binLo[,c(1, 2, 5, 6)]
+binLo$CallType <- "Pacific white-sided dolphins"
+binLo <- binLo[!is.na(binLo$Region),]
+
+
+binUo<-dolphinBinUO_adrift%>%
+  mutate (Season = markSeason(dolphinBinUO_adrift$UTC),
+          Region = map_chr(dolphinBinUO_adrift$Latitude, find_region),
+          Species = "UO"
+  )%>%
+  group_by(Season, Region) %>%
+  dplyr::summarise(
+    HourlyEffort=sum(pctEff),
+    sppPres=length(which(species == "UO")),
+    HourlyProb = sppPres/HourlyEffort,
+    n=n()
+  )
+binUo<- binUo[,c(1, 2, 5, 6)]
+binUo$CallType <- "Unidentified odontocetes"
+binUo <- binUo[!is.na(binUo$Region),]
+
+
+dfSummary <- rbind(binGg, binLo, binUo)
+
+detTbl <- dfSummary %>%
+  pivot_wider(names_from = "Season", values_from = c("HourlyProb", "n"))%>%
+  mutate (Region = fct_relevel(Region, c("Oregon", "Humboldt", "San Francisco", "Morro Bay")))%>%
+  arrange(Region)%>%
+  gt(
+    groupname_col = "CallType",
+    rowname_col = "Region"
+  )%>%
+  DetTableTheme508()
+detTbl
+# gtsave(detTbl, filename = here("output", "dolphin_detTbl.html"))
+
