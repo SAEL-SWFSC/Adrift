@@ -1,9 +1,9 @@
 project: 
   type: website
   output-dir: docs
-  # render:
-  #   - "*.qmd"
-  # #   - "!R/"
+  render:
+    - "*.qmd"
+  #   - "!R/"
 
 website: 
   page-navigation: true
