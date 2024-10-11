@@ -1,6 +1,5 @@
 ---
 title: Beaked Whales
-always_allow_html: true
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
