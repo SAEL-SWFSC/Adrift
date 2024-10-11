@@ -1,8 +1,8 @@
 project: 
   type: website
-  render: 
+  render:
     - "*.qmd"
-    - "!R/"
+  #   - "!R/"
 
 website: 
   page-navigation: true
