@@ -13,7 +13,10 @@ Dolphin schools in central and northern California are frequently encountered in
 
 ::: {.column width="60%"}
 
-Put Table Here
+```{r dolphinTbl, child= "../R/detTbls/dolphinTbl.Rmd"}
+
+
+```
 
 :::
 :::

@@ -14,7 +14,7 @@ Data Nuggets are free classroom activities designed to bring contemporary resear
 :::
 
 
-We collaborated with Data Nuggets to create 'Eavesdropping on the Ocean’ . This Data Nugget provides background on the research question, authentic data to allow classrooms to work with real data to apply to the research question, as well as links for additional information. This has been made publicly available for teachers at no cost.
+We collaborated with Data Nuggets to create ['Eavesdropping on the Ocean’](https://datanuggets.org/2024/04/eavesdropping-on-the-ocean/). This Data Nugget provides background on the research question, authentic data to allow classrooms to work with real data to apply to the research question, as well as links for additional information. This has been made publicly available for teachers at no cost.
 
 
 [![Screenshot of Data Nugget "Eavesdropping on the Ocean'](/figs/DataNuggetScreenshot.PNG){#fig-DataNuggetScreenshot}](https://datanuggets.org/2024/04/eavesdropping-on-the-ocean/)

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -421,19 +455,542 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>There are four known cetacean species that produce NBHF echolocation clicks in the California Current Ecosystem, including harbor, Dall’s porpoise, as well as dwarf and pygmy sperm whales (Kogia sima and Kogia breviceps, respectively). These species all produce NBHF clicks with similar acoustic features (peak frequency greater than 100 kHz and 3 dB bandwidth less than 10 kHz), and to date, the species cannot be distinguished acoustically. Their presence in acoustic surveys is generally reported within a “NBHF” category; however, each species has distinct habitat preferences (Carretta 2023), and likely responds differently to anthropogenic impacts and environmental stressors. We build upon unsupervised clustering methods developed by (Griffiths et al.&nbsp;2020) by adding visually-verified species assignments to train an event level classification model in a supervised approach. This work also expands on a San Francisco State University master’s thesis by Jackson VanFleet-Brown (thesis will be publicly available summer 2024 ).</p>
-<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (Kogia spp. are the only NBHF here) were used as a training dataset (Table F 1) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package PAMpal, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
-<p>[ADD TABLE]</p>
-<p>The classification accuracy of the BANTER model was 83% overall (Figure F 1), ranging from 77% for harbor porpoise to 93% for Dall’s porpoise. All classification results were greater than expected by chance (see priors in Figure F 1).</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (Kogia spp. are the only NBHF here) were used as a training dataset (see table, right) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package PAMpal, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gt<span class="ot">&lt;-</span><span class="fu">gt</span>(<span class="fu">head</span>(TrainTable)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">Species=</span><span class="st">'Species'</span>, <span class="at">Survey=</span><span class="st">'Survey'</span>, <span class="at">NEvents=</span><span class="st">'N Events'</span>, <span class="at">MedClicks=</span><span class="st">'Event Clicks'</span>, <span class="at">TotClicks=</span><span class="st">'Total Clicks'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableTheme</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="zrjktaxldw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zrjktaxldw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zrjktaxldw thead, #zrjktaxldw tbody, #zrjktaxldw tfoot, #zrjktaxldw tr, #zrjktaxldw td, #zrjktaxldw th {
+  border-style: none;
+}
+
+#zrjktaxldw p {
+  margin: 0;
+  padding: 0;
+}
+
+#zrjktaxldw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zrjktaxldw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zrjktaxldw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zrjktaxldw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_col_heading {
+  color: #333333;
+  background-color: #DBE5F1;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zrjktaxldw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #DBE5F1;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zrjktaxldw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zrjktaxldw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zrjktaxldw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zrjktaxldw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zrjktaxldw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zrjktaxldw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zrjktaxldw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zrjktaxldw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zrjktaxldw .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zrjktaxldw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrjktaxldw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zrjktaxldw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zrjktaxldw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zrjktaxldw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrjktaxldw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zrjktaxldw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrjktaxldw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zrjktaxldw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrjktaxldw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zrjktaxldw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrjktaxldw .gt_left {
+  text-align: left;
+}
+
+#zrjktaxldw .gt_center {
+  text-align: center;
+}
+
+#zrjktaxldw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zrjktaxldw .gt_font_normal {
+  font-weight: normal;
+}
+
+#zrjktaxldw .gt_font_bold {
+  font-weight: bold;
+}
+
+#zrjktaxldw .gt_font_italic {
+  font-style: italic;
+}
+
+#zrjktaxldw .gt_super {
+  font-size: 65%;
+}
+
+#zrjktaxldw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zrjktaxldw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zrjktaxldw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zrjktaxldw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zrjktaxldw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zrjktaxldw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zrjktaxldw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zrjktaxldw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zrjktaxldw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Species">Species</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Survey">Survey</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="N Events">N Events</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Event Clicks">Event Clicks</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Total Clicks">Total Clicks</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Kspp.</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">CCES-drifter</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">13</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">7 (3-8)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">106</td></tr>
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Pd</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">BC-array</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">4</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">7 (4-13)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">40</td></tr>
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Pd</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">CalCURSeas-array</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">6</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">14 (10-19)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">84</td></tr>
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Pd</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">PASCAL-array</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">5</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">10 (5-12)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">44</td></tr>
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Pp</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">ADRIFT-drifter</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">40</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">34 (9-116)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">2954</td></tr>
+    <tr><td headers="Species" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">Pp</td>
+<td headers="Survey" class="gt_row gt_left" style="font-family: Arial; font-size: 12; text-align: left;">CalCURSeas-array</td>
+<td headers="NEvents" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">7</td>
+<td headers="MedClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">6 (5-64)</td>
+<td headers="TotClicks" class="gt_row gt_right" style="font-family: Arial; font-size: 12; text-align: left;">278</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The classification accuracy of the BANTER model was 83% overall (<a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>), ranging from 77% for harbor porpoise to 93% for Dall’s porpoise. All classification results were greater than expected by chance (see priors in <a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>).</p>
 <p>Dall’s porpoise were the dominant species found in all study areas and seasons, accounting for 91% (n=2,836 of 3093 events) of NBHF detections overall. Harbor porpoises were detected in all study areas, although 54% (n=105 of 192) of events were detected during the upwelling season in Oregon. Only 2% (n=65 of 3093) of all NBHF events were attributed to Kogia spp., and 77% (n=50) of these events occurred within the San Francisco and Morro Bay study areas.</p>
-<p><img src="images/nbhf_bantModel.png" class="img-fluid" alt="NBHF BANTER classification results from the training dataset. Confusion matrix (a) provides the percent correct classification for each species (pct.correct), lower confidence intervals (LCI_0.95), upper confidence intervals (UCI_0.95), and priors (expected error rate). Proximity plot (b) for species events from BANTER model (central dot color represents true species identity; color of circle surrounding dot represents BANTER species classification). Heat map (c) for ranks of ten most important variables; colors scale from most important predictors (dark red) to least important predictors (dark blue). Vote Plot (d) shows the vote distribution for each event (vertical slice) for each species; distribution of votes by species is shown by their representative color.">{#fig-images/nbhf_bantModel fig-alt=“NBHF BANTER classification results including a (a) confusion matrix, (b) proximity plot, (c) importance heat map, and (d) vote plot. The confusion matrix results include an overall classification result of 83% correct classification for the combined species, with 92% for <em>Kogia</em> spp., 93% for Dall’s porpoise, and 77% for harbor porpoise. All results are much higher than the expected results based on sample size (priors; 17%, 20% and 62%, respectively). The proximity plot provides a view of the distribution of the events within the classification model space. The x and y axes represent two of the model dimensions, and events are labeled based on their classification result. The proximity plot shows strong segregation between <em>Kogia</em> spp. and the porpoise based on these features. The importance heat map shows that the high frequency ranges were the most important variables for this model. The vote plot shows the strength of the classification scores. Most of the <em>Kogia</em> spp. classifications were very strong, with weaker results for the porpoise species.”}</p>
-<p>This NBHF acoustic classifier can then be used to predict on archived Adrift NBHF detections to better resolve the three separate taxa in the California Current, including <em>Kogia</em> spp., Dall’s and harbor porpoises (<strong>?@fig-images/nbhf_bantModel</strong>). The overall classification accuracy of the model (83%) is acceptable, however there are several avenues to improve the model. Recently, (Zahn et al.&nbsp;2024) reported significant gains in BANTER model performance by considering the ratios of third-octave levels at specific frequencies. The mean spectra of each class within our training data indicate distinct distributions of spectral energy in each class, and the inclusion of a third octave level ratio (or other similar metric) may improve model performance. Additionally, the use of an iterative training approach merits consideration. Acoustic events that are labeled with high probabilities can be included when re-training a new model (<a href="#fig-Appdx-NBHF-map2">Figure&nbsp;1</a>).</p>
+<div id="fig-nbhf_bantModel" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/nbhf_bantModel.png" class="img-fluid figure-img" alt="NBHF BANTER classification results including a (a) confusion matrix, (b) proximity plot, (c) importance heat map, and (d) vote plot. The confusion matrix results include an overall classification result of 83% correct classification for the combined species, with 92% for *Kogia* spp., 93% for Dall’s porpoise, and 77% for harbor porpoise. All results are much higher than the expected results based on sample size (priors; 17%, 20% and 62%, respectively). The proximity plot provides a view of the distribution of the events within the classification model space. The x and y axes represent two of the model dimensions, and events are labeled based on their classification result. The proximity plot shows strong segregation between *Kogia* spp. and the porpoise based on these features. The importance heat map shows that the high frequency ranges were the most important variables for this model. The vote plot shows the strength of the classification scores. Most of the *Kogia* spp. classifications were very strong, with weaker results for the porpoise species."></p>
+<figcaption class="figure-caption">Figure&nbsp;1: NBHF BANTER classification results from the training dataset. Confusion matrix (a) provides the percent correct classification for each species (pct.correct), lower confidence intervals (LCI_0.95), upper confidence intervals (UCI_0.95), and priors (expected error rate). Proximity plot (b) for species events from BANTER model (central dot color represents true species identity; color of circle surrounding dot represents BANTER species classification). Heat map (c) for ranks of ten most important variables; colors scale from most important predictors (dark red) to least important predictors (dark blue). Vote Plot (d) shows the vote distribution for each event (vertical slice) for each species; distribution of votes by species is shown by their representative color.</figcaption>
+</figure>
+</div>
+<p>This NBHF acoustic classifier can then be used to predict on archived Adrift NBHF detections to better resolve the three separate taxa in the California Current, including <em>Kogia</em> spp., Dall’s and harbor porpoises (<a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>). The overall classification accuracy of the model (83%) is acceptable, however there are several avenues to improve the model. Recently, (Zahn et al.&nbsp;2024) reported significant gains in BANTER model performance by considering the ratios of third-octave levels at specific frequencies. The mean spectra of each class within our training data indicate distinct distributions of spectral energy in each class, and the inclusion of a third octave level ratio (or other similar metric) may improve model performance. Additionally, the use of an iterative training approach merits consideration.</p>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div id="fig-Appdx-NBHF-map2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/Appdx-NBHF-map2.png" class="img-fluid figure-img" alt="Maps with drift tracks for Adrift deployments and detection of NBHF species for Oregon (top map), Humboldt (second from top), San Francisco (second from bottom) and Morro Bay (bottom map). Detection points for NBHF species are based on classification results from this preliminary NBHF acoustic classifier including *Kogia* spp. as blue dots, Dall’s porpoise as pink dots, and harbor porpoise as yellow dots. Most detections for all regions were classified as Dall’s porpoise, with a smaller number of harbor porpoise classifications, and a few rare detections classified as *Kogia* spp.."></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Maps with drift tracks and predicted species labels for NBHF events. Maps with drift tracks shown in gray and predicted species labels for NBHF events including *Kogia* spp. (Ks, blue), Dall’s porpoise (Pd, pink) and harbor porpoise (Pp, yellow).</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: Maps with drift tracks and predicted species labels for NBHF events. Maps with drift tracks shown in gray and predicted species labels for NBHF events including *Kogia* spp. (Ks, blue), Dall’s porpoise (Pd, pink) and harbor porpoise (Pp, yellow).</figcaption>
 </figure>
 </div>
+</div><div class="column" style="width:40%;">
+<p>Acoustic events that are labeled with high probabilities can be included when re-training a new model (<a href="#fig-Appdx-NBHF-map2">Figure&nbsp;2</a>).</p>
 <p>This iterative approach would be biased toward acoustic events most similar to the original training dataset, however the gains from including additional variation in an increased sample size should be evaluated. The development of a more robust classification model should be investigated, but the model we report here has sufficient classification performance to apply to <em>Kogia</em>-specific species habitat models, investigations of species-specific responses to disturbance, and the potential development of acoustic density estimates.</p>
+</div>
+</div>
 
 
 

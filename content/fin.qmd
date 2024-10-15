@@ -11,7 +11,10 @@ Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling 
 
 ::: {.column width="60%"}
 
-PUT TABLE HERE
+```{r finTbl, child= "../R/detTbls/finTbl.Rmd"}
+
+
+```
 
 :::
 :::

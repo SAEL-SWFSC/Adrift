@@ -16,7 +16,10 @@ Blue whale ‘song’ consists of both A and B calls, which can occur individual
 
 ::: {.column width="60%"}
 
-Put Table HEre 
+```{r blueTbl, child= "../R/detTbls/blueTbl.Rmd"}
+
+
+``` 
 :::
 
 :::

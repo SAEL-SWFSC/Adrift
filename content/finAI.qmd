@@ -1,14 +1,20 @@
 ---
 title: Deep Learning to Detect Fin Whales
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(here)
+```
 OSA was tasked with processing low frequency drifting recorder data for the explicit purpose of identifying the occurrence of 40 Hz calls from fin whales and calls from sei whales. A related analytical objective was to develop an improved method of detecting fin whale low-frequency calls within obscure acoustic environments using a deep learning approach. Using a deep learning network development and detection tool DeepAcoustics, we iteratively tested ideal image and network parameters for the calls procured from the data review process. Network development encompassed training with both 20 Hz and 40 Hz whale call types and resulted in successful detection despite excessive instrument noise within the dataset.
 
 Data were evaluated in two ways, by assessing performance in comparison to an annotated test file and by comparing the network detection performance to our semi-automated PAMGuard processing approach, which involves a human in the loop to classify calls and assign to an acoustic encounter. After identifying 40 Hz and 20 Hz calls in the PAMGuard approach, we annotated approximately 1,400 calls in Raven to include in network training. Annotations of 20 Hz calls from another dataset were included to increase sample size.
 
 Three network architectures were evaluated: tiny YOLO (You Only Look Once), CSP-DarkNet-53, and the ResNet-50. We tested performance using a separate set of annotated calls and assessed performance in the absence of vocalizations with varying degrees of instrument noise. Extensive instrument noise and small sample size contribute to performance metrics; however, we considered these results favorable considering the degree of noise (Table G 1).
 
-\[ADD TABLE\]
+```{r finAITbl, child= "../R/appdx-finAI-tbl.Rmd"}
+
+
+```
 
 When incorporating false positive rates in the evaluation, the tiny YOLO and CSP-DarkNet-53 demonstrate the additional benefit of deep network development (see detailed report on GitHub repository).
 

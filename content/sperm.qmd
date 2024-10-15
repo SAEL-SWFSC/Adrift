@@ -13,7 +13,10 @@ Sperm whales had been documented only 3 times in the waters offshore San Francis
 
 ::: {.column width="60%"}
 
-PUT TABLE HERE
+```{r spermTbl, child= "../R/detTbls/spermTbl.Rmd"}
+
+
+```
 
 :::
 :::

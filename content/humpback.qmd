@@ -13,7 +13,10 @@ There were few acoustic detections of humpback whales during the late June/early
 
 ::: {.column width="60%"}
 
-PUT TABLE HERE
+```{r humpTbl, child= "../R/detTbls/humpTbl.Rmd"}
+
+
+```
 
 :::
 :::

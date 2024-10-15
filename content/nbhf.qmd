@@ -10,7 +10,10 @@ Calls associated with NBHF species (porpoise and Kogia spp.) were detected in al
 
 ::: {.column width="60%"}
 
-PUT TABLE HERE
+```{r nbhfTbl, child= "../R/detTbls/nbhfTbl.Rmd"}
+
+
+```
 
 :::
 :::
