@@ -1,5 +1,5 @@
 ---
-title: Objectives
+title: Objectives 
 ---
 The Adrift study uses passive acoustic drifting recorders to collect acoustic data on marine mammals and the ocean soundscape offshore California and Oregon. This work will complement ongoing studies by National Oceanographic and Atmospheric Administration (NOAA) and the Bureau of Ocean Energy Management (BOEM) to assess the potential impacts of offshore renewable energy activities on marine mammals in order to inform environmentally responsible management of renewable energy efforts in the California Current.
 

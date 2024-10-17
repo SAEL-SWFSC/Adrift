@@ -1,10 +1,11 @@
 ---
-title: Deep Learning to Detect Fin Whales
+title: Fin Whale AI 
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(here)
 ```
+## *Deep Learning to Detect and Classify Fin Whale Calls*
 OSA was tasked with processing low frequency drifting recorder data for the explicit purpose of identifying the occurrence of 40 Hz calls from fin whales and calls from sei whales. A related analytical objective was to develop an improved method of detecting fin whale low-frequency calls within obscure acoustic environments using a deep learning approach. Using a deep learning network development and detection tool DeepAcoustics, we iteratively tested ideal image and network parameters for the calls procured from the data review process. Network development encompassed training with both 20 Hz and 40 Hz whale call types and resulted in successful detection despite excessive instrument noise within the dataset.
 
 Data were evaluated in two ways, by assessing performance in comparison to an annotated test file and by comparing the network detection performance to our semi-automated PAMGuard processing approach, which involves a human in the loop to classify calls and assign to an acoustic encounter. After identifying 40 Hz and 20 Hz calls in the PAMGuard approach, we annotated approximately 1,400 calls in Raven to include in network training. Annotations of 20 Hz calls from another dataset were included to increase sample size.

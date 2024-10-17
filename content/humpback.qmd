@@ -1,5 +1,5 @@
 ---
-title: Humpback Whales
+title: Humpback Whales 
 ---
 
 ::: columns
@@ -7,7 +7,7 @@ title: Humpback Whales
 
 Humpback whales were detected during most deployments (@fig-AdPC_humpback_HourlyPresence), with higher probability of detection in the post-upwelling season in Humboldt and San Francisco (see table, right). Hourly detection rates of humpback whales were lower for the combined PASCAL and CCES surveys than the Adrift study (@fig-AdPC_humpback_HourlyPresence). Most PASCAL and CCES deployments were further offshore (west) of the Adrift study areas (see drift maps in Appendix B, Appendix C). Historical sighting data shows decreased distribution of humpback whales in these offshore waters (see [OBIS Seamap](https://seamap.env.duke.edu/species/180530)). Humpback whales were not detected in Oregon during the PASCAL and CCES Surveys (@fig-AdPC_humpback_HourlyPresence).
 
-There were few acoustic detections of humpback whales during the late June/early July surveys off Morro Bay (@fig-AdPC_humpback_HourlyPresence). Multiple humpback whales were visually sighted during the June 2022 and July 2023 CCC surveys in Morro Bay; however, the bulk of the visual survey effort (and sightings) were south of the area acoustically surveyed. The disconnect between the visual sightings and acoustic detections could be due to local differences in the sampling areas or that the animals were not particularly vocal during this sampling period.
+There were few acoustic detections of humpback whales during the late June/early July surveys off Morro Bay (@fig-AdPC_humpback_HourlyPresence). 
 
 :::
 
@@ -22,7 +22,7 @@ There were few acoustic detections of humpback whales during the late June/early
 :::
 
 
-
+Multiple humpback whales were visually sighted during the June 2022 and July 2023 CCC surveys in Morro Bay; however, the bulk of the visual survey effort (and sightings) were south of the area acoustically surveyed. The disconnect between the visual sightings and acoustic detections could be due to local differences in the sampling areas or that the animals were not particularly vocal during this sampling period.
 
 
 ![Hourly humpback whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of combined humpback whales call types (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_humpback_HourlyPresence.png){#fig-AdPC_humpback_HourlyPresence fig-alt="Hourly presence of humpback whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of humpbacks varied by drift, with fewer detections off Oregon for all surveys. Humpback whale detections were strong off Humboldt for most drifts during Adrift, but there were few humpback detections in Humboldt (and Oregon) for the PASCAL/CCES surveys."}

@@ -53,6 +53,4 @@ Fin and humpback whales were detected during all surveys. Blue whales dominated 
 ![Acoustic scene for Morro Bay, 2023. Acoustic scene showing detections of various contributors to the soundscape for the 2023 Morro Bay deployments in the upwelling and post-upwelling oceanographic seasons.](/figs/acoustic_scenes/Adrift_MorroBay23_Seasons.png){#fig-Adrift_MorroBay23_Seasons fig-alt="An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes over time (x axis) are noted by the approximate frequency of their sounds, colored by species (y axis).  Detection of species varies over time and between deployments and seasons, which are outlined in the text."}
 
 
-{{< include studyArea.qmd >}}
-{{< include soundscape.qmd >}}
 

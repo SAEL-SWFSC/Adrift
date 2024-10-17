@@ -1,7 +1,7 @@
 ---
-title: Sperm Whale Demographic Composition
+title: Sperm Whale Demographics 
 ---
-
+## *Determining Sperm Whale Demographic Composition using Inter-Click Intervals*
 Male and female sperm whales are sexually dimorphic and differences in body size (males are larger than females) have been linked to differences in echolocation click characteristics (Solsona-Berga et al. 2022). The Inter-Pulse Interval (IPI) is a result of the time taken for the click to reflect multiple times between air sacs at opposite ends of the spermaceti organ and to exit the rostrum in several subsequent pulses (Møhl et al. 2000), and thus the IPI has been found to relate to body size. Similarly, the Inter-Click Interval (ICI), which is the time between pulse trains, can serve as a proxy for sperm whale body size and sex, as males click every \~1s and females click every 0.5s (Solsona-Berga et al. 2022). This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from six drifting buoys.
 
 ::: columns 

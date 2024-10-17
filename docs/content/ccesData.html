@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +357,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -398,7 +392,17 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#deployment-map" id="toc-deployment-map" class="nav-link active" data-scroll-target="#deployment-map"><em>Deployment Map</em></a></li>
+  <li><a href="#odontocete-detections" id="toc-odontocete-detections" class="nav-link" data-scroll-target="#odontocete-detections"><em>Odontocete Detections</em></a></li>
+  <li><a href="#mysticete-detections" id="toc-mysticete-detections" class="nav-link" data-scroll-target="#mysticete-detections"><em>Mysticete Detections</em></a></li>
+  <li><a href="#acoustic-scenes-by-drift" id="toc-acoustic-scenes-by-drift" class="nav-link" data-scroll-target="#acoustic-scenes-by-drift"><em>Acoustic Scenes by Drift</em></a></li>
+  <li><a href="#cces-deployment-table" id="toc-cces-deployment-table" class="nav-link" data-scroll-target="#cces-deployment-table"><em>CCES Deployment Table</em></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/ccesData.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/ccesData.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -421,31 +425,811 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>CCES was a multidisciplinary survey of the marine ecosystem from the US-Canada border south to Northern Baja California, Mexico. Background information on this survey as well as preliminary analysis of beaked whale, sperm whale, and narrow band high frequency species are provided in (Simonis 2020). A map of tracklines is provided in <a href="#fig-CCES_DriftTracks_All">Figure&nbsp;1</a>.</p>
+<section id="deployment-map" class="level2">
+<h2 class="anchored" data-anchor-id="deployment-map"><em>Deployment Map</em></h2>
 <div id="fig-CCES_DriftTracks_All" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="..\figs/CCES_DriftTracks_All.png" class="img-fluid figure-img" alt="Map of the west coast of the United States with plots of all successful CCES drifts shown as black and white lines that represent their geoposition during the drift. The west coast Wind Energy Areas are outlined in purple, and shipping traffic lanes are outlined in yellow. Latitude is on the x-axis, and Longitude is on the y-axis. Bathymetry is shown with light blue for the shelf and slope waters, and dark blue for deep ocean waters. A 100 m and 200 m isobath line is provided.&quot;"></p>
+<p><img src="..\figs/CCES_DriftTracks_All.png" class="img-fluid figure-img" alt="Map of the west coast of the United States with plots of all successful CCES drifts shown as black and white lines that represent their geoposition during the drift. The west coast Wind Energy Areas are outlined in purple, and shipping traffic lanes are outlined in yellow. Latitude is on the x-axis, and Longitude is on the y-axis. Bathymetry is shown with light blue for the shelf and slope waters, and dark blue for deep ocean waters. A 100 m and 200 m isobath line is provided.&quot;" width="497"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Plot of all successful drifts deployed during the CCES Survey. Drifts are shown as black/white lines; Wind Energy Areas are outlined in purple, and shipping lanes for entry to San Francisco Bay are outlined in yellow.</figcaption>
 </figure>
 </div>
 <p>Data were analyzed following methods consistent with the Adrift data analysis, with slight modifications to address duty cycled data. The power spectral density plots (PSD) can be found <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/CCES_PSD_SeasonRegion.png">online</a>.</p>
+</section>
+<section id="odontocete-detections" class="level2">
+<h2 class="anchored" data-anchor-id="odontocete-detections"><em>Odontocete Detections</em></h2>
 <p>Each of the major odontocete groups were detected during the CCES study (<a href="#fig-CCES_PmBwUdNbhf_HourlyPresence">Figure&nbsp;2</a>).</p>
 <div id="fig-CCES_PmBwUdNbhf_HourlyPresence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="..\figs/CCES_PmBwUdNbhf_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of sperm whales (top left), beaked whales (top right),dolphins (lower left), and NBHF (lower right) for the CCES survey. The number of hours for combined deployments is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season (all effort for CCES was during the post-upwelling season). Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Daily deployment hours ranged from 24 to 160 hours per day, depending on the number of acoustic recorders deployed per day. Detection of all species varied based on the number and location of acoustic recorders deployed on that date. Hourly detection of beaked whales and dolphins increased later in the survey. Detection of sperm whales was low except for two peaks (likely related to specific drifts), and detection of NBHF was low throughout the survey."></p>
+<p><img src="..\figs/CCES_PmBwUdNbhf_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of sperm whales (top left), beaked whales (top right),dolphins (lower left), and NBHF (lower right) for the CCES survey. The number of hours for combined deployments is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season (all effort for CCES was during the post-upwelling season). Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Daily deployment hours ranged from 24 to 160 hours per day, depending on the number of acoustic recorders deployed per day. Detection of all species varied based on the number and location of acoustic recorders deployed on that date. Hourly detection of beaked whales and dolphins increased later in the survey. Detection of sperm whales was low except for two peaks (likely related to specific drifts), and detection of NBHF was low throughout the survey." width="535"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Hourly presence of sperm whales, beaked whales, dolphins, and narrow band high frequency species during the CCES 2018 survey. Hourly presence (y axis) of sperm whales (top left), beaked whales (top right), dolphins (lower left), and narrow band high frequency species (lower right) for months (x axis) and seasons (color bands) during the CCES 2018 survey. Black lines represent total available hours (effort) and bottom graph shows total effort for survey. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.</figcaption>
 </figure>
 </div>
+</section>
+<section id="mysticete-detections" class="level2">
+<h2 class="anchored" data-anchor-id="mysticete-detections"><em>Mysticete Detections</em></h2>
 <p>Blue whale detections were dominated by song, as the low hourly presence of D calls indicates that A/B (song) calls dominated the blue whale detections (<a href="#fig-CCES_BlueAllBlueDFin20minke_HourlyPresence">Figure&nbsp;3</a>). There were a few minke whale detections in the later months of the survey. Detection of fin whales was dominated by 20 Hz calls (<a href="#fig-CCES_BlueAllBlueDFin20minke_HourlyPresence">Figure&nbsp;3</a>). There were no Fin whale 40 Hz calls, or calls associated with Bryde’s, sei, or gray whales.</p>
 <div id="fig-CCES_BlueAllBlueDFin20minke_HourlyPresence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="..\figs/CCES_BlueAllBlueDFin20minke_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of blue whales (top left), blue whale D calls (top right), fin whale 20 Hz calls (lower left), and minke whale boing calls (lower right) for the CCES survey. The number of hours for combined deployments is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season (all effort for CCES was during the post-upwelling season). Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Daily deployment hours ranged from 24 to over 160 hours per day, depending on the number of acoustic recorders deployed per day. Detection of all species varied based on the number and location of acoustic recorders deployed on that date. The proportion of total hours with blue whale song (A/B calls, or non- D calls) were very high at the end of the survey effort, while blue whale D calls low for the entire survey. The proportion of total hours with fin whale song (20 Hz) were lower at the end of the survey effort and there were no detections of fin whale 40 Hz calls during the CCES survey. There were few detections of minke whale boing calls later in the survey."></p>
+<p><img src="..\figs/CCES_BlueAllBlueDFin20minke_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of blue whales (top left), blue whale D calls (top right), fin whale 20 Hz calls (lower left), and minke whale boing calls (lower right) for the CCES survey. The number of hours for combined deployments is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season (all effort for CCES was during the post-upwelling season). Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Daily deployment hours ranged from 24 to over 160 hours per day, depending on the number of acoustic recorders deployed per day. Detection of all species varied based on the number and location of acoustic recorders deployed on that date. The proportion of total hours with blue whale song (A/B calls, or non- D calls) were very high at the end of the survey effort, while blue whale D calls low for the entire survey. The proportion of total hours with fin whale song (20 Hz) were lower at the end of the survey effort and there were no detections of fin whale 40 Hz calls during the CCES survey. There were few detections of minke whale boing calls later in the survey." width="535"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Hourly presence of blue whales (all calls), blue whale D calls, fin whale 20 Hz, and minke whale calls during the CCES 2018 survey. Hourly presence (y axis) of blue whales (all calls, top left), blue whale D calls (top right), fin whale 20 Hz (lower left), and minke whale calls (lower right) for months (x axis) and seasons (color bands) during the CCES 2018 survey. Black lines represent total available hours (effort) and bottom graph shows total effort for survey. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.</figcaption>
 </figure>
 </div>
 <p>There were few hourly detections of humpback whales (hourly presence plots can be found in our <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/CCES_humpbackSongSocial_HourlyPresence.png">GitHub Repository</a>. Most of the CCES deployments were further offshore than the Adrift deployments, and this offshore distribution may be the reason for such low detection rates.</p>
+</section>
+<section id="acoustic-scenes-by-drift" class="level2">
+<h2 class="anchored" data-anchor-id="acoustic-scenes-by-drift"><em>Acoustic Scenes by Drift</em></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds (see <a href="#fig-CCES_007_AcousticScene">Figure&nbsp;4</a>). Acoustic Scenes were created for each CCES drift, and high resolution images are saved in the Github Repository](), and links to specific drifts are provided in the table, right.</p>
+</div><div class="column" style="width:60%;">
+<div id="fig-CCES_007_AcousticScene" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/acoustic_scenes/CCES_007_AcousticScene.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Drift track and Acoustic Scene for CCES Drift #007.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<table class="table">
+<caption>Links to high resolution images of acoustic scene and drift track for each CCES drift.</caption>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_004_AcousticScene.png">CCES_004</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_017_AcousticScene.png">CCES_017</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_007_AcousticScene.png">CCES_007</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_018_AcousticScene.png">CCES_018</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_008_AcousticScene.png">CCES_008</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_019_AcousticScene.png">CCES_019</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_010_AcousticScene.png">CCES_010</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_020_AcousticScene.png">CCES_020</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_012_AcousticScene.png">CCES_012</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_021_AcousticScene.png">CCES_021</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_013_AcousticScene.png">CCES_013</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_022_AcousticScene.png">CCES_022</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_014_AcousticScene.png">CCES_014</a></td>
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_023_AcousticScene.png">CCES_023</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/CCES_016_AcousticScene.png">CCES_016</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cces-deployment-table" class="level2">
+<h2 class="anchored" data-anchor-id="cces-deployment-table"><em>CCES Deployment Table</em></h2>
 <p>A complete list of successful drifting recorder deployments during the CCES survey are provided in Table C‑1. Sites include Humboldt (HUM), Point Arena (PTA), Morro Bay (MOB), Channel Islands (CHI), and Baja California Norte (BCN).&nbsp;See Figure 3.1 for more information on regions.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="bzipxpaegl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bzipxpaegl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bzipxpaegl thead, #bzipxpaegl tbody, #bzipxpaegl tfoot, #bzipxpaegl tr, #bzipxpaegl td, #bzipxpaegl th {
+  border-style: none;
+}
+
+#bzipxpaegl p {
+  margin: 0;
+  padding: 0;
+}
+
+#bzipxpaegl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bzipxpaegl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bzipxpaegl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bzipxpaegl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_col_heading {
+  color: #333333;
+  background-color: #DBE5F1;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bzipxpaegl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #DBE5F1;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bzipxpaegl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bzipxpaegl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bzipxpaegl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bzipxpaegl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bzipxpaegl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bzipxpaegl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bzipxpaegl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bzipxpaegl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bzipxpaegl .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bzipxpaegl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzipxpaegl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bzipxpaegl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bzipxpaegl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bzipxpaegl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzipxpaegl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bzipxpaegl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzipxpaegl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bzipxpaegl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzipxpaegl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzipxpaegl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzipxpaegl .gt_left {
+  text-align: left;
+}
+
+#bzipxpaegl .gt_center {
+  text-align: center;
+}
+
+#bzipxpaegl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bzipxpaegl .gt_font_normal {
+  font-weight: normal;
+}
+
+#bzipxpaegl .gt_font_bold {
+  font-weight: bold;
+}
+
+#bzipxpaegl .gt_font_italic {
+  font-style: italic;
+}
+
+#bzipxpaegl .gt_super {
+  font-size: 65%;
+}
+
+#bzipxpaegl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bzipxpaegl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bzipxpaegl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bzipxpaegl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bzipxpaegl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bzipxpaegl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bzipxpaegl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bzipxpaegl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bzipxpaegl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Drift ID">Drift ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Site">Site</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Status">Status</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Deployment">
+        <span class="gt_column_spanner">Deployment</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Retrieval">
+        <span class="gt_column_spanner">Retrieval</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Recording Specifications">
+        <span class="gt_column_spanner">Recording Specifications</span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Data Start Date">Data Start Date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Data End Date">Data End Date</th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Date">Date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Lat">Lat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Long">Long</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Date">Date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Lat">Lat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Long">Long</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Recorder">Recorder</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="SR (kHz)">SR (kHz)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="Duty Cycle">Duty Cycle</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-family: Arial; text-align: center; font-weight: bold;" scope="col" id="HP Depth (m)">HP Depth (m)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_004</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">HUM</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-07-25</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">45.08</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−128.21</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-13</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">41.76</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−127.15</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">SM3M</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">256</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">100</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-07-30</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-12</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_007</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">HUM</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-05</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">41.26</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−125.02</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-22</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">42.04</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−124.48</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">288</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-05</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-09-22</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_008</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">HUM</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-16</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">38.95</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−126.64</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-10</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">34.38</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−128.32</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">288</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-16</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-01</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_010</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">PTA</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-22</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">36.76</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−125.06</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-22</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">35.97</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−122.94</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-22</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-21</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_012</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">MOB</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-30</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">34.83</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−123.81</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-06</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">34.03</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−124.39</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">288</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-08-30</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-06</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_013</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CHI</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-09-11</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">33.90</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−120.91</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-23</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">31.44</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−119.78</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">288</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-09-11</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-23</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_014</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-05</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">32.27</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.26</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-01</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">31.95</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−119.25</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 20</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-05</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-01</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_016</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-30</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">31.35</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−117.42</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-21</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">32.13</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.03</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 10</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-30</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-15</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_017</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-31</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">30.73</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.69</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-24</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">28.29</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.44</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">SM3M</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">256</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 4</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">100</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-31</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-24</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_018</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-31</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">30.01</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−120.18</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-23</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">29.51</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.82</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 6</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-10-31</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-16</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_019</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-01</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">30.05</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−117.46</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-27</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">28.40</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−115.55</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 10</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-01</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-18</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_020</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-05</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">29.46</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−118.39</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-22</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">29.39</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−116.34</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 10</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-05</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-22</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_021</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-06</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">29.47</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−116.01</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-11</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">29.82</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−116.08</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 6</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-06</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-11</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_022</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-07</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">28.72</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−116.48</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-27</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">28.28</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−116.68</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 10</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-07</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-23</td></tr>
+    <tr><td headers="Drift_ID" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">CCES_023</td>
+<td headers="Site" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">BCN</td>
+<td headers="Status" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">Complete</td>
+<td headers="Deployment_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-22</td>
+<td headers="Deployment_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">30.93</td>
+<td headers="Deployment_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−117.38</td>
+<td headers="Recovery_Date" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-12-03</td>
+<td headers="Recovery_Latitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">31.05</td>
+<td headers="Recovery_Longitude" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">−119.01</td>
+<td headers="Recorder" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">ST4300HF</td>
+<td headers="SampleRate_kHz" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">576</td>
+<td headers="DutyCycle" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2 min per 5</td>
+<td headers="Deployment_Depth_m." class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">150</td>
+<td headers="Data_Start" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-11-22</td>
+<td headers="Data_End" class="gt_row gt_center" style="font-family: Arial; font-size: 12; text-align: left;">2018-12-03</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -799,7 +1583,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../content/pascalData.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Pascal Data</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">PASCAL Data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -814,7 +1598,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© CC-1.0</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/ccesData.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/ccesData.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This page is built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

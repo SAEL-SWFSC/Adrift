@@ -1,18 +1,20 @@
 ---
-title: Drifting Recorders
+title: Drifting Recorders 
 ---
 
 ::: columns
 ::: {.column width="40%"}
 Drifting recorders consist of a hydrophone array and autonomous recorder at depth with a surface buoy and satellite GPS at the surface to allow for tracking and retrieval (@fig-DriftingAcousticBuoyDiagram). Components are continually modified to address problems and accommodate improved technologies.
 
-The surface buoy transitioned from a spar buoy to a high-flyer pole buoy after CCES and prior to Adrift in an effort to minimize buoy loss due to ship strike. The pole buoy includes a radar reflector for visibility and a satellite GPS tracker mounted to the pole. Pole buoys included the now discontinued Lindgren-Pitman high-flyer buoy, a custom high-flyer developed by Fisherman Dick Ogg, and a custom in-house high-flyer pole buoy. Initial GPS trackers included two SPOT GPS trackers (for redundancy) mounted in a waterproof canister on the pole buoy. The modifications made to these trackers to increase their battery power led to increased failure (modifications weakened the units). These were replaced with Solar GPS that were easier to use, more robust, and could be used for extended periods with solar recharge of the internal battery.
+The surface buoy transitioned from a spar buoy to a high-flyer pole buoy after CCES and prior to Adrift in an effort to minimize buoy loss due to ship strike. The pole buoy includes a radar reflector for visibility and a satellite GPS tracker mounted to the pole. Pole buoys included the now discontinued Lindgren-Pitman high-flyer buoy, a custom high-flyer developed by Fisherman Dick Ogg, and a custom in-house high-flyer pole buoy. 
+
 :::
 
 ::: {.column width="60%"}
 ![Drifting Recorder Diagram](/figs/DriftingAcousticBuoyDiagram.jpg){#fig-DriftingAcousticBuoyDiagram fig-alt="Diagram showing components of drifting buoy. On the left is the pole float at the surface of the ocean, with a radar reflector on top, a satellite transmitter on the pole, a float and a weight to keep the pole buoy floating and upright. The pole buoy is attached by a rope to the small surface float with 100 m of rope with the instrumentation. Below the surface float is a sub-surface float, and the recorder with hydrophones at 100 m depth, and an anchor at the bottom of this rope." fig-align="center"}
 :::
 :::
+Initial GPS trackers included two SPOT GPS trackers (for redundancy) mounted in a waterproof canister on the pole buoy. The modifications made to these trackers to increase their battery power led to increased failure (modifications weakened the units). These were replaced with Solar GPS that were easier to use, more robust, and could be used for extended periods with solar recharge of the internal battery.
 
 A trawl float was attached to the surface buoy with a short length of floating line to allow for retrieval using a grappling hook.
 

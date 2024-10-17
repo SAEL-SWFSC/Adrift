@@ -88,7 +88,6 @@ website:
         text: Ancillary Projects
         contents:
         - content/spermDemographics.qmd
-        - content/beakedDensity.qmd
         - content/nbhfClassification.qmd
         - content/finAI.qmd
         - content/habitatModels.qmd

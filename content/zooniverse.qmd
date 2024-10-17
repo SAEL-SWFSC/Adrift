@@ -1,5 +1,5 @@
 ---
-title: Zooniverse
+title: Zooniverse 
 ---
 
 The Zooniverse Project, [Ocean Voices](https://www.zooniverse.org/projects/annelistens/ocean-voices) was created to allow for labeling of datasets by citizen scientists. Our initial intention was to label datasets as either humpback whales or ship noise; these annotations would then be used to develop an improved machine learning classifier. This required significant effort to automate development of paired spectrograms and acoustic recordings for the platform. The citizen scientist portion of this project will be delayed until future continuation of the work done during the Adrift study, however, the platform can currently function as an education learning tool.

@@ -7,8 +7,7 @@ title: Sperm Whales
 
 Sperm whales were detected in all regions (see table, right), with the most consistent detections and highest hourly probability of detection in the Humboldt deployments (see table, right, and @fig-AdPC_sperm_HourlyPresence). Most sperm whale detections were ‘regular’ clicks associated with feeding animals; ‘slow’ clicks (associated with adult males) were uncommon but detected in all regions except Morro Bay (see table, right). Sperm whales were detected in all regions in PASCAL and/or CCES Surveys (@fig-AdPC_sperm_HourlyPresence).
 
-Sperm whales had been documented only 3 times in the waters offshore San Francisco in over 30 years of ACCESS visual surveys (J. Roletto, pers. comm.). Our detection of sperm whales (both regular and slow clicks) from drifting recorders deployed during the ACCESS surveys suggests that passive acoustic monitoring might improve our understanding of sperm whale distribution in the busy shipping lanes off San Francisco as well as within the combined Greater Farallones and Cordell Bank National Marine Sanctuary.
-
+Sperm whales had been documented only 3 times in the waters offshore San Francisco in over 30 years of ACCESS visual surveys (J. Roletto, pers. comm.). 
 :::
 
 ::: {.column width="60%"}
@@ -20,7 +19,7 @@ Sperm whales had been documented only 3 times in the waters offshore San Francis
 
 :::
 :::
-
+Our detection of sperm whales (both regular and slow clicks) from drifting recorders deployed during the ACCESS surveys suggests that passive acoustic monitoring might improve our understanding of sperm whale distribution in the busy shipping lanes off San Francisco as well as within the combined Greater Farallones and Cordell Bank National Marine Sanctuary.
 
 
 A pilot study examining the potential estimation of body size based on inter-pulse and inter-click intervals found that sperm whale groups detected during November deployments in Morro Bay were comprised of females and juvenile males (see Appendix D). Sperm whales are protected under the endangered species act, and we recommend applying these methods to archived and future acoustic data to improve our understanding of sperm whale demographics within the regional WEAs as well as the greater California Current.

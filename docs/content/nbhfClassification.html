@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Adrift in the California Current - Acoustics Classification of NBHF Species</title>
+<title>Adrift in the California Current - NBHF Classification</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../content/finAI.html" rel="next">
-<link href="../content/beakedDensity.html" rel="prev">
+<link href="../content/spermDemographics.html" rel="prev">
 <link href="../images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/nbhfClassification.html">Acoustics Classification of NBHF Species</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/nbhfClassification.html">NBHF Classification</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -391,25 +391,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -432,14 +426,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#acoustic-classification-models-to-differentiate-nbhf-species" id="toc-acoustic-classification-models-to-differentiate-nbhf-species" class="nav-link active" data-scroll-target="#acoustic-classification-models-to-differentiate-nbhf-species"><em>Acoustic Classification Models to Differentiate NBHF Species</em></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/nbhfClassification.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/nbhfClassification.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Acoustics Classification of NBHF Species</h1>
+<h1 class="title">NBHF Classification</h1>
 </div>
 
 
@@ -454,10 +454,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>There are four known cetacean species that produce NBHF echolocation clicks in the California Current Ecosystem, including harbor, Dall’s porpoise, as well as dwarf and pygmy sperm whales (Kogia sima and Kogia breviceps, respectively). These species all produce NBHF clicks with similar acoustic features (peak frequency greater than 100 kHz and 3 dB bandwidth less than 10 kHz), and to date, the species cannot be distinguished acoustically. Their presence in acoustic surveys is generally reported within a “NBHF” category; however, each species has distinct habitat preferences (Carretta 2023), and likely responds differently to anthropogenic impacts and environmental stressors. We build upon unsupervised clustering methods developed by (Griffiths et al.&nbsp;2020) by adding visually-verified species assignments to train an event level classification model in a supervised approach. This work also expands on a San Francisco State University master’s thesis by Jackson VanFleet-Brown (thesis will be publicly available summer 2024 ).</p>
+<section id="acoustic-classification-models-to-differentiate-nbhf-species" class="level2">
+<h2 class="anchored" data-anchor-id="acoustic-classification-models-to-differentiate-nbhf-species"><em>Acoustic Classification Models to Differentiate NBHF Species</em></h2>
+<p>There are four known cetacean species that produce NBHF echolocation clicks in the California Current Ecosystem, including harbor, Dall’s porpoise, as well as dwarf and pygmy sperm whales (<em>Kogia sima</em> and <em>Kogia breviceps</em>, respectively). These species all produce NBHF clicks with similar acoustic features (peak frequency greater than 100 kHz and 3 dB bandwidth less than 10 kHz), and to date, the species cannot be distinguished acoustically. Their presence in acoustic surveys is generally reported within a “NBHF” category; however, each species has distinct habitat preferences (Carretta 2023), and likely responds differently to anthropogenic impacts and environmental stressors. We build upon unsupervised clustering methods developed by (Griffiths et al.&nbsp;2020) by adding visually-verified species assignments to train an event level classification model in a supervised approach. This work also expands on a San Francisco State University master’s thesis by Jackson VanFleet-Brown (thesis will be publicly available summer 2024 ).</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (Kogia spp. are the only NBHF here) were used as a training dataset (see table, right) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package PAMpal, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
+<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (<em>Kogia</em> spp. are the only NBHF here) were used as a training dataset (see table, right) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package PAMpal, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
 <details>
@@ -470,23 +472,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output-display">
 
-<div id="zrjktaxldw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zrjktaxldw table {
+<div id="iasvyklgqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iasvyklgqa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zrjktaxldw thead, #zrjktaxldw tbody, #zrjktaxldw tfoot, #zrjktaxldw tr, #zrjktaxldw td, #zrjktaxldw th {
+#iasvyklgqa thead, #iasvyklgqa tbody, #iasvyklgqa tfoot, #iasvyklgqa tr, #iasvyklgqa td, #iasvyklgqa th {
   border-style: none;
 }
 
-#zrjktaxldw p {
+#iasvyklgqa p {
   margin: 0;
   padding: 0;
 }
 
-#zrjktaxldw .gt_table {
+#iasvyklgqa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -512,12 +514,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_caption {
+#iasvyklgqa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zrjktaxldw .gt_title {
+#iasvyklgqa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -529,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#zrjktaxldw .gt_subtitle {
+#iasvyklgqa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -541,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#zrjktaxldw .gt_heading {
+#iasvyklgqa .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -553,13 +555,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_bottom_border {
+#iasvyklgqa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_col_headings {
+#iasvyklgqa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -574,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_col_heading {
+#iasvyklgqa .gt_col_heading {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -594,7 +596,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zrjktaxldw .gt_column_spanner_outer {
+#iasvyklgqa .gt_column_spanner_outer {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -606,15 +608,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#zrjktaxldw .gt_column_spanner_outer:first-child {
+#iasvyklgqa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zrjktaxldw .gt_column_spanner_outer:last-child {
+#iasvyklgqa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zrjktaxldw .gt_column_spanner {
+#iasvyklgqa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -626,11 +628,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#zrjktaxldw .gt_spanner_row {
+#iasvyklgqa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zrjktaxldw .gt_group_heading {
+#iasvyklgqa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +658,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#zrjktaxldw .gt_empty_group_heading {
+#iasvyklgqa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -671,15 +673,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#zrjktaxldw .gt_from_md > :first-child {
+#iasvyklgqa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zrjktaxldw .gt_from_md > :last-child {
+#iasvyklgqa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zrjktaxldw .gt_row {
+#iasvyklgqa .gt_row {
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 5px;
@@ -698,7 +700,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zrjktaxldw .gt_stub {
+#iasvyklgqa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,7 +713,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrjktaxldw .gt_stub_row_group {
+#iasvyklgqa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,15 +727,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#zrjktaxldw .gt_row_group_first td {
+#iasvyklgqa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zrjktaxldw .gt_row_group_first th {
+#iasvyklgqa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zrjktaxldw .gt_summary_row {
+#iasvyklgqa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -743,16 +745,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrjktaxldw .gt_first_summary_row {
+#iasvyklgqa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_first_summary_row.thick {
+#iasvyklgqa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zrjktaxldw .gt_last_summary_row {
+#iasvyklgqa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -762,7 +764,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_grand_summary_row {
+#iasvyklgqa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -772,7 +774,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrjktaxldw .gt_first_grand_summary_row {
+#iasvyklgqa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -782,7 +784,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_last_grand_summary_row_top {
+#iasvyklgqa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -792,11 +794,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_striped {
+#iasvyklgqa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zrjktaxldw .gt_table_body {
+#iasvyklgqa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -805,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_footnotes {
+#iasvyklgqa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -819,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_footnote {
+#iasvyklgqa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -828,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrjktaxldw .gt_sourcenotes {
+#iasvyklgqa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -842,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrjktaxldw .gt_sourcenote {
+#iasvyklgqa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -850,72 +852,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrjktaxldw .gt_left {
+#iasvyklgqa .gt_left {
   text-align: left;
 }
 
-#zrjktaxldw .gt_center {
+#iasvyklgqa .gt_center {
   text-align: center;
 }
 
-#zrjktaxldw .gt_right {
+#iasvyklgqa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zrjktaxldw .gt_font_normal {
+#iasvyklgqa .gt_font_normal {
   font-weight: normal;
 }
 
-#zrjktaxldw .gt_font_bold {
+#iasvyklgqa .gt_font_bold {
   font-weight: bold;
 }
 
-#zrjktaxldw .gt_font_italic {
+#iasvyklgqa .gt_font_italic {
   font-style: italic;
 }
 
-#zrjktaxldw .gt_super {
+#iasvyklgqa .gt_super {
   font-size: 65%;
 }
 
-#zrjktaxldw .gt_footnote_marks {
+#iasvyklgqa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zrjktaxldw .gt_asterisk {
+#iasvyklgqa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zrjktaxldw .gt_indent_1 {
+#iasvyklgqa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zrjktaxldw .gt_indent_2 {
+#iasvyklgqa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zrjktaxldw .gt_indent_3 {
+#iasvyklgqa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zrjktaxldw .gt_indent_4 {
+#iasvyklgqa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zrjktaxldw .gt_indent_5 {
+#iasvyklgqa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zrjktaxldw .katex-display {
+#iasvyklgqa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zrjktaxldw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iasvyklgqa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -970,7 +972,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The classification accuracy of the BANTER model was 83% overall (<a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>), ranging from 77% for harbor porpoise to 93% for Dall’s porpoise. All classification results were greater than expected by chance (see priors in <a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>).</p>
-<p>Dall’s porpoise were the dominant species found in all study areas and seasons, accounting for 91% (n=2,836 of 3093 events) of NBHF detections overall. Harbor porpoises were detected in all study areas, although 54% (n=105 of 192) of events were detected during the upwelling season in Oregon. Only 2% (n=65 of 3093) of all NBHF events were attributed to Kogia spp., and 77% (n=50) of these events occurred within the San Francisco and Morro Bay study areas.</p>
+<p>Dall’s porpoise were the dominant species found in all study areas and seasons, accounting for 91% (n=2,836 of 3093 events) of NBHF detections overall. Harbor porpoises were detected in all study areas, although 54% (n=105 of 192) of events were detected during the upwelling season in Oregon. Only 2% (n=65 of 3093) of all NBHF events were attributed to <em>Kogia</em> spp., and 77% (n=50) of these events occurred within the San Francisco and Morro Bay study areas.</p>
 <div id="fig-nbhf_bantModel" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/nbhf_bantModel.png" class="img-fluid figure-img" alt="NBHF BANTER classification results including a (a) confusion matrix, (b) proximity plot, (c) importance heat map, and (d) vote plot. The confusion matrix results include an overall classification result of 83% correct classification for the combined species, with 92% for *Kogia* spp., 93% for Dall’s porpoise, and 77% for harbor porpoise. All results are much higher than the expected results based on sample size (priors; 17%, 20% and 62%, respectively). The proximity plot provides a view of the distribution of the events within the classification model space. The x and y axes represent two of the model dimensions, and events are labeled based on their classification result. The proximity plot shows strong segregation between *Kogia* spp. and the porpoise based on these features. The importance heat map shows that the high frequency ranges were the most important variables for this model. The vote plot shows the strength of the classification scores. Most of the *Kogia* spp. classifications were very strong, with weaker results for the porpoise species."></p>
@@ -993,6 +995,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1345,13 +1348,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/beakedDensity.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Beaked Whale Density Estimation Tools</span>
+      <a href="../content/spermDemographics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sperm Whale Demographics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../content/finAI.html" class="pagination-link">
-        <span class="nav-page-text">Deep Learning to Detect Fin Whales</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Fin Whale AI</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1361,7 +1364,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© CC-1.0</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/nbhfClassification.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/nbhfClassification.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This page is built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Adrift in the California Current - Sperm Whale Demographic Composition</title>
+<title>Adrift in the California Current - Sperm Whale Demographics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/beakedDensity.html" rel="next">
+<link href="../content/nbhfClassification.html" rel="next">
 <link href="../content/ancillary.html" rel="prev">
 <link href="../images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/spermDemographics.html">Sperm Whale Demographic Composition</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/spermDemographics.html">Sperm Whale Demographics</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -357,25 +357,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -398,14 +392,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#determining-sperm-whale-demographic-composition-using-inter-click-intervals" id="toc-determining-sperm-whale-demographic-composition-using-inter-click-intervals" class="nav-link active" data-scroll-target="#determining-sperm-whale-demographic-composition-using-inter-click-intervals"><em>Determining Sperm Whale Demographic Composition using Inter-Click Intervals</em></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/spermDemographics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/spermDemographics.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sperm Whale Demographic Composition</h1>
+<h1 class="title">Sperm Whale Demographics</h1>
 </div>
 
 
@@ -420,6 +420,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="determining-sperm-whale-demographic-composition-using-inter-click-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="determining-sperm-whale-demographic-composition-using-inter-click-intervals"><em>Determining Sperm Whale Demographic Composition using Inter-Click Intervals</em></h2>
 <p>Male and female sperm whales are sexually dimorphic and differences in body size (males are larger than females) have been linked to differences in echolocation click characteristics (Solsona-Berga et al.&nbsp;2022). The Inter-Pulse Interval (IPI) is a result of the time taken for the click to reflect multiple times between air sacs at opposite ends of the spermaceti organ and to exit the rostrum in several subsequent pulses (Møhl et al.&nbsp;2000), and thus the IPI has been found to relate to body size. Similarly, the Inter-Click Interval (ICI), which is the time between pulse trains, can serve as a proxy for sperm whale body size and sex, as males click every ~1s and females click every 0.5s (Solsona-Berga et al.&nbsp;2022). This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from six drifting buoys.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -445,6 +447,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from a subset of six drifting recorders. A total of 34 animals with a mean total body length of 10.3 m, likely Social Groups and Mid-Size animals, were identified in the region on November 9th, 2023. By applying this method to the entire dataset, we can further understand the demographics of sperm whales utilizing the California Current and potentially identify regions preferred by different demographic groups (i.e., Social Groups, Mid-Size, and Adult Males). Different demographic groups have differences in behavior and ecology that likely translate to demographic-specific responses to increasing anthropogenic threats and climate change. This type of analysis can play an important role for monitoring future changes to sperm whales in the California Current.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -802,8 +805,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/beakedDensity.html" class="pagination-link">
-        <span class="nav-page-text">Beaked Whale Density Estimation Tools</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/nbhfClassification.html" class="pagination-link">
+        <span class="nav-page-text">NBHF Classification</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -813,7 +816,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© CC-1.0</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/spermDemographics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/spermDemographics.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This page is built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

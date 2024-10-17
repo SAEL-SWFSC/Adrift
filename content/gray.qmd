@@ -1,11 +1,11 @@
 ---
-title: Gray Whales
+title: Gray Whales 
 ---
 
 ::: columns
 ::: {.column width="40%"}
 
-Sounds associated with gray whales were only detected on a few recordings in the upwelling and post-upwelling seasons in Oregon and San Francisco regions (see table, right), and only during a few hours on the combined PASCAL and CCES surveys (@fig-AdPC_gray_HourlyPresence). There is a significant overlap in spectral content for humpback and gray whale calls and most drifts were outside primary gray whale migration routes; care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.
+Sounds associated with gray whales were only detected on a few recordings in the upwelling and post-upwelling seasons in Oregon and San Francisco regions (see table, right), and only during a few hours on the combined PASCAL and CCES surveys (@fig-AdPC_gray_HourlyPresence). 
 
 :::
 
@@ -18,6 +18,7 @@ Sounds associated with gray whales were only detected on a few recordings in the
 
 :::
 :::
+There is a significant overlap in spectral content for humpback and gray whale calls and most drifts were outside primary gray whale migration routes; care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.
 
 Most Eastern North Pacific gray whales use the California Current to migrate between their feeding grounds in the north and their winter breeding grounds in Baja California. A subpopulation of these whales known as the ‘Pacific Coast Feeding Group’ feed in the California Current off Northern California, Oregon, and Washington during the upwelling and post-upwelling seasons (Barlow et al. 2024). Gray whales are typically found in the nearshore waters, but do occur in offshore waters (see [OBIS Seamap](https://seamap.env.duke.edu/dataset/861)).
 

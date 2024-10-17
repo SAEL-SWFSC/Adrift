@@ -1,5 +1,5 @@
 ---
-title: Outreach
+title: Outreach 
 ---
 
 The study of ocean sound is interdisciplinary and provides a natural opportunity for community engagement in formal education (K-12), informal science learning (museums), and online crowd-source citizen science participation. Our team engaged with students, journalists, and educators to develop materials and tools to make our science accessible to the public. Education and Outreach efforts included mentoring students and interns on authentic research projects, inviting journalists to participate in fieldwork, collaborating with educators to develop lesson plans for many age groups, and developing a preliminary crowd-sourced Zooniverse platform for community involvement in our research.

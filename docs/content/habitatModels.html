@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +357,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -398,7 +392,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#localizating-calls-from-clustered-recorders-to-model-habitat-use" id="toc-localizating-calls-from-clustered-recorders-to-model-habitat-use" class="nav-link active" data-scroll-target="#localizating-calls-from-clustered-recorders-to-model-habitat-use"><em>Localizating Calls from Clustered Recorders to Model Habitat Use</em></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/habitatModels.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/habitatModels.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -420,27 +420,33 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="localizating-calls-from-clustered-recorders-to-model-habitat-use" class="level2">
+<h2 class="anchored" data-anchor-id="localizating-calls-from-clustered-recorders-to-model-habitat-use"><em>Localizating Calls from Clustered Recorders to Model Habitat Use</em></h2>
 <p>In order to consider passive acoustic data for population assessment of marine mammals, these methods must account for varying detection probabilities due to uncertainty in the source location and with changing background noise levels.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
 <p>The clustered deployments off Morro Bay provide a test bed for evaluating the ability of drifting recorders to contribute to population assessment models. Mysticete calls can be detected on multiple instruments; however, localization of the sound source is limited by gaps in known sensor location (30 min GPS updates). As part of the exploratory analysis, we built a simulation of fin whale habitat use using regional density estimates, simplified propagation models and noise levels from one Morro Bay datasets. This simulation examined the potential spatial resolution of calls given the changing spacing of recorders throughout the deployment.</p>
 <p>We simulated 4,000 calls distributed in the survey area according to predicted fin whale densities by (Becker et al.&nbsp;2020) (<a href="#fig-ADRIFT_Appendix_HabitaMod_Simulation">Figure&nbsp;1</a>). We determined the minimum spatial resolution to which each call could potentially be localized using between 1 and 7 of the drifting recorders to compare the tradeoffs between localization resolution and the number of sensors.</p>
+</div><div class="column" style="width:60%;">
 <div id="fig-ADRIFT_Appendix_HabitaMod_Simulation" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/ADRIFT_Appendix_HabitaMod_Simulation.png" class="img-fluid figure-img" alt="Tracks of 8 clustered drifting recorders with simulated fin whale call density. Map of drift tracks for a cluster of 8 drifting recorders overlying simulated fin whale density with call density ranging from 0.5 calls/min in blue to 1.5 calls/min in green. A bright yellow/green area to the southeast of the drift tracks highlights high call density."></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Tracks of 8 clustered drifting recorders with simulated fin whale call density. Filled area represents simulated fin whale call density based on (Becker et al.&nbsp;2020). Black lines indicate the drift path.</figcaption>
 </figure>
 </div>
+</div>
+</div>
 <p>The proposed method is a grid approach that asks whether or not a call could have been produced by an animal in each of the grid cells within the survey region. The method involves two steps and accounts for spatial uncertainty throughout.</p>
 <p>The first step in the localization method considers known biological parameters of the species and the measured SNR of the arriving call to determine the minimum and maximum range at which a call could have arrived.</p>
-<p>SNR is defined as the Source level of a call minus the noise level at the sensor and the transmission loss over the range between the source and sensor.<a href="#_ftn1">[1]</a> Thus, if a call arrives at a sensor with an SNR of 45 dB, the ambient noise level in the fin whale band was 120 dB, then we can use knowledge of source level distribution to estimate the minimum and maximum range of each call. If fin whale source levels range between 170 and 190 dB then we know the animal must have been 3.6 to 46.4 km from the receiver. Thus, an annulus (doughnut!) of potential call origin centered at each drifting recorder location is created for each call. This information is particularly informative by itself but with multiple drifting recorders the annuli can be overlapped to narrow down the region of origin (<a href="#fig-ADRIFT_Appendix_HabitaMod_SNRgrid">Figure&nbsp;2</a>).</p>
+<p>SNR is defined as the Source level of a call minus the noise level at the sensor and the transmission loss over the range between the source and sensor (see related <a href="https://github.com/JPalmerK/AmbiguityGrids">Github Repository</a>). Thus, if a call arrives at a sensor with an SNR of 45 dB, the ambient noise level in the fin whale band was 120 dB, then we can use knowledge of source level distribution to estimate the minimum and maximum range of each call. If fin whale source levels range between 170 and 190 dB then we know the animal must have been 3.6 to 46.4 km from the receiver. Thus, an annulus (doughnut!) of potential call origin centered at each drifting recorder location is created for each call. This information is particularly informative by itself but with multiple drifting recorders the annuli can be overlapped to narrow down the region of origin (<a href="#fig-ADRIFT_Appendix_HabitaMod_SNRgrid">Figure&nbsp;2</a>).</p>
 <p>The second step applies to calls that were detected on two or more drifting recorders. In this case, the time-difference-of arrival, with associated positional error, is used to further limit the region of origin established in the first step.</p>
-<p><a href="#_ftnref1">[1]</a> https://github.com/JPalmerK/AmbiguityGrids</p>
 <div id="fig-ADRIFT_Appendix_HabitaMod_SNRgrid" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/ADRIFT_Appendix_HabitaMod_SNRgrid.png" class="img-fluid figure-img" alt="Variability in sound source location using multiple drifting recorders. For each plot, the potential location of a source (red point) as detected by each of the drifting recorders (green star) at a given point during the deployment. Black areas represent the region from which the call could have originated according to the arrival SNR at each drifting recorder. There is a plot for each individual drift, and the figure on the right provides an estimated location range based on the combined detections. Note the call was not detected by Adrift-047 and as such only a minimum location is known. The potential region of origin for the call based on the intersection of all drifting recorders (right), and covers an overall smaller range than the estimate provided by any individual drifting recorder."></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Variability in sound source location using multiple sensors. Potential location of a source (red point) as detected by each of the drifting recorders (green star) at a given point during the deployment. Black areas represent the region from which the call could have originated according to the arrival SNR at each drifting recorder. Note the call was not detected by Adrift-047 and as such only a minimum location is known (left). The potential region of origin for the call based on the intersection of all drifting recorders (right).</figcaption>
 </figure>
 </div>
-<p>Using the above approach, we estimated the area associated with each region of origin produced from the calls in the simulation (4,000 calls). The histogram densities show a bi-modal distribution with a low region size associated with larger numbers of drifting recorders, and larger region size associated with lower numbers of drifting recorders (<strong>?@fig-Adrift_Appendix_HabitatMod_HistSpatialRes3</strong>). The scatterplot provides the mean and 95% confidence intervals of the regions of origin based on the number of sensors deployed in the array (<a href="#fig-Adrift_Appendix_HabitatMod_HistSpatialRes">Figure&nbsp;3</a>) The majority of the calls were in the southern portion of the survey area and calls in these regions could only be detected by one or two instruments at most.</p>
+<p>Using the above approach, we estimated the area associated with each region of origin produced from the calls in the simulation (4,000 calls). The histogram densities show a bi-modal distribution with a low region size associated with larger numbers of drifting recorders, and larger region size associated with lower numbers of drifting recorders (<a href="#fig-Adrift_Appendix_HabitatMod_HistSpatialRes">Figure&nbsp;3</a>). The scatterplot provides the mean and 95% confidence intervals of the regions of origin based on the number of sensors deployed in the array (<a href="#fig-Adrift_Appendix_HabitatMod_HistSpatialRes">Figure&nbsp;3</a>) The majority of the calls were in the southern portion of the survey area and calls in these regions could only be detected by one or two instruments at most.</p>
 <div id="fig-Adrift_Appendix_HabitatMod_HistSpatialRes" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/Adrift_Appendix_HabitatMod_HistSpatialRes.png" class="img-fluid figure-img" alt="The estimated location range for a sound source based on the number of drifting recorders detecting the sound are provided by a histogram density plot (left), with region size on the x axis and histogram density on the y axis (histogram densities are colored based on the number of drifting recorders). There is a strong peak at small region size when a larger number of drifting recorders detects the sound, and another peak at very large estimated size when few drifting recorders are considered. The plot on the right shows the region size in square kilometers (y axis) and the number of sensors. There is a consistent decline in the region size based on the number of drifting recorders."></p>
@@ -450,6 +456,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This preliminary modeling suggests that the dispersed sensors provided by the clustered deployment of multiple drifting recorders can allow for reducing the possible source location for sounds detected on multiple sensors. This improved spatial resolution of the sound source may improve the viability for using these data for population assessment.&nbsp; Future research should test these analytical methods on real data such as those provided during the Morro Bay surveys and identify how these methods can be used for population assessment.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -803,7 +810,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../content/finAI.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Deep Learning to Detect Fin Whales</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Fin Whale AI</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -818,7 +825,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© CC-1.0</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/habitatModels.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/habitatModels.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This page is built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

@@ -1,7 +1,10 @@
 ---
-title: Study Area
+title: Study Area 
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(here)
+```
 The Adrift project surveyed the California Current between Point Conception to the south and Newport, Oregon to the north. This greater study area was subdivided into three sub-areas: Oregon, Northern California, and Central California. Initial funding (2020) focused on Northern California, ranging from San Francisco to the California-Oregon border, and encompassing the Humboldt Wind Energy Area. In 2021, funding was expanded to include Central California, with focus on the Morro Bay Wind Energy Area. Finally, in 2022 the area studied expanded to include a pilot study in Oregon. In addition to focused data collection efforts, this study analyzed data from two previous offshore surveys: Passive Acoustic Survey of Cetacean Abundance Levels (PASCAL 2016, Keating et al. 2018) and the California Current Ecosystem Survey (CCES 2018, Simonis 2020).
 
 ::: columns
@@ -19,6 +22,11 @@ The Adrift project started in June 2020, during the COVID-19 Pandemic. All field
 Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. These surveys were conducted in late summer through late fall during the post-upwelling season and data collection was not impacted by strong currents or inclement weather. Weather conditions are typically less ideal, and currents stronger, during the upwelling and winter season. The California Current experienced three consecutive years of La Niña between 2020-2022 (Thompson et al. 2024). The increased wind and currents caused by these conditions led to decreased windows of good weather, even during summer. After the initial loss of several drifting recorders due to extreme weather and current conditions, we limited our deployments to good weather windows, which dramatically decreased the duration of our deployments from \~ 30 days during PASCAL (10-19 days) and CCES (10-79 days), to less than 1 week during most of the Adrift study. Strong currents and high seas also created self-noise such as strumming, which periodically impacted data quality. Use of spar buoys instead of hi-flyer pole buoys may be preferred to minimize strumming.
 
 The cumulative impacts of the pandemic and poor environmental conditions ultimately required us to shift our survey approach and abandon our efforts to coordinate data collection using vessels of opportunity. Instead, we focused on directed deployment of drifting recorders in collaboration with regional partners. Our partners in Humboldt (Cal Poly Humboldt) and Oregon (Oregon State University) were able to use a combination of opportunistic and dedicated vessel time for data collection. We partnered with the NOAA Sanctuary Applied California Current Ecosystem Studies (ACCESS) Surveys to collect data offshore San Francisco up to three times per year, and developed a collaborative partnership for fieldwork in Morro Bay.
+
+```{r summaryTbl, child= "../R/summaryTable.Rmd"}
+
+
+```
 
 
 ::: columns

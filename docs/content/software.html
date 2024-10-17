@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +357,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -404,8 +398,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#pampal" id="toc-pampal" class="nav-link active" data-scroll-target="#pampal">PAMpal</a></li>
   <li><a href="#pamscapes" id="toc-pamscapes" class="nav-link" data-scroll-target="#pamscapes">PAMscapes</a></li>
-  <li><a href="#roboj" id="toc-roboj" class="nav-link" data-scroll-target="#roboj">RoboJ</a></li>
-  <li><a href="#beaked-whale-event-detector" id="toc-beaked-whale-event-detector" class="nav-link" data-scroll-target="#beaked-whale-event-detector">Beaked Whale Event Detector</a></li>
+  <li><a href="#beaked-whale-analytical-tools" id="toc-beaked-whale-analytical-tools" class="nav-link" data-scroll-target="#beaked-whale-analytical-tools">Beaked Whale Analytical Tools</a>
+  <ul class="collapse">
+  <li><a href="#roboj" id="toc-roboj" class="nav-link" data-scroll-target="#roboj"><strong><em>RoboJ</em></strong></a></li>
+  <li><a href="#beaked-whale-event-detector" id="toc-beaked-whale-event-detector" class="nav-link" data-scroll-target="#beaked-whale-event-detector"><strong><em>Beaked Whale Event Detector</em></strong></a></li>
+  </ul></li>
   <li><a href="#fin-model" id="toc-fin-model" class="nav-link" data-scroll-target="#fin-model">Fin Model</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/software.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/software.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -449,17 +446,30 @@ ul.task-list li input[type="checkbox"] {
 <li><p><a href="https://github.com/TaikiSan21/PAMscapes">PAMscapes GitHub</a></p></li>
 </ul>
 </section>
-<section id="roboj" class="level2">
-<h2 class="anchored" data-anchor-id="roboj">RoboJ</h2>
-<p>RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders. The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods. Development is still ongoing, but near-final code for this project is available on <a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub</a>.</p>
+<section id="beaked-whale-analytical-tools" class="level2">
+<h2 class="anchored" data-anchor-id="beaked-whale-analytical-tools">Beaked Whale Analytical Tools</h2>
+<p>Previous research by SWFSC found that drifting acoustic recorders could be used to estimate density of goose-beaked whales (Barlow et al.&nbsp;2022), and efforts were made to streamline this analytical process to allow us to estimate beaked whale density from the Adrift survey as well as other archived and future surveys (CCES 2018 and CalCurCEAS 2024). Development of the RoboJ tool to streamline a systematic approach to density estimation was based off the process developed by SWFSC in (Barlow et al.&nbsp;2022) and it was generalized for adoption by other researchers (see RoboJ GitHub Repository ). While most of the process is now streamlined, there remains a significant manual effort for identifying acoustic events. Our team initiated a process for improving automation of this tedious process, however they were unable to complete the automation of identifying acoustic events and we recommend investing in this development in the future (see Appendix: Open Science for more details on development of a beaked whale matched template classifier). The RoboJ tool has been tested by colleagues at Pacific Islands Fisheries Science Center, and documentation and final preparation of the software is underway.</p>
+<section id="roboj" class="level3">
+<h3 class="anchored" data-anchor-id="roboj"><strong><em>RoboJ</em></strong></h3>
+<p>RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders.The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods.Development is still ongoing, but near-final code for this project is available on <a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub</a>.</p>
+<p>RoboJ Pipeline:</p>
+<ul>
+<li><p>Incorporates acoustic detections stored in PAMGuard databases and binaries.</p></li>
+<li><p>Estimate detection range based on incoming bearing angle, presumed foraging depth, and modeled sound speed profile at each position.</p></li>
+<li><p>Estimate detection function for recorders</p></li>
+</ul>
+<p>The original research was developed for the PASCAL dataset, and we have prepared the CCES 2018 dataset for analysis, but we were unable to complete the analysis in the timeframe of this study. These methods will be used for the CalCurCEAS 2024 survey data, and if opportunity allows, analysis will also be completed for the CCES 2018 dataset.</p>
+<p>Future research should consider (1) funding further development of an automated approach to acoustic event delineation, (2) beaked whale density estimation for the Adrift dataset, and (3) expansion of this analysis to species beyond goose-beaked whales.</p>
 </section>
-<section id="beaked-whale-event-detector" class="level2">
-<h2 class="anchored" data-anchor-id="beaked-whale-event-detector">Beaked Whale Event Detector</h2>
-<p>Anne Simonis and Taiki Sakai developed a preliminary automated workflow for identifying and classifying beaked whale events. The initial approach used a Match Template Classifier (MTC) to identify candidate beaked whale clicks and group these into events. Initial attempts to use the MTC-defined events to train a BANTER model were not successful enough to deploy the model on new Adrift study data, so an attempt was made to incorporate a computer vision-based model to add additional information for the BANTER model. This combined outputs from a computer vision model that was trained on other beaked whale data with the original MTC data. Preliminary results suggest there is a need for further development of the initial MTC detection step. The combined models results were promising but required improved training data.</p>
+<section id="beaked-whale-event-detector" class="level3">
+<h3 class="anchored" data-anchor-id="beaked-whale-event-detector"><strong><em>Beaked Whale Event Detector</em></strong></h3>
+<p>Anne Simonis and Taiki Sakai developed a preliminary automated workflow for identifying and classifying beaked whale events. The initial approach used a Match Template Classifier (MTC) to identify candidate beaked whale clicks and group these into events. Initial attempts to use the MTC-defined events to train a BANTER model were not successful enough to deploy the model on new Adrift study data, so an attempt was made to incorporate a computer vision-based model to add additional information for the BANTER model. This combined outputs from a computer vision model that was trained on other beaked whale data with the original MTC data. Preliminary results suggest there is a need for further development of the initial MTC detection step.</p>
+<p>The combined models results were promising but required improved training data.</p>
 <ul>
 <li><p>Detailed project status report can be found on <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/Simonis.Sakai_BeakerMTC_May2024.pdf">GitHub</a>.</p></li>
 <li><p>Detailed summary of the original computer-vision model can be found on <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/TSakai_beakerVisionModel_May2024.pdf">GitHub</a>.</p></li>
 </ul>
+</section>
 </section>
 <section id="fin-model" class="level2">
 <h2 class="anchored" data-anchor-id="fin-model">Fin Model</h2>

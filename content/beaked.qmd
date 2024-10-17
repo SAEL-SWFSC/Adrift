@@ -1,33 +1,31 @@
 ---
-title: Beaked Whales
-always_allow_html: true
+title: Beaked Whales 
+# always_allow_html: true
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-library(here)
-```
 
 ::: columns
 ::: {.column width="40%"}
 Detection of beaked whale species included: goose-beaked whales (Zc), Baird's beaked whales (Bb, Berardius bairdii), Blainville's beaked whales (Md, Mesoplodon densirostris), Stejneger's beaked whales (Ms, M. stejnegeri), Hubb's beaked whales (Mc, M. carlhubbsi, formerly BW37V), Cross Seamount Beaked Whale (BWC), and unidentified beaked whale BW43 (BW43, recently identified as M. ginkgodens, Mc, (Henderson et al., in prep.)). Beaked whales were detected in all regions (@fig-AdPC_beaked_HourlyPresence), and species detected in Adrift data included Baird's beaked whales (Bb), Hubb's beaked whales (Mc), Stejneger's beaked whales (Ms), and goose-beaked whales (Zc) (see table, right). Detection of beaked whales was higher in low latitude regions than in higher latitudes for the combined CCES and PASCAL surveys (@fig-AdPC_beaked_HourlyPresence).
 
 All beaked whale species were detected in Morro Bay, with relatively high probability of detection for goose-beaked whales (see table, right, and @fig-ADRIFT_ZcBb_HourlyPresence). While goose-beaked whales were the most common species detected overall, there were no detections of this species in either Humboldt or Oregon study areas.
+
+There had been no visual detection of beaked whales during the 30 years of annual ACCESS surveys offshore San Francisco (J. Roletto, pers. comm.). 
 :::
 
 ::: {.column width="60%"}
+
 ```{r bwTbl, child= "../R/detTbls/bwTbl.Rmd"}
 
 
 ```
 
+The drifting recorders deployed during the ACCESS surveys detected both Baird's and goose-beaked whales, suggesting that beaked whales do occur in and near the shipping lanes and the combined Greater Farallones and Cordell Bank National Marine Sanctuaries (@fig-ADRIFT_ZcBb_HourlyPresence). The discrepancy in these detections is likely due to the typically poor sighting conditions in this region and the cryptic surfacing behavior of beaked whales. Future surveys in this region should consider passive acoustic monitoring with sufficient bandwidth to detect echolocating beaked whales.
 
 :::
 :::
 
 ![Hourly beaked whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of beaked whales (combined species) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_beaked_HourlyPresence.png){#fig-AdPC_beaked_HourlyPresence fig-alt="Hourly presence of beaked whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the x-axis, and the date on the y-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Beaked whale detections varied by region, with very low detections in Humboldt, and high hourly detections in San Francisco and Morro Bay."}
 
-There had been no visual detection of beaked whales during the 30 years of annual ACCESS surveys offshore San Francisco (J. Roletto, pers. comm.). The drifting recorders deployed during the ACCESS surveys detected both Baird's and goose-beaked whales, suggesting that beaked whales do occur in and near the shipping lanes and the combined Greater Farallones and Cordell Bank National Marine Sanctuaries (@fig-ADRIFT_ZcBb_HourlyPresence). The discrepancy in these detections is likely due to the typically poor sighting conditions in this region and the cryptic surfacing behavior of beaked whales. Future surveys in this region should consider passive acoustic monitoring with sufficient bandwidth to detect echolocating beaked whales.
 
 Many of the beaked whale detections in Morro Bay occurred during times with large numbers of dolphin detections (see @fig-Adrift_MorroBay22_Seasons, @fig-Adrift_MorroBay23_Seasons) for a visualization of this co-occurrence). Dolphins frequently occur in large schools with many animals echolocating simultaneously. It can be very difficult to identify beaked whales (smaller group sizes where fewer clicks are detected from each group) in these situations.  The vertical hydrophone array allows for the estimation of bearing angles of incoming echolocation clicks. Beaked whales echolocate at depths below the vertical array, providing bearing angles \> 90⁰ on the hydrophone array, while dolphins are typically above the array (bearing angles \< 90⁰). By segregating the data based on bearing angle, we were able to identify groups of echolocating beaked whales during times where there were large numbers of echolocating dolphins. The co-occurrence of dolphins and beaked whales has not been previously reported, and it is unclear what may bring these species together. The likelihood of detecting beaked whales in these mixed species encounters would have been very low if recordings were collected from a single, seafloor sensor or from towed hydrophone arrays.
 
@@ -37,4 +35,4 @@ Detailed methods are provided in our [GitHub online analysis methods](https://sa
 
 A protocol for estimating the density of goose-beaked whales from acoustic detections using drifting hydrophone recorders was established by Barlow et al. (2022). We developed an open-source R package [RoboJ](https://github.com/taikiSan21/roboj) (Robotic Jay) for these methods (see Appendix A). We explored automated event definition based on MTC (matched template classifier) scores and developed a process that identified every manually labeled event, but ultimately included an unacceptable number of false detections. The inclusion of a computer vision model was helpful for separating false detections; however, data processing times and classification rates were not acceptable. Current ideas to improve performance of automated event definition are discussed in Appendix A. Data were prepared for future density estimation, but density estimates were not completed for Adrift or CCES survey data.
 
-{{< include contributorsSS.qmd >}}
+

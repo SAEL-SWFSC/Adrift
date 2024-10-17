@@ -1,5 +1,5 @@
 ---
-title: Dolphins
+title: Dolphins 
 ---
 
 ::: columns
@@ -21,7 +21,7 @@ Dolphin schools in central and northern California are frequently encountered in
 :::
 :::
 
-
+There had been no visual detection of beaked whales during the 30 years of annual ACCESS surveys offshore San Francisco (J. Roletto, pers. comm.). 
 
 Previous research identified different click types for Pacific white-sided dolphins (Soldevilla et al. 2010). The dominant click type in Adrift acoustic encounters of Pacific white-sided dolphins was 'Type A'; however, there were some encounters with 'Type B'. Most of these Type A encounters were at night, similar to Soldevilla et al. (2010), and our research identified a co-occurrence of Click Type A with goose-beaked whale (see Beaked Whales). Future research could investigate this relationship between Pacific white-sided dolphins and goose-beaked whales by taking advantage of the vertical array for separating animals echolocating at the surface and at depth. Soldevilla et al. (2010) suggested Type B echolocation clicks might be attributed to a nearshore population in the southern California Current (Southern California Bight and Baja Mexico); however, our results show that Click Type B can be found in other regions.
 

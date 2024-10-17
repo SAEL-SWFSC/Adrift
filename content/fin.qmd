@@ -1,12 +1,12 @@
 ---
-title: Fin Whales
+title: Fin Whales 
 ---
 
 ::: columns
 ::: {.column width="40%"}
 Fin whales were detected throughout the study area and at different times of year (@fig-AdPC_fin_HourlyPresence). Detection of fin whales during the combined PASCAL/CCES surveys showed strong presence in the Morro Bay and San Francisco regions, with low detections in Humboldt and Oregon (@fig-AdPC_fin_HourlyPresence).
 
-Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and @fin-ADRIFT_fin2040_HourlyPresence). This detection probability dropped during the (limited) winter data for Humboldt. Fin whale 20 Hz detections were lower off San Francisco than other areas, though detection of low frequency fin whale calls in this area may be compromised by low frequency noise associated with high levels of low frequency noise associated with large shipping traffic (container ships).
+Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and @fin-ADRIFT_fin2040_HourlyPresence). This detection probability dropped during the (limited) winter data for Humboldt. 
 :::
 
 ::: {.column width="60%"}
@@ -18,7 +18,7 @@ Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling 
 
 :::
 :::
-
+Fin whale 20 Hz detections were lower off San Francisco than other areas, though detection of low frequency fin whale calls in this area may be compromised by low frequency noise associated with high levels of low frequency noise associated with large shipping traffic (container ships).
 
 The fin whale 20 Hz call is the most commonly reported and is thought to be used as a social call to establish and maintain contact when produced in irregular sequences (Edds-Walton 1997) and it may serve a reproductive function when produced by males in a regular sequence forming song (Croll et al. 2002). Here we did not differentiate between irregular and regular sequencing.
 

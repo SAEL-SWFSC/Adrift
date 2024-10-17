@@ -1,5 +1,5 @@
 ---
-title: Highlighted Results
+title: Highlighted Results 
 ---
 
 Below we present a summary of our results and a summary of recommendations for future work.

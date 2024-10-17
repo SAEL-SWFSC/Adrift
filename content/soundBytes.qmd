@@ -1,5 +1,5 @@
 ---
-title: Sound Bytes Blog
+title: Sound Bytes Blog 
 ---
 
 Our periodic 'Sound Bytes' blog provides a general audience with insight into the day-to-day work behind the science. Topics range from 'Lessons learned from Fishermen' to how we ‘Gear up for Fieldwork’ to how we ‘Hook young scientists on Research’. We have had a host of guest bloggers, including students, interns, and collaborators. These blogs are shared on NOAA's website and they have been promoted through numerous NOAA newsletters. Find [Sound Bytes here](https://www.fisheries.noaa.gov/taxonomy/term/1000356091).
