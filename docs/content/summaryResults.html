@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -398,7 +411,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-collection-efforts" id="toc-data-collection-efforts" class="nav-link active" data-scroll-target="#data-collection-efforts">Data Collection Efforts</a></li>
+  <li><a href="#summary-by-species" id="toc-summary-by-species" class="nav-link" data-scroll-target="#summary-by-species">Summary by Species</a></li>
+  <li><a href="#soundscape" id="toc-soundscape" class="nav-link" data-scroll-target="#soundscape">Soundscape</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/summaryResults.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/summaryResults.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -421,6 +442,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Below we present a summary of our results and a summary of recommendations for future work.</p>
+<section id="data-collection-efforts" class="level3">
+<h3 class="anchored" data-anchor-id="data-collection-efforts">Data Collection Efforts</h3>
 <ul>
 <li><p>Drifting acoustic recorders can provide high quality PAM for some offshore regions, especially when deployed in clusters to enhance spatial monitoring.</p></li>
 <li><p>Pilot studies are recommended for new regions, to ensure that environmental conditions and local resources support effective sampling.</p></li>
@@ -428,31 +451,86 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Our experience suggests that deployment of clustered drifting recorders seasonally in areas of interest could provide additional spatial context to co-located seafloor recorders.</p></li>
 <li><p>Seasonal sampling of these clustered deployments during collaborative cruises, such as our Morro Bay fieldwork, promotes collaborative science and reduces vessel costs.</p></li>
 </ul>
-<p>This dataset provides additional (publicly available) data to support management needs as well as new information on several species. Data analysis included most cetacean species found within the California Current; though several rare species (north Pacific right whales, pilot whales) were not included, nor were pinnipeds. The data are publicly available for future expansion of analysis to include these species.</p>
-<ul>
-<li><p><strong>Sperm whales</strong> are listed as endangered and their consistent, stereotyped vocalizations make them ideal candidates for PAM. Sperm whales were detected in all study areas, with high detection probabilities in Humboldt during all seasons. PAM data can also be used to determine the demographic composition of sperm whales, and a pilot study of a Morro Bay dataset found that all animals were social groups consisting of females and their young, or juvenile males. There was insufficient time to complete this analysis for our entire archived data, but future research should include acoustic estimations of demographic composition for sperm whales.</p></li>
-<li><p><strong>Beaked whales</strong> are difficult to detect, and even harder to classify to species, based on traditional visual observation methods. As with sperm whales, beaked whales are ideal candidates for PAM, and most species can be acoustically classified to species. As an example, there were no detections of beaked whales in 30 years of ACCESS surveys; however, during our limited Adrift deployments, there were numerous detections of both Baird’s beaked whales and goose-beaked whales. Beaked whales were found in all regions, with goose-beaked whales the most common species overall (though none of these species were detected in either Humboldt or Oregon). During the Adrift study, methods to estimate beaked whale density using drifting recorders were automated (to improve efficiency), and data were prepared for analysis, but we were unable to complete this analysis during the time available.</p>
-<p>Many of the beaked whales detected in Morro Bay co-occurred with echolocating dolphins. The vertical hydrophone array of the drifting recorders allows for estimation of bearing angles for incoming echolocation clicks, and subsequent differentiation between echolocating beaked whales at depth from echolocating dolphins near the surface. By segregating the echolocation clicks based on bearing angle, we were able to identify the small numbers of beaked whale clicks within thousands (or even millions) of echolocating dolphins. The co-occurrence of dolphins and beaked whales has not been previously reported, and it is unclear what may bring these species together. The likelihood of detecting beaked whales in these mixed species encounters would have been very low if recordings were collected from a single, seafloor sensor or from towed hydrophone arrays.</p></li>
-<li><p>The California Current has a high diversity of <strong>dolphin species</strong>, and species classification is difficult. While there are several potential approaches to species classification, they have either been developed for towed arrays at the surface (Rankin et al.&nbsp;2017) or for seafloor hydrophones (Frasier et al.&nbsp;2017). Currently, there is insufficient validated data for drifting recorders to test the efficacy of existing classifiers on these data, or to develop a drifting-recorder specific classifier. That said, there are robust methods to identify echolocation clicks from Pacific white-sided dolphins and Risso’s dolphins. Dolphin schools in central and northern California are frequently encountered in large, dispersed mixed species groups, and here we do not distinguish mixed species from single-species groups.</p></li>
-<li><p><strong>Risso’s dolphins</strong> were detected in all regions except Oregon, and had the highest probability of detection during the upwelling season in Humboldt. The dominant click type detected was the ‘Pelagic Pacific’ type identified by Soldevilla 2017.</p></li>
-<li><p><strong>Pacific white-sided dolphins</strong> were detected in all regions, with higher detection probabilities in the post-upwelling season for Humboldt and San Francisco, and during the upwelling season in Morro Bay. The dominant click type for Pacific white-sided dolphins was ‘Type A’, though ‘Type B’ click types were detected northward of the range identified in Soldevilla 2010. There were relatively few detections of ‘Unidentified odontocetes’ during the post-upwelling season in Oregon and Morro Bay.</p></li>
-<li><p>The California Current is home to four different species that produce <strong>NBHF</strong> echolocation clicks: harbor porpoise, Dall’s porpoise, pygmy sperm whales, and dwarf sperm whales. Despite the similarities in their echolocation clicks, these species inhabit different habitats and have different behaviors and life histories. Student work to develop a NBHF classifier for this study (see Appendix F) will be further developed in the near future and applied to these data to expand our understanding of the distribution of these species in the California Current as well as the regional WEAs.</p></li>
-<li><p><strong>Blue whales</strong> were detected in all regions except Oregon, and the probability of detecting blue whales was higher during the post-upwelling season. Blue whale acoustic detections were dominated by the A/B song call types produced by males. Foraging associated ‘D’ calls were primarily detected during the post-upwelling season, and at much lower detection probabilities than A/B call types. Blue whale calls, especially the ‘B’ call type, can be detected at great ranges and the range of potential sound source locations can be large. Preliminary methods to localize low frequency sounds on clustered drifting recorders shows promise (see Appendix H), and adoption of these methods may improve our understanding of the habitat use of these species in the greater area.</p></li>
-<li><p><strong>Fin whales</strong> were detected throughout the study area at different times of year. Fin whale 20 Hz pulses had a higher detection probability during the post-upwelling season for all regions. Here we did not differentiate between irregular and stereotyped patterns of 20 Hz calls. The 40 Hz call associated with foraging were detected off Oregon and during the post-upwelling season off Morro Bay. These data were used to improve and test a fin whale classifier with excellent results (Appendix G), and future adoption of these methods may allow for an improved approach of classifying variability in fin whale call patterns.</p></li>
-<li><p><strong>Humpback whales</strong> were detected during most deployments, though detection off Oregon was relatively low. The probability of detecting humpbacks was higher for the upwelling season for Morro Bay, while the probability of detecting humpbacks was lower during the upwelling season for both San Francisco and Humboldt. While there were few detections of humpback whales during the late June/early July surveys off Morro Bay, these animals were frequently sighted nearshore, highlighting the variability of their distribution within these greater regions.</p>
-<p>Humpback whales are notoriously difficult PAM subjects due to their very active vocal behavior (in quantity and variability). Many recordings can be dominated by humpback song, and this song may be the result of a single individual. There is significant research on many of the non-song vocalizations, but detection and classification of these sounds require expertise and manual classification. There are significant numbers of annotated datasets, and development of a machine learning method to detect and classify these sounds would allow researchers to better understand how the detection of humpback sounds can inform the demographic composition and habitat use of these species throughout the California Current.</p></li>
-<li><p><strong>Bryde’s whales</strong> occur in the tropical and sub-tropical Pacific Ocean, with occasional incursions into the Southern California Bight. We did not detect sounds associated with Bryde’s whales in this analysis, but we do expect these species may become more common with global ocean warming.</p></li>
-<li><p>Little is known of the vocal repertoire of <strong>sei whales</strong>, and our research only found one potential sei whale acoustic detection. Future research should take advantage of opportunities to understand the vocal repertoire of sei whales in the North Pacific Ocean.</p></li>
-<li><p>Most <strong>gray whales</strong> use more shallow, coastal waters for their migration between their feeding grounds in the north and their winter breeding grounds in Baja California. Gray whales were detected off Oregon, where there is a resident population, and during the post-upwelling season in the San Francisco and Morro Bay areas. There is a significant overlap in spectral content for humpback and gray whale calls and care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.</p></li>
-<li><p>There were no detections of <strong>minke whale</strong> ‘boings’ during our Adrift study, and only a few during the combined PASCAL/CCES surveys. There was one visual sighting of a minke whale in coastal waters near Morro Bay harbor in November 2023; however, there were no recordings during our offshore drifts during this same survey. The lack of detections could be related to low seasonal population densities or that calling animals use coastal waters.</p></li>
-<li><p>In addition to detecting marine mammal species, we manually detected <strong>ship tracks</strong> in these data (existing ship noise detectors were not reliable on our data). The percent of recording hours with vessel presence varied across region, season, and time of day, and vessel presence was generally higher in Oregon and Humboldt than in San Francisco or Morro Bay. Vessel presence in Humboldt shifted from night-time during the upwelling season to daytime during the post-upwelling season (summer), with winter variability likely relating to low effort. Morro Bay region experienced the lowest amount of vessel traffic, with extremely low levels of vessel traffic (&lt;20%) detected in the post-upwelling season. The relatively low detection of ships off San Francisco may be related to masking of individual ship passages due to the overall higher sound levels in this region. Development of a standardized approach to detecting vessels that works across platforms and compensates for elevated ambient noise due to high vessel track is warranted.</p></li>
-</ul>
+</section>
+<section id="summary-by-species" class="level3">
+<h3 class="anchored" data-anchor-id="summary-by-species">Summary by Species</h3>
+<section id="sperm-whales" class="level4">
+<h4 class="anchored" data-anchor-id="sperm-whales">Sperm Whales</h4>
+<p>Sperm whales are listed as endangered and their consistent, stereotyped vocalizations make them ideal candidates for PAM. Sperm whales were detected in all study areas, with high detection probabilities in Humboldt during all seasons. PAM data can also be used to determine the demographic composition of sperm whales, and a pilot study of a Morro Bay dataset found that all animals were social groups consisting of females and their young, or juvenile males. There was insufficient time to complete this analysis for our entire archived data, but future research should include acoustic estimations of demographic composition for sperm whales.</p>
+</section>
+<section id="beaked-whales" class="level4">
+<h4 class="anchored" data-anchor-id="beaked-whales">Beaked Whales</h4>
+<p>Beaked whales are difficult to detect, and even harder to classify to species, based on traditional visual observation methods. As with sperm whales, beaked whales are ideal candidates for PAM, and most species can be acoustically classified to species. As an example, there were no detections of beaked whales in 30 years of ACCESS surveys; however, during our limited Adrift deployments, there were numerous detections of both Baird’s beaked whales and goose-beaked whales. Beaked whales were found in all regions, with goose-beaked whales the most common species overall (though none of these species were detected in either Humboldt or Oregon). During the Adrift study, methods to estimate beaked whale density using drifting recorders were automated (to improve efficiency), and data were prepared for analysis, but we were unable to complete this analysis during the time available.</p>
+<p>Many of the beaked whales detected in Morro Bay co-occurred with echolocating dolphins. The vertical hydrophone array of the drifting recorders allows for estimation of bearing angles for incoming echolocation clicks, and subsequent differentiation between echolocating beaked whales at depth from echolocating dolphins near the surface. By segregating the echolocation clicks based on bearing angle, we were able to identify the small numbers of beaked whale clicks within thousands (or even millions) of echolocating dolphins. The co-occurrence of dolphins and beaked whales has not been previously reported, and it is unclear what may bring these species together. The likelihood of detecting beaked whales in these mixed species encounters would have been very low if recordings were collected from a single, seafloor sensor or from towed hydrophone arrays.</p>
+</section>
+<section id="dolphins" class="level4">
+<h4 class="anchored" data-anchor-id="dolphins">Dolphins</h4>
+<p>The California Current has a high diversity of dolphin species, and species classification is difficult. While there are several potential approaches to species classification, they have either been developed for towed arrays at the surface <span class="citation" data-cites="rankin2017">(<a href="#ref-rankin2017" role="doc-biblioref">Rankin et al. 2017</a>)</span> or for seafloor hydrophones <span class="citation" data-cites="frainer2023">(<a href="#ref-frainer2023" role="doc-biblioref">Frainer et al. 2023</a>)</span>. Currently, there is insufficient validated data for drifting recorders to test the efficacy of existing classifiers on these data, or to develop a drifting-recorder specific classifier. That said, there are robust methods to identify echolocation clicks from Pacific white-sided dolphins and Risso’s dolphins. Dolphin schools in central and northern California are frequently encountered in large, dispersed mixed species groups, and here we do not distinguish mixed species from single-species groups.</p>
+<p>Risso’s dolphins were detected in all regions except Oregon, and had the highest probability of detection during the upwelling season in Humboldt. The dominant click type detected was the ‘Pelagic Pacific’ type identified by <span class="citation" data-cites="soldevilla_geographic_2017">(<a href="#ref-soldevilla_geographic_2017" role="doc-biblioref">M. S. Soldevilla et al. 2017</a>)</span>.</p>
+<p>Pacific white-sided dolphins were detected in all regions, with higher detection probabilities in the post-upwelling season for Humboldt and San Francisco, and during the upwelling season in Morro Bay. The dominant click type for Pacific white-sided dolphins was ‘Type A’, though ‘Type B’ click types were detected northward of the range identified in <span class="citation" data-cites="soldevilla_spatio-temporal_2010">(<a href="#ref-soldevilla_spatio-temporal_2010" role="doc-biblioref">M. Soldevilla, Wiggins, and Hildebrand 2010</a>)</span>. There were relatively few detections of ‘Unidentified odontocetes’ during the post-upwelling season in Oregon and Morro Bay.</p>
+</section>
+<section id="nbhf" class="level4">
+<h4 class="anchored" data-anchor-id="nbhf">NBHF</h4>
+<p>The California Current is home to four different species that produce NBHF echolocation clicks: harbor porpoise, Dall’s porpoise, pygmy sperm whales, and dwarf sperm whales. Despite the similarities in their echolocation clicks, these species inhabit different habitats and have different behaviors and life histories. Student work to develop a NBHF classifier for this study (see <a href="https://sael-swfsc.github.io/Adrift/content/nbhfClassification.html">NBHF Classification</a>) will be further developed in the near future and applied to these data to expand our understanding of the distribution of these species in the California Current as well as the regional WEAs.</p>
+</section>
+<section id="blue-whales" class="level4">
+<h4 class="anchored" data-anchor-id="blue-whales">Blue Whales</h4>
+<p>Blue whales were detected in all regions except Oregon, and the probability of detecting blue whales was higher during the post-upwelling season. Blue whale acoustic detections were dominated by the A/B song call types produced by males. Foraging associated ‘D’ calls were primarily detected during the post-upwelling season, and at much lower detection probabilities than A/B call types. Blue whale calls, especially the ‘B’ call type, can be detected at great ranges and the range of potential sound source locations can be large. Preliminary methods to localize low frequency sounds on clustered drifting recorders shows promise (see <a href="https://sael-swfsc.github.io/Adrift/content/habitatModels.html">Modeling Habitat Use</a>), and adoption of these methods may improve our understanding of the habitat use of these species in the greater area.</p>
+</section>
+<section id="fin-whales" class="level4">
+<h4 class="anchored" data-anchor-id="fin-whales">Fin Whales</h4>
+<p>Fin whales were detected throughout the study area at different times of year. Fin whale 20 Hz pulses had a higher detection probability during the post-upwelling season for all regions. Here we did not differentiate between irregular and stereotyped patterns of 20 Hz calls. The 40 Hz call associated with foraging were detected off Oregon and during the post-upwelling season off Morro Bay. These data were used to improve and test a fin whale classifier with excellent results (see <a href="https://sael-swfsc.github.io/Adrift/content/finAI.html">Fin Whale AI</a>), and future adoption of these methods may allow for an improved approach of classifying variability in fin whale call patterns.</p>
+</section>
+<section id="humpback-whales" class="level4">
+<h4 class="anchored" data-anchor-id="humpback-whales">Humpback whales</h4>
+<p>Humpback Whales were detected during most deployments, though detection off Oregon was relatively low. The probability of detecting humpbacks was higher for the upwelling season for Morro Bay, while the probability of detecting humpbacks was lower during the upwelling season for both San Francisco and Humboldt. While there were few detections of humpback whales during the late June/early July surveys off Morro Bay, these animals were frequently sighted nearshore, highlighting the variability of their distribution within these greater regions.</p>
+<p>Humpback whales are notoriously difficult PAM subjects due to their very active vocal behavior (in quantity and variability). Many recordings can be dominated by humpback song, and this song may be the result of a single individual. There is significant research on many of the non-song vocalizations, but detection and classification of these sounds require expertise and manual classification. There are significant numbers of annotated datasets, and development of a machine learning method to detect and classify these sounds would allow researchers to better understand how the detection of humpback sounds can inform the demographic composition and habitat use of these species throughout the California Current.</p>
+</section>
+<section id="brydessei-whales" class="level4">
+<h4 class="anchored" data-anchor-id="brydessei-whales">Bryde’s/Sei Whales</h4>
+<p>Bryde’s whales occur in the tropical and sub-tropical Pacific Ocean, with occasional incursions into the Southern California Bight. We did not detect sounds associated with Bryde’s whales in this analysis, but we do expect these species may become more common with global ocean warming.</p>
+<p>Little is known of the vocal repertoire of sei whales, and our research only found one potential sei whale acoustic detection. Future research should take advantage of opportunities to understand the vocal repertoire of sei whales in the North Pacific Ocean.</p>
+</section>
+<section id="gray-whales" class="level4">
+<h4 class="anchored" data-anchor-id="gray-whales">Gray Whales</h4>
+<p>Most gray whales use more shallow, coastal waters for their migration between their feeding grounds in the north and their winter breeding grounds in Baja California. Gray whales were detected off Oregon, where there is a resident population, and during the post-upwelling season in the San Francisco and Morro Bay areas. There is a significant overlap in spectral content for humpback and gray whale calls and care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.</p>
+</section>
+<section id="minke-whales" class="level4">
+<h4 class="anchored" data-anchor-id="minke-whales">Minke Whales</h4>
+<p>There were no detections of minke whale ‘boings’ during our Adrift study, and only a few during the combined PASCAL/CCES surveys. There was one visual sighting of a minke whale in coastal waters near Morro Bay harbor in November 2023; however, there were no recordings during our offshore drifts during this same survey. The lack of detections could be related to low seasonal population densities or that calling animals use coastal waters.</p>
+</section>
+</section>
+<section id="soundscape" class="level3">
+<h3 class="anchored" data-anchor-id="soundscape">Soundscape</h3>
 <p>These biological and anthropogenic sounds contribute to the overall soundscape, and measurement of sound levels allows us to examine variation in the soundscape over time. Soundscape metrics aligned with previously analyzed SanctSound data for consistency, but preferred methods recommend reporting sound levels in hybrid millidecade bands. Our soundscape data will be publicly accessible to allow for this conversion. Our results show variability in sound levels over time and space, with general noise levels ranging from 50 dB re 1uPa to nearly 150 dB re 1 uPa (and the highest density of sound in the 75 – 100 dB range).</p>
+<p>These biological and anthropogenic sounds contribute to the overall soundscape, and measurement of sound levels allows us to examine variation in the soundscape over time. Soundscape metrics aligned with previously analyzed SanctSound data for consistency, but preferred methods recommend reporting sound levels in hybrid millidecade bands. Our soundscape data will be publicly accessible to allow for this conversion. Our results show variability in sound levels over time and space, with general noise levels ranging from 50 dB re 1uPa to nearly 150 dB re 1 uPa (and the highest density of sound in the 75 – 100 dB range).</p>
+<section id="ship-noise" class="level4">
+<h4 class="anchored" data-anchor-id="ship-noise">Ship Noise</h4>
+<p>In addition to detecting marine mammal species, we manually detected ship tracks in these data (existing ship noise detectors were not reliable on our data). The percent of recording hours with vessel presence varied across region, season, and time of day, and vessel presence was generally higher in Oregon and Humboldt than in San Francisco or Morro Bay. Vessel presence in Humboldt shifted from night-time during the upwelling season to daytime during the post-upwelling season (summer), with winter variability likely relating to low effort. Morro Bay region experienced the lowest amount of vessel traffic, with extremely low levels of vessel traffic (&lt;20%) detected in the post-upwelling season. The relatively low detection of ships off San Francisco may be related to masking of individual ship passages due to the overall higher sound levels in this region. Development of a standardized approach to detecting vessels that works across platforms and compensates for elevated ambient noise due to high vessel track is warranted.</p>
+</section>
+<section id="contributors-to-the-soundscape" class="level4">
+<h4 class="anchored" data-anchor-id="contributors-to-the-soundscape">Contributors to the Soundscape</h4>
 <p>The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. In this study we examined sounds attributed to a number of marine mammal species as well as ship noise. We also developed automated methods to integrate these data to better understand these various contributors to the soundscape, and how they change over time. While we had limited time to conduct advanced analyses, our research efforts took a significant step forward so that future researchers can more readily integrate these methods into their analyses. These methods will be adopted and expanded by NOAA PAM researchers at a national scale as part of a new PAM strategic initiative.</p>
 
 
 
-</main> <!-- /main -->
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-frainer2023" class="csl-entry" role="listitem">
+Frainer, Guilherme, Emmanuel Dufourq, Jack Fearey, Sasha Dines, Rachel Probert, Simon Elwen, and Tess Gridley. 2023. <span>“Automatic Detection and Taxonomic Identification of Dolphin Vocalisations Using Convolutional Neural Networks for Passive Acoustic Monitoring.”</span> <em>Ecological Informatics</em> 78 (December): 102291. <a href="https://doi.org/10.1016/j.ecoinf.2023.102291">https://doi.org/10.1016/j.ecoinf.2023.102291</a>.
+</div>
+<div id="ref-rankin2017" class="csl-entry" role="listitem">
+Rankin, Shannon, Frederick Archer, Jennifer L. Keating, Julie N. Oswald, Michael Oswald, Alex Curtis, and Jay Barlow. 2017. <span>“Acoustic Classification of Dolphins in the California Current Using Whistles, Echolocation Clicks, and Burst Pulses.”</span> <em>Marine Mammal Science</em> 2 (33): 520–40. <a href="https://doi.org/10.1111/mms.12381">https://doi.org/10.1111/mms.12381</a>.
+</div>
+<div id="ref-soldevilla_geographic_2017" class="csl-entry" role="listitem">
+Soldevilla, Melissa S., Simone Baumann-Pickering, Danielle Cholewiak, Lynne E. W. Hodge, Erin M. Oleson, and Shannon Rankin. 2017. <span>“Geographic Variation in <span>Risso</span>’s Dolphin Echolocation Click Spectra.”</span> <em>The Journal of the Acoustical Society of America</em> 142 (2): 599–617. <a href="https://doi.org/10.1121/1.4996002">https://doi.org/10.1121/1.4996002</a>.
+</div>
+<div id="ref-soldevilla_spatio-temporal_2010" class="csl-entry" role="listitem">
+Soldevilla, Ms, Sm Wiggins, and Ja Hildebrand. 2010. <span>“Spatio-Temporal Comparison of <span>Pacific</span> White-Sided Dolphin Echolocation Click Types.”</span> <em>Aquatic Biology</em> 9 (March): 49–62. <a href="https://doi.org/10.3354/ab00224">https://doi.org/10.3354/ab00224</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -819,7 +897,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© CC-1.0</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SAEL-SWFSC/Adrift/edit/main/content/summaryResults.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/content/summaryResults.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/SAEL-SWFSC/Adrift/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This page is built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

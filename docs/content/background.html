@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Adrift in the California Current - Introduction to Adrift in the California Current {#sec-background}</title>
+<title>Adrift in the California Current - Introduction to Adrift in the California Current</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -405,7 +418,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction to Adrift in the California Current {#sec-background}</h1>
+<h1 class="title">Introduction to Adrift in the California Current</h1>
 </div>
 
 
@@ -420,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The goal of the Adrift in the California Current Project (‘Adrift’) was to use passive acoustic drifting recorders deployed offshore the U.S. West Coast to assess the distribution of marine mammals and to characterize the marine soundscape. This three-year study was initiated in the Northern California region in 2020, was extended to Central California in 2021, and an additional pilot study off Oregon was initiated in 2022. A concerted effort was made to develop a streamlined open-source workflow for passive acoustic analysis that would promote reproducible research, with all methods, data, and metadata being publicly accessible. This report outlines methods, results, and recommendations for future research.</p>
+<p>The goal of the Adrift in the California Current Project (‘Adrift’) was to use passive acoustic drifting recorders deployed offshore the U.S. West Coast to assess the distribution of marine mammals and to characterize the marine soundscape. This three-year study was initiated in the Northern California region in 2020, was extended to Central California in 2021, and an additional pilot study off Oregon was initiated in 2022. This report outlines methods, results, and recommendations for future research.</p>
 <p><strong>Why PAM?</strong></p>
 <ul>
 <li><p><em>Traditional shipboard surveys to assess marine mammal populations are expensive generally conducted intermittently (every 5 years) during summer and fall seasons</em></p></li>
@@ -442,11 +455,22 @@ ul.task-list li input[type="checkbox"] {
 <li><p><em>Hydrophones positioned near animals in the water column (neither at surface nor seafloor)</em></p></li>
 </ul></li>
 </ul>
-<p>Drifting recorders have been increasingly deployed during large scale shipboard surveys to augment visual line-transect surveys for cryptic and deep-diving species (Keating et al.&nbsp;2018; Simonis 2020), and methods have been developed to estimate density and abundance of goose-beaked whales (Ziphius cavirostris) (Barlow et al.&nbsp;2021). As drifting recorders are not tethered to the seafloor or to a ship, they have shown potential as an alternative PAM platform for the wind energy areas identified in the deep waters offshore the U.S. West Coast.</p>
+<p>Drifting recorders have been increasingly deployed during large scale shipboard surveys to augment visual line-transect surveys for cryptic and deep-diving species (<span class="citation" data-cites="keating2018">(<a href="#ref-keating2018" role="doc-biblioref">Keating et al. 2018</a>)</span> <span class="citation" data-cites="simonis2020">(<a href="#ref-simonis2020" role="doc-biblioref">Simonis 2020</a>)</span>), and methods have been developed to estimate density and abundance of goose-beaked whales (<em>Ziphius cavirostris</em>) (<span class="citation" data-cites="barlow_acoustic-based_2022">(<a href="#ref-barlow_acoustic-based_2022" role="doc-biblioref">Barlow et al. 2022</a>)</span>). As drifting recorders are not tethered to the seafloor or to a ship, they have shown potential as an alternative PAM platform for the wind energy areas identified in the deep waters offshore the U.S. West Coast.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-barlow_acoustic-based_2022" class="csl-entry" role="listitem">
+Barlow, Jay, Jeffrey E. Moore, Jennifer L. K. McCullough, and Emily T. Griffiths. 2022. <span>“Acoustic-Based Estimates of <span>Cuvier</span>’s Beaked Whale (<span>Ziphius</span> Cavirostris) Density and Abundance Along the <span>U</span>.<span>S</span>. <span>West</span> <span>Coast</span> from Drifting Hydrophone Recorders.”</span> <em>Marine Mammal Science</em> 38 (2): 517–38. <a href="https://doi.org/10.1111/mms.12872">https://doi.org/10.1111/mms.12872</a>.
+</div>
+<div id="ref-keating2018" class="csl-entry" role="listitem">
+Keating, Jennifer, Jay Barlow, Emily T. Griffiths, and Jeffrey E. Moore. 2018. <span>“Passive Acoustics Survey of Cetacean Abundance Levels (PASCAL-2016) Final Report.”</span> <a href="https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf">https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf</a>.
+</div>
+<div id="ref-simonis2020" class="csl-entry" role="listitem">
+Simonis, Anne E. 2020. <span>“Passive Acoustic Survey of Deep-Diving Odontocetes in the California Current Ecosystem 2018: Final Report.”</span> <em>NOAA-TM-NMFS-SWFSC-630</em>. <a href="https://doi.org/10.25923/W5XX-JZ73">https://doi.org/10.25923/W5XX-JZ73</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

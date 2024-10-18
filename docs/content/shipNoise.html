@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +357,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +381,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -405,7 +399,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Soundscape</h1>
+<h1 class="title">Ship Noise</h1>
 </div>
 
 
@@ -420,27 +414,16 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Ships produce different sounds while operating, such as impulsive signals from ship propeller cavitation or echosounder signals that can be easily identified in the LTSA and confirmed with a spectrogram. Vessel noise was identified by a trained analyst scanning 1-hour LTSA windows using the Logger Remora in Triton (100 Hz and 5 s resolution). Once a ship was identified, 10 s spectrograms were used to confirm identification (2000 point FFT, 75% overlap). Ships were either logged as being broadband (high amplitude with frequency content above 5 kHz) or narrowband/low frequency (lower amplitude). Ship noise was assessed in full for the Adrift study and in part for CCES (not analyzed for PASCAL). Additional details are provided in <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/Soundscapes/Metrics.html#detect-vessels">Github online analysis methods</a>. The manual methods used in this study were time consuming, but our initial efforts to analyze data with an existing ship detector found that the detector was unreliable on identifying ship tracks with our dataset. We recommend development of an open-source approach to vessel detection that includes classification of vessels to vessel type, and integration of this data into a systematic approach to quantifying the contribution of ship noise to the soundscape.</p>
-<p>The percent of recording hours with vessel presence varied across region, season, and time of day (<a href="#fig-ADRIFT_ShipPresence_SeasonRegion">Figure&nbsp;1</a>). Vessel presence was higher in Oregon and Humboldt than in San Francisco or Morro Bay. Vessel presence in Humboldt shifted from night-time during the upwelling season to daytime during the post-upwelling season (summer), with winter variability likely relating to low effort. Morro Bay region experienced the lowest amount of vessel traffic, with extremely low levels of vessel traffic (&lt;20%) detected in the post-upwelling season.</p>
-<p>Hourly presence of ships in San Francisco appears to be lower than other regions (<a href="#fig-ADRIFT_ShipPresence_SeasonRegion">Figure&nbsp;1</a>). Overall sound levels were much higher in this region (<a href="#fig-ADRIFT_PSD_SeasonRegion">Figure&nbsp;2</a>), and may have masked some individual ship passages. Future work can include an Automatic Identification System metric such as the number of unique large vessels with relatively close approaches.</p>
+<p>Ships produce different sounds while operating, such as impulsive signals from ship propeller cavitation or echosounder signals that can be easily identified in the LTSA and confirmed with a spectrogram. Vessel noise was identified by a trained analyst scanning 1-hour LTSA windows (detailed methods provided in <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/Soundscapes/Metrics.html#detect-vessels">Adrift Analysis Methods</a>).</p>
 <div id="fig-ADRIFT_ShipPresence_SeasonRegion" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="..\figs/ADRIFT_ShipPresence_SeasonRegion.png" class="img-fluid figure-img" alt="Polar plots of ship noise by season (upwelling on left, post-upwelling in center, and winter on right) and region (Oregon at top, then Humboldt, San Francisco, and Morro Bay at the bottom). Each polar plot shows the percent of detections as a colored histogram (percent detections range from 0 in dark blue to 0.5 in bright yellow) for each hour of the day. In Humboldt, more ships were detected in the middle of the night during the upwelling season, in the afternoon during the post-upwelling season, and in the early morning during the (limited) winter data. Oregon had a larger number of ships detected late at night during the post-upwelling season, and both Morro Bay and San Francisco had relatively low percentages of detections compared to other regions."></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Polar plots of seasonal detection of ship noise in Oregon, Humboldt, San Francisco, and Morro Bay regions. The hourly percent of effort with vessel detections is shown in color ranging from dark blue (0%) to yellow (50%). The diurnal variation in vessel noise is shown by detection in bins on polar plot ranging from 0 to 24 hr of the day (UTC, Universal Time Coordinated).</figcaption>
 </figure>
 </div>
-<p>The purpose of soundscape monitoring was to describe the ambient noise level(s) in the California Current Ecosystem (including the Morro Bay and Humboldt Wind Energy Areas) and to identify the major contributors to the soundscape. To that end, we measured soundscape metrics and identified two primary sources of noise: self-noise and ship noise. Weather (wind, rain) is a significant contributor to soundscape and varies by season/region. Although we did not quantify this in our analysis, we recommend that future research include weather as a contributor to the soundscape. These data were combined with the detection of biological sounds from marine mammals to examine the biological and anthropogenic contributors to the soundscape. Soundscape metrics aligned with <a href="https://sanctsound.ioos.us">SanctSound protocols</a> and were measured using Triton (Wiggins and Hildebrand 2007) with the Soundscape Remora. Data were decimated to 48 kHz, and LTSAs were calculated with a 1 Hz, 1 s resolution. The full system calibration value was calculated from the combined hydrophone and SoundTrap sensitivity. Soundscape LTSAs were used to calculate sound levels in 2-minute windows from 100 - 24,000 Hz, including broadband sound pressure levels, third-octave levels, and power spectral densities. Median (50th percentile), mean, and various statistical sound levels (1st, 5th, 10th, 25th, 75th, 90th, and 95th percentiles) are calculated for each metric. Soundscape metrics were archived to NCEI and linked with the original raw data.</p>
-<p>The SanctSound methods were initially adopted to provide data consistent with previously analyzed data. Soundscape methods have changed significantly in the last three years, and the most recent recommendation is to report sound levels in hybrid millidecade bands. While there is now open-source software that can produce these metrics, it was not available for our analysis. All of our data is publicly available and the LTSAs were retained so that the data can be converted in the future. We recommend that data be reanalyzed to report sound levels in hybrid millidecade bands to align with current standards.</p>
-<p>Periods of low frequency self-noise (strumming, knocking sounds resulting from movement of buoy components) were identified by scanning the 1- or 2-hour LTSA windows created with 500 Hz decimated files (5 Hz and 1 s resolution). Start and end times of noisy data were logged with the highest frequency affected (up to the 250 Hz maximum provided by the 500 Hz decimated data). Noisy data with energy above the 100 Hz lower bounds of the soundscape methods were removed from analysis. Additional details are provided in <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/DataArchive/DataQualityCheck.html#scan-ltsa-for-noisy-data">Github online analysis methods</a>.</p>
-<p>The Power Spectral Density (PSD) is the measure of the signal’s power as a function of frequency, and the PSD plots provide a visualization of the ambient noise for each region and season (<a href="#fig-ADRIFT_PSD_SeasonRegion">Figure&nbsp;2</a>). Contributing sounds include biological sounds (marine mammals, fish, invertebrates), environmental noise (wind, rain), and anthropogenic noise (vessel noise, depth sounders, seal bombs). While Figure 6.1 includes all contributors to the soundscape, seasonal and regional differences can be informative and provide valuable pre-development information regarding the general soundscape. In general, noise levels ranged from 50 dB re 1uPa to nearly 150 dB re 1uPa, with the highest density of sound in the 75 - 100 dB range (<a href="#fig-ADRIFT_PSD_SeasonRegion">Figure&nbsp;2</a>).</p>
-<div id="fig-ADRIFT_PSD_SeasonRegion" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="..\figs/ADRIFT_PSD_SeasonRegion.png" class="img-fluid figure-img" alt="Power spectral density (PSD) plots shown by season (upwelling on left, post-upwelling in center, and winter on right) and region (Oregon at top, then Humboldt, San Francisco, and Morro Bay at the bottom). Each PSD plot shows the intensity in dB re: 1uPa on the y axis and frequency in Hz on the x axis. The density is shown as color, ranging from dark blue (0) to bright yellow (0.25). These plots include biological, geological, and anthropogenic contributors to the soundscape, and seasonal/regional variation may be attributed to local factors including storms, highly vocal species, or close passage of vessels."></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Power spectral density for Adrift deployments by season and region.</figcaption>
-</figure>
-</div>
-<p>Other researchers have developed models to separate the distinct contributions of ship and wind noise to soundscapes (Erbe et al.&nbsp;2021; ZoBell et al.&nbsp;2024). These models have been validated with empirical data and can be in close agreement in certain times and places, but validation has been very limited to small spatiotemporal scales. The data collected in offshore waters throughout the California Current by drifting recorders during PASCAL, CCES, and Adrift surveys can be used to validate models which separate wind and shipping contributions to sound levels. This will be an important next step for evaluating changes in the soundscape associated with offshore wind development areas.</p>
-<p>Low frequency noise associated with strumming precluded consistent analysis of soundscape below 100Hz. Future drifting recorder studies should consider alternative configurations that eliminate strumming and other self-noise to allow for broadband soundscape analysis.</p>
+<p>The percent of recording hours with vessel presence varied across region, season, and time of day (<a href="#fig-ADRIFT_ShipPresence_SeasonRegion">Figure&nbsp;1</a>). Vessel presence was higher in Oregon and Humboldt than in San Francisco or Morro Bay. Vessel presence in Humboldt shifted from night-time during the upwelling season to daytime during the post-upwelling season (summer), with winter variability likely relating to low effort. Morro Bay region experienced the lowest amount of vessel traffic, with extremely low levels of vessel traffic (&lt;20%) detected in the post-upwelling season.</p>
+<p>Hourly presence of ships in San Francisco appears to be lower than other regions (<a href="#fig-ADRIFT_ShipPresence_SeasonRegion">Figure&nbsp;1</a>). Overall sound levels were much higher in this region (see <a href="https://sael-swfsc.github.io/Adrift/content/soundscape.html#fig-ADRIFT_PSD_SeasonRegion">Adrift PSD Plot in Soundscapes</a>), and may have masked some individual ship passages. Future work can include an Automatic Identification System metric such as the number of unique large vessels with relatively close approaches.</p>
+<p>The manual methods used in this study were time consuming, but our initial efforts to analyze data with an existing ship detector found that the detector was unreliable on identifying ship tracks with our dataset. We recommend development of an open-source approach to vessel detection that includes classification of vessels to vessel type, and integration of this data into a systematic approach to quantifying the contribution of ship noise to the soundscape.</p>
 
 
 

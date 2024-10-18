@@ -1,19 +1,20 @@
 ---
 title: Drifting Recorders 
+bibliography: references.bib
 ---
 
 ::: columns
 ::: {.column width="40%"}
 Drifting recorders consist of a hydrophone array and autonomous recorder at depth with a surface buoy and satellite GPS at the surface to allow for tracking and retrieval (@fig-DriftingAcousticBuoyDiagram). Components are continually modified to address problems and accommodate improved technologies.
 
-The surface buoy transitioned from a spar buoy to a high-flyer pole buoy after CCES and prior to Adrift in an effort to minimize buoy loss due to ship strike. The pole buoy includes a radar reflector for visibility and a satellite GPS tracker mounted to the pole. Pole buoys included the now discontinued Lindgren-Pitman high-flyer buoy, a custom high-flyer developed by Fisherman Dick Ogg, and a custom in-house high-flyer pole buoy. 
-
+The surface buoy transitioned from a spar buoy to a high-flyer pole buoy after CCES and prior to Adrift in an effort to minimize buoy loss due to ship strike. The pole buoy includes a radar reflector for visibility and a satellite GPS tracker mounted to the pole. Pole buoys included the now discontinued Lindgren-Pitman high-flyer buoy, a custom high-flyer developed by Fisherman Dick Ogg, and a custom in-house high-flyer pole buoy.
 :::
 
 ::: {.column width="60%"}
 ![Drifting Recorder Diagram](/figs/DriftingAcousticBuoyDiagram.jpg){#fig-DriftingAcousticBuoyDiagram fig-alt="Diagram showing components of drifting buoy. On the left is the pole float at the surface of the ocean, with a radar reflector on top, a satellite transmitter on the pole, a float and a weight to keep the pole buoy floating and upright. The pole buoy is attached by a rope to the small surface float with 100 m of rope with the instrumentation. Below the surface float is a sub-surface float, and the recorder with hydrophones at 100 m depth, and an anchor at the bottom of this rope." fig-align="center"}
 :::
 :::
+
 Initial GPS trackers included two SPOT GPS trackers (for redundancy) mounted in a waterproof canister on the pole buoy. The modifications made to these trackers to increase their battery power led to increased failure (modifications weakened the units). These were replaced with Solar GPS that were easier to use, more robust, and could be used for extended periods with solar recharge of the internal battery.
 
 A trawl float was attached to the surface buoy with a short length of floating line to allow for retrieval using a grappling hook.
@@ -24,13 +25,13 @@ To improve vertical alignment of the hydrophones at depth, a subsurface trawl fl
 
 The acoustic recording equipment consisted of a two-element vertical hydrophone array below the recorder. A Sensus Ultra depth sensor was attached directly above the top hydrophone and recorded depth at 60s intervals. The top hydrophone consisted of an HTI-92WB and the lower hydrophone consisted of an HTI-96min positioned 5m below the top hydrophone. Recorders consisted of either the (now discontinued) SoundTrap 4300 or the SoundTrap 640 which allowed for extended deployments (Ocean Instruments, NZ).
 
-Initial recordings included a duty cycle to extend deployment, and then all recordings shifted to continuous sampling. Sample rate varied according to the instrument, with a minimum sample rate of 288 kHz. A summary of deployment details can be found in Adrift Expanded Datasets.
+Initial recordings included a duty cycle to extend deployment, and then all recordings shifted to continuous sampling. Sample rate varied according to the instrument, with a minimum sample rate of 288 kHz. A summary of deployment details can be found in [Adrift Expanded Datasets](https://sael-swfsc.github.io/Adrift/content/adriftData.html).
 
-More information on drifting recorder components and design can be found on our GitHub pages for Adrift field methods. Methods for drifting recorders deployed during PASCAL and CCES can be found in their respective reports (Keating et al. 2018; Simonis 2020)
+More information on drifting recorder components and design can be found on our[Adrift Field Methods](https://sael-swfsc.github.io/adrift-field-methods/) website. Methods for drifting recorders deployed during PASCAL and CCES can be found in their respective reports [@keating2018] [@simonis_passive_2020].
 
 ***Results***
 
-Clustered drifting recorders provide an opportunity to improve our understanding of the spatial and temporal variability of the contributors to the soundscape. Preliminary results suggest that clustered drifting recorders can be used to reduce the possible range of sound source location (see Appendix: Modeling Habitat Use) and can provide information on the spatial variation in soundscape (see Spatial Variation in Noise). Drifting recorders were deployed in clusters of 4 in Humboldt and Oregon study areas, and in clusters of 8 in the Morro Bay Study area. In some cases, drifting recorders in close proximity to each other followed dramatically different drift trajectories.
+Clustered drifting recorders provide an opportunity to improve our understanding of the spatial and temporal variability of the contributors to the soundscape. Preliminary results suggest that clustered drifting recorders can be used to reduce the possible range of sound source location (see [Modeling Habitat Use](https://sael-swfsc.github.io/Adrift/content/habitatModels.html)) and can provide information on the spatial variation in soundscape (see [Spatial Variation in Noise](https://sael-swfsc.github.io/Adrift/content/spatialNoise.html)). Drifting recorders were deployed in clusters of 4 in Humboldt and Oregon study areas, and in clusters of 8 in the Morro Bay Study area. In some cases, drifting recorders in close proximity to each other followed dramatically different drift trajectories.
 
 There were multiple cases of equipment and data loss, especially during the initial deployments. Losses were due to a variety of reasons, including inclement weather, strong currents, and recorder failures. We mitigated these problems through modifying components and altering survey methods. A number of gear modifications were made to improve robustness and to decrease self-noise that interfered with recording quality. We recommend additional buoy modification to reduce noise associated with strong currents and inclement weather. Southwest Fisheries Science Center (SWFSC) will be using an alternative buoy design developed by Pacific Islands Fisheries Science Center during the CalCurCEAS 2024 survey, which may reduce strumming noise.
 

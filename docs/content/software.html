@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -381,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -448,10 +467,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="beaked-whale-analytical-tools" class="level2">
 <h2 class="anchored" data-anchor-id="beaked-whale-analytical-tools">Beaked Whale Analytical Tools</h2>
-<p>Previous research by SWFSC found that drifting acoustic recorders could be used to estimate density of goose-beaked whales (Barlow et al.&nbsp;2022), and efforts were made to streamline this analytical process to allow us to estimate beaked whale density from the Adrift survey as well as other archived and future surveys (CCES 2018 and CalCurCEAS 2024). Development of the RoboJ tool to streamline a systematic approach to density estimation was based off the process developed by SWFSC in (Barlow et al.&nbsp;2022) and it was generalized for adoption by other researchers (see RoboJ GitHub Repository ). While most of the process is now streamlined, there remains a significant manual effort for identifying acoustic events. Our team initiated a process for improving automation of this tedious process, however they were unable to complete the automation of identifying acoustic events and we recommend investing in this development in the future (see Appendix: Open Science for more details on development of a beaked whale matched template classifier). The RoboJ tool has been tested by colleagues at Pacific Islands Fisheries Science Center, and documentation and final preparation of the software is underway.</p>
+<p>Previous research by SWFSC found that drifting acoustic recorders could be used to estimate density of goose-beaked whales <span class="citation" data-cites="barlow2021">(<a href="#ref-barlow2021" role="doc-biblioref">Barlow et al. 2021</a>)</span>, and efforts were made to streamline this analytical process to allow us to estimate beaked whale density from the Adrift survey as well as other archived and future surveys (CCES 2018 and CalCurCEAS 2024). Development of the RoboJ tool to streamline a systematic approach to density estimation was based off the process developed by SWFSC in <span class="citation" data-cites="barlow2021">(<a href="#ref-barlow2021" role="doc-biblioref">Barlow et al. 2021</a>)</span> and it was generalized for adoption by other researchers (see<a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub Repository</a>). While most of the process is now streamlined, there remains a significant manual effort for identifying acoustic events. Our team initiated a process for improving automation of this tedious process, however they were unable to complete the automation of identifying acoustic events and we recommend investing in this development in the future. The RoboJ tool has been tested by colleagues at Pacific Islands Fisheries Science Center, and documentation and final preparation of the software is underway.</p>
 <section id="roboj" class="level3">
 <h3 class="anchored" data-anchor-id="roboj"><strong><em>RoboJ</em></strong></h3>
-<p>RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders.The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods.Development is still ongoing, but near-final code for this project is available on <a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub</a>.</p>
+<p>RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders <span class="citation" data-cites="barlow2021">(<a href="#ref-barlow2021" role="doc-biblioref">Barlow et al. 2021</a>)</span>.The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods.Development is still ongoing, but near-final code for this project is available on <a href="https://github.com/TaikiSan21/RoboJ">RoboJ GitHub</a>.</p>
 <p>RoboJ Pipeline:</p>
 <ul>
 <li><p>Incorporates acoustic detections stored in PAMGuard databases and binaries.</p></li>
@@ -479,9 +498,14 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-barlow2021" class="csl-entry" role="listitem">
+Barlow, Jay, Selene Fregosi, Len Thomas, Danielle Harris, and Emily T. Griffiths. 2021. <span>“Acoustic Detection Range and Population Density of Cuvier’s Beaked Whales Estimated from Near-Surface Hydrophones.”</span> <em>The Journal of the Acoustical Society of America</em> 149 (1): 111–25. <a href="https://doi.org/10.1121/10.0002881">https://doi.org/10.1121/10.0002881</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

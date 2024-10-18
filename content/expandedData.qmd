@@ -4,8 +4,8 @@ title: Expanded Datasets
 
 Expanded datasets, including expanded data tables and additional figures can be found here.
 
--   Adrift Datasets
+-   [Adrift Datasets](https://sael-swfsc.github.io/Adrift/content/adriftData.html)
 
--   PASCAL Datasets
+-   [PASCAL Datasets](https://sael-swfsc.github.io/Adrift/content/pascalData.html)
 
--   CCES Datasets
+-   [CCES Datasets](https://sael-swfsc.github.io/Adrift/content/ccesData.html)

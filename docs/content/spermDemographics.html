@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Natalie Posdaljian, nposdalj@ucsd.edu">
 
 <title>Adrift in the California Current - Sperm Whale Demographics</title>
 <style>
@@ -20,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +354,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -381,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -412,6 +432,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Natalie Posdaljian, nposdalj@ucsd.edu </p>
+          </div>
+  </div>
     
   
     
@@ -422,10 +448,10 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="determining-sperm-whale-demographic-composition-using-inter-click-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="determining-sperm-whale-demographic-composition-using-inter-click-intervals"><em>Determining Sperm Whale Demographic Composition using Inter-Click Intervals</em></h2>
-<p>Male and female sperm whales are sexually dimorphic and differences in body size (males are larger than females) have been linked to differences in echolocation click characteristics (Solsona-Berga et al.&nbsp;2022). The Inter-Pulse Interval (IPI) is a result of the time taken for the click to reflect multiple times between air sacs at opposite ends of the spermaceti organ and to exit the rostrum in several subsequent pulses (Møhl et al.&nbsp;2000), and thus the IPI has been found to relate to body size. Similarly, the Inter-Click Interval (ICI), which is the time between pulse trains, can serve as a proxy for sperm whale body size and sex, as males click every ~1s and females click every 0.5s (Solsona-Berga et al.&nbsp;2022). This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from six drifting buoys.</p>
+<p>Male and female sperm whales are sexually dimorphic and differences in body size (males are larger than females) have been linked to differences in echolocation click characteristics <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span>. The Inter-Pulse Interval (IPI) is a result of the time taken for the click to reflect multiple times between air sacs at opposite ends of the spermaceti organ and to exit the rostrum in several subsequent pulses <span class="citation" data-cites="møhl2000">(<a href="#ref-møhl2000" role="doc-biblioref">Møhl et al. 2000</a>)</span>, and thus the IPI has been found to relate to body size. Similarly, the Inter-Click Interval (ICI), which is the time between pulse trains, can serve as a proxy for sperm whale body size and sex, as males click every ~1s and females click every 0.5s <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span>. This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from six drifting buoys.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>Sperm whale echolocation clicks were detected using the multi-step approach described in (Solsona-Berga et al.&nbsp;2022) appendix, with manual review of putative sperm whale acoustic encounters using DetEdit. Histograms of ICI provide a visualization to indicate sperm whale size and sex (Solsona-Berga et al.&nbsp;2022). A plot of concatenated histograms, referred to as ICIgrams, was annotated and categorized for each time period at each site (see <a href="#fig-ADRIFT_Appendix_Pm-Figure1_ADRIFT_105_ICIgram">Figure&nbsp;1</a>). Detections with a modal ICI of 600 ms or less were presumed to be females and their young, or Social Groups. Detections with a modal ICI of 0.8 s and greater will be considered Adult Males. The detections with a modal ICI between the Social Groups and Adult Males (&lt; 0.6 s and &gt; 0.8 s) could contain large females or juvenile males, and will be referred to as Mid-Size.</p>
+<p>Sperm whale echolocation clicks were detected using the multi-step approach described in <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span> appendix, with manual review of putative sperm whale acoustic encounters using DetEdit. Histograms of ICI provide a visualization to indicate sperm whale size and sex <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span>. A plot of concatenated histograms, referred to as ICIgrams, was annotated and categorized for each time period at each site (see <a href="#fig-ADRIFT_Appendix_Pm-Figure1_ADRIFT_105_ICIgram">Figure&nbsp;1</a>). Detections with a modal ICI of 600 ms or less were presumed to be females and their young, or Social Groups. Detections with a modal ICI of 0.8 s and greater will be considered Adult Males. The detections with a modal ICI between the Social Groups and Adult Males (&lt; 0.6 s and &gt; 0.8 s) could contain large females or juvenile males, and will be referred to as Mid-Size.</p>
 </div><div class="column" style="width:60%;">
 <div id="fig-ADRIFT_Appendix_Pm-Figure1_ADRIFT_105_ICIgram" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -435,9 +461,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The ICIgram method was originally developed for sperm whales in the Gulf of Mexico (Solsona-Berga et al.&nbsp;2022), and has been applied to sperm whales in the Gulf of Alaska (Posdaljian et al.&nbsp;2023) and in southern New England (Westell et al.&nbsp;2024). To compare how effectively the ICIgram method can be used to categorize the size/sex of sperm whales in the California Current, length estimates using IPI from individual animals were matched with the size/sex classification using the ICIgram method.</p>
-<p>IPIs were extracted using the Cachalot Automatic Body Length Estimator (CABLE) (Beslin et al.&nbsp;2018). This tool estimates the body length of sperm whales by compiling and clustering their IPI distributions. To avoid including the same animal more than once, only unique IPI values were retained in the final analysis.</p>
-<p>The results of this pilot study identified only one size/sex class (Social Groups) based on their echolocation ICI, supported by examining IPI for individual clicks. Sperm whale body length estimates were calculated using both their IPI and ICI for 34 animals encountered across six Adrift study deployments. The animal lengths obtained from the IPI were plotted against the ICI to confirm the linear relationship between the two acoustic characteristics (<a href="#fig-ADRIFT_Appendix_Pm_Combo">Figure&nbsp;2</a>, left). A Thiel-sen regression revealed a slope between ICI and body length suggesting a 1.2 m increase in size associated with a 100 ms increase in ICI (line of best fit: body length = 0.0120*ICI + 2.5, R2 = 0.4, p-value = 0.02: Spearman’s correlation coefficient). No ICIs above 800 ms and total body length above 12.3 m were identified, indicating that only Social Groups with potentially a few subadult males were detected. The Adrift study data suggested a steeper linear relationship between ICI and total length compared to (Solsona-Berga et al.&nbsp;2022), likely because the Adrift study data only included 34 animals and these were all females and their young with potentially a few subadult males.</p>
+<p>The ICIgram method was originally developed for sperm whales in the Gulf of Mexico <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span>, and has been applied to sperm whales in the Gulf of Alaska <span class="citation" data-cites="posdaljian_sperm_2023">(<a href="#ref-posdaljian_sperm_2023" role="doc-biblioref">Posdaljian et al. 2023</a>)</span> and in southern New England <span class="citation" data-cites="westell_acoustic_2024">(<a href="#ref-westell_acoustic_2024" role="doc-biblioref">Westell et al. 2024</a>)</span>. To compare how effectively the ICIgram method can be used to categorize the size/sex of sperm whales in the California Current, length estimates using IPI from individual animals were matched with the size/sex classification using the ICIgram method.</p>
+<p>IPIs were extracted using the Cachalot Automatic Body Length Estimator (CABLE) <span class="citation" data-cites="beslin2018">(<a href="#ref-beslin2018" role="doc-biblioref">Beslin, Whitehead, and Gero 2018</a>)</span>. This tool estimates the body length of sperm whales by compiling and clustering their IPI distributions. To avoid including the same animal more than once, only unique IPI values were retained in the final analysis.</p>
+<p>The results of this pilot study identified only one size/sex class (Social Groups) based on their echolocation ICI, supported by examining IPI for individual clicks. Sperm whale body length estimates were calculated using both their IPI and ICI for 34 animals encountered across six Adrift study deployments. The animal lengths obtained from the IPI were plotted against the ICI to confirm the linear relationship between the two acoustic characteristics (<a href="#fig-ADRIFT_Appendix_Pm_Combo">Figure&nbsp;2</a>, left). A Thiel-sen regression revealed a slope between ICI and body length suggesting a 1.2 m increase in size associated with a 100 ms increase in ICI (line of best fit: body length = 0.0120*ICI + 2.5, R2 = 0.4, p-value = 0.02: Spearman’s correlation coefficient). No ICIs above 800 ms and total body length above 12.3 m were identified, indicating that only Social Groups with potentially a few subadult males were detected. The Adrift study data suggested a steeper linear relationship between ICI and total length compared to <span class="citation" data-cites="solsona-berga2022">(<a href="#ref-solsona-berga2022" role="doc-biblioref">Solsona-Berga et al. 2022</a>)</span>, likely because the Adrift study data only included 34 animals and these were all females and their young with potentially a few subadult males.</p>
 <div id="fig-ADRIFT_Appendix_Pm_Combo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/ADRIFT_Appendix_Pm_Combo.png" class="img-fluid figure-img" alt="Three graphs representing sperm whale body size relationship with ICI results. On the left, the estimated total animal length in meters is on the y axis, and the ICI in ms is on the x axis. This scatterplot shows a positive linear relationship between ICI and body size, suggesting a 1.2 m increase in body size with a 100 ms increase in ICI. The center graph is a scatterplot time series with body length (m) on the y axis, and time on the x axis for the 22 hours of analyzed deployments. Each point represents a unique animal and the color represents the deployment on which the animal was recorded. All body lengths estimated ranged from 8 to 12.5 m. The final graph on the right provides a histogram of the number of sperm whale detections (y axis) for each estimated body length. The number of counts ranged from 6 to 8 animals."></p>
@@ -447,9 +473,26 @@ ul.task-list li input[type="checkbox"] {
 <p>This pilot study investigated the potential for assessing demographic composition of sperm whales in the California Current using inter-click interval as a proxy for sex/size in acoustic data from a subset of six drifting recorders. A total of 34 animals with a mean total body length of 10.3 m, likely Social Groups and Mid-Size animals, were identified in the region on November 9th, 2023. By applying this method to the entire dataset, we can further understand the demographics of sperm whales utilizing the California Current and potentially identify regions preferred by different demographic groups (i.e., Social Groups, Mid-Size, and Adult Males). Different demographic groups have differences in behavior and ecology that likely translate to demographic-specific responses to increasing anthropogenic threats and climate change. This type of analysis can play an important role for monitoring future changes to sperm whales in the California Current.</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-beslin2018" class="csl-entry" role="listitem">
+Beslin, Wilfried A. M., Hal Whitehead, and Shane Gero. 2018. <span>“Automatic Acoustic Estimation of Sperm Whale Size Distributions Achieved Through Machine Recognition of on-Axis Clicks.”</span> <em>The Journal of the Acoustical Society of America</em> 144 (6): 3485–95. <a href="https://doi.org/10.1121/1.5082291">https://doi.org/10.1121/1.5082291</a>.
+</div>
+<div id="ref-møhl2000" class="csl-entry" role="listitem">
+Møhl, B., M. Wahlberg, P. T. Madsen, L. A. Miller, and A. Surlykke. 2000. <span>“Sperm Whale Clicks: Directionality and Source Level Revisited.”</span> <em>The Journal of the Acoustical Society of America</em> 107 (1): 638–48. <a href="https://doi.org/10.1121/1.428329">https://doi.org/10.1121/1.428329</a>.
+</div>
+<div id="ref-posdaljian_sperm_2023" class="csl-entry" role="listitem">
+Posdaljian, Natalie, Alba Solsona-Berga, John A. Hildebrand, Caroline Soderstjerna, Sean M. Wiggins, Kieran Lenssen, and Simone Baumann-Pickering. 2023. <span>“Sperm <span>Whales</span> <span>Demographics</span> in the <span>Gulf</span> of <span>Alaska</span> and <span>Bering</span> <span>Sea</span>/<span>Aleutian</span> <span>Islands</span>: <span>An</span> <span>Overlooked</span> <span>Female</span> <span>Habitat</span>.”</span> <a href="https://doi.org/10.1101/2023.04.16.537097">https://doi.org/10.1101/2023.04.16.537097</a>.
+</div>
+<div id="ref-solsona-berga2022" class="csl-entry" role="listitem">
+Solsona-Berga, Alba, Natalie Posdaljian, John A. Hildebrand, and Simone Baumann-Pickering. 2022. <span>“Echolocation Repetition Rate as a Proxy to Monitor Population Structure and Dynamics of Sperm Whales.”</span> <em>Remote Sensing in Ecology and Conservation</em> 8 (6): 827–40. <a href="https://doi.org/10.1002/rse2.278">https://doi.org/10.1002/rse2.278</a>.
+</div>
+<div id="ref-westell_acoustic_2024" class="csl-entry" role="listitem">
+Westell, Annabel, Timothy J Rowell, Natalie Posdaljian, Alba Solsona-Berga, Sofie M Van Parijs, and Annamaria I DeAngelis. 2024. <span>“Acoustic Presence and Demographics of Sperm Whales (<span>Physeter</span> Macrocephalus) Off Southern <span>New</span> <span>England</span> and Near a <span>US</span> Offshore Wind Energy Area.”</span> <em>ICES Journal of Marine Science</em>, February, fsae012. <a href="https://doi.org/10.1093/icesjms/fsae012">https://doi.org/10.1093/icesjms/fsae012</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -6,10 +6,12 @@ The study of ocean sound is interdisciplinary and provides a natural opportunity
 
 The interdisciplinary nature of passive acoustics along with the natural appeal of whales and dolphins provides an opportunity for engaging the public in science and the scientific process. To that end, we developed a series of education and outreach materials to reach a diverse populace.
 
--   SDUSD Phenomena Based Instructional Curricula
+-   [SDUSD Phenomena Based Instructional Curricula](https://sael-swfsc.github.io/Adrift/content/sdusd.html)
 
--   Data Nuggets "Eavesdropping on the Ocean"
+-   [Data Nuggets "Eavesdropping on the Ocean"](https://sael-swfsc.github.io/Adrift/content/dataNuggets.html)
 
--   Zooniverse "Ocean Voices"
+-   [Zooniverse "Ocean Voices"](https://sael-swfsc.github.io/Adrift/content/zooniverse.html)
 
--   Sound Bytes Blog
+-   [Sound Bytes Blog](https://sael-swfsc.github.io/Adrift/content/soundBytes.html)
+
+-   [SoundCloud audio samples](https://sael-swfsc.github.io/Adrift/content/soundCloud.html)

@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -420,14 +433,25 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Methods Detection of calls associated with Bryde’s and sei whales was conducted by our partners at OSA. PAMGuard’s (v2.02.09) whistle and moan detector was used to detect calls associated with Bryde’s (Be4) and sei whales (frequency modulated downsweep calls identified in Rankin and Barlow (2007)). Potential calls were reviewed by an experienced OSA analyst in PAMGuard’s Viewer Mode. Detections were grouped into acoustic events using the Detection Group Localiser module. Acoustic events were then binned into hourly presence for the presence of Bryde’s and sei whales. Deployments with excessive self-noise (such as strumming) that consistently impacted our ability to detect Bryde’s and sei whales were eliminated from this analysis. Detailed methods are provided in our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift">GitHub online analysis methods</a> and an OSA Report archived on our GitHub repository.</p>
-<p>Results There were no confirmed detections of calls associated with Bryde’s or sei whales during Adrift, and a single possible sei whale encounter was detected during PASCAL (see spectrogram of possible sei whale in GitHub Repository).</p>
-<p>Bryde’s whale distribution is in the tropical and subtropical waters, with occasional northward incursion into the Southern California Bight (Kerosky et al.&nbsp;2012). The Adrift deployments were north of Point Conception (and the Southern California Bight), and it is not unexpected to fail to detect animals on our recordings. Warming oceans associated with climate change may lead to more consistent detection of these species in the California Current, and these detections may occur in increasingly northern latitudes over time. We recommend that future acoustic studies in the California Current include detection of Bryde’s whales.</p>
-<p>Little is known about sei whales in the North Pacific, and to our knowledge there is only one confirmed recording of sei whales in the North Pacific, near Hawaii (Rankin and Barlow 2007). Future research should take advantage of opportunities to understand the vocal repertoire of sei whales in the North Pacific Ocean.</p>
+<p>Methods Detection of calls associated with Bryde’s and sei whales was conducted by our partners at OSA. PAMGuard’s (v2.02.09) whistle and moan detector was used to detect calls associated with Bryde’s (Be4) and sei whales (frequency modulated downsweep calls identified in <span class="citation" data-cites="rankin2007">(<a href="#ref-rankin2007" role="doc-biblioref">Rankin and Barlow 2007a</a>)</span>. Potential calls were reviewed by an experienced OSA analyst in PAMGuard’s Viewer Mode. Detections were grouped into acoustic events using the Detection Group Localiser module. Acoustic events were then binned into hourly presence for the presence of Bryde’s and sei whales. Deployments with excessive self-noise (such as strumming) that consistently impacted our ability to detect Bryde’s and sei whales were eliminated from this analysis. Detailed methods are provided in our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift">Adrift Analysis Methods</a> and an <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/OSA_NMSF_2023.578_Project_Report.pdf">OSA Report</a> archived on our GitHub repository.</p>
+<p>Results There were no confirmed detections of calls associated with Bryde’s or sei whales during Adrift, and a single possible sei whale encounter was detected during PASCAL (see spectrogram of <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/PossSei_Pascal010.png">possible sei whale</a> in GitHub Repository).</p>
+<p>Bryde’s whale distribution is in the tropical and subtropical waters, with occasional northward incursion into the Southern California Bight <span class="citation" data-cites="kerosky_brydes_2012">(<a href="#ref-kerosky_brydes_2012" role="doc-biblioref">Kerosky et al. 2012</a>)</span>. The Adrift deployments were north of Point Conception (and the Southern California Bight), and it is not unexpected to fail to detect animals on our recordings. Warming oceans associated with climate change may lead to more consistent detection of these species in the California Current, and these detections may occur in increasingly northern latitudes over time. We recommend that future acoustic studies in the California Current include detection of Bryde’s whales.</p>
+<p>Little is known about sei whales in the North Pacific, and to our knowledge there is only one confirmed recording of sei whales in the North Pacific, near Hawaii <span class="citation" data-cites="rankin_vocalizations_2007">(<a href="#ref-rankin_vocalizations_2007" role="doc-biblioref">Rankin and Barlow 2007b</a>)</span>. Future research should take advantage of opportunities to understand the vocal repertoire of sei whales in the North Pacific Ocean.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-kerosky_brydes_2012" class="csl-entry" role="listitem">
+Kerosky, Sara M., Ana Širović, Lauren Roche, Simone Baumann-Pickering, Sean M. Wiggins, and John A. Hildebrand. 2012. <span>“Bryde’s Whale Seasonal Range Expansion and Increasing Presence in the <span>Southern</span> <span>California</span> <span>Bight</span> from 2000 to 2010.”</span> <em>Deep Sea Research</em> 65 (July): 125–32. https://doi.org/<a href="https://doi.org/10.1016/j.dsr.2012.03.013">https://doi.org/10.1016/j.dsr.2012.03.013</a>.
+</div>
+<div id="ref-rankin_vocalizations_2007" class="csl-entry" role="listitem">
+Rankin, Shannon, and Jay Barlow. 2007b. <span>“Vocalizations of the <span>Sei</span> <span>Whales</span> (<span>Balaenoptera</span> Borealis) Off the <span>Hawaiian</span> <span>Islands</span>.”</span> <em>Bioacoustics</em> 16 (2): 137–45. <a href="https://doi.org/10.1080/09524622.2007.9753572">https://doi.org/10.1080/09524622.2007.9753572</a>.
+</div>
+<div id="ref-rankin2007" class="csl-entry" role="listitem">
+———. 2007a. <span>“Vocalizations of the Sei Whales (Balaenoptera Borealis) Off the Hawaiian Islands.”</span> <em>Bioacoustics</em> 16 (2): 137–45. <a href="https://doi.org/10.1080/09524622.2007.9753572">https://doi.org/10.1080/09524622.2007.9753572</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

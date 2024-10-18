@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Anne Simonis, asimonis@sfsu.edu">
 
 <title>Adrift in the California Current - NBHF Classification</title>
 <style>
@@ -54,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -368,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -415,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -446,6 +466,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anne Simonis, asimonis@sfsu.edu </p>
+          </div>
+  </div>
     
   
     
@@ -456,10 +482,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="acoustic-classification-models-to-differentiate-nbhf-species" class="level2">
 <h2 class="anchored" data-anchor-id="acoustic-classification-models-to-differentiate-nbhf-species"><em>Acoustic Classification Models to Differentiate NBHF Species</em></h2>
-<p>There are four known cetacean species that produce NBHF echolocation clicks in the California Current Ecosystem, including harbor, Dall’s porpoise, as well as dwarf and pygmy sperm whales (<em>Kogia sima</em> and <em>Kogia breviceps</em>, respectively). These species all produce NBHF clicks with similar acoustic features (peak frequency greater than 100 kHz and 3 dB bandwidth less than 10 kHz), and to date, the species cannot be distinguished acoustically. Their presence in acoustic surveys is generally reported within a “NBHF” category; however, each species has distinct habitat preferences (Carretta 2023), and likely responds differently to anthropogenic impacts and environmental stressors. We build upon unsupervised clustering methods developed by (Griffiths et al.&nbsp;2020) by adding visually-verified species assignments to train an event level classification model in a supervised approach. This work also expands on a San Francisco State University master’s thesis by Jackson VanFleet-Brown (thesis will be publicly available summer 2024 ).</p>
+<p>There are four known cetacean species that produce NBHF echolocation clicks in the California Current Ecosystem, including harbor, Dall’s porpoise, as well as dwarf and pygmy sperm whales (<em>Kogia sima</em> and <em>Kogia breviceps</em>, respectively). These species all produce NBHF clicks with similar acoustic features (peak frequency greater than 100 kHz and 3 dB bandwidth less than 10 kHz), and to date, the species cannot be distinguished acoustically. Their presence in acoustic surveys is generally reported within a “NBHF” category; however, each species has distinct habitat preferences <span class="citation" data-cites="carretta2023">(<a href="#ref-carretta2023" role="doc-biblioref">Carretta 2023</a>)</span>, and likely responds differently to anthropogenic impacts and environmental stressors. We build upon unsupervised clustering methods developed by <span class="citation" data-cites="griffiths2020">(<a href="#ref-griffiths2020" role="doc-biblioref">Griffiths et al. 2020</a>)</span> by adding visually-verified species assignments to train an event level classification model in a supervised approach. This work also expands on a San Francisco State University master’s thesis by Jackson VanFleet-Brown (thesis will be publicly at <a href="https://environment.sfsu.edu/theses">SFSU Thesis website</a>).</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (<em>Kogia</em> spp. are the only NBHF here) were used as a training dataset (see table, right) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package PAMpal, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
+<p>Visually verified acoustic recordings for Dall’s and harbor porpoises from PASCAL, CCES, and Adrift surveys and NBHF clicks in the offshore waters of Baja California (<em>Kogia</em> spp. are the only NBHF here) were used as a training dataset (see table, right) to train a 2-stage BANTER (BioAcoustic EveNT ClassifiER) model <span class="citation" data-cites="rankin2017">(<a href="#ref-rankin2017" role="doc-biblioref">Rankin et al. 2017</a>)</span>. Click detections were assigned to a detector category based on the presence of a peak frequency below 125 kHz (lo-range) and greater than 125 kHz (hi-range). A suite of features was calculated for each click detection using the R package <a href="https://cran.r-project.org/web/packages/PAMpal/index.html">PAMpal</a>, and the median inter-click interval for each event was included as an event-level feature. The model was trained in an iterative way to achieve high classification accuracy and stability. The classification model was then used to predict labels on the Adrift survey data.</p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
 <details>
@@ -472,23 +498,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output-display">
 
-<div id="iasvyklgqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iasvyklgqa table {
+<div id="yxxtpvcbdi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yxxtpvcbdi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iasvyklgqa thead, #iasvyklgqa tbody, #iasvyklgqa tfoot, #iasvyklgqa tr, #iasvyklgqa td, #iasvyklgqa th {
+#yxxtpvcbdi thead, #yxxtpvcbdi tbody, #yxxtpvcbdi tfoot, #yxxtpvcbdi tr, #yxxtpvcbdi td, #yxxtpvcbdi th {
   border-style: none;
 }
 
-#iasvyklgqa p {
+#yxxtpvcbdi p {
   margin: 0;
   padding: 0;
 }
 
-#iasvyklgqa .gt_table {
+#yxxtpvcbdi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -514,12 +540,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_caption {
+#yxxtpvcbdi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iasvyklgqa .gt_title {
+#yxxtpvcbdi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -531,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#iasvyklgqa .gt_subtitle {
+#yxxtpvcbdi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -543,7 +569,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#iasvyklgqa .gt_heading {
+#yxxtpvcbdi .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -555,13 +581,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_bottom_border {
+#yxxtpvcbdi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_col_headings {
+#yxxtpvcbdi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -576,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_col_heading {
+#yxxtpvcbdi .gt_col_heading {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -596,7 +622,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#iasvyklgqa .gt_column_spanner_outer {
+#yxxtpvcbdi .gt_column_spanner_outer {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -608,15 +634,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#iasvyklgqa .gt_column_spanner_outer:first-child {
+#yxxtpvcbdi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iasvyklgqa .gt_column_spanner_outer:last-child {
+#yxxtpvcbdi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iasvyklgqa .gt_column_spanner {
+#yxxtpvcbdi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -628,11 +654,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#iasvyklgqa .gt_spanner_row {
+#yxxtpvcbdi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iasvyklgqa .gt_group_heading {
+#yxxtpvcbdi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -658,7 +684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#iasvyklgqa .gt_empty_group_heading {
+#yxxtpvcbdi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -673,15 +699,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#iasvyklgqa .gt_from_md > :first-child {
+#yxxtpvcbdi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iasvyklgqa .gt_from_md > :last-child {
+#yxxtpvcbdi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iasvyklgqa .gt_row {
+#yxxtpvcbdi .gt_row {
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 5px;
@@ -700,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#iasvyklgqa .gt_stub {
+#yxxtpvcbdi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -713,7 +739,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#iasvyklgqa .gt_stub_row_group {
+#yxxtpvcbdi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -727,15 +753,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#iasvyklgqa .gt_row_group_first td {
+#yxxtpvcbdi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iasvyklgqa .gt_row_group_first th {
+#yxxtpvcbdi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iasvyklgqa .gt_summary_row {
+#yxxtpvcbdi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -745,16 +771,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#iasvyklgqa .gt_first_summary_row {
+#yxxtpvcbdi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_first_summary_row.thick {
+#yxxtpvcbdi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iasvyklgqa .gt_last_summary_row {
+#yxxtpvcbdi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,7 +790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_grand_summary_row {
+#yxxtpvcbdi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -774,7 +800,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#iasvyklgqa .gt_first_grand_summary_row {
+#yxxtpvcbdi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -784,7 +810,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_last_grand_summary_row_top {
+#yxxtpvcbdi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -794,11 +820,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_striped {
+#yxxtpvcbdi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iasvyklgqa .gt_table_body {
+#yxxtpvcbdi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -807,7 +833,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_footnotes {
+#yxxtpvcbdi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -821,7 +847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_footnote {
+#yxxtpvcbdi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -830,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#iasvyklgqa .gt_sourcenotes {
+#yxxtpvcbdi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -844,7 +870,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#iasvyklgqa .gt_sourcenote {
+#yxxtpvcbdi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -852,72 +878,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#iasvyklgqa .gt_left {
+#yxxtpvcbdi .gt_left {
   text-align: left;
 }
 
-#iasvyklgqa .gt_center {
+#yxxtpvcbdi .gt_center {
   text-align: center;
 }
 
-#iasvyklgqa .gt_right {
+#yxxtpvcbdi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iasvyklgqa .gt_font_normal {
+#yxxtpvcbdi .gt_font_normal {
   font-weight: normal;
 }
 
-#iasvyklgqa .gt_font_bold {
+#yxxtpvcbdi .gt_font_bold {
   font-weight: bold;
 }
 
-#iasvyklgqa .gt_font_italic {
+#yxxtpvcbdi .gt_font_italic {
   font-style: italic;
 }
 
-#iasvyklgqa .gt_super {
+#yxxtpvcbdi .gt_super {
   font-size: 65%;
 }
 
-#iasvyklgqa .gt_footnote_marks {
+#yxxtpvcbdi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iasvyklgqa .gt_asterisk {
+#yxxtpvcbdi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iasvyklgqa .gt_indent_1 {
+#yxxtpvcbdi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iasvyklgqa .gt_indent_2 {
+#yxxtpvcbdi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iasvyklgqa .gt_indent_3 {
+#yxxtpvcbdi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iasvyklgqa .gt_indent_4 {
+#yxxtpvcbdi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iasvyklgqa .gt_indent_5 {
+#yxxtpvcbdi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#iasvyklgqa .katex-display {
+#yxxtpvcbdi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#iasvyklgqa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yxxtpvcbdi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -979,7 +1005,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Figure&nbsp;1: NBHF BANTER classification results from the training dataset. Confusion matrix (a) provides the percent correct classification for each species (pct.correct), lower confidence intervals (LCI_0.95), upper confidence intervals (UCI_0.95), and priors (expected error rate). Proximity plot (b) for species events from BANTER model (central dot color represents true species identity; color of circle surrounding dot represents BANTER species classification). Heat map (c) for ranks of ten most important variables; colors scale from most important predictors (dark red) to least important predictors (dark blue). Vote Plot (d) shows the vote distribution for each event (vertical slice) for each species; distribution of votes by species is shown by their representative color.</figcaption>
 </figure>
 </div>
-<p>This NBHF acoustic classifier can then be used to predict on archived Adrift NBHF detections to better resolve the three separate taxa in the California Current, including <em>Kogia</em> spp., Dall’s and harbor porpoises (<a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>). The overall classification accuracy of the model (83%) is acceptable, however there are several avenues to improve the model. Recently, (Zahn et al.&nbsp;2024) reported significant gains in BANTER model performance by considering the ratios of third-octave levels at specific frequencies. The mean spectra of each class within our training data indicate distinct distributions of spectral energy in each class, and the inclusion of a third octave level ratio (or other similar metric) may improve model performance. Additionally, the use of an iterative training approach merits consideration.</p>
+<p>This NBHF acoustic classifier can then be used to predict on archived Adrift NBHF detections to better resolve the three separate taxa in the California Current, including <em>Kogia</em> spp., Dall’s and harbor porpoises (<a href="#fig-nbhf_bantModel">Figure&nbsp;1</a>). The overall classification accuracy of the model (83%) is acceptable, however there are several avenues to improve the model. Recently, <span class="citation" data-cites="zahn_accurate_2024">(<a href="#ref-zahn_accurate_2024" role="doc-biblioref">Zahn et al. 2024</a>)</span> reported significant gains in BANTER model performance by considering the ratios of third-octave levels at specific frequencies. The mean spectra of each class within our training data indicate distinct distributions of spectral energy in each class, and the inclusion of a third octave level ratio (or other similar metric) may improve model performance. Additionally, the use of an iterative training approach merits consideration.</p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div id="fig-Appdx-NBHF-map2" class="quarto-figure quarto-figure-center anchored">
@@ -995,9 +1021,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-carretta2023" class="csl-entry" role="listitem">
+Carretta, James V. 2023. <span>“U.s. Pacific Marine Mammal Stock Assessments: 2022.”</span> <a href="https://doi.org/10.25923/5YSF-GT95">https://doi.org/10.25923/5YSF-GT95</a>.
+</div>
+<div id="ref-griffiths2020" class="csl-entry" role="listitem">
+Griffiths, Emily T., Frederick Archer, Shannon Rankin, Jennifer L. Keating, Eric Keen, Jay Barlow, and Jeffrey E. Moore. 2020. <span>“Detection and Classification of Narrow-Band High Frequency Echolocation Clicks from Drifting Recorders.”</span> <em>The Journal of the Acoustical Society of America</em> 147 (5): 3511–22. <a href="https://doi.org/10.1121/10.0001229">https://doi.org/10.1121/10.0001229</a>.
+</div>
+<div id="ref-rankin2017" class="csl-entry" role="listitem">
+Rankin, Shannon, Frederick Archer, Jennifer L. Keating, Julie N. Oswald, Michael Oswald, Alex Curtis, and Jay Barlow. 2017. <span>“Acoustic Classification of Dolphins in the California Current Using Whistles, Echolocation Clicks, and Burst Pulses.”</span> <em>Marine Mammal Science</em> 2 (33): 520–40. <a href="https://doi.org/10.1111/mms.12381">https://doi.org/10.1111/mms.12381</a>.
+</div>
+<div id="ref-zahn_accurate_2024" class="csl-entry" role="listitem">
+Zahn, Marie, Michael Ladegaard, Malene Simon, Kathleen Stafford, Taiki Sakai, and Kristin Laidre. 2024. <span>“Accurate Species Classification of <span>Arctic</span> Toothed Whale Echolocation Clicks Using One-Third Octave Ratios.”</span> <em>The Journal of the Acoustical Society of America</em> 155 (April): 2359–70. <a href="https://doi.org/10.1121/10.0025460">https://doi.org/10.1121/10.0025460</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

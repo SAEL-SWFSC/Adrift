@@ -1,21 +1,22 @@
 ---
 title: Modeling Habitat Use 
+author: Kaitlin Palmer, kpalmer@coa.edu
+bibliography: references.bib
 ---
+
 ## *Localizating Calls from Clustered Recorders to Model Habitat Use*
+
 In order to consider passive acoustic data for population assessment of marine mammals, these methods must account for varying detection probabilities due to uncertainty in the source location and with changing background noise levels.
 
 ::: columns
 ::: {.column width="40%"}
-
 The clustered deployments off Morro Bay provide a test bed for evaluating the ability of drifting recorders to contribute to population assessment models. Mysticete calls can be detected on multiple instruments; however, localization of the sound source is limited by gaps in known sensor location (30 min GPS updates). As part of the exploratory analysis, we built a simulation of fin whale habitat use using regional density estimates, simplified propagation models and noise levels from one Morro Bay datasets. This simulation examined the potential spatial resolution of calls given the changing spacing of recorders throughout the deployment.
 
-We simulated 4,000 calls distributed in the survey area according to predicted fin whale densities by (Becker et al. 2020) (@fig-ADRIFT_Appendix_HabitaMod_Simulation). We determined the minimum spatial resolution to which each call could potentially be localized using between 1 and 7 of the drifting recorders to compare the tradeoffs between localization resolution and the number of sensors.
+We simulated 4,000 calls distributed in the survey area according to predicted fin whale densities by [@becker2020] (@fig-ADRIFT_Appendix_HabitaMod_Simulation). We determined the minimum spatial resolution to which each call could potentially be localized using between 1 and 7 of the drifting recorders to compare the tradeoffs between localization resolution and the number of sensors.
+:::
 
-::: 
 ::: {.column width="60%"}
-
 ![Tracks of 8 clustered drifting recorders with simulated fin whale call density. Filled area represents simulated fin whale call density based on (Becker et al. 2020). Black lines indicate the drift path.](images/ADRIFT_Appendix_HabitaMod_Simulation.png){#fig-ADRIFT_Appendix_HabitaMod_Simulation fig-alt="Tracks of 8 clustered drifting recorders with simulated fin whale call density. Map of drift tracks for a cluster of 8 drifting recorders overlying simulated fin whale density with call density ranging from 0.5 calls/min in blue to 1.5 calls/min in green. A bright yellow/green area to the southeast of the drift tracks highlights high call density."}
-
 :::
 :::
 
@@ -26,7 +27,6 @@ The first step in the localization method considers known biological parameters 
 SNR is defined as the Source level of a call minus the noise level at the sensor and the transmission loss over the range between the source and sensor (see related [Github Repository](https://github.com/JPalmerK/AmbiguityGrids)). Thus, if a call arrives at a sensor with an SNR of 45 dB, the ambient noise level in the fin whale band was 120 dB, then we can use knowledge of source level distribution to estimate the minimum and maximum range of each call. If fin whale source levels range between 170 and 190 dB then we know the animal must have been 3.6 to 46.4 km from the receiver. Thus, an annulus (doughnut!) of potential call origin centered at each drifting recorder location is created for each call. This information is particularly informative by itself but with multiple drifting recorders the annuli can be overlapped to narrow down the region of origin (@fig-ADRIFT_Appendix_HabitaMod_SNRgrid).
 
 The second step applies to calls that were detected on two or more drifting recorders. In this case, the time-difference-of arrival, with associated positional error, is used to further limit the region of origin established in the first step.
-
 
 ![Variability in sound source location using multiple sensors. Potential location of a source (red point) as detected by each of the drifting recorders (green star) at a given point during the deployment. Black areas represent the region from which the call could have originated according to the arrival SNR at each drifting recorder. Note the call was not detected by Adrift-047 and as such only a minimum location is known (left). The potential region of origin for the call based on the intersection of all drifting recorders (right).](images/ADRIFT_Appendix_HabitaMod_SNRgrid.png){#fig-ADRIFT_Appendix_HabitaMod_SNRgrid fig-alt="Variability in sound source location using multiple drifting recorders. For each plot, the potential location of a source (red point) as detected by each of the drifting recorders (green star) at a given point during the deployment. Black areas represent the region from which the call could have originated according to the arrival SNR at each drifting recorder. There is a plot for each individual drift, and the figure on the right provides an estimated location range based on the combined detections. Note the call was not detected by Adrift-047 and as such only a minimum location is known. The potential region of origin for the call based on the intersection of all drifting recorders (right), and covers an overall smaller range than the estimate provided by any individual drifting recorder."}
 

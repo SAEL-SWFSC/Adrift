@@ -3,6 +3,7 @@ title: Software
 editor: 
   markdown: 
     wrap: sentence
+bibliography: references.bib
 ---
 
 The Southwest Acoustic Ecology Lab firmly believes that analysis methods should be publicly accessible.
@@ -35,15 +36,15 @@ This effort also allows for integration of Automatic Identification System ship 
 
 ## Beaked Whale Analytical Tools
 
-Previous research by SWFSC found that drifting acoustic recorders could be used to estimate density of goose-beaked whales (Barlow et al. 2022), and efforts were made to streamline this analytical process to allow us to estimate beaked whale density from the Adrift survey as well as other archived and future surveys (CCES 2018 and CalCurCEAS 2024).
-Development of the RoboJ tool to streamline a systematic approach to density estimation was based off the process developed by SWFSC in (Barlow et al. 2022) and it was generalized for adoption by other researchers (see RoboJ GitHub Repository ).
+Previous research by SWFSC found that drifting acoustic recorders could be used to estimate density of goose-beaked whales [@barlow2021], and efforts were made to streamline this analytical process to allow us to estimate beaked whale density from the Adrift survey as well as other archived and future surveys (CCES 2018 and CalCurCEAS 2024).
+Development of the RoboJ tool to streamline a systematic approach to density estimation was based off the process developed by SWFSC in [@barlow2021] and it was generalized for adoption by other researchers (see[RoboJ GitHub Repository](https://github.com/TaikiSan21/RoboJ)).
 While most of the process is now streamlined, there remains a significant manual effort for identifying acoustic events.
-Our team initiated a process for improving automation of this tedious process, however they were unable to complete the automation of identifying acoustic events and we recommend investing in this development in the future (see Appendix: Open Science for more details on development of a beaked whale matched template classifier).
+Our team initiated a process for improving automation of this tedious process, however they were unable to complete the automation of identifying acoustic events and we recommend investing in this development in the future.
 The RoboJ tool has been tested by colleagues at Pacific Islands Fisheries Science Center, and documentation and final preparation of the software is underway.
 
-###  ***RoboJ***
+### ***RoboJ***
 
-RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders.The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods.Development is still ongoing, but near-final code for this project is available on [RoboJ GitHub](https://github.com/TaikiSan21/RoboJ).
+RoboJ is an extension of work by Jay Barlow and Jeff Moore to estimate the density of beaked whales using detections from drifting recorders [@barlow2021].The methods use the received angles of beaked whale events combined with known dive depth distributions to estimate the distance to the calling animals, which then is used to estimate the density using more traditional methods.Development is still ongoing, but near-final code for this project is available on [RoboJ GitHub](https://github.com/TaikiSan21/RoboJ).
 
 RoboJ Pipeline:
 
@@ -58,7 +59,7 @@ These methods will be used for the CalCurCEAS 2024 survey data, and if opportuni
 
 Future research should consider (1) funding further development of an automated approach to acoustic event delineation, (2) beaked whale density estimation for the Adrift dataset, and (3) expansion of this analysis to species beyond goose-beaked whales.
 
-###  ***Beaked Whale Event Detector***
+### ***Beaked Whale Event Detector***
 
 Anne Simonis and Taiki Sakai developed a preliminary automated workflow for identifying and classifying beaked whale events.
 The initial approach used a Match Template Classifier (MTC) to identify candidate beaked whale clicks and group these into events.

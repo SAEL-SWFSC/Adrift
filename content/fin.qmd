@@ -1,37 +1,33 @@
 ---
 title: Fin Whales 
+bibliography: references.bib
 ---
 
 ::: columns
 ::: {.column width="40%"}
 Fin whales were detected throughout the study area and at different times of year (@fig-AdPC_fin_HourlyPresence). Detection of fin whales during the combined PASCAL/CCES surveys showed strong presence in the Morro Bay and San Francisco regions, with low detections in Humboldt and Oregon (@fig-AdPC_fin_HourlyPresence).
 
-Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and @fin-ADRIFT_fin2040_HourlyPresence). This detection probability dropped during the (limited) winter data for Humboldt. 
+Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and @fin-ADRIFT_fin2040_HourlyPresence. This detection probability dropped during the (limited) winter data for Humboldt.
 :::
 
 ::: {.column width="60%"}
-
 ```{r finTbl, child= "../R/detTbls/finTbl.Rmd"}
 
 
 ```
+:::
+:::
 
-:::
-:::
 Fin whale 20 Hz detections were lower off San Francisco than other areas, though detection of low frequency fin whale calls in this area may be compromised by low frequency noise associated with high levels of low frequency noise associated with large shipping traffic (container ships).
 
-The fin whale 20 Hz call is the most commonly reported and is thought to be used as a social call to establish and maintain contact when produced in irregular sequences (Edds-Walton 1997) and it may serve a reproductive function when produced by males in a regular sequence forming song (Croll et al. 2002). Here we did not differentiate between irregular and regular sequencing.
-
+The fin whale 20 Hz call is the most commonly reported and is thought to be used as a social call to establish and maintain contact when produced in irregular sequences [@edds-walton1997] and it may serve a reproductive function when produced by males in a regular sequence forming song [@croll_only_2002]. Here we did not differentiate between irregular and regular sequencing.
 
 ![Hourly fin whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of fin whales (combined call types) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for ADRIFT (left) and combined Pascal and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_fin_HourlyPresence.png){#fig-AdPC_fin_HourlyPresence fig-alt="Hourly presence of fin whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of fin whales varied by drift for the Adrift survey. Detections of fin whales were very strong in San Francisco and Morro Bay for PASCAL/CCES surveys, with few detections in Oregon and Humboldt."}
 
-
-The 40 Hz call has a more irregular pattern and has been positively associated with prey biomass, providing evidence that it is associated with a foraging function (Romagosa et al. 2021). Most 40 Hz fin whale detections occurred off Oregon, with a few detections off Morro Bay. Detection probability was highest during the post-upwelling season for both Oregon and Morro Bay (there were no detections during the upwelling season off Morro Bay).
-
+The 40 Hz call has a more irregular pattern and has been positively associated with prey biomass, providing evidence that it is associated with a foraging function [@romagosa_food_2021]. Most 40 Hz fin whale detections occurred off Oregon, with a few detections off Morro Bay. Detection probability was highest during the post-upwelling season for both Oregon and Morro Bay (there were no detections during the upwelling season off Morro Bay).
 
 ![Figure 5.9. Hourly presence of fin whale 20, 40 Hz calls by month, region for Adrift. Hourly presence of fin 20 Hz calls (left) and fin 40 Hz calls (right) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay). Adrifts 001-012 were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data (6 min of 12 min). Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/ADRIFT_fin2040_HourlyPresence.png){#fin-ADRIFT_fin2040_HourlyPresence fig-alt="Hourly presence of fin whale 20 Hz calls detected during the Adrift study (left graph) and fin whale 40 Hz calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Most fin whale calls detected were 20 Hz calls; detection of fin whale 40 Hz calls were primarily from Oregon and Morro Bay."}
 
+Detailed methods are provided in our GitHub online analysis methods , in a report provided by OSA and archived on our [Adrift Analysis Methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift).
 
-Detailed methods are provided in our GitHub online analysis methods , in a report provided by OSA and archived on our [GitHub Repository](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift).
-
-A pilot study to develop a deep learning network to detect and classify fin whale 20 and 40 Hz calls was initiated by Ocean Science Analytics and preliminary results can be found in Appendix G.
+A pilot study to develop a deep learning network to detect and classify fin whale 20 and 40 Hz calls was initiated by Ocean Science Analytics (see [Fin Whale AI](https://sael-swfsc.github.io/Adrift/content/finAI.html) and [OSA Report on Fin Whale Deep Learning](https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/OSA_Appendix_DL_Model_40Hz_20Hz_FinWhale.docx) in Github Repository.

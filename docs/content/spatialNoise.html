@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Kaitlin Palmer, kpalmer@coa.edu">
 
-<title>Adrift in the California Current - Spatial Variation to Noise</title>
+<title>Adrift in the California Current - Spatial Variation in Noise</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -75,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/spatialNoise.html">Spatial Variation to Noise</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ancillary.html">Ancillary Projects</a></li><li class="breadcrumb-item"><a href="../content/spatialNoise.html">Spatial Variation in Noise</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -333,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -380,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -404,13 +424,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Spatial Variation to Noise</h1>
+<h1 class="title">Spatial Variation in Noise</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kaitlin Palmer, kpalmer@coa.edu </p>
+          </div>
+  </div>
     
   
     
@@ -426,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="columns">
 <div class="column" style="width:40%;">
 <p>The Adrift study project uses clusters of drifting recorders to produce snapshots of ambient noise levels and animal presence in wind energy areas that compliment single sensor seafloor hydrophones. With these buoys, we can begin to document spatial variability in soundscapes, validate propagation models, and better understand how well single sensors represent sound within the greater region.</p>
-<p>A preliminary examination of the spatial cohesion of ambient noise levels was conducted across an array of 7 recorders drifting for 8 days in the Morro Bay region. Figure I 1 shows the 2-minute median noise level in two third octave bins. Considerable variation in noise levels were observed in the first few days across both third octave bins with considerable variation in the 20 kHz bin. Storms moving through the area during the second half of the deployment raised the baseline noise levels nearly uniformly.</p>
+<p>A preliminary examination of the spatial cohesion of ambient noise levels was conducted across an array of 7 recorders drifting for 8 days in the Morro Bay region. <a href="#fig-ADRIFT_Apendix_SptlNoiseTimeseries">Figure&nbsp;1</a> shows the 2-minute median noise level in two third octave bins. Considerable variation in noise levels were observed in the first few days across both third octave bins with considerable variation in the 20 kHz bin. Storms moving through the area during the second half of the deployment raised the baseline noise levels nearly uniformly.</p>
 </div><div class="column" style="width:60%;">
 <div id="fig-ADRIFT_Apendix_SptlNoiseTimeseries" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -443,10 +469,10 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;2: Time series of noise levels in 500 Hz and 20 kHz third octave bin. Time series of noise levels recorded by the drifting recorders in the 500 Hz third octave bin (top) and the 20 kHz third octave bin (bottom).</figcaption>
 </figure>
 </div>
-<p>Figure I‑2 shows positive correlation between all drifting recorders within the region with scores ranging between 0.7 and 0.91 in the 500 Hz band and 0.64 and 0.83 in the 20 kHz band. This indicates that, on average, noise levels were somewhat correlated over the deployment and that noise levels from more closely spaced units were more highly correlated, as expected. Much of this correlation is attributed to the regional scale storms that uniformly affected the area.</p>
+<p><a href="#fig-ADRIFT_Apendix_SptlNoiseCorr">Figure&nbsp;2</a> shows positive correlation between all drifting recorders within the region with scores ranging between 0.7 and 0.91 in the 500 Hz band and 0.64 and 0.83 in the 20 kHz band. This indicates that, on average, noise levels were somewhat correlated over the deployment and that noise levels from more closely spaced units were more highly correlated, as expected. Much of this correlation is attributed to the regional scale storms that uniformly affected the area.</p>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p>Because the data from the drifting recorders inherently cover both space and time, we can model sound levels across the entire region (Figure I‑3). This pre-storm modelled data provides a view of the soundscape averaged across the region. The brighter colors (relating to higher noise levels) in the northwest were attributed to the approaching storm.</p>
+<p>Because the data from the drifting recorders inherently cover both space and time, we can model sound levels across the entire region <a href="#fig-ADRIFT_Apendix_StormNoise">Figure&nbsp;3</a>. This pre-storm modelled data provides a view of the soundscape averaged across the region. The brighter colors (relating to higher noise levels) in the northwest were attributed to the approaching storm.</p>
 </div><div class="column" style="width:70%;">
 <div id="fig-ADRIFT_Apendix_StormNoise" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -459,14 +485,19 @@ ul.task-list li input[type="checkbox"] {
 <p>This preliminary exploration of the data highlights some interesting spatial aspects of noise that warrant further investigation. Future analyses may include:</p>
 <ul>
 <li><p>Evaluate noise levels as a function of distance between sensors. Quantifying this relationship will help to validate propagation models and improve future estimates of noise levels from disparate sensors.</p></li>
-<li><p>Parse environmental and anthropogenic contributions to noise levels. Depth-dependent empirical models for wind-generated noise can be applied to drifting recorders (Hildebrand et al.&nbsp;2021). Then, subtraction of wind-associated noise allows evaluation of sound maps such as Figure I‑3 for biological and anthropogenic activity.</p></li>
+<li><p>Parse environmental and anthropogenic contributions to noise levels. Depth-dependent empirical models for wind-generated noise can be applied to drifting recorders <span class="citation" data-cites="hildebrand2021">(<a href="#ref-hildebrand2021" role="doc-biblioref">Hildebrand et al. 2021</a>)</span>. Then, subtraction of wind-associated noise allows evaluation of sound maps such as <a href="#fig-ADRIFT_Apendix_StormNoise">Figure&nbsp;3</a> for biological and anthropogenic activity.</p></li>
 <li><p>Evaluate depth-dependent changes in ambient noise levels. Sound levels recorded by drifting recorders can be compared with bottom-moored sensors to measure depth dependent changes in ambient noise levels. This is particularly relevant if future acoustic monitoring is limited to seafloor sensors, which do not occupy the predominant habitat of most marine mammals, or sensors that modulate their depth throughout the survey period (e.g., gliders).</p></li>
 </ul>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-hildebrand2021" class="csl-entry" role="listitem">
+Hildebrand, John A., Kaitlin E. Frasier, Simone Baumann-Pickering, and Sean M. Wiggins. 2021. <span>“An Empirical Model for Wind-Generated Ocean Noise.”</span> <em>The Journal of the Acoustical Society of America</em> 149 (6): 4516–33. <a href="https://doi.org/10.1121/10.0005430">https://doi.org/10.1121/10.0005430</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

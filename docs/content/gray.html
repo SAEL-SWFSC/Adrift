@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -427,23 +440,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="rfewlahmoi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rfewlahmoi table {
+<div id="gyiajisfup" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gyiajisfup table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rfewlahmoi thead, #rfewlahmoi tbody, #rfewlahmoi tfoot, #rfewlahmoi tr, #rfewlahmoi td, #rfewlahmoi th {
+#gyiajisfup thead, #gyiajisfup tbody, #gyiajisfup tfoot, #gyiajisfup tr, #gyiajisfup td, #gyiajisfup th {
   border-style: none;
 }
 
-#rfewlahmoi p {
+#gyiajisfup p {
   margin: 0;
   padding: 0;
 }
 
-#rfewlahmoi .gt_table {
+#gyiajisfup .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -469,12 +482,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_caption {
+#gyiajisfup .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rfewlahmoi .gt_title {
+#gyiajisfup .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -486,7 +499,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#rfewlahmoi .gt_subtitle {
+#gyiajisfup .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -498,7 +511,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#rfewlahmoi .gt_heading {
+#gyiajisfup .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -510,13 +523,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_bottom_border {
+#gyiajisfup .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_col_headings {
+#gyiajisfup .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -531,7 +544,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_col_heading {
+#gyiajisfup .gt_col_heading {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -551,7 +564,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#rfewlahmoi .gt_column_spanner_outer {
+#gyiajisfup .gt_column_spanner_outer {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -563,15 +576,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#rfewlahmoi .gt_column_spanner_outer:first-child {
+#gyiajisfup .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rfewlahmoi .gt_column_spanner_outer:last-child {
+#gyiajisfup .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rfewlahmoi .gt_column_spanner {
+#gyiajisfup .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -583,11 +596,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#rfewlahmoi .gt_spanner_row {
+#gyiajisfup .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rfewlahmoi .gt_group_heading {
+#gyiajisfup .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -613,7 +626,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#rfewlahmoi .gt_empty_group_heading {
+#gyiajisfup .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -628,15 +641,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#rfewlahmoi .gt_from_md > :first-child {
+#gyiajisfup .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rfewlahmoi .gt_from_md > :last-child {
+#gyiajisfup .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rfewlahmoi .gt_row {
+#gyiajisfup .gt_row {
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 5px;
@@ -655,7 +668,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#rfewlahmoi .gt_stub {
+#gyiajisfup .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -668,7 +681,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#rfewlahmoi .gt_stub_row_group {
+#gyiajisfup .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -682,15 +695,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#rfewlahmoi .gt_row_group_first td {
+#gyiajisfup .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rfewlahmoi .gt_row_group_first th {
+#gyiajisfup .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rfewlahmoi .gt_summary_row {
+#gyiajisfup .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -700,16 +713,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#rfewlahmoi .gt_first_summary_row {
+#gyiajisfup .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_first_summary_row.thick {
+#gyiajisfup .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rfewlahmoi .gt_last_summary_row {
+#gyiajisfup .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -719,7 +732,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_grand_summary_row {
+#gyiajisfup .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -729,7 +742,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#rfewlahmoi .gt_first_grand_summary_row {
+#gyiajisfup .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -739,7 +752,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_last_grand_summary_row_top {
+#gyiajisfup .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -749,11 +762,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_striped {
+#gyiajisfup .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rfewlahmoi .gt_table_body {
+#gyiajisfup .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -762,7 +775,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_footnotes {
+#gyiajisfup .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -776,7 +789,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_footnote {
+#gyiajisfup .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -785,7 +798,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#rfewlahmoi .gt_sourcenotes {
+#gyiajisfup .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -799,7 +812,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#rfewlahmoi .gt_sourcenote {
+#gyiajisfup .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -807,72 +820,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#rfewlahmoi .gt_left {
+#gyiajisfup .gt_left {
   text-align: left;
 }
 
-#rfewlahmoi .gt_center {
+#gyiajisfup .gt_center {
   text-align: center;
 }
 
-#rfewlahmoi .gt_right {
+#gyiajisfup .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rfewlahmoi .gt_font_normal {
+#gyiajisfup .gt_font_normal {
   font-weight: normal;
 }
 
-#rfewlahmoi .gt_font_bold {
+#gyiajisfup .gt_font_bold {
   font-weight: bold;
 }
 
-#rfewlahmoi .gt_font_italic {
+#gyiajisfup .gt_font_italic {
   font-style: italic;
 }
 
-#rfewlahmoi .gt_super {
+#gyiajisfup .gt_super {
   font-size: 65%;
 }
 
-#rfewlahmoi .gt_footnote_marks {
+#gyiajisfup .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rfewlahmoi .gt_asterisk {
+#gyiajisfup .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rfewlahmoi .gt_indent_1 {
+#gyiajisfup .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rfewlahmoi .gt_indent_2 {
+#gyiajisfup .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rfewlahmoi .gt_indent_3 {
+#gyiajisfup .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rfewlahmoi .gt_indent_4 {
+#gyiajisfup .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rfewlahmoi .gt_indent_5 {
+#gyiajisfup .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rfewlahmoi .katex-display {
+#gyiajisfup .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rfewlahmoi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gyiajisfup div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -912,18 +925,23 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>There is a significant overlap in spectral content for humpback and gray whale calls and most drifts were outside primary gray whale migration routes; care should be taken when inferring gray whale presence from data with concurrent humpback whale presence.</p>
-<p>Most Eastern North Pacific gray whales use the California Current to migrate between their feeding grounds in the north and their winter breeding grounds in Baja California. A subpopulation of these whales known as the ‘Pacific Coast Feeding Group’ feed in the California Current off Northern California, Oregon, and Washington during the upwelling and post-upwelling seasons (Barlow et al.&nbsp;2024). Gray whales are typically found in the nearshore waters, but do occur in offshore waters (see <a href="https://seamap.env.duke.edu/dataset/861">OBIS Seamap</a>).</p>
+<p>Most Eastern North Pacific gray whales use the California Current to migrate between their feeding grounds in the north and their winter breeding grounds in Baja California. A subpopulation of these whales known as the ‘Pacific Coast Feeding Group’ feed in the California Current off Northern California, Oregon, and Washington during the upwelling and post-upwelling seasons <span class="citation" data-cites="barlow2024">(<a href="#ref-barlow2024" role="doc-biblioref">Barlow, Strong, and Torres 2024</a>)</span>. Gray whales are typically found in the nearshore waters, but do occur in offshore waters (see <a href="https://seamap.env.duke.edu/dataset/861">OBIS Seamap</a>).</p>
 <div id="fig-AdPC_gray_HourlyPresence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="..\figs/AdPC_gray_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of gray whales detected during the Adrift study (left graph) and social calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red.  There were few detections of gray whales during these offshore deployments, but some gray whales were detected during one drift off Oregon during the upwelling season, and one drift off San Francisco during the post-upwelling season. There were almost no gray whale detections during the combined PASCAL/CCES surveys."></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Hourly gray whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of gray whale calls (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.</figcaption>
 </figure>
 </div>
-<p>Detailed methods are provided in our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack">GitHub online analysis methods.</a></p>
+<p>Detailed methods are provided in our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#gray-and-humpack">Adrift Analysis Methods.</a></p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-barlow2024" class="csl-entry" role="listitem">
+Barlow, Dawn R., Craig S. Strong, and Leigh G. Torres. 2024. <span>“Three Decades of Nearshore Surveys Reveal Long-Term Patterns in Gray Whale Habitat Use, Distribution, and Abundance in the Northern California Current.”</span> <em>Scientific Reports</em> 14 (1): 9352. <a href="https://doi.org/10.1038/s41598-024-59552-z">https://doi.org/10.1038/s41598-024-59552-z</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

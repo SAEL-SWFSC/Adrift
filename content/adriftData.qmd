@@ -2,23 +2,22 @@
 title: Adrift Data
 ---
 
-Expanded Adrift datasets and links to high resolution figures provided below. 
+Expanded Adrift datasets and links to high resolution figures provided below.
 
+## *Acoustic Scenes by Drift*
 
-## Acoustic Scenes by Drift
 ::: columns
 ::: {.column width="40%"}
-Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds (see @CCES_007_AcousticScene). Acoustic Scenes were created for each CCES drift, and high resolution images are saved in the Github Repository\](), and links to specific drifts are provided in the table, right.
+Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds (see @fig-ADRIFT_007_AcousticScene). Acoustic Scenes were created for each CCES drift, and high resolution images are saved in the [Adrift Github Repository](https://github.com/SAEL-SWFSC/Adrift/tree/main/figs/acoustic_scenes), and links to specific drifts are provided in the table, below.
 :::
 
 ::: {.column width="60%"}
 ![Drift track and Acoustic Scene for ADRIFT Drift #007.](/figs/acoustic_scenes/ADRIFT_007_AcousticScene.png){#fig-ADRIFT_007_AcousticScene}
-
 :::
 :::
 
 |                                                                                                                |                                                                                                                |                                                                                                                |                                                                                                                |                                                                                                                |                                                                                                                |
-|------------|------------|------------|------------|------------|------------|
+|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | [ADRIFT_001](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_001_AcousticScene.png) | [ADRIFT_023](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_023_AcousticScene.png) | [ADRIFT_040](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_040_AcousticScene.png) | [ADRIFT_055](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_055_AcousticScene.png) | [ADRIFT_073](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_073_AcousticScene.png) | [ADRIFT_090](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_090_AcousticScene.png) |
 | [ADRIFT_002](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_002_AcousticScene.png) | [ADRIFT_024](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_024_AcousticScene.png) | [ADRIFT_041](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_041_AcousticScene.png) | [ADRIFT_057](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_057_AcousticScene.png) | [ADRIFT_074](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_074_AcousticScene.png) | [ADRIFT_091](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_091_AcousticScene.png) |
 | [ADRIFT_003](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_003_AcousticScene.png) | [ADRIFT_025](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_025_AcousticScene.png) | [ADRIFT_042](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_042_AcousticScene.png) | [ADRIFT_058](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_058_AcousticScene.png) | [ADRIFT_075](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_075_AcousticScene.png) | [ADRIFT_092](https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/acoustic_scenes/ADRIFT_092_AcousticScene.png) |
@@ -37,8 +36,9 @@ Temporal variation (marked in hourly bins) in the contribution of these sounds t
 
 : Links to high resolution images of acoustic scene and drift track for each ADRIFT drift.
 
-## Adrift Deployment Table
-Complete list of drifting acoustic recorder deployments (Table A 1) during the Adrift in the California Current Survey. Sites include Oregon (ORE), Humboldt (HUM), San Francisco Bay (SFB), Half Moon Bay (HMB), Monterey Bay (MBY) and Morro Bay (MOB). See Figure XXXX for more information on regions.
+## *Adrift Deployment Table*
+
+Complete list of drifting acoustic recorder deployments (see table, below) during the Adrift in the California Current Survey. Sites include Oregon (ORE), Humboldt (HUM), San Francisco Bay (SFB), Half Moon Bay (HMB), Monterey Bay (MBY) and Morro Bay (MOB). See [Study Area Figure 1](https://sael-swfsc.github.io/Adrift/content/studyArea.html) for more information on regions.
 
 ```{r adriftTbl, child= "../R/deploymentTables-ADRIFT.Rmd"}
 

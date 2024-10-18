@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -438,10 +451,10 @@ ul.task-list li input[type="checkbox"] {
 <p>The hydrophone array, recorder, and ancillary components were deployed vertically from the surface trawl float, with the hydrophone array and recorder located 100 or 150 m depth. While movement of the surface buoys would be affected by wind, variable surface currents, and swell height, instrumentation at depth were minimally affected by modest and relatively stable subsurface current. The different forces at the surface and depth occasionally led to strumming of the line and hydrophones. Additional ancillary components were added in 2022 to minimize vertical and horizontal movement of the instruments, reduce tension induced strumming, and reduce displacement of hydrophones from a vertical orientation. Also, several initial losses were due (at least in part) to failures in the primary vertical line; this line was replaced with a significantly stronger line that eliminated this failure point.</p>
 <p>To improve vertical alignment of the hydrophones at depth, a subsurface trawl float was placed immediately above the instruments, with a 30 lb mushroom anchor below the instruments. This effectively reduced vertical displacement of the hydrophone array. A small drogue was used to decrease horizontal movement of the hydrophone array at depth, and a dampener plate was used to minimize vertical movement. While these helped alleviate tension and movement that attributed to strumming noise, an additional bungee was added to the line to further reduce strumming. The anchor was attached using a small rope with low breaking strength as a ‘weak-link’ to mitigate entanglement risk.</p>
 <p>The acoustic recording equipment consisted of a two-element vertical hydrophone array below the recorder. A Sensus Ultra depth sensor was attached directly above the top hydrophone and recorded depth at 60s intervals. The top hydrophone consisted of an HTI-92WB and the lower hydrophone consisted of an HTI-96min positioned 5m below the top hydrophone. Recorders consisted of either the (now discontinued) SoundTrap 4300 or the SoundTrap 640 which allowed for extended deployments (Ocean Instruments, NZ).</p>
-<p>Initial recordings included a duty cycle to extend deployment, and then all recordings shifted to continuous sampling. Sample rate varied according to the instrument, with a minimum sample rate of 288 kHz. A summary of deployment details can be found in Adrift Expanded Datasets.</p>
-<p>More information on drifting recorder components and design can be found on our GitHub pages for Adrift field methods. Methods for drifting recorders deployed during PASCAL and CCES can be found in their respective reports (Keating et al.&nbsp;2018; Simonis 2020)</p>
+<p>Initial recordings included a duty cycle to extend deployment, and then all recordings shifted to continuous sampling. Sample rate varied according to the instrument, with a minimum sample rate of 288 kHz. A summary of deployment details can be found in <a href="https://sael-swfsc.github.io/Adrift/content/adriftData.html">Adrift Expanded Datasets</a>.</p>
+<p>More information on drifting recorder components and design can be found on our<a href="https://sael-swfsc.github.io/adrift-field-methods/">Adrift Field Methods</a> website. Methods for drifting recorders deployed during PASCAL and CCES can be found in their respective reports <span class="citation" data-cites="keating2018">(<a href="#ref-keating2018" role="doc-biblioref">Keating et al. 2018</a>)</span> <span class="citation" data-cites="simonis_passive_2020">(<a href="#ref-simonis_passive_2020" role="doc-biblioref">Simonis 2020</a>)</span>.</p>
 <p><strong><em>Results</em></strong></p>
-<p>Clustered drifting recorders provide an opportunity to improve our understanding of the spatial and temporal variability of the contributors to the soundscape. Preliminary results suggest that clustered drifting recorders can be used to reduce the possible range of sound source location (see Appendix: Modeling Habitat Use) and can provide information on the spatial variation in soundscape (see Spatial Variation in Noise). Drifting recorders were deployed in clusters of 4 in Humboldt and Oregon study areas, and in clusters of 8 in the Morro Bay Study area. In some cases, drifting recorders in close proximity to each other followed dramatically different drift trajectories.</p>
+<p>Clustered drifting recorders provide an opportunity to improve our understanding of the spatial and temporal variability of the contributors to the soundscape. Preliminary results suggest that clustered drifting recorders can be used to reduce the possible range of sound source location (see <a href="https://sael-swfsc.github.io/Adrift/content/habitatModels.html">Modeling Habitat Use</a>) and can provide information on the spatial variation in soundscape (see <a href="https://sael-swfsc.github.io/Adrift/content/spatialNoise.html">Spatial Variation in Noise</a>). Drifting recorders were deployed in clusters of 4 in Humboldt and Oregon study areas, and in clusters of 8 in the Morro Bay Study area. In some cases, drifting recorders in close proximity to each other followed dramatically different drift trajectories.</p>
 <p>There were multiple cases of equipment and data loss, especially during the initial deployments. Losses were due to a variety of reasons, including inclement weather, strong currents, and recorder failures. We mitigated these problems through modifying components and altering survey methods. A number of gear modifications were made to improve robustness and to decrease self-noise that interfered with recording quality. We recommend additional buoy modification to reduce noise associated with strong currents and inclement weather. Southwest Fisheries Science Center (SWFSC) will be using an alternative buoy design developed by Pacific Islands Fisheries Science Center during the CalCurCEAS 2024 survey, which may reduce strumming noise.</p>
 <p>Drifting acoustic recorders are not appropriate for all geographic regions. We recommend conducting a regional pilot study to determine the region-specific environmental conditions, and to identify local partners. The Humboldt study area was especially affected by strong currents combined with the close proximity of the study area to Cape Mendocino, in which options for retrieval south of Cape Mendocino are rare. The success of the CCC-PAM survey in Morro Bay included the financial benefit of sharing vessel resources, improved scientific collaborations, and it provided an opportunity for scientists to share and learn from other community members. We recommend consideration of a collaborative fieldwork pilot study in Humboldt and other regions.</p>
 <p>There were multiple recorder failures, and different problems were associated with different recording models, including: failure to start, instrument flooding, and low received levels on one or more channels. Initial deployments (including the previous PASCAL and CCES Surveys) used the multi-channel SoundTrap ST4300, which is easy to use and provides high quality recording for up to four channels (max 256 Gb flash drive, battery for 4-5 days continuous recording). Recorder failures for these devices included failure to start (instrument failure or user error) and low received levels on one or more channels. The SoundTrap ST4300 was discontinued and replaced by the higher capacity SoundTrap ST640 in 2021. The SoundTrap ST640 with removable components can accommodate up to 2Tb memory and has battery capacity for up to 90 days. This newer model provided the capacity needed for continuous recordings but required significantly more experience to use and had an increased risk of failure due to leaks. Four 640s were lost during a sea trial and one was lost during Adrift data collection effort.</p>
@@ -449,7 +462,15 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-keating2018" class="csl-entry" role="listitem">
+Keating, Jennifer, Jay Barlow, Emily T. Griffiths, and Jeffrey E. Moore. 2018. <span>“Passive Acoustics Survey of Cetacean Abundance Levels (PASCAL-2016) Final Report.”</span> <a href="https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf">https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf</a>.
+</div>
+<div id="ref-simonis_passive_2020" class="csl-entry" role="listitem">
+Simonis, Anne E. 2020. <span>“Passive <span>Acoustic</span> <span>Survey</span> <span>Of</span> <span>Deep</span>-<span>Diving</span> <span>Odontocetes</span> in the <span>California</span> <span>Current</span> <span>Ecosystem</span> 2018: <span>Final</span> <span>Report</span>.”</span> <em>NOAA-TM-NMFS-SWFSC-630</em>. <a href="https://doi.org/10.25923/W5XX-JZ73">https://doi.org/10.25923/W5XX-JZ73</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

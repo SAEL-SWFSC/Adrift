@@ -1,56 +1,39 @@
 ---
 title: Blue Whales 
+bibliography: references.bib
 ---
-
 
 ::: columns
 ::: {.column width="40%"}
-
 Blue whales were detected in all regions except Oregon (@fig-AdPC_blue_HourlyPresence), with most detections during the post-upwelling season (see table, right). Similar to the overall Adrift project, blue whales were detected in all regions during the combined PASCAL/CCES surveys, with low detections of blue whales off Oregon (@fig-AdPC_blue_HourlyPresence).
 
 Detection of blue whale calls were primarily A and B calls associated with song, with few detections of D calls during the summer months (@fig-ADRIFT_BmD_HourlyPresence).
 
-Blue whale ‘song’ consists of both A and B calls, which can occur individually or in A-B pairs. Detection of both A and B calls were higher during the post-upwelling seasons in all areas (see table, right). The hourly probability of detecting blue whale A and B calls during the limited data off Humboldt in the winter were higher than during the upwelling season, but lower than the post-upwelling season. 
-
+Blue whale ‘song’ consists of both A and B calls, which can occur individually or in A-B pairs. Detection of both A and B calls were higher during the post-upwelling seasons in all areas (see table, right). The hourly probability of detecting blue whale A and B calls during the limited data off Humboldt in the winter were higher than during the upwelling season, but lower than the post-upwelling season.
 :::
 
 ::: {.column width="60%"}
-
 ```{r blueTbl, child= "../R/detTbls/blueTbl.Rmd"}
 
 
-``` 
+```
+:::
 :::
 
-:::
-
-There were only a few blue whale B calls detected during the upwelling season off San Francisco; no other calls associated with song were detected during the upwelling season in any region. The probability of detecting blue whale B calls was consistently higher than A calls for all regions (and seasons), which reflects research showing that blue whale B calls can be detected at greater ranges than blue whale A calls (McDonald et al. 2001). Blue whale B calls can be readily classified by an experienced analyst when the SNR (signal to noise ratio) is low.
-
+There were only a few blue whale B calls detected during the upwelling season off San Francisco; no other calls associated with song were detected during the upwelling season in any region. The probability of detecting blue whale B calls was consistently higher than A calls for all regions (and seasons), which reflects research showing that blue whale B calls can be detected at greater ranges than blue whale A calls [@mcdonald2001]. Blue whale B calls can be readily classified by an experienced analyst when the SNR (signal to noise ratio) is low.
 
 ![Hourly blue whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of blue whale calls (A, B, and D types, combined) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for Adrift (left) and combined PASCAL and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/AdPC_blue_HourlyPresence.png){#fig-AdPC_blue_HourlyPresence fig-alt="Hourly presence of blue whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the x-axis, and the date on the y-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detections of blue whales were high in all regions except Oregon during the post-upwelling season for Adrift, PASCAL, and CCES surveys. Detections were low in the upwelling season."}
 
-
 ::: columns
 ::: {.column width="40%"}
-
-
-
-Blue whale D calls have been associated with feeding behavior (Oleson et al. 2007), and detection of D calls were primarily during the post-upwelling season (@fig-ADRIFT_BmD_HourlyPresence). The probability of detecting D calls was much lower than detecting A and/or B calls, and there were no detection of D calls off Oregon (see table, above). Low SNR D calls are more readily confused with low frequency downsweep calls produced by other species, reducing the overall effective detection range for these calls. 
-
-
-::: 
+Blue whale D calls have been associated with feeding behavior [@oleson_temporal_2007], and detection of D calls were primarily during the post-upwelling season (@fig-ADRIFT_BmD_HourlyPresence). The probability of detecting D calls was much lower than detecting A and/or B calls, and there were no detection of D calls off Oregon (see table, above). Low SNR D calls are more readily confused with low frequency downsweep calls produced by other species, reducing the overall effective detection range for these calls. 
+:::
 
 ::: {.column width="60%"}
-
 ![Hourly presence of blue whale D calls by month, region for Adrift. Hourly presence of blue whale D calls (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay). Adrifts 001-012 were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data (6 min of 12 min). Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.](/figs/ADRIFT_BmD_HourlyPresence.png){#fig-ADRIFT_BmD_HourlyPresence fig-alt="Hourly presence of blue whale ‘D’ calls detected during the Adrift study. Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the x-axis, and the date on the y-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Non-song ‘D’ calls were detected in late upwelling (San Francisco) and early post-upwelling seasons and account for a fraction of the overall calls presented in Figure 10.1."}
-
+:::
 :::
 
-:::
+There were an additional 227 ad hoc detections of blue whales during the OSA analysis of other low-frequency baleen whale species (see [OSA Project Report](https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/OSA_NMSF_2023.578_Project_Report.pdf)). The majority of those detections were either low SNR calls or were masked by noise while scanning the LTSAs.
 
-
-
-There were an additional 227 ad hoc detections of blue whales during the OSA analysis of other low-frequency baleen whale species (see [OSA Project Report](https://github.com/shannonrankin/ADRIFT_Report/blob/main/supplement/OSA_NMSF_2023.578_Project_Report.pdf)). The majority of those detections were either low SNR calls or were masked by noise while scanning the LTSAs.
-
-
-Detailed methods are provided in our [GitHub online analysis methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#blue-whales).
+Detailed methods are provided in our [Adrift Analysis Methods](https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#blue-whales).

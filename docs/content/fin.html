@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -423,28 +436,28 @@ ul.task-list li input[type="checkbox"] {
 <div class="columns">
 <div class="column" style="width:40%;">
 <p>Fin whales were detected throughout the study area and at different times of year (<a href="#fig-AdPC_fin_HourlyPresence">Figure&nbsp;1</a>). Detection of fin whales during the combined PASCAL/CCES surveys showed strong presence in the Morro Bay and San Francisco regions, with low detections in Humboldt and Oregon (<a href="#fig-AdPC_fin_HourlyPresence">Figure&nbsp;1</a>).</p>
-<p>Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and <span class="citation" data-cites="fin-ADRIFT_fin2040_HourlyPresence">@fin-ADRIFT_fin2040_HourlyPresence</span>). This detection probability dropped during the (limited) winter data for Humboldt.</p>
+<p>Fin whale 20 Hz pulses had higher detection probabilities in the post-upwelling seasons for all locations (see table, right, and <span class="citation" data-cites="fin-ADRIFT_fin2040_HourlyPresence">(<a href="#ref-fin-ADRIFT_fin2040_HourlyPresence" role="doc-biblioref"><strong>fin-ADRIFT_fin2040_HourlyPresence?</strong></a>)</span>. This detection probability dropped during the (limited) winter data for Humboldt.</p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="hpyuugrapn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hpyuugrapn table {
+<div id="anfytrmder" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#anfytrmder table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hpyuugrapn thead, #hpyuugrapn tbody, #hpyuugrapn tfoot, #hpyuugrapn tr, #hpyuugrapn td, #hpyuugrapn th {
+#anfytrmder thead, #anfytrmder tbody, #anfytrmder tfoot, #anfytrmder tr, #anfytrmder td, #anfytrmder th {
   border-style: none;
 }
 
-#hpyuugrapn p {
+#anfytrmder p {
   margin: 0;
   padding: 0;
 }
 
-#hpyuugrapn .gt_table {
+#anfytrmder .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -470,12 +483,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_caption {
+#anfytrmder .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hpyuugrapn .gt_title {
+#anfytrmder .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -487,7 +500,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#hpyuugrapn .gt_subtitle {
+#anfytrmder .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -499,7 +512,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#hpyuugrapn .gt_heading {
+#anfytrmder .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -511,13 +524,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_bottom_border {
+#anfytrmder .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_col_headings {
+#anfytrmder .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -532,7 +545,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_col_heading {
+#anfytrmder .gt_col_heading {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -552,7 +565,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hpyuugrapn .gt_column_spanner_outer {
+#anfytrmder .gt_column_spanner_outer {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -564,15 +577,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#hpyuugrapn .gt_column_spanner_outer:first-child {
+#anfytrmder .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hpyuugrapn .gt_column_spanner_outer:last-child {
+#anfytrmder .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hpyuugrapn .gt_column_spanner {
+#anfytrmder .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -584,11 +597,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#hpyuugrapn .gt_spanner_row {
+#anfytrmder .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hpyuugrapn .gt_group_heading {
+#anfytrmder .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -614,7 +627,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#hpyuugrapn .gt_empty_group_heading {
+#anfytrmder .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -629,15 +642,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#hpyuugrapn .gt_from_md > :first-child {
+#anfytrmder .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hpyuugrapn .gt_from_md > :last-child {
+#anfytrmder .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hpyuugrapn .gt_row {
+#anfytrmder .gt_row {
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 5px;
@@ -656,7 +669,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hpyuugrapn .gt_stub {
+#anfytrmder .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,7 +682,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hpyuugrapn .gt_stub_row_group {
+#anfytrmder .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -683,15 +696,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#hpyuugrapn .gt_row_group_first td {
+#anfytrmder .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hpyuugrapn .gt_row_group_first th {
+#anfytrmder .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hpyuugrapn .gt_summary_row {
+#anfytrmder .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -701,16 +714,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hpyuugrapn .gt_first_summary_row {
+#anfytrmder .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_first_summary_row.thick {
+#anfytrmder .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hpyuugrapn .gt_last_summary_row {
+#anfytrmder .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -720,7 +733,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_grand_summary_row {
+#anfytrmder .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -730,7 +743,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hpyuugrapn .gt_first_grand_summary_row {
+#anfytrmder .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +753,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_last_grand_summary_row_top {
+#anfytrmder .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -750,11 +763,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_striped {
+#anfytrmder .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hpyuugrapn .gt_table_body {
+#anfytrmder .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -763,7 +776,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_footnotes {
+#anfytrmder .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -777,7 +790,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_footnote {
+#anfytrmder .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -786,7 +799,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hpyuugrapn .gt_sourcenotes {
+#anfytrmder .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -800,7 +813,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hpyuugrapn .gt_sourcenote {
+#anfytrmder .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -808,72 +821,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hpyuugrapn .gt_left {
+#anfytrmder .gt_left {
   text-align: left;
 }
 
-#hpyuugrapn .gt_center {
+#anfytrmder .gt_center {
   text-align: center;
 }
 
-#hpyuugrapn .gt_right {
+#anfytrmder .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hpyuugrapn .gt_font_normal {
+#anfytrmder .gt_font_normal {
   font-weight: normal;
 }
 
-#hpyuugrapn .gt_font_bold {
+#anfytrmder .gt_font_bold {
   font-weight: bold;
 }
 
-#hpyuugrapn .gt_font_italic {
+#anfytrmder .gt_font_italic {
   font-style: italic;
 }
 
-#hpyuugrapn .gt_super {
+#anfytrmder .gt_super {
   font-size: 65%;
 }
 
-#hpyuugrapn .gt_footnote_marks {
+#anfytrmder .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hpyuugrapn .gt_asterisk {
+#anfytrmder .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hpyuugrapn .gt_indent_1 {
+#anfytrmder .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hpyuugrapn .gt_indent_2 {
+#anfytrmder .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hpyuugrapn .gt_indent_3 {
+#anfytrmder .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hpyuugrapn .gt_indent_4 {
+#anfytrmder .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hpyuugrapn .gt_indent_5 {
+#anfytrmder .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hpyuugrapn .katex-display {
+#anfytrmder .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hpyuugrapn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#anfytrmder div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -935,26 +948,37 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Fin whale 20 Hz detections were lower off San Francisco than other areas, though detection of low frequency fin whale calls in this area may be compromised by low frequency noise associated with high levels of low frequency noise associated with large shipping traffic (container ships).</p>
-<p>The fin whale 20 Hz call is the most commonly reported and is thought to be used as a social call to establish and maintain contact when produced in irregular sequences (Edds-Walton 1997) and it may serve a reproductive function when produced by males in a regular sequence forming song (Croll et al.&nbsp;2002). Here we did not differentiate between irregular and regular sequencing.</p>
+<p>The fin whale 20 Hz call is the most commonly reported and is thought to be used as a social call to establish and maintain contact when produced in irregular sequences <span class="citation" data-cites="edds-walton1997">(<a href="#ref-edds-walton1997" role="doc-biblioref">Edds-Walton 1997</a>)</span> and it may serve a reproductive function when produced by males in a regular sequence forming song <span class="citation" data-cites="croll_only_2002">(<a href="#ref-croll_only_2002" role="doc-biblioref">Croll et al. 2002</a>)</span>. Here we did not differentiate between irregular and regular sequencing.</p>
 <div id="fig-AdPC_fin_HourlyPresence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="..\figs/AdPC_fin_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of fin whales detected during the Adrift study (left graph) and the combined PASCAL/CCES surveys (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Detection of fin whales varied by drift for the Adrift survey. Detections of fin whales were very strong in San Francisco and Morro Bay for PASCAL/CCES surveys, with few detections in Oregon and Humboldt."></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Hourly fin whale events by month, region for Adrift and combined PASCAL, CCES surveys. Hourly presence of fin whales (combined call types) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay) for ADRIFT (left) and combined Pascal and CCES (right). Hourly presence for duty-cycled data relates to the portion of the hour included in the duty cycled data. Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.</figcaption>
 </figure>
 </div>
-<p>The 40 Hz call has a more irregular pattern and has been positively associated with prey biomass, providing evidence that it is associated with a foraging function (Romagosa et al.&nbsp;2021). Most 40 Hz fin whale detections occurred off Oregon, with a few detections off Morro Bay. Detection probability was highest during the post-upwelling season for both Oregon and Morro Bay (there were no detections during the upwelling season off Morro Bay).</p>
+<p>The 40 Hz call has a more irregular pattern and has been positively associated with prey biomass, providing evidence that it is associated with a foraging function <span class="citation" data-cites="romagosa_food_2021">(<a href="#ref-romagosa_food_2021" role="doc-biblioref">Romagosa et al. 2021</a>)</span>. Most 40 Hz fin whale detections occurred off Oregon, with a few detections off Morro Bay. Detection probability was highest during the post-upwelling season for both Oregon and Morro Bay (there were no detections during the upwelling season off Morro Bay).</p>
 <div id="fin-ADRIFT_fin2040_HourlyPresence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="..\figs/ADRIFT_fin2040_HourlyPresence.png" class="img-fluid figure-img" alt="Hourly presence of fin whale 20 Hz calls detected during the Adrift study (left graph) and fin whale 40 Hz calls (right graph). Detections in Oregon are shown in the top graphs, then Humboldt, San Francisco, and Morro Bay at the bottom. The number of hours is provided on the y-axis, and the date on the x-axis, with seasons shaded in blue for winter, green for upwelling, and yellow for the post-upwelling season. Effort is outlined with a black line, and hours of effort with detections are highlighted in red. Most fin whale calls detected were 20 Hz calls; detection of fin whale 40 Hz calls were primarily from Oregon and Morro Bay."></p>
 <figcaption class="figure-caption">Figure 5.9. Hourly presence of fin whale 20, 40 Hz calls by month, region for Adrift. Hourly presence of fin 20 Hz calls (left) and fin 40 Hz calls (right) (y axis) for different months for combined years (x axis) and for each region (Oregon, Humboldt, San Francisco, and Morro Bay). Adrifts 001-012 were duty cycled and hourly presence relates to the portion of the hour included in the duty cycled data (6 min of 12 min). Black lines represent total available hours (effort) and red lines represent hours with detections. Blue shading represents winter, green represents upwelling, and yellow represents the post-upwelling oceanographic season.</figcaption>
 </figure>
 </div>
-<p>Detailed methods are provided in our GitHub online analysis methods , in a report provided by OSA and archived on our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift">GitHub Repository</a>.</p>
-<p>A pilot study to develop a deep learning network to detect and classify fin whale 20 and 40 Hz calls was initiated by Ocean Science Analytics and preliminary results can be found in Appendix G.</p>
+<p>Detailed methods are provided in our GitHub online analysis methods , in a report provided by OSA and archived on our <a href="https://sael-swfsc.github.io/adrift-analysis-methods/content/BaleenWhales/Overview.html#fin-20-hz-adrift">Adrift Analysis Methods</a>.</p>
+<p>A pilot study to develop a deep learning network to detect and classify fin whale 20 and 40 Hz calls was initiated by Ocean Science Analytics (see <a href="https://sael-swfsc.github.io/Adrift/content/finAI.html">Fin Whale AI</a> and <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/supplement/OSA_Appendix_DL_Model_40Hz_20Hz_FinWhale.docx">OSA Report on Fin Whale Deep Learning</a> in Github Repository.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-croll_only_2002" class="csl-entry" role="listitem">
+Croll, Donald A., Christopher W. Clark, Alejandro Acevedo, Bernie Tershy, Sergio Flores, Jason Gedamke, and Jorge Urban. 2002. <span>“Only Male Fin Whales Sing Loud Songs.”</span> <em>Nature</em> 417 (6891): 809–9. <a href="https://doi.org/10.1038/417809a">https://doi.org/10.1038/417809a</a>.
+</div>
+<div id="ref-edds-walton1997" class="csl-entry" role="listitem">
+Edds-Walton, PEGGY L. 1997. <span>“Acoustic Communication Signals of Mysticete Whales.”</span> <em>Bioacoustics</em> 8 (1-2): 4760. <a href="https://doi.org/10.1080/09524622.1997.9753353">https://doi.org/10.1080/09524622.1997.9753353</a>.
+</div>
+<div id="ref-romagosa_food_2021" class="csl-entry" role="listitem">
+Romagosa, Miriam, Sergi Pérez-Jorge, Irma Cascão, Helena Mouriño, Patrick Lehodey, Andreia Pereira, Tiago A. Marques, Luís Matias, and Mónica A. Silva. 2021. <span>“Food Talk: 40-<span>Hz</span> Fin Whale Calls Are Associated with Prey Biomass.”</span> <em>Proceedings of the Royal Society B: Biological Sciences</em> 288 (1954): 20211156. <a href="https://doi.org/10.1098/rspb.2021.1156">https://doi.org/10.1098/rspb.2021.1156</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

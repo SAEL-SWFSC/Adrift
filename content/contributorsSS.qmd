@@ -2,7 +2,45 @@
 title: Contributors to Soundscape
 ---
 
-The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. In this study we examined sounds attributed to a number of marine mammal species as well as ship noise. Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds. For this visualization, we used the following frequency range for these detections: blue whale (15 - 25 Hz), fin whale (20 - 50 Hz), humpback whale (50 - 2,000 Hz), sei whale (50 - 500 Hz), gray whale (100 - 2,000 Hz), minke whale (1,000 -2,000 Hz), sperm whale (1,000 - 20,000 Hz), dolphins (1,000 - 25,000 Hz), beaked whales (25,000 - 60,000 Hz), NBHF species (80,000 - 120,000 Hz) and ship noise (100 - 1,000 Hz).
+The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. In this study we examined sounds attributed to a number of marine mammal species as well as ship noise. Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene.
+
+An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds.
+
+::: columns
+::: {.column width="40%"}
+
+
+For this visualization, we used the following frequency range for these detections:
+
+-   blue whale (15 - 25 Hz),
+
+-   fin whale (20 - 50 Hz),
+
+-   humpback whale (50 - 2,000 Hz),
+
+-   sei whale (50 - 500 Hz),
+
+-   gray whale (100 - 2,000 Hz),
+
+-   minke whale (1,000 -2,000 Hz),
+
+-   sperm whale (1,000 - 20,000 Hz),
+
+-   dolphins (1,000 - 25,000 Hz),
+
+-   beaked whales (25,000 - 60,000 Hz),
+
+-   NBHF species (80,000 - 120,000 Hz), and
+
+-   ship noise (100 - 1,000 Hz).
+:::
+
+::: {.column width="60%"}
+![Example of an Acoustic Scene with time on the x-axes and log frequency on the y-axis. Each species group is identified by a color in the legend, and detections of those species over time are shown as vertical lines on the figure. The height of the vertical line represents the approximate frequency extent of their calls.](/figs/acoustic_scenes/AcousticSceneExample.png){fig-alt="Example of an Acoustic Scene with time on the x-axes and log frequency on the y-axis. Each species group is identified by a color in the legend, and detections of those species over time are shown as vertical lines on the figure. The height of the vertical line represents the approximate frequency extent of their calls."}
+:::
+:::
+
+Acoustic Scene summaries are provided below for each region, season, and year. Individual acoustic scenes for each drift are provided in the Expanded Datasets for [Adrift](https://sael-swfsc.github.io/Adrift/content/adriftData.html#acoustic-scenes-by-drift), [PASCAL](https://sael-swfsc.github.io/Adrift/content/pascalData.html#acoustic-scenes-by-drift), and [CCES](https://sael-swfsc.github.io/Adrift/content/ccesData.html#acoustic-scenes-by-drift) Surveys.
 
 ## Oregon
 
@@ -30,15 +68,15 @@ There was little ship noise detected during 2021 (@fig-Adrift_Humboldt21_Seasons
 
 ## San Francisco
 
-Deployments offshore San Francisco were coordinated with NOAA Sanctuaries' ACCESS Surveys during the upwelling and post-upwelling oceanographic seasons (@fig-Adrift_SF22_Seasons, @fig-Adrift_SF22_Seasons, @fig-Adrift_SF23_Season). Contrary to other deployments, buoys were not deployed in clusters as part of the ACCESS survey (to broaden survey area), and therefore data represent data from 1 or 2 buoys at greater distance from each other. Differences in geographic location of deployments in the upwelling and post-upwelling seasons may complicate interpretation of seasonal differences in marine mammal detections (@fig-ADRIFT_DriftTracks_All).
+Deployments offshore San Francisco were coordinated with NOAA Sanctuaries' ACCESS Surveys during the upwelling and post-upwelling oceanographic seasons (@fig-Adrift_SF22_Seasons, @fig-Adrift_SF22_Seasons, @fig-Adrift_SF23_Seasons). Contrary to other deployments, buoys were not deployed in clusters as part of the ACCESS survey (to broaden survey area), and therefore data represent data from 1 or 2 buoys at greater distance from each other. Differences in geographic location of deployments in the upwelling and post-upwelling seasons may complicate interpretation of seasonal differences in marine mammal detections (see [Study Area: Adrift Drift Ma](https://sael-swfsc.github.io/Adrift/content/studyArea.html#fig-ADRIFT_DriftTracks_All)p).
 
 ![Acoustic scene for San Francisco, 2021. Acoustic scene showing detections of various contributors to the soundscape for the 2021 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.](/figs/acoustic_scenes/Adrift_SF21_Seasons.png){#fig-Adrift_SF21_Seasons fig-alt="An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes over time (x axis) are noted by the approximate frequency of their sounds, colored by species (y axis).  Detection of species varies over time and between deployments and seasons, which are outlined in the text."}
 
-Detection of odontocetes (including NBHF, beaked whales, sperm whales, and dolphins) varied by drift (@fig-Adrift_SF22_Seasons, @fig-Adrift_SF22_Seasons, @fig-Adrift_SF23_Season). Detection of baleen whales (humpback, gray, fin, and blue whales) varied by drift, with a general increase in detections of many baleen whale species during the post-upwelling season.
+Detection of odontocetes (including NBHF, beaked whales, sperm whales, and dolphins) varied by drift (@fig-Adrift_SF22_Seasons, @fig-Adrift_SF22_Seasons, @fig-Adrift_SF23_Seasons). Detection of baleen whales (humpback, gray, fin, and blue whales) varied by drift, with a general increase in detections of many baleen whale species during the post-upwelling season.
 
 ![Acoustic scene for San Francisco, 2022. Acoustic scene showing detections of various contributors to the soundscape for the 2022 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.](/figs/acoustic_scenes/Adrift_SF22_Seasons.png){#fig-Adrift_SF22_Seasons fig-alt="An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes over time (x axis) are noted by the approximate frequency of their sounds, colored by species (y axis).  Detection of species varies over time and between deployments and seasons, which are outlined in the text."}
 
-Despite the drift locations being near a convergence of shipping lanes entering San Francisco Bay, detection of specific vessels was relatively modest. Analysts noted an overall high level of ambient noise associated with background ship noise (@fig-ADRIFT_ShipPresence_SeasonRegion) and a reduced ability to detect individual vessels. Detection of vessels used manual detection methods (existing automated vessel detectors were not reliable for this dataset); development of a standardized vessel detector that works across datasets could be used to determine if individual ship tracks are difficult to detect in high traffic areas.
+Despite the drift locations being near a convergence of shipping lanes entering San Francisco Bay, detection of specific vessels was relatively modest. Analysts noted an overall high level of ambient noise associated with background ship noise (see [Ship Noise: Ship Hourly Presence Plot](https://sael-swfsc.github.io/Adrift/content/shipNoise.html#fig-ADRIFT_ShipPresence_SeasonRegion)) and a reduced ability to detect individual vessels. Detection of vessels used manual detection methods (existing automated vessel detectors were not reliable for this dataset); development of a standardized vessel detector that works across datasets could be used to determine if individual ship tracks are difficult to detect in high traffic areas.
 
 ![Acoustic scene for San Francisco, 2023. Acoustic scene showing detections of various contributors to the soundscape for the 2023 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.](/figs/acoustic_scenes/Adrift_SF23_Seasons.png){#fig-Adrift_SF23_Seasons fig-alt="An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes over time (x axis) are noted by the approximate frequency of their sounds, colored by species (y axis).  Detection of species varies over time and between deployments and seasons, which are outlined in the text."}
 
@@ -51,6 +89,3 @@ Morro Bay deployments included between 7 and 8 drifting recorders deployed over 
 Fin and humpback whales were detected during all surveys. Blue whales dominated the post-upwelling deployments in 2023 (@fig-Adrift_MorroBay23_Seasons), but there were no blue whale detections during either of the upwelling deployments. Periodic vessel noise was detected during all deployments.
 
 ![Acoustic scene for Morro Bay, 2023. Acoustic scene showing detections of various contributors to the soundscape for the 2023 Morro Bay deployments in the upwelling and post-upwelling oceanographic seasons.](/figs/acoustic_scenes/Adrift_MorroBay23_Seasons.png){#fig-Adrift_MorroBay23_Seasons fig-alt="An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes over time (x axis) are noted by the approximate frequency of their sounds, colored by species (y axis).  Detection of species varies over time and between deployments and seasons, which are outlined in the text."}
-
-
-

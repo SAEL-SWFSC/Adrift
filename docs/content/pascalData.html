@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -381,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PASCAL was a dedicated cetacean acoustic survey in the California Current off the U.S. West Coast in August and September 2016. Background information on this survey as well as preliminary analysis are provided in Keating et al.&nbsp;(2018). A map of drift tracks is provided in <a href="#fig-PASCAL_DriftTracks_All">Figure&nbsp;1</a>.</p>
+<p>PASCAL was a dedicated cetacean acoustic survey in the California Current off the U.S. West Coast in August and September 2016. Background information on this survey as well as preliminary analysis are provided in <span class="citation" data-cites="keating2018">(<a href="#ref-keating2018" role="doc-biblioref">Keating et al. 2018</a>)</span>. A map of drift tracks is provided in <a href="#fig-PASCAL_DriftTracks_All">Figure&nbsp;1</a>.</p>
 <section id="deployment-map" class="level2">
 <h2 class="anchored" data-anchor-id="deployment-map"><em>Deployment Map</em></h2>
 <div id="fig-PASCAL_DriftTracks_All" class="quarto-figure quarto-figure-center anchored">
@@ -455,13 +474,13 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>There were few hourly detections of humpback whales (hourly presence plots can be found in our <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/PASCAL_humpbackSongSocial_HourlyPresence.png">GitHub Repository</a>. Most of the PASCAL deployments were further offshore than the Adrift deployments, and this offshore distribution may be the reason for such low detection rates.</p>
-<p>There were a few calls associated with sei and minke whales. There is little known about the vocal repertoire of sei whales in the Pacific Ocean, although a single encounter with four loud low-frequency downsweeps were detected and considered as ‘possible’ sei whale vocalizations (see spectrogram in <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/PossSei_Pascal010.png">GitHub Repository</a>. Minke whale boings are seasonal vocalizations and more frequently detected during the winter.</p>
+<p>There were a few calls associated with sei and minke whales. There is little known about the vocal repertoire of sei whales in the Pacific Ocean, although a single encounter with four loud low-frequency downsweeps were detected and considered as ‘possible’ sei whale vocalizations (see <a href="https://github.com/SAEL-SWFSC/Adrift/blob/main/figs/PossSei_Pascal010.png">spectrogram in our GitHub Repository</a>. Minke whale boings are seasonal vocalizations and more frequently detected during the winter.</p>
 </section>
 <section id="acoustic-scenes-by-drift" class="level2">
 <h2 class="anchored" data-anchor-id="acoustic-scenes-by-drift"><em>Acoustic Scenes by Drift</em></h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds (see <span class="citation" data-cites="CCES_007_AcousticScene">@CCES_007_AcousticScene</span>). Acoustic Scenes were created for each CCES drift, and high resolution images are saved in the Github Repository](), and links to specific drifts are provided in the table, right.</p>
+<p>Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds (see <a href="#fig-PASCAL_016_AcousticScene">Figure&nbsp;4</a>). Acoustic Scenes were created for each CCES drift, and high resolution images are saved in the <a href="https://github.com/SAEL-SWFSC/Adrift/tree/main/figs/acoustic_scenes">Adrift Github Repository</a>, and links to specific drifts are provided in the table, below.</p>
 </div><div class="column" style="width:60%;">
 <div id="fig-PASCAL_016_AcousticScene" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -539,27 +558,27 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pascal-deployment-table" class="level2">
 <h2 class="anchored" data-anchor-id="pascal-deployment-table">PASCAL Deployment Table</h2>
-<p>A complete list of successful drifting acoustic recorder deployments during the PASCAL survey are provided in Table B‑1 . Sites include Washington (WAS), Columbia River (COL), Oregon (ORE), Humboldt (HUM), Mendocino (MND), Point Arena (PTA), Monterey Bay (MBY), Morro Bay (MOB), Channel Islands (CHI), San Diego (SND), and Baja California Norte (BCN). See Figure XXX for more information on regions.</p>
+<p>A complete list of successful drifting acoustic recorder deployments during the PASCAL survey are provided in table (below). Sites include Washington (WAS), Columbia River (COL), Oregon (ORE), Humboldt (HUM), Mendocino (MND), Point Arena (PTA), Monterey Bay (MBY), Morro Bay (MOB), Channel Islands (CHI), San Diego (SND), and Baja California Norte (BCN). See <a href="https://sael-swfsc.github.io/Adrift/content/studyArea.html">Study Area Figure 1</a> for more information on regions.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="hhibnpclgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hhibnpclgi table {
+<div id="nqfotievjb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nqfotievjb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hhibnpclgi thead, #hhibnpclgi tbody, #hhibnpclgi tfoot, #hhibnpclgi tr, #hhibnpclgi td, #hhibnpclgi th {
+#nqfotievjb thead, #nqfotievjb tbody, #nqfotievjb tfoot, #nqfotievjb tr, #nqfotievjb td, #nqfotievjb th {
   border-style: none;
 }
 
-#hhibnpclgi p {
+#nqfotievjb p {
   margin: 0;
   padding: 0;
 }
 
-#hhibnpclgi .gt_table {
+#nqfotievjb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -585,12 +604,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_caption {
+#nqfotievjb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hhibnpclgi .gt_title {
+#nqfotievjb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -602,7 +621,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#hhibnpclgi .gt_subtitle {
+#nqfotievjb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -614,7 +633,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#hhibnpclgi .gt_heading {
+#nqfotievjb .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -626,13 +645,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_bottom_border {
+#nqfotievjb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_col_headings {
+#nqfotievjb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -647,7 +666,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_col_heading {
+#nqfotievjb .gt_col_heading {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -667,7 +686,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hhibnpclgi .gt_column_spanner_outer {
+#nqfotievjb .gt_column_spanner_outer {
   color: #333333;
   background-color: #DBE5F1;
   font-size: 14px;
@@ -679,15 +698,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#hhibnpclgi .gt_column_spanner_outer:first-child {
+#nqfotievjb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hhibnpclgi .gt_column_spanner_outer:last-child {
+#nqfotievjb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hhibnpclgi .gt_column_spanner {
+#nqfotievjb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -699,11 +718,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#hhibnpclgi .gt_spanner_row {
+#nqfotievjb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hhibnpclgi .gt_group_heading {
+#nqfotievjb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -729,7 +748,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#hhibnpclgi .gt_empty_group_heading {
+#nqfotievjb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -744,15 +763,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#hhibnpclgi .gt_from_md > :first-child {
+#nqfotievjb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hhibnpclgi .gt_from_md > :last-child {
+#nqfotievjb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hhibnpclgi .gt_row {
+#nqfotievjb .gt_row {
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 5px;
@@ -771,7 +790,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hhibnpclgi .gt_stub {
+#nqfotievjb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -784,7 +803,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hhibnpclgi .gt_stub_row_group {
+#nqfotievjb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -798,15 +817,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#hhibnpclgi .gt_row_group_first td {
+#nqfotievjb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hhibnpclgi .gt_row_group_first th {
+#nqfotievjb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hhibnpclgi .gt_summary_row {
+#nqfotievjb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -816,16 +835,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hhibnpclgi .gt_first_summary_row {
+#nqfotievjb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_first_summary_row.thick {
+#nqfotievjb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hhibnpclgi .gt_last_summary_row {
+#nqfotievjb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -835,7 +854,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_grand_summary_row {
+#nqfotievjb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -845,7 +864,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hhibnpclgi .gt_first_grand_summary_row {
+#nqfotievjb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -855,7 +874,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_last_grand_summary_row_top {
+#nqfotievjb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -865,11 +884,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_striped {
+#nqfotievjb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hhibnpclgi .gt_table_body {
+#nqfotievjb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -878,7 +897,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_footnotes {
+#nqfotievjb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -892,7 +911,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_footnote {
+#nqfotievjb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -901,7 +920,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hhibnpclgi .gt_sourcenotes {
+#nqfotievjb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -915,7 +934,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hhibnpclgi .gt_sourcenote {
+#nqfotievjb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -923,72 +942,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hhibnpclgi .gt_left {
+#nqfotievjb .gt_left {
   text-align: left;
 }
 
-#hhibnpclgi .gt_center {
+#nqfotievjb .gt_center {
   text-align: center;
 }
 
-#hhibnpclgi .gt_right {
+#nqfotievjb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hhibnpclgi .gt_font_normal {
+#nqfotievjb .gt_font_normal {
   font-weight: normal;
 }
 
-#hhibnpclgi .gt_font_bold {
+#nqfotievjb .gt_font_bold {
   font-weight: bold;
 }
 
-#hhibnpclgi .gt_font_italic {
+#nqfotievjb .gt_font_italic {
   font-style: italic;
 }
 
-#hhibnpclgi .gt_super {
+#nqfotievjb .gt_super {
   font-size: 65%;
 }
 
-#hhibnpclgi .gt_footnote_marks {
+#nqfotievjb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hhibnpclgi .gt_asterisk {
+#nqfotievjb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hhibnpclgi .gt_indent_1 {
+#nqfotievjb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hhibnpclgi .gt_indent_2 {
+#nqfotievjb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hhibnpclgi .gt_indent_3 {
+#nqfotievjb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hhibnpclgi .gt_indent_4 {
+#nqfotievjb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hhibnpclgi .gt_indent_5 {
+#nqfotievjb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hhibnpclgi .katex-display {
+#nqfotievjb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hhibnpclgi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nqfotievjb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1543,9 +1562,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-keating2018" class="csl-entry" role="listitem">
+Keating, Jennifer, Jay Barlow, Emily T. Griffiths, and Jeffrey E. Moore. 2018. <span>“Passive Acoustics Survey of Cetacean Abundance Levels (PASCAL-2016) Final Report.”</span> <a href="https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf">https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

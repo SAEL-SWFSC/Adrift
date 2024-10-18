@@ -8,7 +8,7 @@ Data Nuggets are free classroom activities designed to bring contemporary resear
 :::
 
 ::: {.column width="40%"}
-![DataNugget Logot](/figs/dataNugget.png){#fig-dataNugget fig-alt="Logo for Data Nugget"}
+![](/figs/dataNugget.png){#fig-dataNugget fig-alt="Logo for Data Nugget"}
 :::
 
 :::

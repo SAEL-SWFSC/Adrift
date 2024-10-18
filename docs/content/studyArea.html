@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/pascalData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pascal Data</span></a>
+ <span class="menu-text">PASCAL Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,25 +376,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spermDemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sperm Whale Demographic Composition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/beakedDensity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beaked Whale Density Estimation Tools</span></a>
+ <span class="menu-text">Sperm Whale Demographics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/nbhfClassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acoustics Classification of NBHF Species</span></a>
+ <span class="menu-text">NBHF Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/finAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning to Detect Fin Whales {#sec-finAI}</span></a>
+ <span class="menu-text">Fin Whale AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -429,10 +442,10 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The Adrift project surveyed the California Current between Point Conception to the south and Newport, Oregon to the north. This greater study area was subdivided into three sub-areas: Oregon, Northern California, and Central California. Initial funding (2020) focused on Northern California, ranging from San Francisco to the California-Oregon border, and encompassing the Humboldt Wind Energy Area. In 2021, funding was expanded to include Central California, with focus on the Morro Bay Wind Energy Area. Finally, in 2022 the area studied expanded to include a pilot study in Oregon. In addition to focused data collection efforts, this study analyzed data from two previous offshore surveys: Passive Acoustic Survey of Cetacean Abundance Levels (PASCAL 2016, Keating et al.&nbsp;2018) and the California Current Ecosystem Survey (CCES 2018, Simonis 2020).</p>
+<p>The Adrift project surveyed the California Current between Point Conception to the south and Newport, Oregon to the north. This greater study area was subdivided into three sub-areas: Oregon, Northern California, and Central California. Initial funding (2020) focused on Northern California, ranging from San Francisco to the California-Oregon border, and encompassing the Humboldt Wind Energy Area. In 2021, funding was expanded to include Central California, with focus on the Morro Bay Wind Energy Area. Finally, in 2022 the area studied expanded to include a pilot study in Oregon. In addition to focused data collection efforts, this study analyzed data from two previous offshore surveys: Passive Acoustic Survey of Cetacean Abundance Levels (PASCAL 2016, <span class="citation" data-cites="keating2018">Keating et al. (<a href="#ref-keating2018" role="doc-biblioref">2018</a>)</span> ) and the California Current Ecosystem Survey (CCES 2018, <span class="citation" data-cites="simonis_passive_2020">Simonis (<a href="#ref-simonis_passive_2020" role="doc-biblioref">2020</a>)</span> ).</p>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p>Seasonal and regional designations were selected based on those identified in (Southall et al.&nbsp;2023). For the purpose of identifying approximate location of data collection efforts, we subdivided our larger study area into nine smaller latitudinal regions (Figure 3.1). Seasonal variation considered the oceanographic seasons designated in (Southall et al.&nbsp;2023): upwelling (March - June), post-upwelling (July - November), and winter (December - February).</p>
+<p>Seasonal and regional designations were selected based on those identified in <span class="citation" data-cites="southall2023">(<a href="#ref-southall2023" role="doc-biblioref">Southall, Mazurek, and Eriksen 2023</a>)</span>. For the purpose of identifying approximate location of data collection efforts, we subdivided our larger study area into nine smaller latitudinal regions (Figure 3.1). Seasonal variation considered the oceanographic seasons designated in <span class="citation" data-cites="southall2023">(<a href="#ref-southall2023" role="doc-biblioref">Southall, Mazurek, and Eriksen 2023</a>)</span>: upwelling (March - June), post-upwelling (July - November), and winter (December - February).</p>
 </div><div class="column" style="width:65%;">
 <div id="fig-DrifterRegions" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -443,28 +456,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>The Adrift project started in June 2020, during the COVID-19 Pandemic. All fieldwork in 2020 was canceled due to the pandemic, and these impacts greatly hampered research efforts in 2021. In addition to the initial cessation of all fieldwork efforts, secondary impacts continued to negatively impact fieldwork well into 2022. Secondary impacts included disruptions to the supply chain and extreme short-staffing due to outbreaks and exposure, as well as the widespread post-pandemic changes to the workforce.</p>
-<p>Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. These surveys were conducted in late summer through late fall during the post-upwelling season and data collection was not impacted by strong currents or inclement weather. Weather conditions are typically less ideal, and currents stronger, during the upwelling and winter season. The California Current experienced three consecutive years of La Niña between 2020-2022 (Thompson et al.&nbsp;2024). The increased wind and currents caused by these conditions led to decreased windows of good weather, even during summer. After the initial loss of several drifting recorders due to extreme weather and current conditions, we limited our deployments to good weather windows, which dramatically decreased the duration of our deployments from ~ 30 days during PASCAL (10-19 days) and CCES (10-79 days), to less than 1 week during most of the Adrift study. Strong currents and high seas also created self-noise such as strumming, which periodically impacted data quality. Use of spar buoys instead of hi-flyer pole buoys may be preferred to minimize strumming.</p>
+<p>Prior research efforts include the 2016 PASCAL survey and the 2018 CCES survey. These surveys were conducted in late summer through late fall during the post-upwelling season and data collection was not impacted by strong currents or inclement weather. Weather conditions are typically less ideal, and currents stronger, during the upwelling and winter season. The California Current experienced three consecutive years of La Niña between 2020-2022 <span class="citation" data-cites="thompson_state_2024">(<a href="#ref-thompson_state_2024" role="doc-biblioref">Thompson et al. 2024</a>)</span>. The increased wind and currents caused by these conditions led to decreased windows of good weather, even during summer. After the initial loss of several drifting recorders due to extreme weather and current conditions, we limited our deployments to good weather windows, which dramatically decreased the duration of our deployments from ~ 30 days during PASCAL (10-19 days) and CCES (10-79 days), to less than 1 week during most of the Adrift study. Strong currents and high seas also created self-noise such as strumming, which periodically impacted data quality. Use of spar buoys instead of hi-flyer pole buoys may be preferred to minimize strumming.</p>
 <p>The cumulative impacts of the pandemic and poor environmental conditions ultimately required us to shift our survey approach and abandon our efforts to coordinate data collection using vessels of opportunity. Instead, we focused on directed deployment of drifting recorders in collaboration with regional partners. Our partners in Humboldt (Cal Poly Humboldt) and Oregon (Oregon State University) were able to use a combination of opportunistic and dedicated vessel time for data collection. We partnered with the NOAA Sanctuary Applied California Current Ecosystem Studies (ACCESS) Surveys to collect data offshore San Francisco up to three times per year, and developed a collaborative partnership for fieldwork in Morro Bay.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="nhrsjcqmij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nhrsjcqmij table {
+<div id="atgfvjpkmn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#atgfvjpkmn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nhrsjcqmij thead, #nhrsjcqmij tbody, #nhrsjcqmij tfoot, #nhrsjcqmij tr, #nhrsjcqmij td, #nhrsjcqmij th {
+#atgfvjpkmn thead, #atgfvjpkmn tbody, #atgfvjpkmn tfoot, #atgfvjpkmn tr, #atgfvjpkmn td, #atgfvjpkmn th {
   border-style: none;
 }
 
-#nhrsjcqmij p {
+#atgfvjpkmn p {
   margin: 0;
   padding: 0;
 }
 
-#nhrsjcqmij .gt_table {
+#atgfvjpkmn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -490,12 +503,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_caption {
+#atgfvjpkmn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nhrsjcqmij .gt_title {
+#atgfvjpkmn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -507,7 +520,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#nhrsjcqmij .gt_subtitle {
+#atgfvjpkmn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -519,7 +532,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#nhrsjcqmij .gt_heading {
+#atgfvjpkmn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -531,13 +544,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_bottom_border {
+#atgfvjpkmn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_col_headings {
+#atgfvjpkmn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -552,7 +565,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_col_heading {
+#atgfvjpkmn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -572,7 +585,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#nhrsjcqmij .gt_column_spanner_outer {
+#atgfvjpkmn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -584,15 +597,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#nhrsjcqmij .gt_column_spanner_outer:first-child {
+#atgfvjpkmn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nhrsjcqmij .gt_column_spanner_outer:last-child {
+#atgfvjpkmn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nhrsjcqmij .gt_column_spanner {
+#atgfvjpkmn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -604,11 +617,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#nhrsjcqmij .gt_spanner_row {
+#atgfvjpkmn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nhrsjcqmij .gt_group_heading {
+#atgfvjpkmn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -634,7 +647,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#nhrsjcqmij .gt_empty_group_heading {
+#atgfvjpkmn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -649,15 +662,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#nhrsjcqmij .gt_from_md > :first-child {
+#atgfvjpkmn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nhrsjcqmij .gt_from_md > :last-child {
+#atgfvjpkmn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nhrsjcqmij .gt_row {
+#atgfvjpkmn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -676,7 +689,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#nhrsjcqmij .gt_stub {
+#atgfvjpkmn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -689,7 +702,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#nhrsjcqmij .gt_stub_row_group {
+#atgfvjpkmn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -703,15 +716,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#nhrsjcqmij .gt_row_group_first td {
+#atgfvjpkmn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nhrsjcqmij .gt_row_group_first th {
+#atgfvjpkmn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nhrsjcqmij .gt_summary_row {
+#atgfvjpkmn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -721,16 +734,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#nhrsjcqmij .gt_first_summary_row {
+#atgfvjpkmn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_first_summary_row.thick {
+#atgfvjpkmn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nhrsjcqmij .gt_last_summary_row {
+#atgfvjpkmn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +753,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_grand_summary_row {
+#atgfvjpkmn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -750,7 +763,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#nhrsjcqmij .gt_first_grand_summary_row {
+#atgfvjpkmn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -760,7 +773,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_last_grand_summary_row_top {
+#atgfvjpkmn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,11 +783,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_striped {
+#atgfvjpkmn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nhrsjcqmij .gt_table_body {
+#atgfvjpkmn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -783,7 +796,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_footnotes {
+#atgfvjpkmn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -797,7 +810,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_footnote {
+#atgfvjpkmn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -806,7 +819,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#nhrsjcqmij .gt_sourcenotes {
+#atgfvjpkmn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -820,7 +833,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#nhrsjcqmij .gt_sourcenote {
+#atgfvjpkmn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -828,72 +841,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#nhrsjcqmij .gt_left {
+#atgfvjpkmn .gt_left {
   text-align: left;
 }
 
-#nhrsjcqmij .gt_center {
+#atgfvjpkmn .gt_center {
   text-align: center;
 }
 
-#nhrsjcqmij .gt_right {
+#atgfvjpkmn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nhrsjcqmij .gt_font_normal {
+#atgfvjpkmn .gt_font_normal {
   font-weight: normal;
 }
 
-#nhrsjcqmij .gt_font_bold {
+#atgfvjpkmn .gt_font_bold {
   font-weight: bold;
 }
 
-#nhrsjcqmij .gt_font_italic {
+#atgfvjpkmn .gt_font_italic {
   font-style: italic;
 }
 
-#nhrsjcqmij .gt_super {
+#atgfvjpkmn .gt_super {
   font-size: 65%;
 }
 
-#nhrsjcqmij .gt_footnote_marks {
+#atgfvjpkmn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nhrsjcqmij .gt_asterisk {
+#atgfvjpkmn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nhrsjcqmij .gt_indent_1 {
+#atgfvjpkmn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nhrsjcqmij .gt_indent_2 {
+#atgfvjpkmn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nhrsjcqmij .gt_indent_3 {
+#atgfvjpkmn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nhrsjcqmij .gt_indent_4 {
+#atgfvjpkmn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nhrsjcqmij .gt_indent_5 {
+#atgfvjpkmn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nhrsjcqmij .katex-display {
+#atgfvjpkmn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nhrsjcqmij div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#atgfvjpkmn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -970,7 +983,7 @@ N = 30</p>
 </div>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p>A total of 90 drifting recorders were successfully deployed during the Adrift survey, for a total of 493 deployment days which resulted in a total of 8,736 hours of recordings (<strong>?@tbl-summaryTable</strong>, <a href="#fig-ADRIFT_DriftTracks_All">Figure&nbsp;2</a>). Analysis included additional recordings from the 2016 PASCAL Survey (29 successful drifting recorders for a total of 421 deployment days and 9,451 hours of recordings) and the 2018 CCES Survey (15 successful drifting recorders for a total of 529 deployment days and 11,022 hours of recordings). Expanded deployment details are provided in Appendix A, Appendix B, Appendix C.</p>
+<p>A total of 90 drifting recorders were successfully deployed during the Adrift survey, for a total of 493 deployment days which resulted in a total of 8,736 hours of recordings (see table, above, and <a href="#fig-ADRIFT_DriftTracks_All">Figure&nbsp;2</a>). Analysis included additional recordings from the 2016 PASCAL Survey (29 successful drifting recorders for a total of 421 deployment days and 9,451 hours of recordings) and the 2018 CCES Survey (15 successful drifting recorders for a total of 529 deployment days and 11,022 hours of recordings). Expanded deployment details are provided in Appendix A, Appendix B, Appendix C.</p>
 <p>The primary focal regions included areas of importance to the initial phases of offshore renewable wind energy development, including two locations in Oregon (Coos Bay to the North, and Brookings to the South), Humboldt, and Morro Bay, with sampling of San Francisco as opportunity allowed (Figure 3.2). The 100 m and 200 m isobaths are shown on the maps to identify the shelf break and potential for increased biological activity associated with upwelling (Figure 3.2 and regional maps). Regional description of partners and data collection efforts will be presented from the northern region (Oregon) to the southern region (Morro Bay).</p>
 </div><div class="column" style="width:65%;">
 <div id="fig-ADRIFT_DriftTracks_All" class="quarto-figure quarto-figure-center anchored">
@@ -1001,7 +1014,7 @@ N = 30</p>
 <div class="columns">
 <div class="column" style="width:35%;">
 <p>Adrift data collection in the Humboldt region was coordinated with our partners at Cal Poly Humboldt (<a href="#fig-ADRIFT_DriftTracks_Humboldt">Figure&nbsp;4</a>). The first drifting recorder was deployed in fall 2021, with more frequent deployment of clusters of 2-4 buoys starting in spring 2022 (28 total deployments).</p>
-<p>Drifting recorders had previously been deployed in the Humboldt region during the 2018 CCES survey (Appendix C) and the 2019 Express Pilot Survey. Both previous drifts were entrained in the recirculating current offshore Humboldt (Largier et al.&nbsp;1993) that allowed for repeated sampling during each deployment. Unfortunately, during the Adrift survey these drifting recorders encountered strong southward currents that prevented the repeated sampling provided during previous surveys. The extreme weather conditions, variable currents, and proximity to Cape Mendocino (and lack of ports south of this point) created a high-risk scenario. After the loss of 3 drifting recorders in the first survey year, we reduced deployments to open weather windows to ensure opportunity for retrieval.</p>
+<p>Drifting recorders had previously been deployed in the Humboldt region during the 2018 CCES survey (<a href="https://sael-swfsc.github.io/Adrift/content/ccesData.html">See CCES Expanded Datasets</a>) and the 2019 Express Pilot Survey. Both previous drifts were entrained in the recirculating current offshore Humboldt <span class="citation" data-cites="largier1993">(<a href="#ref-largier1993" role="doc-biblioref">Largier, Magnell, and Winant 1993</a>)</span> that allowed for repeated sampling during each deployment. Unfortunately, during the Adrift survey these drifting recorders encountered strong southward currents that prevented the repeated sampling provided during previous surveys. The extreme weather conditions, variable currents, and proximity to Cape Mendocino (and lack of ports south of this point) created a high-risk scenario. After the loss of 3 drifting recorders in the first survey year, we reduced deployments to open weather windows to ensure opportunity for retrieval.</p>
 </div><div class="column" style="width:65%;">
 <div id="fig-ADRIFT_DriftTracks_Humboldt" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1011,13 +1024,13 @@ N = 30</p>
 </div>
 </div>
 </div>
-<p>The monthly Trinidad Head Line survey provides year-round ship observations of oceanography (hydrographic and biological) and terminates just inside the boundary of the Humboldt WEA. Efforts to deploy monthly during these surveys were complicated by personnel shortages and poor environmental conditions, and deployments were frequently shortened due to prevailing environmental conditions. Data collection in Humboldt was negatively impacted by competition for resources (vessel and seaboard technician time) and poor weather conditions, especially during the winter months. The increasing need for offshore research in the Humboldt WEA combined with the University’s new status as a polytechnic institution suggest collaborative field efforts such as those conducted in Morro Bay may be welcome.</p>
+<p>The monthly <a href="https://www.fisheries.noaa.gov/west-coast/science-data/ocean-and-ecosystem-observations-trinidad-head-line">Trinidad Head Line</a> survey provides year-round ship observations of oceanography (hydrographic and biological) and terminates just inside the boundary of the Humboldt WEA. Efforts to deploy monthly during these surveys were complicated by personnel shortages and poor environmental conditions, and deployments were frequently shortened due to prevailing environmental conditions. Data collection in Humboldt was negatively impacted by competition for resources (vessel and seaboard technician time) and poor weather conditions, especially during the winter months. The increasing need for offshore research in the Humboldt WEA combined with the University’s new status as a polytechnic institution suggest collaborative field efforts such as those conducted in Morro Bay may be welcome.</p>
 </section>
 <section id="san-francisco" class="level2">
 <h2 class="anchored" data-anchor-id="san-francisco">San Francisco</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p>We partnered with the Greater Farallones and the Cordell Bank National Marine Sanctuaries and Point Blue to participate in their tri-annual ACCESS surveys. These surveys provided an opportunity to deploy and retrieve 1-2 drifting recorders in the area offshore San Francisco Bay, providing data to inform the Sanctuaries and to provide an additional dataset between the Morro Bay and Humboldt WEAs (total 11 deployments, Figure 3.5). This partnership was mutually beneficial; however, these surveys are only conducted in late spring through late summer. Deployments in the post-upwelling season extended further south than deployments in the upwelling season (<a href="#fig-ADRIFT_DriftTracks_SanFrancisco">Figure&nbsp;5</a>); these geographic differences may contribute to seasonal differences in marine mammal detections.</p>
+<p>We partnered with the Greater Farallones and the Cordell Bank National Marine Sanctuaries and Point Blue to participate in their tri-annual <a href="https://farallones.noaa.gov/science/access.html">ACCESS surveys</a>. These surveys provided an opportunity to deploy and retrieve 1-2 drifting recorders in the area offshore San Francisco Bay, providing data to inform the Sanctuaries and to provide an additional dataset between the Morro Bay and Humboldt WEAs (total 11 deployments, <a href="#fig-ADRIFT_DriftTracks_SanFrancisco">Figure&nbsp;5</a>). This partnership was mutually beneficial; however, these surveys are only conducted in late spring through late summer. Deployments in the post-upwelling season extended further south than deployments in the upwelling season (<a href="#fig-ADRIFT_DriftTracks_SanFrancisco">Figure&nbsp;5</a>); these geographic differences may contribute to seasonal differences in marine mammal detections.</p>
 </div><div class="column" style="width:65%;">
 <div id="fig-ADRIFT_DriftTracks_SanFrancisco" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1044,9 +1057,26 @@ N = 30</p>
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-keating2018" class="csl-entry" role="listitem">
+Keating, Jennifer, Jay Barlow, Emily T. Griffiths, and Jeffrey E. Moore. 2018. <span>“Passive Acoustics Survey of Cetacean Abundance Levels (PASCAL-2016) Final Report.”</span> <a href="https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf">https://www.boem.gov/sites/default/files/environmental-stewardship/Environmental-Studies/Pacific-Region/Studies/BOEM-2018-025.pdf</a>.
+</div>
+<div id="ref-largier1993" class="csl-entry" role="listitem">
+Largier, J. L., B. A. Magnell, and C. D. Winant. 1993. <span>“Subtidal Circulation over the Northern California Shelf.”</span> <em>Journal of Geophysical Research: Oceans</em> 98 (C10): 18147–79. <a href="https://doi.org/10.1029/93JC01074">https://doi.org/10.1029/93JC01074</a>.
+</div>
+<div id="ref-simonis_passive_2020" class="csl-entry" role="listitem">
+Simonis, Anne E. 2020. <span>“Passive <span>Acoustic</span> <span>Survey</span> <span>Of</span> <span>Deep</span>-<span>Diving</span> <span>Odontocetes</span> in the <span>California</span> <span>Current</span> <span>Ecosystem</span> 2018: <span>Final</span> <span>Report</span>.”</span> <em>NOAA-TM-NMFS-SWFSC-630</em>. <a href="https://doi.org/10.25923/W5XX-JZ73">https://doi.org/10.25923/W5XX-JZ73</a>.
+</div>
+<div id="ref-southall2023" class="csl-entry" role="listitem">
+Southall, Brandon, Robert Mazurek, and Rikki Eriksen. 2023. <span>“Vulnerability Index to Scale Effects of Offshore Renewable Energy on Marine Mammals and Sea Turtles Off the u.s. West Coast (VIMMS).”</span> Aptos, CA. <a href="https://espis.boem.gov/Final%20Reports/BOEM_2023-057.pdf">https://espis.boem.gov/Final%20Reports/BOEM_2023-057.pdf</a>.
+</div>
+<div id="ref-thompson_state_2024" class="csl-entry" role="listitem">
+Thompson, Andrew R., Rasmus Swalethorp, Michaela Alksne, Jarrod A. Santora, Elliott L. Hazen, Andrew Leising, Erin Satterthwaite, et al. 2024. <span>“State of the <span>California</span> <span>Current</span> <span>Ecosystem</span> Report in 2022: A Tale of Two <span>La</span> <span>Niñas</span>.”</span> <em>Frontiers in Marine Science</em> 11 (February). <a href="https://doi.org/10.3389/fmars.2024.1294011">https://doi.org/10.3389/fmars.2024.1294011</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

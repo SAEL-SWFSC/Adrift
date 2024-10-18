@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Kaitlin Palmer, kpalmer@coa.edu">
 
 <title>Adrift in the California Current - Modeling Habitat Use</title>
 <style>
@@ -20,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -381,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/spatialNoise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Variation to Noise</span></a>
+ <span class="menu-text">Spatial Variation in Noise</span></a>
   </div>
 </li>
       </ul>
@@ -412,6 +432,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kaitlin Palmer, kpalmer@coa.edu </p>
+          </div>
+  </div>
     
   
     
@@ -426,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="columns">
 <div class="column" style="width:40%;">
 <p>The clustered deployments off Morro Bay provide a test bed for evaluating the ability of drifting recorders to contribute to population assessment models. Mysticete calls can be detected on multiple instruments; however, localization of the sound source is limited by gaps in known sensor location (30 min GPS updates). As part of the exploratory analysis, we built a simulation of fin whale habitat use using regional density estimates, simplified propagation models and noise levels from one Morro Bay datasets. This simulation examined the potential spatial resolution of calls given the changing spacing of recorders throughout the deployment.</p>
-<p>We simulated 4,000 calls distributed in the survey area according to predicted fin whale densities by (Becker et al.&nbsp;2020) (<a href="#fig-ADRIFT_Appendix_HabitaMod_Simulation">Figure&nbsp;1</a>). We determined the minimum spatial resolution to which each call could potentially be localized using between 1 and 7 of the drifting recorders to compare the tradeoffs between localization resolution and the number of sensors.</p>
+<p>We simulated 4,000 calls distributed in the survey area according to predicted fin whale densities by <span class="citation" data-cites="becker2020">(<a href="#ref-becker2020" role="doc-biblioref">Becker et al. 2020</a>)</span> (<a href="#fig-ADRIFT_Appendix_HabitaMod_Simulation">Figure&nbsp;1</a>). We determined the minimum spatial resolution to which each call could potentially be localized using between 1 and 7 of the drifting recorders to compare the tradeoffs between localization resolution and the number of sensors.</p>
 </div><div class="column" style="width:60%;">
 <div id="fig-ADRIFT_Appendix_HabitaMod_Simulation" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -456,9 +482,14 @@ ul.task-list li input[type="checkbox"] {
 <p>This preliminary modeling suggests that the dispersed sensors provided by the clustered deployment of multiple drifting recorders can allow for reducing the possible source location for sounds detected on multiple sensors. This improved spatial resolution of the sound source may improve the viability for using these data for population assessment.&nbsp; Future research should test these analytical methods on real data such as those provided during the Morro Bay surveys and identify how these methods can be used for population assessment.</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-becker2020" class="csl-entry" role="listitem">
+Becker, Elizabeth A, Karin A Forney, David L Miller, Jay Barlow, and Jeff E Moore. 2020. <span>“Habitat-Based Density Estimates for Cetaceans in the California Current Ecosystem Based on 1991<span></span>2018 Survey Data,”</span> December. https://doi.org/<a href="https://doi.org/10.25923/3znq-yx13">https://doi.org/10.25923/3znq-yx13</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -815,7 +846,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../content/spatialNoise.html" class="pagination-link">
-        <span class="nav-page-text">Spatial Variation to Noise</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Spatial Variation in Noise</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,7 +6,7 @@ NOAA is committed to increasing the accessibility of publications and digital da
 
 -   [Research Compendium](https://github.com/SAEL-SWFSC/Adrift): Adrift Github Repository for Adrift in the California Current Project
 -   [Adrift Website](https://sael-swfsc.github.io/Adrift/): Website for Adrift results and output of research compendium
--   NCEI Data Archive \[FIX\]: Raw recordings (wav), metadata, and soundscape metrics
+-   [NCEI Data Archive](https://www.ncei.noaa.gov/products/passive-acoustic-data): Raw recordings (wav), metadata, and soundscape metrics
 -   [Passive Acoustic Cetacean Map (PACM)](https://apps-nefsc.fisheries.noaa.gov/pacm): Visual representation of acoustic detection of species
--   Adrift Field Methods: \[FIX\] Repository website detailing field hardware & methods
+-   [Adrift Field Methods](https://sael-swfsc.github.io/adrift-field-methods/): Repository website detailing field hardware & methods
 -   [Adrift Analysis Methods](https://sael-swfsc.github.io/adrift-analysis-methods/): Repository website detailing analysis methods
