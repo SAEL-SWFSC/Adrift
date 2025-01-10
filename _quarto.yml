@@ -92,6 +92,7 @@ website:
         - content/finAI.qmd
         - content/habitatModels.qmd
         - content/spatialNoise.qmd
+        - content/access.qmd
 
 
           

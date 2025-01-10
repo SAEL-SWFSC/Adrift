@@ -1,0 +1,21 @@
+---
+title: ACCESS Survey
+author: Shannon Rankin, shannon.rankin@noaa.gov
+---
+::: columns
+::: {.column width="40%"}
+The Applied California Current Ecosystem Studies (ACCESS) surveys provide an opportunity to deploy drifting recorders to monitor the waters offshore San Francisco Bay. This report complements the final Adrift report with specific focus on the Adrift-ACCESS data collection efforts within these NOAA Sanctuaries. 
+
+:::
+::: {.column width="40%"}
+!(/figs/ADRIFT_DriftTracks_SanFrancisco.png)
+
+:::
+:::
+
+Specific objectives of the Adrift-ACCESS surveys include:
+•	Determine the viability and value of coordinated drifting recorder PAM monitoring during ACCESS Surveys 
+•	Identify marine mammal species encountered within the Greater Farallones and Cordell Bank National Marine Sanctuaries
+•	Provide additional information on the detection of fin and blue whales within and offshore the Greater Farallones and Cordell Bank National Marine Sanctuary 
+
+
