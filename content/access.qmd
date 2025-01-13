@@ -2,20 +2,35 @@
 title: ACCESS Survey
 author: Shannon Rankin, shannon.rankin@noaa.gov
 ---
+
 ::: columns
 ::: {.column width="40%"}
 The Applied California Current Ecosystem Studies (ACCESS) surveys provide an opportunity to deploy drifting recorders to monitor the waters offshore San Francisco Bay. This report complements the final Adrift report with specific focus on the Adrift-ACCESS data collection efforts within these NOAA Sanctuaries. 
 
+A total of 17 drifting recorders were deployed during the upwelling and post-upwelling seasons.
 :::
+
 ::: {.column width="40%"}
-!(/figs/ADRIFT_DriftTracks_SanFrancisco.png)
-
+![Plot of all successful drifts deployed during the Adrift-ACCESS survey. Drifts deployed during upwelling are green, and post-upwelling are yellow. Shipping lanes for entry to San Francisco Bay are outlined in yellow.](/figs/ADRIFT_DriftTracks_SanFrancisco.png){#fig-ADRIFT_DriftTracks_SanFrancisco fig-alt="Map of the Adrift San Francisco study area with plots of geoposition tracks of successful drifts during the upwelling season shown in green and the post-upwelling season shown in yellow. The shipping lanes are outlined in yellow. Latitude is on the x-axis, and Longitude is on the y-axis. Bathymetry is shown with light blue for the shelf and slope waters, and dark blue for deep ocean waters. A 100 m and 200 m isobath line are provided."}
 :::
 :::
 
-Specific objectives of the Adrift-ACCESS surveys include:
-•	Determine the viability and value of coordinated drifting recorder PAM monitoring during ACCESS Surveys 
-•	Identify marine mammal species encountered within the Greater Farallones and Cordell Bank National Marine Sanctuaries
-•	Provide additional information on the detection of fin and blue whales within and offshore the Greater Farallones and Cordell Bank National Marine Sanctuary 
+
+*Specific objectives of the Adrift-ACCESS surveys include*:
+
+-   Determine the viability and value of coordinated drifting recorder PAM monitoring during ACCESS Surveys
+
+-   Identify marine mammal species encountered within the Greater Farallones and Cordell Bank National Marine Sanctuaries
+
+-   Provide additional information on the detection of fin and blue whales within and offshore the Greater Farallones and Cordell Bank National Marine Sanctuary
+
+
+A summary table of Adrift-ACCESS deployments are shown below.  Additional deployment details are provided in the [Expanded Datasets for Adrift](https://sael-swfsc.github.io/Adrift/content/driftingRecorders.html).
+
+
+```{r accessTbl, child= "../R/accessSummary.Rmd"}
+
+
+```
 
 

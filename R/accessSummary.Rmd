@@ -1,0 +1,74 @@
+
+```{r, loadpackages, include=FALSE}
+#Load packages and background data/functions
+#Note: I don't think the source is working properly?
+library(here)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+source(here::here("R/_commonR.r"))
+source(here::here("R/deployDetails.r"))
+```
+
+```{r}
+#Make Summary Table, # Deployments by Survey & Site. Notes at bottom to direct to appendix tables & reports
+deployDetails_all <- read.csv(here ("output", "deployDetails.csv"))
+
+goodCol <- c("Data_ID", "Status", "Deployment_Latitude", "Deployment_Longitude", "Deployment_Date", "Recovery_Date", "Quality_Category") #Fields to use in table)
+
+deployDetails_access <- deployDetails_all%>%
+  filter(Cruise == "ACCESS" & Project != "OPPS") %>%
+  arrange("Deployment_Date")%>%
+  dplyr::select(all_of(goodCol))
+  # rename(Drift_ID = Deployment ID) %>%
+  
+accessTbl <- deployDetails_access %>% 
+  gt()%>%
+  sub_missing(missing_text = "--")%>%
+  # tab_spanner(
+  #   label = "Deployment",
+  #   columns = c(Deployment_Date, Deployment_Latitude, Deployment_Longitude)
+  # ) %>%
+  # tab_spanner(
+  #   label = "Retrieval",
+  #   columns = c(Recovery_Date, Recovery_Latitude, Recovery_Longitude)
+  # )%>%
+  #   tab_spanner(
+  #   label = "Recording Specifications",
+  #   columns = c(Recorder, SampleRate_kHz, DutyCycle, Deployment_Depth_m.)
+  # )%>%
+    fmt_number(
+    columns = c("Deployment_Latitude", "Deployment_Longitude"),
+    decimals = 2
+  ) %>%
+    tableTheme()%>%
+  cols_label(
+      Data_ID = "Deployment ID",
+      Deployment_Date = "Deployment Date",
+      Deployment_Latitude = "Deployment Latitude",
+      Deployment_Longitude = "Deployment Longitude",
+      Recovery_Date = "Recovery Date",
+      # Recovery_Latitude = "Recovery Latitude",
+      # Recovery_Longitude = "Recovery Longitude", 
+      Quality_Category = "Data Quality"
+      # SampleRate_kHz = "SR (kHz)",
+      # DutyCycle = "Duty Cycle",
+      # Deployment_Depth_m. = "HP Depth (m)",
+      # Data_Start = "Data Start Date",
+      # Data_End = "Data End Date"
+    )%>%
+  cols_align(
+    align = "center"
+  ) %>%
+  sub_values(
+    columns = "Status",
+    values = c("Lost", "Sunk"),
+    replacement = "Failed"
+  ) 
+
+accessTbl
+
+gt::gtsave(accessTbl, file=file.path(here("figs", "accessTable.png")))
+
+
+gtsave(accessTbl, filename = here("output", "accessTable.html"))
+
+```

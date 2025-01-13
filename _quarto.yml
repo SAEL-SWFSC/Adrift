@@ -92,7 +92,12 @@ website:
         - content/finAI.qmd
         - content/habitatModels.qmd
         - content/spatialNoise.qmd
-        - content/access.qmd
+        - section: content/access.qmd
+          text: ACCESS Survey
+          contents:
+          - content/accessDetections.qmd
+          - content/accessSoundscape.qmd
+          - content/accessSummary.qmd
 
 
           
