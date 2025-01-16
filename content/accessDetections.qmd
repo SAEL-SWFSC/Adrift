@@ -4,6 +4,7 @@ editor:
   markdown: 
     wrap: 72
 bibliography: references.bib
+tbl-cap-location: top
 ---
 
 A primary goal of the Adrift-ACCESS project was to identify which marine
@@ -15,13 +16,13 @@ therefore provide information related to habitat use. Passive acoustic
 monitoring relies on sounds produced by animals for detection, and
 therefore PAM studies cannot identify the absence of animals.
 
-### **Sperm Whales** 
+### **Sperm Whales**
 
 Sperm whales were detected during ACCESS surveys in all months except
-late September/early October (@ACCESS_Pm_HourlyPresence). Most sperm
+late September/early October @fig-ACCESS_Pm_HourlyPresence. Most sperm
 whale detections were ‘regular’ clicks associated with feeding animals;
 ‘slow’ clicks (associated with adult males) were uncommon but detected
-in all regions except Morro Bay (Table 2).
+in all regions except Morro Bay (@tbl-pm).
 
 Sperm whales had been documented only 3 times in the waters offshore San
 Francisco in over 30 years of ACCESS visual surveys (J. Roletto, pers.
@@ -32,11 +33,15 @@ whale distribution in the busy shipping lanes off San Francisco as well
 as within the combined Greater Farallones and Cordell Bank National
 Marine Sanctuary.
 
-Table 2. Summary of sperm whale detections for regular and slow clicks
-in hourly bins for Adrift-ACCESS surveys. Upwelling Post-Upwelling
-Winter Regular Clicks 0.03 (769) 0.00 (626) – Slow Clicks 0.01 (769)
-0.00 (626) – Note: Mean hourly probability of sperm whale detection for
-that call type/season; total hourly bins are shown in parenthesis.
+|                    | Upwelling  | Post-Upwelling | Winter |
+|--------------------|:----------:|:--------------:|:------:|
+| **Regular Clicks** | 0.03 (769) |   0.00 (626)   |   --   |
+| **Slow Clicks**    | 0.01 (769) |   0.00 (626)   |   --   |
+
+: Summary of sperm whale detections for regular and slow clicks in
+hourly bins for Adrift-ACCESS surveys. Mean hourly probability of sperm
+whale detection for that call type/season; total hourly bins are shown
+in parenthesis. {#tbl-pm}
 
 ![Hourly sperm whale events by month for Adrift-ACCESS surveys. Hourly
 sperm whale events (y axis) for different months for combined years (x
@@ -46,7 +51,7 @@ data. Black lines represent total available hours (effort) and red lines
 represent hours with detections. Blue shading represents winter, green
 represents upwelling, and yellow represents the post-upwelling
 oceanographic
-season.](/figs/ACCESS/ACCESS_Pm_HourlyPresence.png){#ACCESS_Pm_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_Pm_HourlyPresence.png){#fig-ACCESS_Pm_HourlyPresence width="400"}
 
 A pilot study examining the potential estimation of body size based on
 inter-pulse and inter-click intervals found that sperm whale groups
@@ -54,75 +59,84 @@ detected during November deployments in Morro Bay were comprised of
 females and juvenile males (see online summary: [Sperm Whale
 Demographics](https://sael-swfsc.github.io/Adrift/content/spermDemographics.html)).
 
-### **Beaked Whales** 
+### **Beaked Whales**
 
 Baird’s beaked whales and goose-beaked whales were detected in
-recordings collected during the Adrift-ACCESS surveys (Table 4,
-@ACCESS_ZcBb_HourlyPresence). Detections of both species were higher
+recordings collected during the Adrift-ACCESS surveys (@tbl-bw,
+@fig-ACCESS_ZcBb_HourlyPresence). Detections of both species were higher
 during the post-upwelling season, and goose-beaked whales were more
-commonly detected than Baird’s beaked whales (Table 4).
+commonly detected than Baird’s beaked whales (@tbl-bw).
 
-Table 3. Summary of beaked whale detections Baird’s beaked whales and
-goose-beaked whales in hourly bins for Adrift-ACCESS data. Upwelling
-Post-Upwelling Winter Baird's beaked whale 0.0031 (960) 0.0176 (688) –
-Goose-beaked whale 0.0147 (960) 0.0250 (688) – Note: Summary of beaked
-whale detections for Baird’s beaked whales and goose-beaked whales in
-hourly bins for Adrift-ACCESS data. Mean hourly probability of detection
-for that species/season; total hourly bins are shown in parenthesis.
+|                          |  Upwelling   | Post-Upwelling | Winter |
+|--------------------------|:------------:|:--------------:|:------:|
+| **Baird's beaked whale** | 0.0031 (960) |  0.0176 (688)  |   --   |
+| **Goose-beaked whale**   | 0.0147 (960) |  0.0250 (688)  |   --   |
 
-Figure 4. ![Hourly goose-beaked whales and Baird's beaked whales by
-month for the Adrift-ACCESS surveys. Hourly presence of goose-beaked
-whales (left) and Baird's beaked whales (right) (y axis) for different
-months for combined years (x axis) during the Adrift-ACCESS surveys.
-Hourly presence for duty-cycled data relates to the portion of the hour
-included in the duty cycled data. Black lines represent total available
-hours (effort) and red lines represent hours with detections. Blue
-shading represents winter, green represents upwelling, and yellow
-represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_ZcBb_HourlyPresence.png){#ACCESS_ZcBb_HourlyPresence}
+: Summary of beaked whale detections Baird’s beaked whales and
+goose-beaked whales in hourly bins for Adrift-ACCESS data. Summary of
+beaked whale detections for Baird’s beaked whales and goose-beaked
+whales in hourly bins for Adrift-ACCESS data. Mean hourly probability of
+detection for that species/season; total hourly bins are shown in
+parenthesis. {#tbl-bw}
+
+![Hourly goose-beaked whales and Baird's beaked whales by month for the
+Adrift-ACCESS surveys. Hourly presence of goose-beaked whales (left) and
+Baird's beaked whales (right) (y axis) for different months for combined
+years (x axis) during the Adrift-ACCESS surveys. Hourly presence for
+duty-cycled data relates to the portion of the hour included in the duty
+cycled data. Black lines represent total available hours (effort) and
+red lines represent hours with detections. Blue shading represents
+winter, green represents upwelling, and yellow represents the
+post-upwelling oceanographic
+season.](/figs/ACCESS/ACCESS_ZcBb_HourlyPresence.png){#fig-ACCESS_ZcBb_HourlyPresence}
 
 There had been no visual detection of beaked whales during the 30 years
 of annual ACCESS surveys offshore San Francisco (J. Roletto, pers.
 comm.). The drifting recorders deployed during the ACCESS surveys
 detected both Baird's and goose-beaked whales, suggesting that beaked
 whales do occur in and near the shipping lanes and the combined Greater
-Farallones and Cordell Bank National Marine Sanctuaries (Figure 5.3).
-The discrepancy in these detections is likely due to the typically poor
-sighting conditions in this region and the cryptic surfacing behavior of
-beaked whales. Future surveys in this region should consider passive
-acoustic monitoring with sufficient bandwidth to detect echolocating
-beaked whales.
+Farallones and Cordell Bank National Marine Sanctuaries. The discrepancy
+in these detections is likely due to the typically poor sighting
+conditions in this region and the cryptic surfacing behavior of beaked
+whales. Future surveys in this region should consider passive acoustic
+monitoring with sufficient bandwidth to detect echolocating beaked
+whales.
 
-### **Dolphins** 
+### **Dolphins**
 
 Dolphins were detected during all Adrift-ACCESS deployments
-(@ACCESS_GgLo_HourlyPresence). Dolphin events included detections that
+(@fig-ACCESS_GgLo_HourlyPresence). Dolphin events included detections that
 could be positively attributed to Risso's dolphins and Pacific
-white-sided Dolphins, and detections that remained unidentified (Table
-4).
+white-sided Dolphins, and detections that remained unidentified
+(@tbl-dolphin).
 
-Table 4. Summary of dolphin detections (by species) in hourly bins for
-Adrift-ACCESS data. Upwelling Post-Upwelling Winter Risso's dolphins
-0.01 (960) 0.01 (688) – Pacific white-sided dolphins 0.10 (960) 0.23
-(688) – Unidentified odontocetes 0.00 (960) 0.00 (688) – Note: Summary
-of dolphin detections for Risso’s dolphins, Pacific white-sided
-dolphins, and unidentified odontocetes for hourly bins for Adrift-ACCESS
-data. Mean hourly probability of detection for that species/season;
-total hourly bins are shown in parenthesis.
+|                                  | Upwelling  | Post-Upwelling | Winter |
+|----------------------------------|:----------:|:--------------:|:------:|
+| **Risso's dolphins**             | 0.01 (960) |   0.01 (688)   |   --   |
+| **Pacific white-sided dolphins** | 0.10 (960) |   0.23 (688)   |   --   |
+| **Unidentified dolphins**        | 0.00 (960) |   0.00 (688    |   --   |
+
+: Summary of dolphin detections (by species) in hourly bins for
+Adrift-ACCESS data. Summary of dolphin detections for Risso’s dolphins,
+Pacific white-sided dolphins, and unidentified odontocetes for hourly
+bins for Adrift-ACCESS data. Mean hourly probability of detection for
+that species/season; total hourly bins are shown in parenthesis.
+{#tbl-dolphin}
 
 There were no dolphin events that did not include at least Risso’s or
-Pacific white-sided dolphins (Table 4). Pacific white-sided dolphins
-were detected at higher rates than Risso’s dolphins in all but the
-earliest survey during the upwelling season @ACCESS_GgLo_HourlyPresence.
-Dolphin schools in central and northern California are frequently
-encountered in large, dispersed mixed species groups (S.Rankin, pers.
-comm.), and here we do not distinguish mixed species from single-species
-groups. So, attribution of an acoustic event to Risso's dolphins does
-not preclude the presence of other species. We currently lack a
-comprehensive acoustic classification routine that includes all dolphin
-schools in the region. Future research should develop a publicly
-available acoustic classifier for dolphins that considers mixed species
-groups and can be applied to different passive acoustic platforms.
+Pacific white-sided dolphins (@tbl-dolphin). Pacific white-sided
+dolphins were detected at higher rates than Risso’s dolphins in all but
+the earliest survey during the upwelling season
+@fig-ACCESS_GgLo_HourlyPresence. Dolphin schools in central and northern
+California are frequently encountered in large, dispersed mixed species
+groups (S.Rankin, pers. comm.), and here we do not distinguish mixed
+species from single-species groups. So, attribution of an acoustic event
+to Risso's dolphins does not preclude the presence of other species. We
+currently lack a comprehensive acoustic classification routine that
+includes all dolphin schools in the region. Future research should
+develop a publicly available acoustic classifier for dolphins that
+considers mixed species groups and can be applied to different passive
+acoustic platforms.
 
 ![Hourly Risso’s and Pacific white-sided dolphins by month for the
 Adrift-ACCESS surveys. Hourly presence of Risso’s dolphins (left) and
@@ -133,7 +147,7 @@ included in the duty cycled data. Black lines represent total available
 hours (effort) and red lines represent hours with detections. Blue
 shading represents winter, green represents upwelling, and yellow
 represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_GgLo_HourlyPresence.png){#ACCESS_GgLo_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_GgLo_HourlyPresence.png){#fig-ACCESS_GgLo_HourlyPresence}
 
 Risso’s and Pacific white-sided dolphins were detected on most/all
 ACCESS deployments, and there were most likely other species that were
@@ -145,19 +159,22 @@ on these data, or to develop a drifting-recorder specific classifier.
 Adrift data are publicly available for future analysis, should improved
 acoustic classification methods become available.
 
-### **Narrow Band High Frequency Species** (*Kogia* spp., porpoise) 
+### **Narrow Band High Frequency Species** (*Kogia* spp., porpoise)
 
 Calls associated with NBHF species (porpoise and Kogia spp.) were
 detected in all drifts except the earliest of the upwelling surveys
-(June, @ACCESS_NBHF_HourlyPresence) and the hourly probability of
+(June, @fig-ACCESS_NBHF_HourlyPresence) and the hourly probability of
 detection was higher for the post-upwelling season than for the
-upwelling season (Table 5).
+upwelling season (@tbl-nbhf).
 
-Table 5. Summary of NBHF detections in hourly bins for Adrift-ACCESS
-data. Upwelling Post-Upwelling Winter San Francisco 0.05 (960) 0.27
-(688) – Note: Summary of NBHF detections for Adrift-ACCESS data. Mean
-hourly probability of NBHF detection for that season; total hourly bins
-are shown in parenthesis.
+|                   | Upwelling  | Post-Upwelling | Winter |
+|-------------------|:----------:|:--------------:|:------:|
+| **San Francisco** | 0.05 (960) |   0.27 (688)   |   --   |
+
+: Summary of NBHF detections in hourly bins for Adrift-ACCESS data.
+Summary of NBHF detections for Adrift-ACCESS data. Mean hourly
+probability of NBHF detection for that season; total hourly bins are
+shown in parenthesis. {#tbl-nbhf}
 
 ![Hourly NBHF events by month for the Adrift-ACCESS surveys. Hourly
 presence of NBHF events (y axis) for different months for different
@@ -167,7 +184,8 @@ included in the duty cycled data. Black lines represent total available
 hours (effort) and red lines represent hours with detections. Blue
 shading represents winter, green represents upwelling, and yellow
 represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_NBHF_HourlyPresence.png){#ACCESS_NBHF_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_NBHF_HourlyPresence.png){#fig-ACCESS_NBHF_HourlyPresence
+width="400"}
 
 The California Current is home to 4 different species that produce NBHF
 echolocation clicks: harbor porpoise, Dall’s porpoise, pygmy sperm
@@ -191,19 +209,23 @@ These classifiers will be further developed in 2025 and we hope to
 re-examine the Adrift-ACCESS NBHF species to refine the species identity
 in these data.
 
-### **Blue Whales** 
+### **Blue Whales**
 
 Blue whales were detected in all deployments except the initial
-upwelling deployment @ACCESS_Bm_HourlyPresence, with most detections
-during the post-upwelling season (Table 6).
+upwelling deployment @fig-ACCESS_Bm_HourlyPresence, with most detections
+during the post-upwelling season (@tbl-blue).
 
-Table 6. Summary of blue whale detections in hourly bins for
-Adrift-ACCESS data. Upwelling Post-Upwelling Winter A Calls 0.00 (960)
-0.31 (688) – B Calls 0.02 (960) 0.50 (688) – D Calls 0.03 (960) 0.06
-(688) – Note: Summary of blue whale detections for A, B, and D calls in
-hourly bins for Adrift-ACCESS data. Mean hourly probability of blue
-whale detection for that call type/season; total hourly bins are shown
-in parenthesis.
+|             | Upwelling  | Post-Upwelling | Winter |
+|-------------|:----------:|:--------------:|:------:|
+| **A Calls** | 0.00 (960) |   0.31 (688)   |   --   |
+| **B Calls** | 0.02 (960) |   0.50 (688)   |   --   |
+| **D Calls** | 0.03 (960) |   0.06 (688)   |   --   |
+
+: Summary of blue whale detections in hourly bins for Adrift-ACCESS
+data. Summary of blue whale detections for A, B, and D calls in hourly
+bins for Adrift-ACCESS data. Mean hourly probability of blue whale
+detection for that call type/season; total hourly bins are shown in
+parenthesis. {#tbl-blue}
 
 ![Hourly blue whale events by month for the Adrift-ACCESS surveys.
 Hourly presence of blue whale calls (A, B, and D types, combined) (y
@@ -213,16 +235,17 @@ the portion of the hour included in the duty cycled data. Black lines
 represent total available hours (effort) and red lines represent hours
 with detections. Blue shading represents winter, green represents
 upwelling, and yellow represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_Bm_HourlyPresence.png){#ACCESS_Bm_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_Bm_HourlyPresence.png){#fig-ACCESS_Bm_HourlyPresence
+width="400"}
 
 Detection of blue whale calls were primarily A and B calls associated
 with song, with few detections of D calls during the summer months
-@ACCESS_BmD_HourlyPresence. Blue whale ‘song’ consists of both A and B
+@fig-ACCESS_BmD_HourlyPresence. Blue whale ‘song’ consists of both A and B
 calls, which can occur individually or in A-B pairs. Detection of both A
 and B calls were higher during the post-upwelling seasons in all areas
-(Figure 8). There were only a few blue whale B calls detected during the
-upwelling season off San Francisco. The probability of detecting blue
-whale B calls was consistently higher than A calls, which reflects
+(@tbl-blue). There were only a few blue whale B calls detected during
+the upwelling season off San Francisco. The probability of detecting
+blue whale B calls was consistently higher than A calls, which reflects
 research showing that blue whale B calls can be detected at greater
 ranges than blue whale A calls [@mcdonald2001]. Blue whale B calls can
 be readily classified by an experienced analyst when the SNR (signal to
@@ -230,22 +253,23 @@ noise ratio) is low.
 
 Blue whale D calls have been associated with feeding behavior
 [@oleson2007], and detection of D calls were primarily during the summer
-(late upwelling/early post-upwelling, @ACCESS_BmD_HourlyPresence). The
+(late upwelling/early post-upwelling, @fig-ACCESS_BmD_HourlyPresence). The
 probability of detecting D calls was much lower than detecting A and/or
 B calls, and low SNR D calls are more readily confused with low
 frequency downsweep calls produced by other species, reducing the
 overall effective detection range for these calls.
 
-Figure 9. ![Hourly presence of blue whale D calls by month for the
-Adrift-ACCESS surveys. Hourly presence of blue whale D calls (y axis)
-for different months for combined years (x axis) during the
-Adrift-ACCESS surveys. Adrifts 001-012 were duty cycled and hourly
-presence relates to the portion of the hour included in the duty cycled
-data (6 min of 12 min). Black lines represent total available hours
-(effort) and red lines represent hours with detections. Blue shading
-represents winter, green represents upwelling, and yellow represents the
-post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_BmD_HourlyPresence.png){#ACCESS_BmD_HourlyPresence}
+![Hourly presence of blue whale D calls by month for the Adrift-ACCESS
+surveys. Hourly presence of blue whale D calls (y axis) for different
+months for combined years (x axis) during the Adrift-ACCESS surveys.
+Adrifts 001-012 were duty cycled and hourly presence relates to the
+portion of the hour included in the duty cycled data (6 min of 12 min).
+Black lines represent total available hours (effort) and red lines
+represent hours with detections. Blue shading represents winter, green
+represents upwelling, and yellow represents the post-upwelling
+oceanographic
+season.](/figs/ACCESS/ACCESS_BmD_HourlyPresence.png){#fig-ACCESS_BmD_HourlyPresence
+width="400"}
 
 Detection of blue whales was higher during the post-upwelling season,
 and detections were dominated by the A/B song call types produced by
@@ -260,20 +284,24 @@ Use](https://sael-swfsc.github.io/Adrift/content/habitatModels.html)),
 and adoption of these methods may improve our understanding of the
 habitat use of these species in the greater area.
 
-### **Fin Whales** 
+### **Fin Whales**
 
 Fin whales 20 Hz calls were detected during both the upwelling and
 post-upwelling seasons, with greater hourly detection during the
-post-upwelling deployments (Table 7, @ACCESS_fin20_HourlyPresence).
+post-upwelling deployments (@tbl-fin, @fig-ACCESS_fin20_HourlyPresence).
 There were no detection of fin whale 40 Hz calls during the
-Adrift-ACCESS deployments (Table 7).
+Adrift-ACCESS deployments (@tbl-fin).
 
-Table 7. Summary of fin whale detections in hourly bins for
-Adrift-ACCESS data. Upwelling Post-Upwelling Winter 20 Hz 0.04 (960)
-0.12 (688) – 40 Hz 0.00 (960) 0.00 (688) – Note: Summary of fin whale 20
-Hz and 40 Hz detections in hourly bins for Adrift-ACCESS data. Mean
-hourly probability of fin whale detection for that call type/season;
-total hourly bins are shown in parenthesis.
+|           | Upwelling  | Post-Upwelling | Winter |
+|-----------|:----------:|:--------------:|:------:|
+| **20 Hz** | 0.04 (960) |   0.12 (688)   |   --   |
+| **40 Hz** | 0.00 (960) |   0.00 (688)   |   --   |
+
+: Summary of fin whale detections in hourly bins for Adrift-ACCESS data.
+Summary of fin whale 20 Hz and 40 Hz detections in hourly bins for
+Adrift-ACCESS data. Mean hourly probability of fin whale detection for
+that call type/season; total hourly bins are shown in parenthesis.
+{#tbl-fin}
 
 Fin whale 20 Hz detections were lower off San Francisco than other areas
 (see online [Adrift
@@ -291,7 +319,7 @@ irregular and regular sequencing.
 The 40 Hz call has a more irregular pattern and has been positively
 associated with prey biomass, providing evidence that it is associated
 with a foraging function [@romagosa2021]. There were no detections of
-fin whale 40 Hz calls in this region (Table 7).
+fin whale 40 Hz calls in this region (@tbl-fin).
 
 ![Hourly fin whale events by month for the Adrift-ACCESS surveys. Hourly
 presence of fin whales (combined call types) (y axis) for different
@@ -301,7 +329,8 @@ included in the duty cycled data. Black lines represent total available
 hours (effort) and red lines represent hours with detections. Blue
 shading represents winter, green represents upwelling, and yellow
 represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_fin20_HourlyPresence.png){#ACCESS_fin20_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_fin20_HourlyPresence.png){#fig-ACCESS_fin20_HourlyPresence
+width="400"}
 
 These data were used to improve and test a fin whale classifier with
 excellent results (see online summary: [Fin Whale
@@ -309,22 +338,26 @@ AI](https://sael-swfsc.github.io/Adrift/content/finAI.html)), and future
 adoption of these methods may allow for an improved approach of
 classifying variability in fin whale call patterns. 
 
-### **Humpback Whales** 
+### **Humpback Whales**
 
 Humpback whales were detected during most deployments
-(@ACCESS_humpback_HourlyPresence), with higher probability of detection
-in the post-upwelling season off San Francisco (Table 8). Hourly
+(@fig-ACCESS_humpback_HourlyPresence), with higher probability of detection
+in the post-upwelling season off San Francisco (@tbl-hump). Hourly
 probability of detecting song was higher in the post-upwelling than the
-upwelling season (Table 8).
+upwelling season (@tbl-hump).
 
-Table 8. Summary of humpback whale detections in hourly bins for
-Adrift-ACCESS data. Upwelling Post-Upwelling Winter Song 0.03 (960) 
-0.36 (688)  – Social Calls 0.01 (960)  0.24 (688)  – Undetermined
-Humpback Calls 0.06 (960)  0.28 (688)  – Note: Summary of humpback whale
-detections for Song, Social sounds, and Unidentified calls in hourly
-bins for Adrift-ACCESS data. Mean hourly probability of humpback whale
-detection for that call type/region/season; total hourly bins are shown
-in parenthesis.
+|                  |   Upwelling   | Post-Upwelling | Winter |
+|------------------|:-------------:|:--------------:|:------:|
+| **Song**         |  0.03 (960)   |   0.36 (688)   |   --   |
+| **Social Calls** | 0.01 (960)    |   0.24 (688)   |   --   |
+| **Undetermined** |  0.06 (960)   |   0.28 (688)   |   --   |
+
+: Summary of humpback whale detections in hourly bins for Adrift-ACCESS
+data. Summary of humpback whale detections for Song, Social sounds, and
+Unidentified calls in hourly bins for Adrift-ACCESS data. Mean hourly
+probability of humpback whale detection for that call
+type/region/season; total hourly bins are shown in parenthesis.
+{#tbl-hump}
 
 ![Hourly humpback whale events by month for the Adrift-ACCESS surveys.
 Hourly presence of combined humpback whales call types (y axis) for
@@ -334,13 +367,14 @@ the hour included in the duty cycled data. Black lines represent total
 available hours (effort) and red lines represent hours with detections.
 Blue shading represents winter, green represents upwelling, and yellow
 represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_humpback_HourlyPresence.png){#ACCESS_humpback_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_humpback_HourlyPresence.png){#fig-ACCESS_humpback_HourlyPresence
+width="400"}
 
 There were no deployments during the winter oceanographic season, but
 high probability of detecting humpback song during the late fall aligns
 with the production of song during the southern winter migration
 [@clapham1990]. There were several drifts in which humpback song
-dominated the recordings (@ACCESS_humpbackSongSocial_HourlyPresence).
+dominated the recordings (@fig-ACCESS_humpbackSongSocial_HourlyPresence).
 The acoustic features of humpback whale song, including high source
 level and series of calls produced over long time spans, naturally lead
 to high detection rates [@au2006]. While recordings dominated by song
@@ -356,7 +390,7 @@ included in the duty cycled data (6 min of 12 min). Black lines
 represent total available hours (effort) and red lines represent hours
 with detections. Blue shading represents winter, green represents
 upwelling, and yellow represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_humpbackSongSocial_HourlyPresence.png){#ACCESS_humpbackSongSocial_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_humpbackSongSocial_HourlyPresence.png){#fig-ACCESS_humpbackSongSocial_HourlyPresence}
 
 Humpback whales are notoriously difficult PAM subjects due to their very
 active vocal behavior (in quantity and variability). Many recordings can
@@ -370,7 +404,7 @@ understand how the detection of humpback sounds can inform the
 demographic composition and habitat use of these species throughout the
 California Current.
 
-### **Bryde’s and Sei Whales** 
+### **Bryde’s and Sei Whales**
 
 There were no confirmed detections of calls associated with Bryde's or
 sei whales during Adrift-ACCESS. Bryde’s whale distribution is in the
@@ -389,16 +423,19 @@ sei whales in the North Pacific, near Hawaii [@rankin2007].
 
 Gray Whales Sounds associated with gray whales were only detected on a
 few recordings during the post-upwelling Adrift-ACCESS deployments
-(Table 9, @ACCESS_gray_HourlyPresence). There is a significant overlap
+(@tbl-gray, @fig-ACCESS_gray_HourlyPresence). There is a significant overlap
 in spectral content for humpback and gray whale calls and care should be
 taken when inferring gray whale presence from data with concurrent
 humpback whale presence.
 
-Table 9. Summary of gray whale detections in hourly bins for
-Adrift-ACCESS data. Upwelling Post-Upwelling Winter San Francisco 0.00
-(960)  0.07 (688)  – Note: Summary of gray whale detections for
-Adrift-ACCESS data. Mean hourly probability of gray whale detection for
-that region/season; total hourly bins are shown in parenthesis.
+|                   | Upwelling  | Post-Upwelling | Winter |
+|-------------------|:----------:|:--------------:|:------:|
+| **San Francisco** | 0.00 (960) |   0.07 (688)   |   --   |
+
+: Summary of gray whale detections in hourly bins for Adrift-ACCESS
+data. Summary of gray whale detections for Adrift-ACCESS data. Mean
+hourly probability of gray whale detection for that region/season; total
+hourly bins are shown in parenthesis. {#tbl-gray}
 
 ![Hourly gray whale events by month for the Adrift-ACCESS surveys.
 Hourly presence of gray whale calls (y axis) for different months for
@@ -408,7 +445,8 @@ included in the duty cycled data. Black lines represent total available
 hours (effort) and red lines represent hours with detections. Blue
 shading represents winter, green represents upwelling, and yellow
 represents the post-upwelling oceanographic
-season.](/figs/ACCESS/ACCESS_gray_HourlyPresence.png){#ACCESS_gray_HourlyPresence}
+season.](/figs/ACCESS/ACCESS_gray_HourlyPresence.png){#fig-ACCESS_gray_HourlyPresence
+width="400"}
 
 Most Eastern North Pacific gray whales use the California Current to
 migrate between their feeding grounds in the north and their winter
@@ -419,7 +457,7 @@ upwelling and post-upwelling seasons [@barlow_three_2024]. Gray whales
 are typically found in the nearshore waters, but do occur in offshore
 waters. 
 
-### **Minke Whales** 
+### **Minke Whales**
 
 There were no detections of minke whale boings during the Adrift-ACCESS.
 Minke whale boing calls are considered 'song' and typically detected

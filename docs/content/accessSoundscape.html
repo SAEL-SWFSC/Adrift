@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -445,25 +464,58 @@ ul.task-list li input[type="checkbox"] {
 
 <p>The purpose of soundscape monitoring was to describe the ambient noise level(s) and to identify the major contributors to the soundscape. To that end, we measured soundscape metrics and identified two primary sources of noise: self-noise and ship noise. Weather (wind, rain) is a significant contributor to soundscape and varies by season/region. Although we did not quantify this in our analysis, we recommend that future research include weather as a contributor to the soundscape. These data were combined with the detection of biological sounds from marine mammals to examine the biological and anthropogenic contributors to the soundscape.</p>
 <p>The SanctSound methods were initially adopted to provide data consistent with previously analyzed data. Soundscape methods have changed significantly in the last three years, and the most recent recommendation is to report sound levels in hybrid millidecade bands. While there is now open-source software that can produce these metrics, it was not available for our analysis. All of our data is publicly available and the LTSAs were retained so that the data can be converted in the future. We recommend that data be reanalyzed to report sound levels in hybrid millidecade bands to align with current standards.</p>
-<p><strong><em>Power Spectral Density</em></strong> The Power Spectral Density (PSD) is the measure of the signal’s power as a function of frequency, and the PSD plots provide a visualization of the ambient noise for each region and season (Figure 14). Contributing sounds include biological sounds (marine mammals, fish, invertebrates), environmental noise (wind, rain), and anthropogenic noise (vessel noise, depth sounders, seal bombs). While Figure 14 includes all contributors to the soundscape, seasonal and regional differences can be informative and provide valuable pre-development information regarding the general soundscape. In general, noise levels ranged from 50 dB re 1uPa to nearly 150 dB re 1uPa, with the highest density of sound in the 75 - 100 dB range (Figure 14).</p>
-<p>Figure 14. Power spectral density for Adrift-ACCESS deployments by season.</p>
-<p>Other researchers have developed models to separate the distinct contributions of ship and wind noise to soundscapes (Erbe et al.&nbsp;2021; ZoBell et al.&nbsp;2024). These models have been validated with empirical data and can be in close agreement in certain times and places, but validation has been very limited to small spatiotemporal scales. The data collected in offshore waters of the Adrift-ACCESS survey can be used to validate models which separate wind and shipping contributions to sound levels. This will be an important next step for evaluating changes in the soundscape associated with offshore wind development areas.</p>
+<p><strong><em>Power Spectral Density</em></strong> The Power Spectral Density (PSD) is the measure of the signal’s power as a function of frequency, and the PSD plots provide a visualization of the ambient noise for each region and season <a href="#fig-ACCESS_PSD">Figure&nbsp;1</a>. Contributing sounds include biological sounds (marine mammals, fish, invertebrates), environmental noise (wind, rain), and anthropogenic noise (vessel noise, depth sounders, seal bombs). While <a href="#fig-ACCESS_PSD">Figure&nbsp;1</a> includes all contributors to the soundscape, seasonal and regional differences can be informative and provide valuable pre-development information regarding the general soundscape. In general, noise levels ranged from 50 dB re 1uPa to nearly 150 dB re 1uPa, with the highest density of sound in the 75 - 100 dB range <a href="#fig-ACCESS_PSD">Figure&nbsp;1</a>.</p>
+<div id="fig-ACCESS_PSD" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/ACCESS/ACCESS_PSD.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Power spectral density for Adrift-ACCESS deployments by season.</figcaption>
+</figure>
+</div>
+<p>Other researchers have developed models to separate the distinct contributions of ship and wind noise to soundscapes (<span class="citation" data-cites="erbe2021">(<a href="#ref-erbe2021" role="doc-biblioref">Erbe et al. 2021</a>)</span>; <span class="citation" data-cites="zobell2024">(<a href="#ref-zobell2024" role="doc-biblioref">ZoBell, Hildebrand, and Frasier 2024</a>)</span>). These models have been validated with empirical data and can be in close agreement in certain times and places, but validation has been very limited to small spatiotemporal scales. The data collected in offshore waters of the Adrift-ACCESS survey can be used to validate models which separate wind and shipping contributions to sound levels. This will be an important next step for evaluating changes in the soundscape associated with offshore wind development areas.</p>
 <p>Low frequency noise associated with strumming precluded consistent analysis of soundscape below 100Hz. Future drifting recorder studies should consider alternative configurations that eliminate strumming and other self-noise to allow for broadband soundscape analysis.</p>
-<p><strong><em>Ship Noise</em></strong> Ships produce different sounds while operating, such as impulsive signals from ship propeller cavitation or echosounder signals that can be easily identified in the LTSA and confirmed with a spectrogram. During the upwelling season, vessel noise was largely consistent throughout the day (with a slight decrease during the night); however, vessel noise was much higher in the late morning in the post-upwelling season (Figure 15).</p>
-<p>Hourly presence of ships in San Francisco appears to be lower than other regions (Figure 15). Our analysis of ship noise considers detection of noise from specific vessels rather than the presence of background ship noise. Analysts noted an overall high level of ambient noise associated with background ship noise (Figure 14) and a reduced ability to detect individual vessels. Detection of vessels used manual detection methods (existing automated vessel detectors were not reliable for this dataset); development of a standardized vessel detector that works across datasets could be used to determine if individual ship tracks are difficult to detect in high traffic areas. Future work can include an Automatic Identification System metric such as the number of unique large vessels with relatively close approaches.</p>
-<p>Figure 15. Polar plots of seasonal detection of ship noise in the Adrift-ACCESS surveys. The hourly percent of effort with vessel detections is shown in color ranging from dark blue (0%) to yellow (50%). The diurnal variation in vessel noise is shown by detection in bins on polar plot ranging from 0 to 24 hr of the day (UTC, Universal Time Coordinated).</p>
+<p><strong><em>Ship Noise</em></strong> Ships produce different sounds while operating, such as impulsive signals from ship propeller cavitation or echosounder signals that can be easily identified in the LTSA and confirmed with a spectrogram. During the upwelling season, vessel noise was largely consistent throughout the day (with a slight decrease during the night); however, vessel noise was much higher in the late morning in the post-upwelling season <a href="#fig-ACCESS_ShipPresence_Season">Figure&nbsp;2</a>.</p>
+<p>Hourly presence of ships in San Francisco appears to be lower than other regions <a href="#fig-ACCESS_ShipPresence_Season">Figure&nbsp;2</a>. Our analysis of ship noise considers detection of noise from specific vessels rather than the presence of background ship noise. Analysts noted an overall high level of ambient noise associated with background ship noise <a href="#fig-ACCESS_PSD">Figure&nbsp;1</a> and a reduced ability to detect individual vessels. Detection of vessels used manual detection methods (existing automated vessel detectors were not reliable for this dataset); development of a standardized vessel detector that works across datasets could be used to determine if individual ship tracks are difficult to detect in high traffic areas. Future work can include an Automatic Identification System metric such as the number of unique large vessels with relatively close approaches.</p>
+<div id="fig-ACCESS_ShipPresence_Season" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/ACCESS/ACCESS_ShipPresence_Season.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Polar plots of seasonal detection of ship noise in the Adrift-ACCESS surveys. The hourly percent of effort with vessel detections is shown in color ranging from dark blue (0%) to yellow (50%). The diurnal variation in vessel noise is shown by detection in bins on polar plot ranging from 0 to 24 hr of the day (UTC, Universal Time Coordinated).</figcaption>
+</figure>
+</div>
 <p><strong><em>Contributors to the Soundscape</em></strong> The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. In this study we examined sounds attributed to a number of marine mammal species as well as ship noise. Temporal variation (marked in hourly bins) in the contribution of these sounds to the overall soundscape are provided by the acoustic scene. An acoustic scene provides a visualization of the spectral variation in the contributors to the soundscape, where detection of various species classes is noted by the approximate frequency of their sounds.</p>
-<p>Deployments offshore San Francisco were coordinated with NOAA Sanctuaries’ ACCESS Surveys during the upwelling and post-upwelling oceanographic seasons (Figure 16, Figure 17, Figure 18). Visualizations represent data from 1 or 2 buoys at greater distance from each other (other Adrift buoys were deployed in clusters). Differences in geographic location of deployments in the upwelling and post-upwelling seasons may complicate interpretation of seasonal differences in marine mammal detections (see Figure 2).</p>
-<p>Figure 16. Acoustic scene for San Francisco, 2021. Acoustic scene showing detections of various contributors to the soundscape for the 2021 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</p>
-<p>Detection of odontocetes (including NBHF, beaked whales, sperm whales, and dolphins) varied by drift (Figure 16, Figure 17, Figure 18). Detection of baleen whales (humpback, gray, fin, and blue whales) varied by drift, with a general increase in detections of many baleen whale species during the post-upwelling season.</p>
-<p>Figure 17. Acoustic scene for San Francisco, 2022. Acoustic scene showing detections of various contributors to the soundscape for the 2022 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</p>
+<p>Deployments offshore San Francisco were coordinated with NOAA Sanctuaries’ ACCESS Surveys during the upwelling and post-upwelling oceanographic seasons (<a href="#fig-Adrift_SF21_Seasons">Figure&nbsp;3</a>, <a href="#fig-Adrift_SF22_Seasons">Figure&nbsp;4</a>, <a href="#fig-Adrift_SF23_Seasons">Figure&nbsp;5</a>). Visualizations represent data from 1 or 2 buoys at greater distance from each other (other Adrift buoys were deployed in clusters). Differences in geographic location of deployments in the upwelling and post-upwelling seasons may complicate interpretation of seasonal differences in marine mammal detections.</p>
+<div id="fig-Adrift_SF21_Seasons" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/acoustic_scenes/Adrift_SF21_Seasons.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Acoustic scene for San Francisco, 2021. Acoustic scene showing detections of various contributors to the soundscape for the 2021 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</figcaption>
+</figure>
+</div>
+<p>Detection of odontocetes (including NBHF, beaked whales, sperm whales, and dolphins) varied by drift (<a href="#fig-Adrift_SF21_Seasons">Figure&nbsp;3</a>, <a href="#fig-Adrift_SF22_Seasons">Figure&nbsp;4</a>, <a href="#fig-Adrift_SF23_Seasons">Figure&nbsp;5</a>). Detection of baleen whales (humpback, gray, fin, and blue whales) varied by drift, with a general increase in detections of many baleen whale species during the post-upwelling season.</p>
+<div id="fig-Adrift_SF22_Seasons" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/acoustic_scenes/Adrift_SF22_Seasons.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Acoustic scene for San Francisco, 2022. Acoustic scene showing detections of various contributors to the soundscape for the 2022 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</figcaption>
+</figure>
+</div>
 <p>Despite the drift locations being near a convergence of shipping lanes entering San Francisco Bay, detection of specific vessels was relatively modest. Higher ambient noise in this region may have led to decreased detection of individual vessel tracks due to masking.</p>
-<p>Figure 18. Acoustic scene for San Francisco, 2023. Acoustic scene showing detections of various contributors to the soundscape for the 2023 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</p>
-<p>The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. During the course of this study we developed automated methods to integrate physical drivers (environmental variables), biological sources (marine mammal detections), as well as anthropogenic sounds to better understand these various contributors to the soundscape, and how they change over time. While we had limited time to conduct advanced analyses, our research efforts took a significant step forward so that future researchers can more readily integrate these methods into their analyses (see online summary of open source software developed as part of this project: Adrift Software).</p>
+<div id="fig-Adrift_SF23_Seasons" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="..\figs/acoustic_scenes/Adrift_SF23_Seasons.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Acoustic scene for San Francisco, 2023. Acoustic scene showing detections of various contributors to the soundscape for the 2023 San Francisco deployments in the upwelling and post-upwelling oceanographic seasons.</figcaption>
+</figure>
+</div>
+<p>The marine soundscape includes sounds associated with physical drivers (rain, waves, earthquakes), biological sources (sounds produced by marine mammals, fish, and invertebrates), as well as anthropogenic sounds. During the course of this study we developed automated methods to integrate physical drivers (environmental variables), biological sources (marine mammal detections), as well as anthropogenic sounds to better understand these various contributors to the soundscape, and how they change over time. While we had limited time to conduct advanced analyses, our research efforts took a significant step forward so that future researchers can more readily integrate these methods into their analyses (see online summary of open source software developed as part of this project: <a href="https://sael-swfsc.github.io/Adrift/content/software.html">Adrift Software</a>).</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-erbe2021" class="csl-entry" role="listitem">
+Erbe, Christine, Renee P. Schoeman, David Peel, and Joshua N. Smith. 2021. <span>“It Often Howls More Than It Chugs: Wind Versus Ship Noise Under Water in Australia<span>’</span>s Maritime Regions.”</span> <em>Journal of Marine Science and Engineering</em> 9 (5): 472. <a href="https://doi.org/10.3390/jmse9050472">https://doi.org/10.3390/jmse9050472</a>.
+</div>
+<div id="ref-zobell2024" class="csl-entry" role="listitem">
+ZoBell, Vanessa M., John A. Hildebrand, and Kaitlin E. Frasier. 2024. <span>“Comparing Pre-Industrial and Modern Ocean Noise Levels in the Santa Barbara Channel.”</span> <em>Marine Pollution Bulletin</em> 202 (May): 116379. <a href="https://doi.org/10.1016/j.marpolbul.2024.116379">https://doi.org/10.1016/j.marpolbul.2024.116379</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
