@@ -1,0 +1,119 @@
+---
+title: "Adrift Summary Dashboard"
+format: 
+  dashboard:
+    orientation: rows
+    theme: quartz #see https://bootswatch.com
+    # scrolling: true
+    logo: /figs/noaa_emblem_logo-2022.png
+---
+Next Steps: Make a map that can zoom in/out
+
+```{r}
+#| label: load-packages
+library(here)
+library(tidyverse)
+library(sf)
+library(readr)
+```
+
+``` {r}
+#| label: load-data
+deployDetails <- read_csv(here("output", "deployDetails.csv"))
+deployDetails$DeployDuration_days <- round(deployDetails$DeployDuration_days, digits = 1)
+deployDetails$RecordDuration_hrs <- round(deployDetails$RecordDuration_hrs, digits = 1)
+```
+
+```{r}
+#| label: prep-data
+
+
+```
+
+# Drift
+
+## Row - Value Boxes {height = "30%"}
+
+```{r}
+#| label: data-prep
+
+start_date <- as.Date(deployDetails$Deployment_Date[1])
+end_date <- as.Date(deployDetails$Recovery_Date[1])
+start_end_dates <- paste(start_date, "to", end_date)
+
+start_lat <- deployDetails$Deployment_Latitude[1]
+start_lon <- deployDetails$Deployment_Longitude[22]
+end_lat <- deployDetails$Recovery_Latitude[22]
+end_lon <- deployDetails$Recovery_Longitude[22]
+
+duration <- deployDetails$DeployDuration_days[22] # Duration of deployment/recording
+
+recording <- deployDetails$RecordDuration_hrs[22] # Distance traveled
+```
+
+::: {.valuebox icon="calendar3" color="primary"}
+Deployment Start/End Dates
+
+`{r} start_date`
+
+
+:::
+
+::: {.valuebox icon="calendar3" color="primary"}
+Retrieval Date
+
+`{r} end_date`
+
+
+:::
+
+::: {.valuebox icon="calendar-day" color="primary"}
+Days of Deployment
+
+`{r} duration`
+
+:::
+
+::: {.valuebox icon="rulers" color="primary"}
+Hours of Recording
+
+`{r} recording`
+
+:::
+
+## Row 2 {.tabset}
+
+::: {.card title="Drift Map and Acoustic Scene"}
+
+`{r} view(here("figs", "acoustic_scenes", "ADRIFT_022_AcousticScene.png"))`
+
+```
+
+## Row 2b {.tabset}
+```{r}
+print("Column 1 in Row 3")
+
+```
+
+
+# Species
+## {.sidebar}
+
+## Row 1 {height = "20%"}
+### {width = "40%"}
+```{r}
+print("Column 1 in Row 1") 
+```
+### {width = "60%"}
+```{r}
+print("Column 2 in Row 1")
+```
+## Row 2 {height = "40%"}
+```{r}
+print("Column 1 in Row 2")
+```
+## Row 3 {height = "40%"}
+```{r}
+print("Column 1 in Row 3")
+
+```
